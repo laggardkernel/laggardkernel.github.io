@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.81.0 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.pseudocold.com/post/2019/flask-httpauth-code-reading/" />
@@ -35,7 +35,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.fa20e845db068df5bd1b183f37f2c2b1ccb88d6fc052a3d6c4f63a682a4d6d4c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -43,13 +44,13 @@
 <meta property="og:description" content="flask-httpauth 源码阅读个人笔记， 不做解读。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pseudocold.com/post/2019/flask-httpauth-code-reading/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-08-04T12:15:28&#43;08:00" />
-<meta property="article:modified_time" content="2019-08-04T12:15:28&#43;08:00" />
+<meta property="article:published_time" content="2019-08-04T12:15:28+08:00" />
+<meta property="article:modified_time" content="2019-08-04T12:15:28+08:00" />
 
 <meta itemprop="name" content="Flask HTTPAuth 源码阅读笔记">
-<meta itemprop="description" content="flask-httpauth 源码阅读个人笔记， 不做解读。"><meta itemprop="datePublished" content="2019-08-04T12:15:28&#43;08:00" />
-<meta itemprop="dateModified" content="2019-08-04T12:15:28&#43;08:00" />
-<meta itemprop="wordCount" content="1636">
+<meta itemprop="description" content="flask-httpauth 源码阅读个人笔记， 不做解读。"><meta itemprop="datePublished" content="2019-08-04T12:15:28+08:00" />
+<meta itemprop="dateModified" content="2019-08-04T12:15:28+08:00" />
+<meta itemprop="wordCount" content="1635">
 <meta itemprop="keywords" content="flask," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Flask HTTPAuth 源码阅读笔记"/>
 <meta name="twitter:description" content="flask-httpauth 源码阅读个人笔记， 不做解读。"/>
@@ -85,6 +86,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">🔍</li>
       </a>
   </ul>
 </nav>
@@ -107,6 +110,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">🔍</a>
       </li>
   </ul>
 </nav>
@@ -125,7 +130,7 @@
         <div class="post-category">
             <a href="/categories/code-reading/"> Code Reading </a>
             </div>
-          <span class="more-meta"> 1636 words </span>
+          <span class="more-meta"> 1635 words </span>
           <span class="more-meta"> 4 mins read </span>
         
       </div>
@@ -162,11 +167,11 @@
 <p>3.2.4</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 单一文件源码
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># 单一文件源码
 flask_httpauth.py
 </code></pre></td></tr></table>
 </div>
@@ -184,7 +189,7 @@ flask_httpauth.py
 <p><code>realm</code>参数仅在<code>HTTPDigestAuth</code>中参与验证。其他类中只被用于在错误处理时返回响应头中的质询<code>WWW-Authenticate</code>，说明验证位置，提示对方使用对应验证。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -202,7 +207,7 @@ flask_httpauth.py
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">HTTPAuth</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">HTTPAuth</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="c1"># ...</span>
     <span class="k">def</span> <span class="nf">error_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
         <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
@@ -217,7 +222,7 @@ flask_httpauth.py
             <span class="k">return</span> <span class="n">res</span>
 
     <span class="k">def</span> <span class="nf">authenticate_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;{0} realm=&#34;{1}&#34;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scheme</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">realm</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> realm=&#34;</span><span class="si">{1}</span><span class="s1">&#34;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scheme</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">realm</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><code>WWW-Authenticate</code>质询状态码为401 Unauthorized。</p>
@@ -235,7 +240,7 @@ flask_httpauth.py
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -244,7 +249,7 @@ flask_httpauth.py
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python">            <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">!=</span> <span class="s1">&#39;OPTIONS&#39;</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python">            <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">!=</span> <span class="s1">&#39;OPTIONS&#39;</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
                 <span class="n">password</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_auth_password</span><span class="p">(</span><span class="n">auth</span><span class="p">)</span>
 
                 <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">auth</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
@@ -270,7 +275,7 @@ flask_httpauth.py
 <p>注：传入参数<code>stored_password</code>通过<code>self.get_auth_password(auth)</code>，调用<code>get_password_callback</code>获取。也就是说要么单独使用<code>@verify_password</code>，要么使用<code>@hash_password</code>, <code>@get_password</code>结合使用。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -279,10 +284,10 @@ flask_httpauth.py
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verify_password_callback</span><span class="p">:</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verify_password_callback</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">verify_password_callback</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">client_password</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">auth</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">return</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_password_callback</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">client_password</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_password_callback</span><span class="p">(</span><span class="n">client_password</span><span class="p">)</span>
@@ -292,7 +297,7 @@ flask_httpauth.py
 <p>参考《HTTP权威指南》p309 摘要的计算一节。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -309,7 +314,7 @@ flask_httpauth.py
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">HTTP/1.1 401 Unauthorized
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">HTTP/1.1 401 Unauthorized
 WWW-Authenticate: Digest
   realm=&#34;Shopping Cart&#34;
   nonce=&#39;random-string&#39;
@@ -343,7 +348,7 @@ Authorization: Digest
 <p>由源码可以，第一参数为回落main_auth，后面列表参数优先。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -359,7 +364,7 @@ Authorization: Digest
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">MultiAuth</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">MultiAuth</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">main_auth</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">main_auth</span> <span class="o">=</span> <span class="n">main_auth</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">additional_auth</span> <span class="o">=</span> <span class="n">args</span>
@@ -371,7 +376,7 @@ Authorization: Digest
                         <span class="k">if</span> <span class="n">auth</span><span class="o">.</span><span class="n">scheme</span> <span class="o">==</span> <span class="n">scheme</span><span class="p">:</span>
                             <span class="n">selected_auth</span> <span class="o">=</span> <span class="n">auth</span>
                             <span class="k">break</span>
-            <span class="k">if</span> <span class="n">selected_auth</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">selected_auth</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">selected_auth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main_auth</span>
 </code></pre></td></tr></table>
 </div>
@@ -462,13 +467,10 @@ Authorization: Digest
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">laggardkernel</span>
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>laggardkernel</span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -479,7 +481,10 @@ Authorization: Digest
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.db1482bc438a2df971757df91e110bb84b31bb77ca2141978d165fcf453c642e.js"></script>
 
 
 

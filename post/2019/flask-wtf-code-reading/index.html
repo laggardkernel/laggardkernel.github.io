@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.81.0 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.pseudocold.com/post/2019/flask-wtf-code-reading/" />
@@ -35,7 +35,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.fa20e845db068df5bd1b183f37f2c2b1ccb88d6fc052a3d6c4f63a682a4d6d4c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -43,12 +44,12 @@
 <meta property="og:description" content="flask-wtf 源码阅读个人笔记， 不做解读。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pseudocold.com/post/2019/flask-wtf-code-reading/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-08-02T01:58:42&#43;08:00" />
-<meta property="article:modified_time" content="2019-08-02T01:58:42&#43;08:00" />
+<meta property="article:published_time" content="2019-08-02T01:58:42+08:00" />
+<meta property="article:modified_time" content="2019-08-02T01:58:42+08:00" />
 
 <meta itemprop="name" content="Flask-WTF 源码阅读笔记">
-<meta itemprop="description" content="flask-wtf 源码阅读个人笔记， 不做解读。"><meta itemprop="datePublished" content="2019-08-02T01:58:42&#43;08:00" />
-<meta itemprop="dateModified" content="2019-08-02T01:58:42&#43;08:00" />
+<meta itemprop="description" content="flask-wtf 源码阅读个人笔记， 不做解读。"><meta itemprop="datePublished" content="2019-08-02T01:58:42+08:00" />
+<meta itemprop="dateModified" content="2019-08-02T01:58:42+08:00" />
 <meta itemprop="wordCount" content="2550">
 <meta itemprop="keywords" content="flask," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Flask-WTF 源码阅读笔记"/>
@@ -85,6 +86,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">🔍</li>
       </a>
   </ul>
 </nav>
@@ -107,6 +110,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">🔍</a>
       </li>
   </ul>
 </nav>
@@ -175,7 +180,7 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -192,7 +197,7 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">flask_wtf
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">flask_wtf
 ├── recaptcha
 │   ├── __init__.py
 │   ├── fields.py
@@ -214,7 +219,7 @@
 <h3 id="urlparse兼容引入"><code>urlparse</code>兼容引入</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -224,13 +229,13 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="ow">not</span> <span class="n">PY2</span><span class="p">:</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="ow">not</span> <span class="n">PY2</span><span class="p">:</span>
     <span class="n">text_type</span> <span class="o">=</span> <span class="nb">str</span>
     <span class="n">string_types</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">,)</span>
     <span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlparse</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">text_type</span> <span class="o">=</span> <span class="nb">unicode</span>
-    <span class="n">string_types</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">unicode</span><span class="p">)</span>
+    <span class="n">text_type</span> <span class="o">=</span> <span class="n">unicode</span>
+    <span class="n">string_types</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">unicode</span><span class="p">)</span>
     <span class="kn">from</span> <span class="nn">urlparse</span> <span class="kn">import</span> <span class="n">urlparse</span>
 </code></pre></td></tr></table>
 </div>
@@ -241,7 +246,7 @@
 <p><code>generate_csrf</code>, <code>validate_csrf</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -253,7 +258,7 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">generate_csrf</span><span class="p">(</span><span class="n">secret_key</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">token_key</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">generate_csrf</span><span class="p">(</span><span class="n">secret_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">token_key</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="c1"># ...</span>
     <span class="k">if</span> <span class="n">field_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">g</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">field_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
@@ -268,7 +273,7 @@
 </div><p>generate random string with <code>urandom(64)</code> and <code>hashlib.sha1</code>. dump it with <code>URLSafeTimedSerializer</code>, the result of which is used as <em>csrf-token</em>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -294,12 +299,12 @@
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">itsdangerous</span> <span class="kn">import</span> <span class="n">BadData</span><span class="p">,</span> <span class="n">SignatureExpired</span><span class="p">,</span> <span class="n">URLSafeTimedSerializer</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">itsdangerous</span> <span class="kn">import</span> <span class="n">BadData</span><span class="p">,</span> <span class="n">SignatureExpired</span><span class="p">,</span> <span class="n">URLSafeTimedSerializer</span>
 <span class="kn">from</span> <span class="nn">werkzeug.security</span> <span class="kn">import</span> <span class="n">safe_str_cmp</span>
 <span class="kn">from</span> <span class="nn">wtforms</span> <span class="kn">import</span> <span class="n">ValidationError</span>
 
 
-<span class="k">def</span> <span class="nf">validate_csrf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">secret_key</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">time_limit</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">token_key</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">validate_csrf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">secret_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time_limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">token_key</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="c1"># ...</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;The CSRF token is missing.&#39;</span><span class="p">)</span>
@@ -324,7 +329,7 @@
 <h3 id="_flaskformcsrf">_FlaskFormCSRF</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -337,7 +342,7 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">wtforms.csrf.core</span> <span class="kn">import</span> <span class="n">CSRF</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">wtforms.csrf.core</span> <span class="kn">import</span> <span class="n">CSRF</span>
 
 <span class="k">class</span> <span class="nc">_FlaskFormCSRF</span><span class="p">(</span><span class="n">CSRF</span><span class="p">):</span>
     <span class="c1"># ...</span>
@@ -356,7 +361,7 @@
 <p>手动生成csrf token方法</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -367,7 +372,7 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">flask_wtf.csrf</span> <span class="kn">import</span> <span class="n">generate_csrf</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">flask_wtf.csrf</span> <span class="kn">import</span> <span class="n">generate_csrf</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">app</span><span class="p">,</span> <span class="n">render_template_string</span>
 
 <span class="n">app</span><span class="o">=</span><span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -383,11 +388,11 @@
 <p>Note: <code>_get_csrf_token()</code>检查当前请求带有的csrf_token。一是从<code>request.form</code>中获取<code>WTF_CSRF_FIELD_NAME='csrf_token</code>字段；二是从<code>request.headers</code>字典中获取<code>WTF_CSRF_HEADERS=['X-CSRFToken', 'X-CSRF-Token']</code>请求头。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 <span class="n">csrf</span> <span class="o">=</span> <span class="n">CsrfProtect</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
@@ -396,11 +401,11 @@
 <p>装载上下文<code>csrf_token</code>为函数<code>generate_csrf</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python">        <span class="n">app</span><span class="o">.</span><span class="n">jinja_env</span><span class="o">.</span><span class="n">globals</span><span class="p">[</span><span class="s1">&#39;csrf_token&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generate_csrf</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python">        <span class="n">app</span><span class="o">.</span><span class="n">jinja_env</span><span class="o">.</span><span class="n">globals</span><span class="p">[</span><span class="s1">&#39;csrf_token&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generate_csrf</span>
         <span class="n">app</span><span class="o">.</span><span class="n">context_processor</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;csrf_token&#39;</span><span class="p">:</span> <span class="n">generate_csrf</span><span class="p">})</span>
 </code></pre></td></tr></table>
 </div>
@@ -409,16 +414,16 @@
 <p>错误，参考文档自定义跳转到错误提示页面。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">flask_wtf.csrf</span> <span class="kn">import</span> <span class="n">CSRFError</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">flask_wtf.csrf</span> <span class="kn">import</span> <span class="n">CSRFError</span>
 
-<span class="nd">@app.errorhandler</span><span class="p">(</span><span class="n">CSRFError</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">errorhandler</span><span class="p">(</span><span class="n">CSRFError</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">handle_csrf_error</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;csrf_error.html&#39;</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="n">e</span><span class="o">.</span><span class="n">description</span><span class="p">),</span> <span class="mi">400</span>
 </code></pre></td></tr></table>
@@ -427,7 +432,7 @@
 <p><code>same_origin</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -449,11 +454,11 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python">        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">is_secure</span> <span class="ow">and</span> <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;WTF_CSRF_SSL_STRICT&#39;</span><span class="p">]:</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python">        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">is_secure</span> <span class="ow">and</span> <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;WTF_CSRF_SSL_STRICT&#39;</span><span class="p">]:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">referrer</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_error_response</span><span class="p">(</span><span class="s1">&#39;The referrer header is missing.&#39;</span><span class="p">)</span>
 
-            <span class="n">good_referrer</span> <span class="o">=</span> <span class="s1">&#39;https://{0}/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">host</span><span class="p">)</span>
+            <span class="n">good_referrer</span> <span class="o">=</span> <span class="s1">&#39;https://</span><span class="si">{0}</span><span class="s1">/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">host</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="ow">not</span> <span class="n">same_origin</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">referrer</span><span class="p">,</span> <span class="n">good_referrer</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_error_response</span><span class="p">(</span><span class="s1">&#39;The referrer does not match the host.&#39;</span><span class="p">)</span>
@@ -483,7 +488,7 @@
 <p><code>csrf_token</code>字段的生成实际由<code>wtforms.meta.DefaultMeta</code>和<code>flask_wtf.csrf._FlaskFormMeta</code>决定。前者内置了CSRF字段判断、生成。后者提供了自定义的token生成方法和校验方法。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -533,7 +538,7 @@
 </span><span class="lnt">48
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">.csrf</span> <span class="kn">import</span> <span class="n">_FlaskFormCSRF</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">.csrf</span> <span class="kn">import</span> <span class="n">_FlaskFormCSRF</span>
 
 <span class="n">SUBMIT_METHODS</span> <span class="o">=</span> <span class="nb">set</span><span class="p">((</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;PUT&#39;</span><span class="p">,</span> <span class="s1">&#39;PATCH&#39;</span><span class="p">,</span> <span class="s1">&#39;DELETE&#39;</span><span class="p">))</span>
 <span class="n">_Auto</span> <span class="o">=</span> <span class="nb">object</span><span class="p">()</span>
@@ -558,14 +563,14 @@
                     <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">():</span>
                         <span class="k">return</span> <span class="n">ImmutableMultiDict</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">())</span>
 
-                <span class="k">return</span> <span class="bp">None</span>
+                <span class="k">return</span> <span class="kc">None</span>
 
             <span class="k">return</span> <span class="n">formdata</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">formdata</span><span class="o">=</span><span class="n">_Auto</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">csrf_enabled</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;csrf_enabled&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">csrf_enabled</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;csrf_enabled&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">csrf_enabled</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">csrf_enabled</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">FlaskWTFDeprecationWarning</span><span class="p">(</span>
                 <span class="s1">&#39;&#34;csrf_enabled&#34; is deprecated and will be removed in 1.0. &#39;</span>
                 <span class="s1">&#39;Set &#34;meta.csrf&#34; instead.&#39;</span>
@@ -586,7 +591,7 @@
 </div><h3 id="wtformsmeta-wtformsform-and-csrf_token">wtforms.meta, wtforms.form and csrf_token</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -616,16 +621,16 @@
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># wtform.meta</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># wtform.meta</span>
 <span class="k">class</span> <span class="nc">DefaultMeta</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="c1"># ...</span>
     <span class="c1"># -- CSRF</span>
 
-    <span class="n">csrf</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">csrf</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">csrf_field_name</span> <span class="o">=</span> <span class="s1">&#39;csrf_token&#39;</span>
-    <span class="n">csrf_secret</span> <span class="o">=</span> <span class="bp">None</span>
-    <span class="n">csrf_context</span> <span class="o">=</span> <span class="bp">None</span>
-    <span class="n">csrf_class</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">csrf_secret</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">csrf_context</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">csrf_class</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="nf">build_csrf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
         <span class="s2">&#34;&#34;&#34;
@@ -639,7 +644,7 @@
 </span><span class="s2">        :param form: The form.
 </span><span class="s2">        :return: A CSRF implementation.
 </span><span class="s2">        &#34;&#34;&#34;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">csrf_class</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span> <span class="c1"># FlaskForm, flask_wtf.csrf._FlaskFormMeta 提供</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">csrf_class</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> <span class="c1"># FlaskForm, flask_wtf.csrf._FlaskFormMeta 提供</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">csrf_class</span><span class="p">()</span>
 
         <span class="kn">from</span> <span class="nn">wtforms.csrf.session</span> <span class="kn">import</span> <span class="n">SessionCSRF</span>
@@ -648,7 +653,7 @@
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -664,7 +669,7 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># wtforms.form</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># wtforms.form</span>
 <span class="k">class</span> <span class="nc">BaseForm</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="s2">&#34;&#34;&#34;
 </span><span class="s2">    Base Form Class.  Provides core behaviour like field construction,
@@ -777,13 +782,10 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">laggardkernel</span>
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>laggardkernel</span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -794,7 +796,10 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.db1482bc438a2df971757df91e110bb84b31bb77ca2141978d165fcf453c642e.js"></script>
 
 
 

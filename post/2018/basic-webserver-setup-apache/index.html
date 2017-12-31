@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.81.0 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.pseudocold.com/post/2018/basic-webserver-setup-apache/" />
@@ -35,7 +35,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.fa20e845db068df5bd1b183f37f2c2b1ccb88d6fc052a3d6c4f63a682a4d6d4c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -43,12 +44,12 @@
 <meta property="og:description" content="Setup HTTP/2, TLS 1.3 with LAMP. (个人笔记，不做注解)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pseudocold.com/post/2018/basic-webserver-setup-apache/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2018-11-02T10:00:00&#43;08:00" />
-<meta property="article:modified_time" content="2018-11-02T10:00:00&#43;08:00" />
+<meta property="article:published_time" content="2018-11-02T10:00:00+08:00" />
+<meta property="article:modified_time" content="2018-11-02T10:00:00+08:00" />
 
 <meta itemprop="name" content="Basic HTTP2 Setup Part 1: Apache">
-<meta itemprop="description" content="Setup HTTP/2, TLS 1.3 with LAMP. (个人笔记，不做注解)"><meta itemprop="datePublished" content="2018-11-02T10:00:00&#43;08:00" />
-<meta itemprop="dateModified" content="2018-11-02T10:00:00&#43;08:00" />
+<meta itemprop="description" content="Setup HTTP/2, TLS 1.3 with LAMP. (个人笔记，不做注解)"><meta itemprop="datePublished" content="2018-11-02T10:00:00+08:00" />
+<meta itemprop="dateModified" content="2018-11-02T10:00:00+08:00" />
 <meta itemprop="wordCount" content="1953">
 <meta itemprop="keywords" content="linux,apache,mysql,php,h2,tls," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Basic HTTP2 Setup Part 1: Apache"/>
@@ -85,6 +86,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">🔍</li>
       </a>
   </ul>
 </nav>
@@ -107,6 +110,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">🔍</a>
       </li>
   </ul>
 </nav>
@@ -197,7 +202,7 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -206,7 +211,7 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt install apache2
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt install apache2
 sudo ufw app list
 sudo ufw allow in <span class="s2">&#34;Apache Full&#34;</span>
 
@@ -218,19 +223,19 @@ sudo systemctl reload apache2 <span class="c1"># reload conf</span>
 </div><p>Setup virtual hosts (可选)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo mkdir -p /var/www/example.com/html
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">sudo mkdir -p /var/www/example.com/html
 sudo chown -R $USER:$USER /var/www/example.com/html
 sudo chmod -R 755 /var/www/example.com
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -241,7 +246,7 @@ sudo chmod -R 755 /var/www/example.com
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="c">&lt;!-- vim /var/www/example.com/html/index.html --&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="c">&lt;!-- vim /var/www/example.com/html/index.html --&gt;</span>
 <span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Welcome to Example.com!<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
@@ -254,7 +259,7 @@ sudo chmod -R 755 /var/www/example.com
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -265,7 +270,7 @@ sudo chmod -R 755 /var/www/example.com
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/sites-available/example.com.conf
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/sites-available/example.com.conf
 &lt;VirtualHost *:80&gt;
     ServerAdmin admin@example.com
     ServerName example.com
@@ -278,14 +283,14 @@ sudo chmod -R 755 /var/www/example.com
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo a2ensite example.com.conf
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo a2ensite example.com.conf
 sudo a2dissite 000-default.conf
 
 sudo apache2ctl configtest
@@ -297,16 +302,16 @@ sudo systemctl restart apache2
 <h3 id="enable-php-with-mod_php">Enable PHP with <code>mod_php</code></h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt install php libapache2-mod-php php-mysql
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt install php libapache2-mod-php php-mysql
 </code></pre></td></tr></table>
 </div>
 </div><p>Use <code>index.php</code> as the 1st index file.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -315,7 +320,7 @@ sudo systemctl restart apache2
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/mods-enabled/dir.conf
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/mods-enabled/dir.conf
 
 &lt;IfModule mod_dir.c&gt;
     DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
@@ -326,22 +331,22 @@ sudo systemctl restart apache2
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt install php-cli
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt install php-cli
 </code></pre></td></tr></table>
 </div>
 </div><p>Test PHP with <code>info.php</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="c1"># /var/www/html/info.php
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1"># /var/www/html/info.php
 </span><span class="c1"></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nx">phpinfo</span><span class="p">();</span>
 <span class="cp">?&gt;</span><span class="err">
@@ -353,14 +358,14 @@ sudo systemctl restart apache2
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt install phpmyadmin php-mbstring php-gettext
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt install phpmyadmin php-mbstring php-gettext
 <span class="c1"># choose apache2, use dbconfig-common</span>
 
 sudo phpenmod mbstring
@@ -370,7 +375,7 @@ sudo systemctl restart apache2
 </div><p>Secure phpMyAdmin with HTTP basic auth. <code>.htaccess</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -379,7 +384,7 @@ sudo systemctl restart apache2
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/conf-available/phpmyadmin.conf
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/conf-available/phpmyadmin.conf
 &lt;Directory /usr/share/phpmyadmin&gt;
     Options FollowSymLinks
     DirectoryIndex index.php
@@ -390,14 +395,14 @@ sudo systemctl restart apache2
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /usr/share/phpmyadmin/.htaccess, chmod 644
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /usr/share/phpmyadmin/.htaccess, chmod 644
 AuthType Basic
 AuthName &#34;Restricted Files&#34;
 AuthUserFile /etc/phpmyadmin/.htpasswd
@@ -406,13 +411,13 @@ Require valid-user
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo htpasswd /etc/phpmyadmin/.htpasswd <span class="o">{</span>username<span class="o">}</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo htpasswd /etc/phpmyadmin/.htpasswd <span class="o">{</span>username<span class="o">}</span>
 <span class="c1"># -c create, otherwise use existing .htpasswd file</span>
 
 chmod <span class="m">644</span>
@@ -424,7 +429,7 @@ chmod <span class="m">644</span>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -438,7 +443,7 @@ chmod <span class="m">644</span>
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">❯ tree /etc/apache2 -L 1
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">❯ tree /etc/apache2 -L 1
 /etc/apache2
 ├── conf-available # conf fragments belonging in a virtual host
 ├── conf-enabled   # a2enconf
@@ -459,14 +464,14 @@ chmod <span class="m">644</span>
 <h2 id="debug">Debug</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">apachectl configtest
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">apachectl configtest
 
 apachectl start/stop <span class="c1"># equivalent to -k start</span>
 apachectl reload
@@ -477,7 +482,7 @@ apachectl graceful <span class="c1"># restart without terminate request processi
 <p><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-18-04">How To Install and Secure phpMyAdmin on Ubuntu 18.04</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -487,7 +492,7 @@ apachectl graceful <span class="c1"># restart without terminate request processi
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /usr/share/phpmyadmin/.htaccess
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /usr/share/phpmyadmin/.htaccess
 AuthType Basic
 AuthName &#34;Restricted Files&#34;
 AuthUserFile /etc/phpmyadmin/.htpasswd
@@ -507,12 +512,12 @@ sudo htpasswd -c /etc/phpmyadmin/.htpasswd {username} # for basis auth only
 <p>Install certbot</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo add-apt-repository ppa:certbot/certbot
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo add-apt-repository ppa:certbot/certbot
 sudo apt update
 sudo apt install python-certbot-apache
 </code></pre></td></tr></table>
@@ -520,14 +525,14 @@ sudo apt install python-certbot-apache
 </div><p>vhost example.com</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo nano /etc/apache2/sites-available/example.com.conf
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">sudo nano /etc/apache2/sites-available/example.com.conf
 # ServerName example.com;
 
 sudo apache2ctl configtest
@@ -537,18 +542,18 @@ sudo systemctl reload apache2
 </div><p>firewall</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo ufw status verbose
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">sudo ufw status verbose
 sudo ufw allow in &#39;Apache Full&#39;
 </code></pre></td></tr></table>
 </div>
 </div><p>obtain SSL certificate</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -557,7 +562,7 @@ sudo ufw allow in &#39;Apache Full&#39;
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo certbot --apache -d example.com -d www.example.com
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo certbot --apache -d example.com -d www.example.com
 
 IMPORTANT NOTES:
  - Congratulations! Your certificate and chain have been saved at:
@@ -581,13 +586,13 @@ IMPORTANT NOTES:
 </ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /usr/local/etc/httpd/httpd.conf
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /usr/local/etc/httpd/httpd.conf
 LoadModule socache_shmcb_module ...
 LoadModule ssl_module ...
 Include /usr/local/etc/httpd/extra/httpd-ssl.conf
@@ -598,7 +603,7 @@ Include /usr/local/etc/httpd/extra/httpd-ssl.conf
 </ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -611,7 +616,7 @@ Include /usr/local/etc/httpd/extra/httpd-ssl.conf
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /usr/local/etc/httpd/extra/httpd-ssl.conf
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /usr/local/etc/httpd/extra/httpd-ssl.conf
 Listen 443
 
 &lt;VirtualHost _default_:443&gt;
@@ -629,7 +634,7 @@ SSLCertificateKeyFile &#34;/usr/local/share/mkcert/example.test+4-key.pem&#34;
 </ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -639,7 +644,7 @@ SSLCertificateKeyFile &#34;/usr/local/share/mkcert/example.test+4-key.pem&#34;
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /usr/local/etc/httpd/extra/httpd-vhosts.conf
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /usr/local/etc/httpd/extra/httpd-vhosts.conf
 &lt;VirtualHost *:443&gt;
     DocumentRoot &#34;/usr/local/var/www&#34;
     ServerName localhost
@@ -657,7 +662,7 @@ SSLCertificateKeyFile &#34;/usr/local/share/mkcert/example.test+4-key.pem&#34;
 <p>Use recommended SSL parameters from <a href="https://cipherli.st/">cipherli.st</a>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -674,7 +679,7 @@ SSLCertificateKeyFile &#34;/usr/local/share/mkcert/example.test+4-key.pem&#34;
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/conf-available/ssl-params.conf
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/conf-available/ssl-params.conf
 SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
 SSLProtocol All -SSLv2 -SSLv3 -TLSv1 -TLSv1.1 # remove ancient protocols
 SSLHonorCipherOrder On
@@ -695,7 +700,7 @@ SSLSessionTickets Off
 <p>SSL vhosts</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -704,7 +709,7 @@ SSLSessionTickets Off
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/sites-available/default-ssl.conf
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/sites-available/default-ssl.conf
 # add conf below
 ServerAdmin your_email@example.com
 ServerName server_domain_or_IP
@@ -716,12 +721,12 @@ SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
 </div><p>redirect HTTP to HTTPS</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/sites-available/000-default.conf
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/sites-available/000-default.conf
 Redirect &#34;/&#34; &#34;https://your_domain/&#34; # 302
 # Redirect permanent &#34;/&#34; &#34;https://your_domain/&#34; # 301
 </code></pre></td></tr></table>
@@ -730,12 +735,12 @@ Redirect &#34;/&#34; &#34;https://your_domain/&#34; # 302
 <p>firewall</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo ufw app list
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo ufw app list
 sudo ufw allow in <span class="s2">&#34;Apache Full&#34;</span>
 sudo ufw status verbose
 </code></pre></td></tr></table>
@@ -743,7 +748,7 @@ sudo ufw status verbose
 </div><p>Enable apache2 modules, conf, changes</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -752,7 +757,7 @@ sudo ufw status verbose
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo a2enmod ssl <span class="c1"># mod_ssl</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo a2enmod ssl <span class="c1"># mod_ssl</span>
 sudo a2enmod headers <span class="c1">#needed by some of the settings in our SSL snippet</span>
 sudo a2ensite default-ssl
 sudo a2enconf ssl-params
@@ -782,7 +787,7 @@ sudo systemctl restart apache2
 <p><strong>Note</strong>: Speaking of SSL, you need to be aware that most <strong>browsers</strong> will speak HTTP/2 <strong>only on <code>https:</code></strong> URLs. Several of the <strong>non-browser client</strong> implementations support <strong>HTTP/2 over cleartext</strong>, h2c. The most versatile being <code>curl</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -791,7 +796,7 @@ sudo systemctl restart apache2
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /usr/local/etc/http/httpd.conf
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /usr/local/etc/http/httpd.conf
 LoadModule http2_module modules/mod_http2.so
 Protocols h2 http/1.1
 # Protocols h2 h2c http/1.1
@@ -809,13 +814,13 @@ Protocols h2 http/1.1
 <p>Enable php-fpm, disable <code>mod_php</code> first.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /usr/local/etc/http/httpd.conf
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /usr/local/etc/http/httpd.conf
 # enable prerequsite
 LoadModule proxy_module modules/mod_proxy.so
 LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so
@@ -824,7 +829,7 @@ LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so
 </div><p>Activate php-fpm with <code>SetHandler</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -833,7 +838,7 @@ LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/php-fpm.d/www.conf
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/php-fpm.d/www.conf
 listen = 127.0.0.1:9000
 
 # /usr/local/etc/http/httpd.conf
@@ -852,7 +857,7 @@ listen = 127.0.0.1:9000
 <p>Linux 下无需手动配置，<code>a2enmod</code>, <code>a2dismod</code>即可完成大部分操作。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -865,7 +870,7 @@ listen = 127.0.0.1:9000
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">apachectl stop
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">apachectl stop
 a2enmod http2
 apt-get install php-fpm <span class="c1"># Install the php-fpm from your PHP repository. This package name depends on the vendor.</span>
 <span class="c1"># php7.2-fpm.service, auto enabled</span>
@@ -882,22 +887,22 @@ apachectl start
 <p>响应头包含以下即可</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Link: &lt;/assets/styles.css&gt;;rel=preload, &lt;/assets/scripts.css&gt;; rel=preload
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Link: &lt;/assets/styles.css&gt;;rel=preload, &lt;/assets/scripts.css&gt;; rel=preload
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># config
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># config
 &lt;Location /index.htmll&gt;
   Header add Link &#34;&lt;/assets/styles.css&gt;;rel=preload, &lt;/assets/scripts.css&gt;; rel=preload&#34;
   Header add Link &#34;&lt;/assets/image.jpg&gt;;rel=preload&#34;
@@ -908,12 +913,12 @@ apachectl start
 <p><a href="https://linux-audit.com/configure-hsts-http-strict-transport-security-apache-nginx/">Configure HSTS (HTTP Strict Transport Security) for Apache and Nginx</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># Load modules (or use the IfModule)
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># Load modules (or use the IfModule)
 LoadModule headers_module modules/mod_headers.so
 LoadModule rewrite_module modules/mod_rewrite.so
 </code></pre></td></tr></table>
@@ -921,7 +926,7 @@ LoadModule rewrite_module modules/mod_rewrite.so
 </div><p>Rewrite HTTP connections and redirect them to HTTPS:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -929,7 +934,7 @@ LoadModule rewrite_module modules/mod_rewrite.so
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># Redirect HTTP connections to HTTPS
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># Redirect HTTP connections to HTTPS
 &lt;IfModule mod_rewrite.c&gt;
 RewriteEngine On
 RewriteCond %{HTTPS} off
@@ -940,13 +945,13 @@ RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 </div><p>Now configure the virtual host:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;VirtualHost 192.168.1.1:443&gt;
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&lt;VirtualHost 192.168.1.1:443&gt;
 Header always set Strict-Transport-Security &#34;max-age=15768000; includeSubDomains&#34; # 6 months
 # 31536000 # 1y
 &lt;/VirtualHost&gt;
@@ -957,23 +962,23 @@ Header always set Strict-Transport-Security &#34;max-age=15768000; includeSubDom
 <p>缺少默认/全局<code>ServerName</code>设置。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/apache2.conf
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/apache2.conf
 ServerName localhost
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="hide-server-infomation">Hide Server Infomation</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">ServerSignature Off
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ServerSignature Off
 # hide info like Apache and PHP versions
 ServerTokens Prod # least info
 </code></pre></td></tr></table>
@@ -1067,13 +1072,10 @@ ServerTokens Prod # least info
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">laggardkernel</span>
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>laggardkernel</span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -1084,7 +1086,10 @@ ServerTokens Prod # least info
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.db1482bc438a2df971757df91e110bb84b31bb77ca2141978d165fcf453c642e.js"></script>
 
 
 

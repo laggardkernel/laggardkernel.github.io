@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.81.0 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.pseudocold.com/post/2019/arch-pkg-downgrade/" />
@@ -35,7 +35,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.fa20e845db068df5bd1b183f37f2c2b1ccb88d6fc052a3d6c4f63a682a4d6d4c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -43,12 +44,12 @@
 <meta property="og:description" content="Downgrade packages in Arch." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pseudocold.com/post/2019/arch-pkg-downgrade/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-02-02T14:54:27&#43;08:00" />
-<meta property="article:modified_time" content="2019-02-02T14:54:27&#43;08:00" />
+<meta property="article:published_time" content="2019-02-02T14:54:27+08:00" />
+<meta property="article:modified_time" content="2019-02-02T14:54:27+08:00" />
 
 <meta itemprop="name" content="Downgrade Packages in Arch">
-<meta itemprop="description" content="Downgrade packages in Arch."><meta itemprop="datePublished" content="2019-02-02T14:54:27&#43;08:00" />
-<meta itemprop="dateModified" content="2019-02-02T14:54:27&#43;08:00" />
+<meta itemprop="description" content="Downgrade packages in Arch."><meta itemprop="datePublished" content="2019-02-02T14:54:27+08:00" />
+<meta itemprop="dateModified" content="2019-02-02T14:54:27+08:00" />
 <meta itemprop="wordCount" content="370">
 <meta itemprop="keywords" content="linux,archlinux," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Downgrade Packages in Arch"/>
@@ -85,6 +86,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">🔍</li>
       </a>
   </ul>
 </nav>
@@ -107,6 +110,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">🔍</a>
       </li>
   </ul>
 </nav>
@@ -157,19 +162,19 @@
 <h2 id="use-an-earlier-pkg-cache">Use an Earlier Pkg Cache</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">pacman -U /var/cache/pacman/pkg/package-old_version.pkg.tar.xz
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">pacman -U /var/cache/pacman/pkg/package-old_version.pkg.tar.xz
 </code></pre></td></tr></table>
 </div>
 </div><p>Remember to ignore the pkg from being upgraded in <code>pacman.conf</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">IgnorePkg=linux
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">IgnorePkg=linux
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="downgrade-the-kernel">Downgrade the Kernel</h2>
@@ -192,28 +197,28 @@
 <p><a href="https://archive.archlinux.org/">https://archive.archlinux.org/</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">├── iso
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">├── iso
 ├── packages
 └── repos
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">pacman -U https://archive.archlinux.org/packages/ ... packagename.pkg.tar.xz
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">pacman -U https://archive.archlinux.org/packages/ ... packagename.pkg.tar.xz
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="downgrade-all-pkgs-to-a-specific-date">Downgrade All Pkgs to a Specific Date</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -227,7 +232,7 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/pacman</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/pacman</span>
 <span class="k">[core]</span>
 <span class="na">SigLevel</span> <span class="o">=</span> <span class="s">PackageRequired</span>
 <span class="na">Server</span><span class="o">=</span><span class="s">https://archive.archlinux.org/repos/2014/03/30/$repo/os/$arch</span>
@@ -243,7 +248,7 @@
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -251,7 +256,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/pacman.d/mirrorlist</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/pacman.d/mirrorlist</span>
 <span class="c1">##</span>
 <span class="c1">## Arch Linux repository mirrorlist</span>
 <span class="c1">## Generated on 2042-01-01</span>
@@ -261,12 +266,12 @@
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># -yy, force refresh database</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># -yy, force refresh database</span>
 <span class="c1"># -uu, enable pkg downgrades</span>
 sudo pacman -Syyuu
 </code></pre></td></tr></table>
@@ -308,7 +313,7 @@ sudo pacman -Syyuu
 <p><a href="https://github.com/pbrisbin/downgrade">downgrade</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -321,7 +326,7 @@ sudo pacman -Syyuu
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># from cache and ALA</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># from cache and ALA</span>
 downgrade foo bar
 
 <span class="c1"># use cache only</span>
@@ -419,13 +424,10 @@ downgrade <span class="o">{</span>package<span class="o">}</span>-<span class="o
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">laggardkernel</span>
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>laggardkernel</span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -436,7 +438,10 @@ downgrade <span class="o">{</span>package<span class="o">}</span>-<span class="o
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.db1482bc438a2df971757df91e110bb84b31bb77ca2141978d165fcf453c642e.js"></script>
 
 
 

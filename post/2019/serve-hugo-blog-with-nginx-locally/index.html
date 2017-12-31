@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.81.0 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.pseudocold.com/post/2019/serve-hugo-blog-with-nginx-locally/" />
@@ -35,7 +35,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.fa20e845db068df5bd1b183f37f2c2b1ccb88d6fc052a3d6c4f63a682a4d6d4c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -43,12 +44,12 @@
 <meta property="og:description" content="hugo 自带测试服务器可以将静态博客运行在本地 https://localhost:1313 作为测试。本文通过配置 Nginx Web 服务器，部署博客本地始终可用，方便的进行内容检索、查询。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pseudocold.com/post/2019/serve-hugo-blog-with-nginx-locally/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-09-16T09:28:41&#43;08:00" />
-<meta property="article:modified_time" content="2019-09-16T09:33:20&#43;08:00" />
+<meta property="article:published_time" content="2019-09-16T09:28:41+08:00" />
+<meta property="article:modified_time" content="2019-09-16T09:33:20+08:00" />
 
 <meta itemprop="name" content="Nginx 部署 Hugo 静态博客始终本地可用">
-<meta itemprop="description" content="hugo 自带测试服务器可以将静态博客运行在本地 https://localhost:1313 作为测试。本文通过配置 Nginx Web 服务器，部署博客本地始终可用，方便的进行内容检索、查询。"><meta itemprop="datePublished" content="2019-09-16T09:28:41&#43;08:00" />
-<meta itemprop="dateModified" content="2019-09-16T09:33:20&#43;08:00" />
+<meta itemprop="description" content="hugo 自带测试服务器可以将静态博客运行在本地 https://localhost:1313 作为测试。本文通过配置 Nginx Web 服务器，部署博客本地始终可用，方便的进行内容检索、查询。"><meta itemprop="datePublished" content="2019-09-16T09:28:41+08:00" />
+<meta itemprop="dateModified" content="2019-09-16T09:33:20+08:00" />
 <meta itemprop="wordCount" content="1313">
 <meta itemprop="keywords" content="nginx,https,hugo,h2,tls," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Nginx 部署 Hugo 静态博客始终本地可用"/>
@@ -85,6 +86,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">🔍</li>
       </a>
   </ul>
 </nav>
@@ -107,6 +110,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">🔍</a>
       </li>
   </ul>
 </nav>
@@ -158,11 +163,11 @@
 <h2 id="mkcert-创建本地域名证书">mkcert 创建本地域名证书</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># create a cert for self.test and example.test</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># create a cert for self.test and example.test</span>
 mkcert example.test *.example.test self.test *.self.test localhost 127.0.0.1 ::1
 </code></pre></td></tr></table>
 </div>
@@ -171,7 +176,7 @@ mkcert example.test *.example.test self.test *.self.test localhost 127.0.0.1 ::1
 <p>将域名解析写入 hosts，或者是本地递归 DNS 服务器。有能力建议使用后者，支持泛域名解析。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -179,7 +184,7 @@ mkcert example.test *.example.test self.test *.self.test localhost 127.0.0.1 ::1
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/hosts</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/hosts</span>
 <span class="na">127.0.0.1 self.test</span>
 <span class="na">127.0.0.1 example.test</span>
 
@@ -191,7 +196,7 @@ mkcert example.test *.example.test self.test *.self.test localhost 127.0.0.1 ::1
 <p>本文并非手把手教程，此处直接提供配置文件，以实现 <code>http://localhost:1313</code> 反代为主，回落到本地静态文件为辅的效果。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -240,7 +245,7 @@ mkcert example.test *.example.test self.test *.self.test localhost 127.0.0.1 ::1
 </span><span class="lnt">47
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="c1"># vim:fdm=marker:foldlevel=0:sw=4:ts=4:sts=4
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="c1"># vim:fdm=marker:foldlevel=0:sw=4:ts=4:sts=4
 </span><span class="c1"></span>
 <span class="k">server</span> <span class="p">{</span>
     <span class="kn">server_name</span> <span class="s">blog.example.test</span> <span class="s">blog.self.test</span><span class="p">;</span>
@@ -297,18 +302,18 @@ mkcert example.test *.example.test self.test *.self.test localhost 127.0.0.1 ::1
 <p><code>snippets/self-signed.conf</code> stores the cert locations.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">ssl_certificate</span> <span class="s">/path/to/mkcert/example.test+10.pem</span><span class="p">;</span>
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">ssl_certificate</span> <span class="s">/path/to/mkcert/example.test+10.pem</span><span class="p">;</span>
 <span class="k">ssl_certificate_key</span> <span class="s">/path/to/mkcert/example.test+10-key.pem</span><span class="p">;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><code>snippets/ssl-params.conf</code> stores strong ciphers for the cert. Copied from <a href="https://cipherli.st/">cipherli.st</a>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -331,7 +336,7 @@ mkcert example.test *.example.test self.test *.self.test localhost 127.0.0.1 ::1
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="c1"># cipherli.st
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="c1"># cipherli.st
 </span><span class="c1"></span><span class="k">ssl_protocols</span> <span class="s">TLSv1.3</span><span class="p">;</span> <span class="c1"># Requires nginx &gt;= 1.13.0 else use TLSv1.2
 </span><span class="c1"># ssl_protocols TLSv1.3 TLSv1.2; # Requires nginx &gt;= 1.13.0 else use TLSv1.2
 </span><span class="c1"></span><span class="k">ssl_prefer_server_ciphers</span> <span class="no">on</span><span class="p">;</span>
@@ -363,10 +368,10 @@ mkcert example.test *.example.test self.test *.self.test localhost 127.0.0.1 ::1
 <p>前向保密的 Diffie-Hellman 参数生成</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">openssl dhparam -out /usr/local/etc/nginx/dhparam.pem <span class="m">4096</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">openssl dhparam -out /usr/local/etc/nginx/dhparam.pem <span class="m">4096</span>
 </code></pre></td></tr></table>
 </div>
 </div></li>
@@ -381,17 +386,17 @@ mkcert example.test *.example.test self.test *.self.test localhost 127.0.0.1 ::1
 <p>最后，通过信号控制 Nginx 重新读取配置。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo nginx -s reload
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo nginx -s reload
 </code></pre></td></tr></table>
 </div>
 </div><p>访问 <a href="https://blog.example.test/">https://blog.example.test/</a> 本地博客服务。当 <code>hugo server -D -w</code> 测试服务器启动时，测试服务器内容优先被显示。</p>
 <p>测试 HTTP/2, TLS v1.3 是否生效。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -400,7 +405,7 @@ mkcert example.test *.example.test self.test *.self.test localhost 127.0.0.1 ::1
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">curl -k --tlsv1.3 --http2 -L -v -s https://blog.example.test 1&gt;/dev/null
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">curl -k --tlsv1.3 --http2 -L -v -s https://blog.example.test 1&gt;/dev/null
 <span class="c1"># -k, --insecure, 信任自签证书</span>
 <span class="c1"># --tlsv1.3, --http2 强制使用 H2, tls 1.3 发起请求</span>
 <span class="c1"># -L, --location, 跟踪跳转</span>
@@ -504,13 +509,10 @@ mkcert example.test *.example.test self.test *.self.test localhost 127.0.0.1 ::1
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">laggardkernel</span>
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>laggardkernel</span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -521,7 +523,10 @@ mkcert example.test *.example.test self.test *.self.test localhost 127.0.0.1 ::1
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.db1482bc438a2df971757df91e110bb84b31bb77ca2141978d165fcf453c642e.js"></script>
 
 
 

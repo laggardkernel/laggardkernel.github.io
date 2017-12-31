@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.81.0 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.pseudocold.com/post/2018/mysql-crashcourse-02/" />
@@ -35,7 +35,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.fa20e845db068df5bd1b183f37f2c2b1ccb88d6fc052a3d6c4f63a682a4d6d4c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -43,13 +44,13 @@
 <meta property="og:description" content="《MySQL必知必会》个人笔记，不做解读。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pseudocold.com/post/2018/mysql-crashcourse-02/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2018-03-29T23:47:06&#43;08:00" />
-<meta property="article:modified_time" content="2018-03-29T23:47:06&#43;08:00" />
+<meta property="article:published_time" content="2018-03-29T23:47:06+08:00" />
+<meta property="article:modified_time" content="2018-03-29T23:47:06+08:00" />
 
 <meta itemprop="name" content="MySQL必知必会：11-20">
-<meta itemprop="description" content="《MySQL必知必会》个人笔记，不做解读。"><meta itemprop="datePublished" content="2018-03-29T23:47:06&#43;08:00" />
-<meta itemprop="dateModified" content="2018-03-29T23:47:06&#43;08:00" />
-<meta itemprop="wordCount" content="5289">
+<meta itemprop="description" content="《MySQL必知必会》个人笔记，不做解读。"><meta itemprop="datePublished" content="2018-03-29T23:47:06+08:00" />
+<meta itemprop="dateModified" content="2018-03-29T23:47:06+08:00" />
+<meta itemprop="wordCount" content="4816">
 <meta itemprop="keywords" content="mysql," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="MySQL必知必会：11-20"/>
 <meta name="twitter:description" content="《MySQL必知必会》个人笔记，不做解读。"/>
@@ -85,6 +86,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">🔍</li>
       </a>
   </ul>
 </nav>
@@ -107,6 +110,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">🔍</a>
       </li>
   </ul>
 </nav>
@@ -125,8 +130,8 @@
         <div class="post-category">
             <a href="/categories/notes/"> Notes </a>
             </div>
-          <span class="more-meta"> 5289 words </span>
-          <span class="more-meta"> 11 mins read </span>
+          <span class="more-meta"> 4816 words </span>
+          <span class="more-meta"> 10 mins read </span>
         
       </div>
     </header>
@@ -181,13 +186,13 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">cust_name</span><span class="p">,</span> <span class="n">cust_contact</span> <span class="k">from</span> <span class="n">customers</span>
-<span class="k">where</span> <span class="n">soundex</span><span class="p">(</span><span class="n">cust_contact</span><span class="p">)</span> <span class="o">=</span> <span class="n">soundex</span><span class="p">(</span><span class="s1">&#39;Y. Lie&#39;</span><span class="p">);</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span><span class="w"> </span><span class="n">cust_name</span><span class="p">,</span><span class="w"> </span><span class="n">cust_contact</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">customers</span><span class="w">
+</span><span class="w"></span><span class="k">where</span><span class="w"> </span><span class="n">soundex</span><span class="p">(</span><span class="n">cust_contact</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">soundex</span><span class="p">(</span><span class="s1">&#39;Y. Lie&#39;</span><span class="p">);</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>时间和日期处理</p>
 <ul>
@@ -280,12 +285,12 @@
 <p>注：<code>Date()</code>, <code>Time()</code> 在 MySQL 4.1.1 中引入。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">cust_id</span><span class="p">,</span> <span class="n">order_num</span> <span class="k">from</span> <span class="n">orders</span> <span class="nb">Date</span><span class="p">(</span><span class="n">order_date</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;2005-09-01&#39;</span><span class="p">;</span>
-<span class="c1">-- where order_date = &#39;2005-09-01&#39; 无法保证时间为 00:00:00
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span><span class="w"> </span><span class="n">cust_id</span><span class="p">,</span><span class="w"> </span><span class="n">order_num</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="nb">Date</span><span class="p">(</span><span class="n">order_date</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;2005-09-01&#39;</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="c1">-- where order_date = &#39;2005-09-01&#39; 无法保证时间为 00:00:00
 </span></code></pre></td></tr></table>
 </div>
 </div><p>数值处理函数</p>
@@ -341,7 +346,7 @@
 <p>聚集函数被设计得高效，在服务端汇总，比获取数据后在客户机计算要快得多。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -357,21 +362,21 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="k">avg</span><span class="p">(</span><span class="n">prod_price</span><span class="p">)</span> <span class="k">as</span> <span class="n">avg_price</span> <span class="k">from</span> <span class="n">products</span> <span class="k">where</span> <span class="n">vend_id</span> <span class="o">=</span> <span class="mi">1003</span><span class="p">;</span>
-
-<span class="k">select</span> <span class="k">sum</span><span class="p">(</span><span class="n">quantity</span><span class="p">)</span> <span class="k">as</span> <span class="n">item_ordered</span> <span class="k">from</span> <span class="n">orderitems</span> <span class="k">where</span> <span class="n">order_num</span> <span class="o">=</span> <span class="mi">20005</span><span class="p">;</span>
-
-<span class="c1">-- sum 计算函数
-</span><span class="c1"></span><span class="k">select</span> <span class="k">sum</span><span class="p">(</span><span class="n">item_price</span><span class="o">*</span><span class="n">quantity</span><span class="p">)</span> <span class="k">as</span> <span class="n">total_price</span> <span class="k">from</span> <span class="n">orderitems</span> <span class="k">where</span> <span class="n">order_num</span> <span class="o">=</span> <span class="mi">20005</span><span class="p">;</span>
-
-<span class="k">select</span> <span class="k">avg</span><span class="p">(</span><span class="k">distinct</span> <span class="n">prod_price</span><span class="p">)</span> <span class="k">as</span> <span class="n">avg_price</span> <span class="k">from</span> <span class="n">products</span> <span class="n">wherer</span> <span class="n">vend_id</span> <span class="o">=</span> <span class="mi">1003</span><span class="p">;</span>
-
-<span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">num_items</span><span class="p">,</span>
-    <span class="k">min</span><span class="p">(</span><span class="n">prod_price</span><span class="p">)</span> <span class="k">as</span> <span class="n">price_min</span><span class="p">,</span>
-    <span class="k">max</span><span class="p">(</span><span class="n">prod_price</span><span class="p">)</span> <span class="k">as</span> <span class="n">price_max</span><span class="p">,</span>
-    <span class="k">avg</span><span class="p">(</span><span class="n">prod_price</span><span class="p">)</span> <span class="k">as</span> <span class="n">price_avg</span>
-<span class="k">from</span> <span class="n">products</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span><span class="w"> </span><span class="k">avg</span><span class="p">(</span><span class="n">prod_price</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">avg_price</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">vend_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1003</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="k">sum</span><span class="p">(</span><span class="n">quantity</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">item_ordered</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">orderitems</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">order_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20005</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c1">-- sum 计算函数
+</span><span class="c1"></span><span class="k">select</span><span class="w"> </span><span class="k">sum</span><span class="p">(</span><span class="n">item_price</span><span class="o">*</span><span class="n">quantity</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">total_price</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">orderitems</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">order_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20005</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="k">avg</span><span class="p">(</span><span class="k">distinct</span><span class="w"> </span><span class="n">prod_price</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">avg_price</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="n">wherer</span><span class="w"> </span><span class="n">vend_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1003</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">num_items</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="k">min</span><span class="p">(</span><span class="n">prod_price</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">price_min</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="k">max</span><span class="p">(</span><span class="n">prod_price</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">price_max</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="k">avg</span><span class="p">(</span><span class="n">prod_price</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">price_avg</span><span class="w">
+</span><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">products</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><h2 id="chapter-13-分组数据">Chapter 13: 分组数据</h2>
 <p>数据分组：划分多个逻辑组；</p>
@@ -428,7 +433,7 @@
 </ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -437,14 +442,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">vend_id</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">num_prods</span> <span class="k">from</span> <span class="n">products</span> <span class="k">group</span> <span class="k">by</span> <span class="n">vend_id</span><span class="p">;</span>
-<span class="k">select</span> <span class="n">cust_id</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">num_orders</span> <span class="k">from</span> <span class="n">orders</span> <span class="k">group</span> <span class="k">by</span> <span class="n">cust_id</span> <span class="k">having</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">;</span>
-<span class="c1">-- or having num_orders &gt;= 2;
-</span><span class="c1"></span>
-<span class="c1">-- order by ordertotal
-</span><span class="c1"></span><span class="k">select</span> <span class="n">order_num</span><span class="p">,</span> <span class="k">sum</span><span class="p">(</span><span class="n">quantity</span><span class="o">*</span><span class="n">item_price</span><span class="p">)</span> <span class="k">as</span> <span class="n">ordertotal</span> <span class="k">from</span> <span class="n">orderitems</span>
-<span class="k">group</span> <span class="k">by</span> <span class="n">order_num</span> <span class="k">having</span> <span class="n">ordertotal</span> <span class="o">&gt;=</span> <span class="mi">50</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span><span class="w"> </span><span class="n">vend_id</span><span class="p">,</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">num_prods</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">vend_id</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="n">cust_id</span><span class="p">,</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">num_orders</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">cust_id</span><span class="w"> </span><span class="k">having</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="c1">-- or having num_orders &gt;= 2;
+</span><span class="c1"></span><span class="w">
+</span><span class="w"></span><span class="c1">-- order by ordertotal
+</span><span class="c1"></span><span class="k">select</span><span class="w"> </span><span class="n">order_num</span><span class="p">,</span><span class="w"> </span><span class="k">sum</span><span class="p">(</span><span class="n">quantity</span><span class="o">*</span><span class="n">item_price</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">ordertotal</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">orderitems</span><span class="w">
+</span><span class="w"></span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">order_num</span><span class="w"> </span><span class="k">having</span><span class="w"> </span><span class="n">ordertotal</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><h2 id="chapter-14-使用子句查询">Chapter 14: 使用子句查询</h2>
 <p>子查询 (<em>subquery</em>)，嵌套在其他查询之中的查询</p>
@@ -461,7 +466,7 @@
 <p>子查询编写时，最好从内层到外层依次测试，最后建立一个子查询语句。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -477,21 +482,21 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">cust_id</span> <span class="k">from</span> <span class="n">orders</span> <span class="k">where</span> <span class="n">order_num</span> <span class="k">in</span> <span class="p">(</span>
-  <span class="k">select</span> <span class="n">order_num</span> <span class="k">from</span> <span class="n">orderitems</span> <span class="k">where</span> <span class="n">prod_id</span> <span class="o">=</span> <span class="s1">&#39;TNT2&#39;</span>
-<span class="p">);</span>
-
-<span class="k">select</span> <span class="n">cust_name</span><span class="p">,</span> <span class="n">cust_contact</span> <span class="k">from</span> <span class="n">customers</span> <span class="k">where</span> <span class="n">cust_id</span> <span class="k">in</span> <span class="p">(</span>
-  <span class="k">select</span> <span class="n">cust_id</span> <span class="k">from</span> <span class="n">orders</span> <span class="k">where</span> <span class="n">order_num</span> <span class="k">in</span> <span class="p">(</span>
-    <span class="k">select</span> <span class="n">order_num</span> <span class="k">from</span> <span class="n">orderitems</span> <span class="k">where</span> <span class="n">prod_id</span> <span class="o">=</span> <span class="s1">&#39;TNT2&#39;</span>
-  <span class="p">)</span>
-<span class="p">);</span>
-
-<span class="c1">-- 对计算字段进行子查询：客户订单数量
-</span><span class="c1"></span><span class="k">select</span> <span class="n">cust_name</span><span class="p">,</span> <span class="n">cust_state</span><span class="p">,</span> <span class="p">(</span>
-  <span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">orders</span> <span class="k">where</span> <span class="n">orders</span><span class="p">.</span><span class="n">cust_id</span> <span class="o">=</span> <span class="n">customers</span><span class="p">.</span><span class="n">cust_id</span>
-<span class="p">)</span> <span class="k">as</span> <span class="n">orders</span> <span class="k">from</span> <span class="n">customers</span> <span class="k">order</span> <span class="k">by</span> <span class="n">cust_name</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span><span class="w"> </span><span class="n">cust_id</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">order_num</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span><span class="w">  </span><span class="k">select</span><span class="w"> </span><span class="n">order_num</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">orderitems</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">prod_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;TNT2&#39;</span><span class="w">
+</span><span class="w"></span><span class="p">);</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="n">cust_name</span><span class="p">,</span><span class="w"> </span><span class="n">cust_contact</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">cust_id</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span><span class="w">  </span><span class="k">select</span><span class="w"> </span><span class="n">cust_id</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">order_num</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span><span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="n">order_num</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">orderitems</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">prod_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;TNT2&#39;</span><span class="w">
+</span><span class="w">  </span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="p">);</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c1">-- 对计算字段进行子查询：客户订单数量
+</span><span class="c1"></span><span class="k">select</span><span class="w"> </span><span class="n">cust_name</span><span class="p">,</span><span class="w"> </span><span class="n">cust_state</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span><span class="w">  </span><span class="k">select</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">orders</span><span class="p">.</span><span class="n">cust_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">customers</span><span class="p">.</span><span class="n">cust_id</span><span class="w">
+</span><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">cust_name</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><h2 id="chapter-15-创建联结表-join">Chapter 15: 创建联结表 (join)</h2>
 <p>外键 (foreign key)，某个表中包含另一个表中主键的列；</p>
@@ -524,7 +529,7 @@
 <p><code>inner join &lt;table&gt; on</code>语法，ANSI SQL规范，但是写起来不方便。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -534,50 +539,50 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">vend_name</span><span class="p">,</span> <span class="n">prod_name</span><span class="p">,</span> <span class="n">prod_price</span>
-<span class="k">from</span> <span class="n">vendors</span><span class="p">,</span> <span class="n">producst</span>
-<span class="k">where</span> <span class="n">vendors</span><span class="p">.</span><span class="n">vend_id</span> <span class="o">=</span> <span class="n">products</span><span class="p">.</span><span class="n">vend_id</span> <span class="c1">-- 非明确的联结语法
-</span><span class="c1"></span><span class="k">order</span> <span class="k">by</span> <span class="n">vend_name</span><span class="p">,</span> <span class="n">prod_name</span><span class="p">;</span>
-
-<span class="k">select</span> <span class="n">vend_name</span><span class="p">,</span> <span class="n">prod_name</span><span class="p">,</span> <span class="n">prod_price</span>
-<span class="k">from</span> <span class="n">vendors</span> <span class="k">inner</span> <span class="k">join</span> <span class="n">products</span>
-<span class="k">on</span> <span class="n">vendors</span><span class="p">.</span><span class="n">vend_id</span> <span class="o">=</span> <span class="n">products</span><span class="p">.</span><span class="n">vend_id</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span><span class="w"> </span><span class="n">vend_name</span><span class="p">,</span><span class="w"> </span><span class="n">prod_name</span><span class="p">,</span><span class="w"> </span><span class="n">prod_price</span><span class="w">
+</span><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">vendors</span><span class="p">,</span><span class="w"> </span><span class="n">producst</span><span class="w">
+</span><span class="w"></span><span class="k">where</span><span class="w"> </span><span class="n">vendors</span><span class="p">.</span><span class="n">vend_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">products</span><span class="p">.</span><span class="n">vend_id</span><span class="w"> </span><span class="c1">-- 非明确的联结语法
+</span><span class="c1"></span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">vend_name</span><span class="p">,</span><span class="w"> </span><span class="n">prod_name</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="n">vend_name</span><span class="p">,</span><span class="w"> </span><span class="n">prod_name</span><span class="p">,</span><span class="w"> </span><span class="n">prod_price</span><span class="w">
+</span><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">vendors</span><span class="w"> </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">products</span><span class="w">
+</span><span class="w"></span><span class="k">on</span><span class="w"> </span><span class="n">vendors</span><span class="p">.</span><span class="n">vend_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">products</span><span class="p">.</span><span class="n">vend_id</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>多级select子句 v.s. where多个联结 v.s. inner join多个联结</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">cust_name</span><span class="p">,</span> <span class="n">cust_contact</span>
-<span class="k">from</span> <span class="n">customers</span><span class="p">,</span> <span class="n">orders</span><span class="p">,</span> <span class="n">orderitems</span>
-<span class="k">where</span> <span class="n">customers</span><span class="p">.</span><span class="n">cust_id</span> <span class="o">=</span> <span class="n">orders</span><span class="p">.</span><span class="n">cust_id</span>
-  <span class="k">and</span> <span class="n">orderitems</span><span class="p">.</span><span class="n">order_num</span> <span class="o">=</span> <span class="n">orders</span><span class="p">.</span><span class="n">order_num</span>
-  <span class="k">and</span> <span class="n">prod_id</span> <span class="o">=</span> <span class="s1">&#39;TNT2&#39;</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span><span class="w"> </span><span class="n">cust_name</span><span class="p">,</span><span class="w"> </span><span class="n">cust_contact</span><span class="w">
+</span><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">customers</span><span class="p">,</span><span class="w"> </span><span class="n">orders</span><span class="p">,</span><span class="w"> </span><span class="n">orderitems</span><span class="w">
+</span><span class="w"></span><span class="k">where</span><span class="w"> </span><span class="n">customers</span><span class="p">.</span><span class="n">cust_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orders</span><span class="p">.</span><span class="n">cust_id</span><span class="w">
+</span><span class="w">  </span><span class="k">and</span><span class="w"> </span><span class="n">orderitems</span><span class="p">.</span><span class="n">order_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orders</span><span class="p">.</span><span class="n">order_num</span><span class="w">
+</span><span class="w">  </span><span class="k">and</span><span class="w"> </span><span class="n">prod_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;TNT2&#39;</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">cust_name</span><span class="p">,</span> <span class="n">cust_contact</span>
-<span class="k">from</span> <span class="n">customers</span> <span class="k">inner</span> <span class="k">join</span> <span class="n">orders</span> <span class="k">on</span> <span class="n">customers</span><span class="p">.</span><span class="n">cust_id</span> <span class="o">=</span> <span class="n">orders</span><span class="p">.</span><span class="n">cust_id</span>
-<span class="k">inner</span> <span class="k">join</span> <span class="n">orderitems</span> <span class="k">on</span> <span class="n">orders</span><span class="p">.</span><span class="n">order_num</span> <span class="o">=</span> <span class="n">orderitems</span><span class="p">.</span><span class="n">order_num</span>
-<span class="k">where</span> <span class="n">prod_id</span> <span class="o">=</span> <span class="s1">&#39;TNT2&#39;</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span><span class="w"> </span><span class="n">cust_name</span><span class="p">,</span><span class="w"> </span><span class="n">cust_contact</span><span class="w">
+</span><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">customers</span><span class="p">.</span><span class="n">cust_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orders</span><span class="p">.</span><span class="n">cust_id</span><span class="w">
+</span><span class="w"></span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">orderitems</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">orders</span><span class="p">.</span><span class="n">order_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orderitems</span><span class="p">.</span><span class="n">order_num</span><span class="w">
+</span><span class="w"></span><span class="k">where</span><span class="w"> </span><span class="n">prod_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;TNT2&#39;</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -585,31 +590,31 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">cust_name</span><span class="p">,</span> <span class="n">cust_contact</span>
-<span class="k">from</span> <span class="n">customers</span>
-<span class="k">where</span> <span class="n">cust_id</span> <span class="k">in</span> <span class="p">(</span><span class="k">select</span> <span class="n">cust_id</span>
-                  <span class="k">from</span> <span class="n">orders</span> <span class="k">where</span> <span class="n">order_num</span> <span class="k">in</span> <span class="p">(</span><span class="k">select</span> <span class="n">order_num</span>
-                                                  <span class="k">from</span> <span class="n">orderitems</span>
-                                                  <span class="k">where</span> <span class="n">prod_id</span> <span class="o">=</span> <span class="s1">&#39;TNT2&#39;</span><span class="p">));</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span><span class="w"> </span><span class="n">cust_name</span><span class="p">,</span><span class="w"> </span><span class="n">cust_contact</span><span class="w">
+</span><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">customers</span><span class="w">
+</span><span class="w"></span><span class="k">where</span><span class="w"> </span><span class="n">cust_id</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">cust_id</span><span class="w">
+</span><span class="w">                  </span><span class="k">from</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">order_num</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">order_num</span><span class="w">
+</span><span class="w">                                                  </span><span class="k">from</span><span class="w"> </span><span class="n">orderitems</span><span class="w">
+</span><span class="w">                                                  </span><span class="k">where</span><span class="w"> </span><span class="n">prod_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;TNT2&#39;</span><span class="p">));</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><h2 id="chapter-16-创建高级联结">Chapter 16: 创建高级联结</h2>
 <p>表别名 <code>from customers as c</code>，大幅简化 <code>where</code> 条件判断的书写；前面已经介绍了<code>select as</code>用法。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">cust_name</span><span class="p">,</span> <span class="n">cust_contact</span>
-<span class="k">from</span> <span class="n">customers</span> <span class="k">as</span> <span class="k">c</span><span class="p">,</span> <span class="n">orders</span> <span class="k">as</span> <span class="n">o</span><span class="p">,</span> <span class="n">orderitems</span> <span class="k">as</span> <span class="n">oi</span>
-<span class="k">where</span> <span class="k">c</span><span class="p">.</span><span class="n">cust_id</span> <span class="o">=</span> <span class="n">o</span><span class="p">.</span><span class="n">cust_id</span>
-  <span class="k">and</span> <span class="n">o</span><span class="p">.</span><span class="n">order_num</span> <span class="o">=</span> <span class="n">oi</span><span class="p">.</span><span class="n">order_num</span>
-  <span class="k">and</span> <span class="n">prod_id</span> <span class="o">=</span> <span class="s1">&#39;TNT2&#39;</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span><span class="w"> </span><span class="n">cust_name</span><span class="p">,</span><span class="w"> </span><span class="n">cust_contact</span><span class="w">
+</span><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">c</span><span class="p">,</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">o</span><span class="p">,</span><span class="w"> </span><span class="n">orderitems</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">oi</span><span class="w">
+</span><span class="w"></span><span class="k">where</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">cust_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">cust_id</span><span class="w">
+</span><span class="w">  </span><span class="k">and</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">order_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">oi</span><span class="p">.</span><span class="n">order_num</span><span class="w">
+</span><span class="w">  </span><span class="k">and</span><span class="w"> </span><span class="n">prod_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;TNT2&#39;</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>自联结</p>
 <ul>
@@ -619,7 +624,7 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -627,27 +632,27 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- 查询产品 DTNTR 供应商所提供的所有产品
-</span><span class="c1"></span><span class="k">select</span> <span class="n">prod_id</span><span class="p">,</span> <span class="n">prod_name</span>
-<span class="k">from</span> <span class="n">products</span>
-<span class="k">where</span> <span class="n">vend_id</span> <span class="o">=</span> <span class="p">(</span><span class="k">select</span> <span class="n">vend_id</span>
-                 <span class="k">from</span> <span class="n">products</span>
-                 <span class="k">where</span> <span class="n">prod_id</span> <span class="o">=</span> <span class="s1">&#39;DTNTR&#39;</span><span class="p">);</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- 查询产品 DTNTR 供应商所提供的所有产品
+</span><span class="c1"></span><span class="k">select</span><span class="w"> </span><span class="n">prod_id</span><span class="p">,</span><span class="w"> </span><span class="n">prod_name</span><span class="w">
+</span><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">products</span><span class="w">
+</span><span class="w"></span><span class="k">where</span><span class="w"> </span><span class="n">vend_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">vend_id</span><span class="w">
+</span><span class="w">                 </span><span class="k">from</span><span class="w"> </span><span class="n">products</span><span class="w">
+</span><span class="w">                 </span><span class="k">where</span><span class="w"> </span><span class="n">prod_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;DTNTR&#39;</span><span class="p">);</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">p1</span><span class="p">.</span><span class="n">prod_id</span><span class="p">,</span><span class="n">p1</span><span class="p">.</span><span class="n">prod_name</span>
-<span class="k">from</span> <span class="n">products</span> <span class="k">as</span> <span class="n">p1</span><span class="p">,</span> <span class="n">products</span> <span class="k">as</span> <span class="n">p2</span>
-<span class="k">where</span> <span class="n">p1</span><span class="p">.</span><span class="n">vend_id</span> <span class="o">=</span> <span class="n">p2</span><span class="p">.</span><span class="n">vend_id</span>
-  <span class="k">and</span> <span class="n">p2</span><span class="p">.</span><span class="n">prod_id</span> <span class="o">=</span> <span class="s1">&#39;DTNTR&#39;</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span><span class="w"> </span><span class="n">p1</span><span class="p">.</span><span class="n">prod_id</span><span class="p">,</span><span class="n">p1</span><span class="p">.</span><span class="n">prod_name</span><span class="w">
+</span><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">p2</span><span class="w">
+</span><span class="w"></span><span class="k">where</span><span class="w"> </span><span class="n">p1</span><span class="p">.</span><span class="n">vend_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p2</span><span class="p">.</span><span class="n">vend_id</span><span class="w">
+</span><span class="w">  </span><span class="k">and</span><span class="w"> </span><span class="n">p2</span><span class="p">.</span><span class="n">prod_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;DTNTR&#39;</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>自然联结：排除多个表中相同列多次出现(人工排除)；</p>
 <ul>
@@ -655,15 +660,15 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="k">c</span><span class="p">.</span><span class="o">*</span> <span class="n">o</span><span class="p">.</span><span class="n">order_num</span><span class="p">,</span> <span class="n">o</span><span class="p">.</span><span class="n">order_date</span><span class="p">,</span> <span class="n">oi</span><span class="p">.</span><span class="n">prod_id</span><span class="p">,</span> <span class="n">oi</span><span class="p">.</span><span class="n">quantity</span><span class="p">,</span> <span class="n">oi</span><span class="p">.</span><span class="n">item_price</span>
-<span class="k">from</span> <span class="n">customers</span> <span class="k">as</span> <span class="k">c</span><span class="p">,</span> <span class="n">orders</span> <span class="k">as</span> <span class="n">o</span><span class="p">,</span> <span class="n">orderitems</span> <span class="k">as</span> <span class="n">oi</span>
-<span class="k">where</span> <span class="k">c</span><span class="p">.</span><span class="n">cust_id</span> <span class="o">=</span> <span class="n">o</span><span class="p">.</span><span class="n">cust_id</span> <span class="k">and</span> <span class="n">oi</span><span class="p">.</span><span class="n">order_num</span> <span class="o">=</span> <span class="n">o</span><span class="p">.</span><span class="n">order_num</span> <span class="k">and</span> <span class="n">prod_id</span> <span class="o">=</span> <span class="s1">&#39;FB&#39;</span><span class="err">\</span><span class="k">G</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">order_num</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">order_date</span><span class="p">,</span><span class="w"> </span><span class="n">oi</span><span class="p">.</span><span class="n">prod_id</span><span class="p">,</span><span class="w"> </span><span class="n">oi</span><span class="p">.</span><span class="n">quantity</span><span class="p">,</span><span class="w"> </span><span class="n">oi</span><span class="p">.</span><span class="n">item_price</span><span class="w">
+</span><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">c</span><span class="p">,</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">o</span><span class="p">,</span><span class="w"> </span><span class="n">orderitems</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">oi</span><span class="w">
+</span><span class="w"></span><span class="k">where</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">cust_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">cust_id</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">oi</span><span class="p">.</span><span class="n">order_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">order_num</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">prod_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;FB&#39;</span><span class="err">\</span><span class="k">G</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p><strong>注</strong>：表格输出行过长时，使用 <code>\G</code>(大写) 而非 <code>;</code> 结尾，可以取消表格输出；</p>
 <p>外部联结：联结包含了那些在相关表中<strong>没有关联行</strong>的行；</p>
@@ -676,19 +681,19 @@
 <p>MySQL不支持简化字符 <code>*=</code> 和 <code>=*</code> 的使用，这两种操作符在其他DBMS中是很流行的。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- 带聚集函数的联结
-</span><span class="c1"></span><span class="k">select</span> <span class="k">c</span><span class="p">.</span><span class="n">cust_name</span><span class="p">,</span> <span class="k">c</span><span class="p">.</span><span class="n">cust_id</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="n">o</span><span class="p">.</span><span class="n">order_num</span><span class="p">)</span> <span class="k">as</span> <span class="n">ord_num</span>
-<span class="k">from</span> <span class="n">customers</span> <span class="k">as</span> <span class="k">c</span> <span class="k">inner</span> <span class="k">join</span> <span class="n">orders</span> <span class="k">as</span> <span class="n">o</span>
-<span class="k">on</span> <span class="k">c</span><span class="p">.</span><span class="n">cust_id</span> <span class="o">=</span> <span class="n">o</span><span class="p">.</span><span class="n">cust_id</span>
-<span class="k">group</span> <span class="k">by</span> <span class="k">c</span><span class="p">.</span><span class="n">cust_id</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- 带聚集函数的联结
+</span><span class="c1"></span><span class="k">select</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">cust_name</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">cust_id</span><span class="p">,</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="n">o</span><span class="p">.</span><span class="n">order_num</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">ord_num</span><span class="w">
+</span><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">c</span><span class="w"> </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">o</span><span class="w">
+</span><span class="w"></span><span class="k">on</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">cust_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">cust_id</span><span class="w">
+</span><span class="w"></span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">cust_id</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><h2 id="chapter-17-组合查询">Chapter 17: 组合查询</h2>
 <p>又称并 (union)，或复合查询 (compound query)。</p>
@@ -708,7 +713,7 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -717,14 +722,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">vend_id</span><span class="p">,</span> <span class="n">prod_id</span><span class="p">,</span> <span class="n">prod_price</span> <span class="k">from</span> <span class="n">products</span> <span class="k">where</span> <span class="n">prod_price</span> <span class="o">&lt;=</span> <span class="mi">5</span>
-<span class="k">union</span>
-<span class="k">select</span> <span class="n">vend_id</span><span class="p">,</span> <span class="n">prod_id</span><span class="p">,</span> <span class="n">prod_price</span> <span class="k">from</span> <span class="n">products</span> <span class="k">where</span> <span class="n">vend_id</span> <span class="k">in</span> <span class="p">(</span><span class="mi">1001</span><span class="p">,</span> <span class="mi">1002</span><span class="p">);</span>
-
-<span class="c1">-- use only where
-</span><span class="c1"></span><span class="k">select</span> <span class="n">vend_id</span><span class="p">,</span> <span class="n">prod_id</span><span class="p">,</span> <span class="n">prod_price</span> <span class="k">from</span> <span class="n">products</span>
-<span class="k">where</span> <span class="n">prod_price</span> <span class="o">&lt;=</span><span class="mi">5</span> <span class="k">or</span> <span class="n">vend_in</span> <span class="p">(</span><span class="mi">1001</span><span class="p">,</span> <span class="mi">1002</span><span class="p">);</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span><span class="w"> </span><span class="n">vend_id</span><span class="p">,</span><span class="w"> </span><span class="n">prod_id</span><span class="p">,</span><span class="w"> </span><span class="n">prod_price</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">prod_price</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">5</span><span class="w">
+</span><span class="w"></span><span class="k">union</span><span class="w">
+</span><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="n">vend_id</span><span class="p">,</span><span class="w"> </span><span class="n">prod_id</span><span class="p">,</span><span class="w"> </span><span class="n">prod_price</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">vend_id</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="mi">1001</span><span class="p">,</span><span class="w"> </span><span class="mi">1002</span><span class="p">);</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c1">-- use only where
+</span><span class="c1"></span><span class="k">select</span><span class="w"> </span><span class="n">vend_id</span><span class="p">,</span><span class="w"> </span><span class="n">prod_id</span><span class="p">,</span><span class="w"> </span><span class="n">prod_price</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">products</span><span class="w">
+</span><span class="w"></span><span class="k">where</span><span class="w"> </span><span class="n">prod_price</span><span class="w"> </span><span class="o">&lt;=</span><span class="mi">5</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">vend_in</span><span class="w"> </span><span class="p">(</span><span class="mi">1001</span><span class="p">,</span><span class="w"> </span><span class="mi">1002</span><span class="p">);</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><h2 id="chapter-18-全文本搜索">Chapter 18: 全文本搜索</h2>
 <p>理解全文本搜索</p>
@@ -741,7 +746,7 @@
 <p>在增加、更新或删除行时， 索引随之自动更新。（也就是说索引加快了检索速度，但是牺牲了数据更改的性能。）</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -755,19 +760,19 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="o">##########################</span>
- <span class="k">Create</span> <span class="n">productnotes</span> <span class="k">table</span>
-<span class="o">##########################</span>
-<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">productnotes</span>
-<span class="p">(</span>
-  <span class="n">note_id</span>    <span class="nb">int</span>           <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
-  <span class="n">prod_id</span>    <span class="nb">char</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>      <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-  <span class="n">note_date</span> <span class="n">datetime</span>       <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-  <span class="n">note_text</span>  <span class="nb">text</span>          <span class="k">NULL</span> <span class="p">,</span>
-  <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">(</span><span class="n">note_id</span><span class="p">),</span>
-  <span class="n">FULLTEXT</span><span class="p">(</span><span class="n">note_text</span><span class="p">)</span>
-<span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">MyISAM</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="o">##########################</span><span class="w">
+</span><span class="w"> </span><span class="k">Create</span><span class="w"> </span><span class="n">productnotes</span><span class="w"> </span><span class="k">table</span><span class="w">
+</span><span class="w"></span><span class="o">##########################</span><span class="w">
+</span><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">productnotes</span><span class="w">
+</span><span class="w"></span><span class="p">(</span><span class="w">
+</span><span class="w">  </span><span class="n">note_id</span><span class="w">    </span><span class="nb">int</span><span class="w">           </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="n">prod_id</span><span class="w">    </span><span class="nb">char</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w">      </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="n">note_date</span><span class="w"> </span><span class="n">datetime</span><span class="w">       </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="n">note_text</span><span class="w">  </span><span class="nb">text</span><span class="w">          </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">note_id</span><span class="p">),</span><span class="w">
+</span><span class="w">  </span><span class="n">FULLTEXT</span><span class="p">(</span><span class="n">note_text</span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="o">=</span><span class="n">MyISAM</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>全文搜索使用</p>
 <ul>
@@ -813,7 +818,7 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -825,16 +830,16 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">note_id</span><span class="p">,</span> <span class="n">note_text</span> <span class="k">from</span> <span class="n">productnotes</span> <span class="k">where</span> <span class="k">match</span><span class="p">(</span><span class="n">note_text</span><span class="p">)</span> <span class="n">against</span><span class="p">(</span><span class="s1">&#39;rabbit&#39;</span><span class="p">);</span>
-
-<span class="c1">-- 查看全文检索优先级输出 (语法失效)
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span><span class="w"> </span><span class="n">note_id</span><span class="p">,</span><span class="w"> </span><span class="n">note_text</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">productnotes</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="k">match</span><span class="p">(</span><span class="n">note_text</span><span class="p">)</span><span class="w"> </span><span class="n">against</span><span class="p">(</span><span class="s1">&#39;rabbit&#39;</span><span class="p">);</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c1">-- 查看全文检索优先级输出 (语法失效)
 </span><span class="c1">-- use match in select but not in where
-</span><span class="c1"></span><span class="k">select</span> <span class="n">note_id</span><span class="p">,</span> <span class="n">note_text</span><span class="p">,</span> <span class="k">match</span><span class="p">(</span><span class="n">note_text</span><span class="p">)</span> <span class="n">against</span><span class="p">(</span><span class="s1">&#39;rabbit&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">rank</span> <span class="k">from</span> <span class="n">productnotes</span><span class="p">;</span>
-
-<span class="c1">-- 布尔模式
-</span><span class="c1"></span><span class="k">select</span> <span class="n">note_id</span><span class="p">,</span> <span class="n">note_text</span> <span class="k">from</span> <span class="n">productnotes</span>
-<span class="k">where</span> <span class="k">match</span><span class="p">(</span><span class="n">note_text</span><span class="p">)</span> <span class="n">against</span><span class="p">(</span><span class="s1">&#39;heavy -rope*&#39;</span> <span class="k">in</span> <span class="nb">boolean</span> <span class="k">mode</span><span class="p">);</span>
-<span class="c1">-- against(&#39;+rabbit +bait&#39; in boolean mode);
+</span><span class="c1"></span><span class="k">select</span><span class="w"> </span><span class="n">note_id</span><span class="p">,</span><span class="w"> </span><span class="n">note_text</span><span class="p">,</span><span class="w"> </span><span class="k">match</span><span class="p">(</span><span class="n">note_text</span><span class="p">)</span><span class="w"> </span><span class="n">against</span><span class="p">(</span><span class="s1">&#39;rabbit&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">productnotes</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c1">-- 布尔模式
+</span><span class="c1"></span><span class="k">select</span><span class="w"> </span><span class="n">note_id</span><span class="p">,</span><span class="w"> </span><span class="n">note_text</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">productnotes</span><span class="w">
+</span><span class="w"></span><span class="k">where</span><span class="w"> </span><span class="k">match</span><span class="p">(</span><span class="n">note_text</span><span class="p">)</span><span class="w"> </span><span class="n">against</span><span class="p">(</span><span class="s1">&#39;heavy -rope*&#39;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nb">boolean</span><span class="w"> </span><span class="k">mode</span><span class="p">);</span><span class="w">
+</span><span class="w"></span><span class="c1">-- against(&#39;+rabbit +bait&#39; in boolean mode);
 </span></code></pre></td></tr></table>
 </div>
 </div><p>额外说明</p>
@@ -850,11 +855,11 @@
 <p>针对部分字符串的索引，如针对列值的前16个字符进行索引</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">definition</span> <span class="k">ON</span> <span class="k">dictionary</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="n">definition</span><span class="p">(</span><span class="mi">16</span><span class="p">));</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">definition</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">dictionary</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="n">definition</span><span class="p">(</span><span class="mi">16</span><span class="p">));</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><h2 id="chapter-19-插入数据">Chapter 19: 插入数据</h2>
 <p>涉及内容</p>
@@ -915,13 +920,13 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">update</span> <span class="n">customers</span> <span class="k">set</span> <span class="n">cust_name</span> <span class="o">=</span> <span class="s1">&#39;The Fudds&#39;</span><span class="p">,</span> <span class="n">cust_email</span> <span class="o">=</span> <span class="s1">&#39;elmer@fudd.com&#39;</span>
-<span class="k">where</span> <span class="n">cust_id</span> <span class="o">=</span> <span class="mi">10005</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">update</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">cust_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;The Fudds&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">cust_email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;elmer@fudd.com&#39;</span><span class="w">
+</span><span class="w"></span><span class="k">where</span><span class="w"> </span><span class="n">cust_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10005</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -1007,13 +1012,10 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">laggardkernel</span>
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>laggardkernel</span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -1024,7 +1026,10 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.db1482bc438a2df971757df91e110bb84b31bb77ca2141978d165fcf453c642e.js"></script>
 
 
 

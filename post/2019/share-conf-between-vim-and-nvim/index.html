@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.81.0 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.pseudocold.com/post/2019/share-conf-between-vim-and-nvim/" />
@@ -35,7 +35,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.fa20e845db068df5bd1b183f37f2c2b1ccb88d6fc052a3d6c4f63a682a4d6d4c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -43,12 +44,12 @@
 <meta property="og:description" content="Share configuration files between vim and nvim." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pseudocold.com/post/2019/share-conf-between-vim-and-nvim/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-07-19T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2019-07-19T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2019-07-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-07-19T00:00:00+00:00" />
 
 <meta itemprop="name" content="Share Configuration Files between Vim and Neovim">
-<meta itemprop="description" content="Share configuration files between vim and nvim."><meta itemprop="datePublished" content="2019-07-19T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-07-19T00:00:00&#43;00:00" />
+<meta itemprop="description" content="Share configuration files between vim and nvim."><meta itemprop="datePublished" content="2019-07-19T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2019-07-19T00:00:00+00:00" />
 <meta itemprop="wordCount" content="191">
 <meta itemprop="keywords" content="vim,neovim," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Share Configuration Files between Vim and Neovim"/>
@@ -85,6 +86,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">🔍</li>
       </a>
   </ul>
 </nav>
@@ -107,6 +110,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">🔍</a>
       </li>
   </ul>
 </nav>
@@ -143,7 +148,7 @@
 <p>In this solution, we try to symlink <code>~/.config/nvim</code> to <code>~/.vim</code>, and make the conf compatible with <code>vim</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -154,7 +159,7 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># nvim conf dir: ~/.config/nvim</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># nvim conf dir: ~/.config/nvim</span>
 <span class="c1"># vim conf dir: ~/.vim</span>
 <span class="c1"># link the 1st as the 2nd with relative links</span>
 
@@ -169,7 +174,7 @@ ln -sf ./.config/nvim ~/.vim
 <p>Now we need to make <code>vim</code> reuse <code>nvim</code>&rsquo;s plugin manager, plugins, by changing <code>runtimepath</code> and <code>packpath</code>. In fact, the plugin paths are reused automatically, the following fix is reusing the plugin manger.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -182,7 +187,7 @@ ln -sf ./.config/nvim ~/.vim
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-vim" data-lang="vim"><span class="k">let</span> <span class="nx">g</span>:<span class="nx">is_nvim</span> <span class="p">=</span> <span class="nx">has</span><span class="p">(</span><span class="s1">&#39;nvim&#39;</span><span class="p">)</span><span class="err">
+<pre tabindex="0" class="chroma"><code class="language-vim" data-lang="vim"><span class="k">let</span> <span class="nx">g</span>:<span class="nx">is_nvim</span> <span class="p">=</span> <span class="nx">has</span><span class="p">(</span><span class="s1">&#39;nvim&#39;</span><span class="p">)</span><span class="err">
 </span><span class="err"></span><span class="k">let</span> <span class="nx">g</span>:<span class="nx">is_vim8</span> <span class="p">=</span> <span class="nx">v</span>:<span class="nx">version</span> <span class="p">&gt;=</span> <span class="m">800</span> ? <span class="m">1</span> : <span class="m">0</span><span class="err">
 </span><span class="err"></span><span class="c">
 </span><span class="c">&#34; Reuse nvim&#39;s runtimepath and packpath in vim</span><span class="err">
@@ -280,13 +285,10 @@ ln -sf ./.config/nvim ~/.vim
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">laggardkernel</span>
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>laggardkernel</span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -297,7 +299,10 @@ ln -sf ./.config/nvim ~/.vim
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.db1482bc438a2df971757df91e110bb84b31bb77ca2141978d165fcf453c642e.js"></script>
 
 
 

@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.81.0 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.pseudocold.com/post/2018/netcat/" />
@@ -35,7 +35,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.fa20e845db068df5bd1b183f37f2c2b1ccb88d6fc052a3d6c4f63a682a4d6d4c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -43,12 +44,12 @@
 <meta property="og:description" content="netcat 个人笔记" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pseudocold.com/post/2018/netcat/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2018-11-15T22:03:21&#43;08:00" />
-<meta property="article:modified_time" content="2018-11-15T22:03:21&#43;08:00" />
+<meta property="article:published_time" content="2018-11-15T22:03:21+08:00" />
+<meta property="article:modified_time" content="2018-11-15T22:03:21+08:00" />
 
 <meta itemprop="name" content="Netcat">
-<meta itemprop="description" content="netcat 个人笔记"><meta itemprop="datePublished" content="2018-11-15T22:03:21&#43;08:00" />
-<meta itemprop="dateModified" content="2018-11-15T22:03:21&#43;08:00" />
+<meta itemprop="description" content="netcat 个人笔记"><meta itemprop="datePublished" content="2018-11-15T22:03:21+08:00" />
+<meta itemprop="dateModified" content="2018-11-15T22:03:21+08:00" />
 <meta itemprop="wordCount" content="1296">
 <meta itemprop="keywords" content="network,netcat," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Netcat"/>
@@ -85,6 +86,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">🔍</li>
       </a>
   </ul>
 </nav>
@@ -107,6 +110,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">🔍</a>
       </li>
   </ul>
 </nav>
@@ -210,17 +215,17 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt-get remove --purge netcat-openBSD
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt-get remove --purge netcat-openBSD
 sudo apt-get install netcat
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -266,7 +271,7 @@ sudo apt-get install netcat
 </span><span class="lnt">44
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># send TCP packets</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># send TCP packets</span>
 <span class="nb">echo</span> <span class="s1">&#39;&lt;YOUR MESSAGE HERE&gt;&#39;</span> <span class="p">|</span> nc &lt;HOST&gt; &lt;PORT&gt;
 
 <span class="c1"># listen to incoming packets and chat</span>
@@ -317,11 +322,11 @@ nc -w timeout_in_seconds ipaddress port
 <h3 id="specify-interface-ip">Specify interface IP</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># -s, use interface with ip 10.x to send packets</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># -s, use interface with ip 10.x to send packets</span>
 nc -s 10.1.2.3 host.example.com <span class="m">42</span>
 </code></pre></td></tr></table>
 </div>
@@ -329,7 +334,7 @@ nc -s 10.1.2.3 host.example.com <span class="m">42</span>
 <p><code>-z</code> does port scanning, TCP by defaults. Use <code>-uz</code> to make UDP scanning.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -350,7 +355,7 @@ nc -s 10.1.2.3 host.example.com <span class="m">42</span>
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># -z , scan for listening daemons, without sending any data  connections.</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># -z , scan for listening daemons, without sending any data  connections.</span>
 nc -z &lt;HOST&gt; &lt;PORT Range&gt;
 <span class="c1"># -v, verbose</span>
 
@@ -374,11 +379,11 @@ Protocol mismatch.
 </div><h3 id="proxy">Proxy</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># forward data from a local TCP port to the given remote host</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># forward data from a local TCP port to the given remote host</span>
 nc -l local_port <span class="p">|</span> nc hostname remote-port
 </code></pre></td></tr></table>
 </div>
@@ -389,7 +394,7 @@ nc -l local_port <span class="p">|</span> nc hostname remote-port
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -408,7 +413,7 @@ nc -l local_port <span class="p">|</span> nc hostname remote-port
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">nc hostname port <span class="c1"># -v,</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">nc hostname port <span class="c1"># -v,</span>
 
 <span class="nb">echo</span> -n <span class="s2">&#34;GET / HTTP/1.0\r\n\r\n&#34;</span> <span class="p">|</span> nc host.example.com <span class="m">80</span>
 
@@ -430,7 +435,7 @@ nc -l -p <span class="m">1337</span> <span class="p">|</span> nc https://www.goo
 </div><h3 id="chat-room">Chat room</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -438,7 +443,7 @@ nc -l -p <span class="m">1337</span> <span class="p">|</span> nc https://www.goo
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">nc -l -vv -p <span class="m">4444</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">nc -l -vv -p <span class="m">4444</span>
 <span class="c1"># -l, listen</span>
 <span class="c1"># -vv, verbose</span>
 
@@ -454,7 +459,7 @@ nc initiator-server <span class="m">4444</span>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -462,7 +467,7 @@ nc initiator-server <span class="m">4444</span>
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># setup a server/listener, and pass input into shell</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># setup a server/listener, and pass input into shell</span>
 nc -l -p <span class="m">6996</span> -e /bin/bash
 nc -l -p <span class="m">6996</span> -e <span class="s2">&#34;/usr/local/bin/bash -il&#34;</span>
 
@@ -477,7 +482,7 @@ nc -l -p <span class="m">1334</span> -e ./script.bash
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -488,7 +493,7 @@ nc -l -p <span class="m">1334</span> -e ./script.bash
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># outside firewall</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># outside firewall</span>
 nc -l <span class="m">9000</span>
 
 <span class="c1"># inside firewall</span>
@@ -504,13 +509,13 @@ nc -t address <span class="m">9000</span> <span class="m">0</span> &lt; ncpipe <
 <p><code>cryptcat</code>, netcat using two-fish encryption.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># encrypt connection with password</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># encrypt connection with password</span>
 cryptcat -k password-string -l -p <span class="m">1337</span>
 
 cryptcat -k password hostname <span class="m">1337</span>
@@ -530,7 +535,7 @@ cryptcat -k password hostname <span class="m">1337</span>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -538,7 +543,7 @@ cryptcat -k password hostname <span class="m">1337</span>
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 多人聊天</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 多人聊天</span>
 ncat -l -p <span class="m">1337</span> -m <span class="m">40</span> -k --chat
 <span class="c1"># -m, max conn</span>
 <span class="c1"># -k, keep open even all disconnect</span>
@@ -553,7 +558,7 @@ ncat -l -p <span class="m">1337</span> -m <span class="m">40</span> -k --chat
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -562,7 +567,7 @@ ncat -l -p <span class="m">1337</span> -m <span class="m">40</span> -k --chat
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># server side</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># server side</span>
 tcpserver -v -RHl0 <span class="m">0</span> <span class="m">1337</span> ./test.sh
 <span class="c1"># -R, no remote info</span>
 <span class="c1"># -H, no remote hostname lookup</span>
@@ -579,7 +584,7 @@ tcpserver -v -RHl0 <span class="m">0</span> <span class="m">1337</span> ./test.s
 <p><strong>Note</strong>: <code>telnet</code> is not available on macOS</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -587,7 +592,7 @@ tcpserver -v -RHl0 <span class="m">0</span> <span class="m">1337</span> ./test.s
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># bind descriptor with a hostname, in and out</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># bind descriptor with a hostname, in and out</span>
 <span class="nb">exec</span> <span class="m">3</span> &lt;&gt; /dev/tcp/127.0.0.1/1337
 <span class="nb">echo</span> -e <span class="s2">&#34;Hello Snubs\r\n&#34;</span> &gt;<span class="p">&amp;</span><span class="m">3</span>
 
@@ -598,7 +603,7 @@ cat &lt;<span class="p">&amp;</span><span class="m">3</span>
 </div><p><a href="https://www.youtube.com/watch?v=hZ6TjWuepqw&amp;t=0s">netcat without netcat</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -608,7 +613,7 @@ cat &lt;<span class="p">&amp;</span><span class="m">3</span>
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">nc -l -p <span class="m">1337</span> -k -vv
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">nc -l -p <span class="m">1337</span> -k -vv
 
 <span class="c1"># 客户端：把bash stdout, stderr导回tcp设备</span>
 <span class="c1"># 实际为创建服务端，共享shell</span>
@@ -703,13 +708,10 @@ mknod backpipe p <span class="o">&amp;&amp;</span> telnet ip_address port 0&lt;b
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">laggardkernel</span>
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>laggardkernel</span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -720,7 +722,10 @@ mknod backpipe p <span class="o">&amp;&amp;</span> telnet ip_address port 0&lt;b
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.db1482bc438a2df971757df91e110bb84b31bb77ca2141978d165fcf453c642e.js"></script>
 
 
 

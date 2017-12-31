@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.81.0 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.pseudocold.com/post/2019/flask-mail/" />
@@ -35,7 +35,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.fa20e845db068df5bd1b183f37f2c2b1ccb88d6fc052a3d6c4f63a682a4d6d4c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -43,12 +44,12 @@
 <meta property="og:description" content="Flask-Mail 扩展源码内容实际和 Flask 关系不大，主要是封装 Python 内置 email 库来发送邮件。我的第一直觉是跳过这个模块源码。不过，这时候我突然想到一个问题，Flask-Mail 发送邮件为什么需要应用上下文？每个教程都这么告诉我，但却没有解释过原因。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pseudocold.com/post/2019/flask-mail/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-08-09T11:09:58&#43;08:00" />
-<meta property="article:modified_time" content="2019-08-09T11:09:58&#43;08:00" />
+<meta property="article:published_time" content="2019-08-09T11:09:58+08:00" />
+<meta property="article:modified_time" content="2019-08-09T11:09:58+08:00" />
 
 <meta itemprop="name" content="为何 Flask-Mail 需要上下文环境">
-<meta itemprop="description" content="Flask-Mail 扩展源码内容实际和 Flask 关系不大，主要是封装 Python 内置 email 库来发送邮件。我的第一直觉是跳过这个模块源码。不过，这时候我突然想到一个问题，Flask-Mail 发送邮件为什么需要应用上下文？每个教程都这么告诉我，但却没有解释过原因。"><meta itemprop="datePublished" content="2019-08-09T11:09:58&#43;08:00" />
-<meta itemprop="dateModified" content="2019-08-09T11:09:58&#43;08:00" />
+<meta itemprop="description" content="Flask-Mail 扩展源码内容实际和 Flask 关系不大，主要是封装 Python 内置 email 库来发送邮件。我的第一直觉是跳过这个模块源码。不过，这时候我突然想到一个问题，Flask-Mail 发送邮件为什么需要应用上下文？每个教程都这么告诉我，但却没有解释过原因。"><meta itemprop="datePublished" content="2019-08-09T11:09:58+08:00" />
+<meta itemprop="dateModified" content="2019-08-09T11:09:58+08:00" />
 <meta itemprop="wordCount" content="708">
 <meta itemprop="keywords" content="flask,flask-mail," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="为何 Flask-Mail 需要上下文环境"/>
@@ -85,6 +86,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">🔍</li>
       </a>
   </ul>
 </nav>
@@ -107,6 +110,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">🔍</a>
       </li>
   </ul>
 </nav>
@@ -148,17 +153,17 @@
 <p>主要源码文件</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">flask_mail.py
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">flask_mail.py
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="为何-flask-mail-需要上下文">为何 Flask-Mail 需要上下文</h2>
 <p>基本所有教程中都会提到，Flask-Mail发送邮件需要应用上下文，但是为啥？以一段常见的利用线程发送邮件防止阻断请求的代码为例，</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -180,7 +185,7 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">send_async_email</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">send_async_email</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">mail</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
@@ -207,7 +212,7 @@
 <p>为了验证这种假设，直接查看 <code>Mail</code> 类代码中 <code>init_app</code> 部分。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -251,31 +256,31 @@
 </span><span class="lnt">42
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Mail</span><span class="p">(</span><span class="n">_MailMixin</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Mail</span><span class="p">(</span><span class="n">_MailMixin</span><span class="p">):</span>
     <span class="s2">&#34;&#34;&#34;Manages email messaging
 </span><span class="s2">    :param app: Flask instance
 </span><span class="s2">    &#34;&#34;&#34;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
-        <span class="k">if</span> <span class="n">app</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">app</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="nf">init_mail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">testing</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">init_mail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">testing</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">_Mail</span><span class="p">(</span>
             <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_SERVER&#39;</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">),</span>
             <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_USERNAME&#39;</span><span class="p">),</span>
             <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_PASSWORD&#39;</span><span class="p">),</span>
             <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_PORT&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_USE_TLS&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_USE_SSL&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_USE_TLS&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_USE_SSL&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
             <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_DEFAULT_SENDER&#39;</span><span class="p">),</span>
             <span class="nb">int</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_DEBUG&#39;</span><span class="p">,</span> <span class="n">debug</span><span class="p">)),</span>
             <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_MAX_EMAILS&#39;</span><span class="p">),</span>
             <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_SUPPRESS_SEND&#39;</span><span class="p">,</span> <span class="n">testing</span><span class="p">),</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_ASCII_ATTACHMENTS&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_ASCII_ATTACHMENTS&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">init_app</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
@@ -292,7 +297,7 @@
         <span class="k">return</span> <span class="n">state</span>
 
     <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>果不其然，查看 <code>init_app</code>, <code>init_mail</code> 与 Flask 的耦合非常低，<strong>只是作为扩展从 Flask 实例获取配置</strong>。也就是说，Flask 基本只充当了注册中心。（你他娘的真是个天才！这么屁大点的事儿就把自己声明成了 Flask 扩展。）</p>
@@ -387,13 +392,10 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">laggardkernel</span>
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>laggardkernel</span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -404,7 +406,10 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.db1482bc438a2df971757df91e110bb84b31bb77ca2141978d165fcf453c642e.js"></script>
 
 
 

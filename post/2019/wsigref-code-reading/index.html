@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.81.0 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.pseudocold.com/post/2019/wsigref-code-reading/" />
@@ -35,7 +35,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.fa20e845db068df5bd1b183f37f2c2b1ccb88d6fc052a3d6c4f63a682a4d6d4c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -43,12 +44,12 @@
 <meta property="og:description" content="wsgiref 源码阅读个人笔记， 不做解读。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pseudocold.com/post/2019/wsigref-code-reading/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-08-20T00:08:19&#43;08:00" />
-<meta property="article:modified_time" content="2019-08-20T00:08:19&#43;08:00" />
+<meta property="article:published_time" content="2019-08-20T00:08:19+08:00" />
+<meta property="article:modified_time" content="2019-08-20T00:08:19+08:00" />
 
 <meta itemprop="name" content="wsigref 源码阅读笔记">
-<meta itemprop="description" content="wsgiref 源码阅读个人笔记， 不做解读。"><meta itemprop="datePublished" content="2019-08-20T00:08:19&#43;08:00" />
-<meta itemprop="dateModified" content="2019-08-20T00:08:19&#43;08:00" />
+<meta itemprop="description" content="wsgiref 源码阅读个人笔记， 不做解读。"><meta itemprop="datePublished" content="2019-08-20T00:08:19+08:00" />
+<meta itemprop="dateModified" content="2019-08-20T00:08:19+08:00" />
 <meta itemprop="wordCount" content="1364">
 <meta itemprop="keywords" content="flask," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="wsigref 源码阅读笔记"/>
@@ -85,6 +86,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">🔍</li>
       </a>
   </ul>
 </nav>
@@ -107,6 +110,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">🔍</a>
       </li>
   </ul>
 </nav>
@@ -162,7 +167,7 @@
 <p>version: Python 3.6.9</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -172,7 +177,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">❯ tree wsgiref
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">❯ tree wsgiref
 wsgiref
 ├── __init__.py
 ├── handlers.py
@@ -200,7 +205,7 @@ wsgiref
 <h2 id="模块使用样码">模块使用样码</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -218,7 +223,7 @@ wsgiref
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># server.py</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># server.py</span>
 <span class="c1"># 从wsgiref模块导入:</span>
 <span class="kn">from</span> <span class="nn">wsgiref.simple_server</span> <span class="kn">import</span> <span class="n">make_server</span>
 <span class="c1"># 导入我们自己编写的application函数:</span>
@@ -231,7 +236,7 @@ wsgiref
 
 <span class="c1"># 创建一个服务器，IP地址为空，端口是8000，处理函数是application:</span>
 <span class="n">httpd</span> <span class="o">=</span> <span class="n">make_server</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">8000</span><span class="p">,</span> <span class="n">application</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Serving HTTP on port 8000...&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Serving HTTP on port 8000...&#39;</span><span class="p">)</span>
 <span class="c1"># 开始监听HTTP请求:</span>
 <span class="n">httpd</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
 </code></pre></td></tr></table>
@@ -266,7 +271,7 @@ wsgiref
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -274,7 +279,7 @@ wsgiref
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># handler in class WSGIRequestHandler(BaseHTTPRequestHandler)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># handler in class WSGIRequestHandler(BaseHTTPRequestHandler)</span>
         <span class="n">handler</span> <span class="o">=</span> <span class="n">ServerHandler</span><span class="p">(</span> <span class="c1"># from handlers.py</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rfile</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_stderr</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_environ</span><span class="p">()</span>
         <span class="p">)</span>
@@ -285,11 +290,11 @@ wsgiref
 </div><p>调用默认浏览器打开URL。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">webbrowser</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">webbrowser</span>
 <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;http://localhost:8000/xyz?abc&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
@@ -301,7 +306,7 @@ wsgiref
 <p>WSGI服务端实现。不需要全部理解，着重查看<code>run</code>和<code>start_response</code>函数。前者对应于<code>simple_server.py</code>中<code>handler.run()</code>，后者属于WSGI标准。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -323,7 +328,7 @@ wsgiref
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">BaseHandler</span><span class="p">:</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">BaseHandler</span><span class="p">:</span>
     <span class="c1"># ...</span>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">application</span><span class="p">):</span>
         <span class="s2">&#34;&#34;&#34;Invoke the application&#34;&#34;&#34;</span>
@@ -429,13 +434,10 @@ wsgiref
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">laggardkernel</span>
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>laggardkernel</span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -446,7 +448,10 @@ wsgiref
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.db1482bc438a2df971757df91e110bb84b31bb77ca2141978d165fcf453c642e.js"></script>
 
 
 

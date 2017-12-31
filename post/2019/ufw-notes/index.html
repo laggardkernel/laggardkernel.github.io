@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.81.0 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.pseudocold.com/post/2019/ufw-notes/" />
@@ -35,7 +35,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.fa20e845db068df5bd1b183f37f2c2b1ccb88d6fc052a3d6c4f63a682a4d6d4c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -43,12 +44,12 @@
 <meta property="og:description" content="UFW (Uncomplicated Firewall) 使用速查，个人笔记，非入门教程。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pseudocold.com/post/2019/ufw-notes/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-02-01T17:36:09&#43;08:00" />
-<meta property="article:modified_time" content="2019-02-01T17:36:09&#43;08:00" />
+<meta property="article:published_time" content="2019-02-01T17:36:09+08:00" />
+<meta property="article:modified_time" content="2019-02-01T17:36:09+08:00" />
 
 <meta itemprop="name" content="UFW Notes">
-<meta itemprop="description" content="UFW (Uncomplicated Firewall) 使用速查，个人笔记，非入门教程。"><meta itemprop="datePublished" content="2019-02-01T17:36:09&#43;08:00" />
-<meta itemprop="dateModified" content="2019-02-01T17:36:09&#43;08:00" />
+<meta itemprop="description" content="UFW (Uncomplicated Firewall) 使用速查，个人笔记，非入门教程。"><meta itemprop="datePublished" content="2019-02-01T17:36:09+08:00" />
+<meta itemprop="dateModified" content="2019-02-01T17:36:09+08:00" />
 <meta itemprop="wordCount" content="1598">
 <meta itemprop="keywords" content="linux,firewall,ufw," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="UFW Notes"/>
@@ -85,6 +86,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">🔍</li>
       </a>
   </ul>
 </nav>
@@ -107,6 +110,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">🔍</a>
       </li>
   </ul>
 </nav>
@@ -171,7 +176,7 @@
 <h2 id="quick-start">Quick Start</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -179,7 +184,7 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">pacman -S ufw
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">pacman -S ufw
 
 <span class="c1"># gufw for GUI</span>
 <span class="c1"># pacman -S gufw</span>
@@ -189,7 +194,7 @@ systemctl <span class="nb">enable</span> --now ufw
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -205,7 +210,7 @@ systemctl <span class="nb">enable</span> --now ufw
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># install ufw</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># install ufw</span>
 sudo vim /etc/default/ufw
 <span class="c1"># Enable IPv6 support. Default on, no need to do it.</span>
 <span class="nv">IPV6</span><span class="o">=</span>yes
@@ -226,11 +231,11 @@ sudo ufw limit <span class="s1">&#39;OpenSSH&#39;</span> <span class="c1"># sudo
 <li><code>/etc/services</code>, this file list all kinds of services and their corresponding ports.
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">❯ pacman -Fo /etc/services
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">❯ pacman -Fo /etc/services
 /etc/services is owned by core/iana-etc 20190329-1
 </code></pre></td></tr></table>
 </div>
@@ -243,7 +248,7 @@ sudo ufw limit <span class="s1">&#39;OpenSSH&#39;</span> <span class="c1"># sudo
 <p>常用命令、规则示例</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -297,7 +302,7 @@ sudo ufw limit <span class="s1">&#39;OpenSSH&#39;</span> <span class="c1"># sudo
 </span><span class="lnt">52
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># continue ufw setup</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># continue ufw setup</span>
 sudo ufw <span class="nb">enable</span> <span class="c1"># activate ufw</span>
 sudo ufw disable <span class="c1"># disable</span>
 sudo ufw reset <span class="c1"># reset all rules</span>
@@ -427,20 +432,20 @@ sudo ufw delete allow http <span class="c1"># allow http is the actual rule</spa
 <p>既然有number，就说明有优先级存在。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo ufw insert <span class="m">1</span> allow from &lt;ip address&gt;
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo ufw insert <span class="m">1</span> allow from &lt;ip address&gt;
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="logging">logging</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo ufw logging on
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo ufw logging on
 sudo ufw logging off
 </code></pre></td></tr></table>
 </div>
@@ -449,11 +454,11 @@ sudo ufw logging off
 <p>Enable forwarding for VPN like OpenVPN, WireGuard.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/default/ufw</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/default/ufw</span>
 <span class="na">DEFAULT_FORWARD_POLICY</span><span class="o">=</span><span class="s">&#34;ACCEPT&#34;</span>
 </code></pre></td></tr></table>
 </div>
@@ -461,7 +466,7 @@ sudo ufw logging off
 <p>The PKG comes with some defaults based on the default ports of many common daemons and programs.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -480,7 +485,7 @@ sudo ufw logging off
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">ufw app list
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">ufw app list
 
 ❯ ls -al /etc/ufw/applications.d
 total <span class="m">52</span>
@@ -502,7 +507,7 @@ drwxr-xr-x <span class="m">3</span> root root <span class="m">4096</span> Apr  <
 </div><p>Custom app policy/rule. Don&rsquo;t override pre-defined rules.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -512,7 +517,7 @@ drwxr-xr-x <span class="m">3</span> root root <span class="m">4096</span> Apr  <
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/ufw/applications.d/custom</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/ufw/applications.d/custom</span>
 <span class="k">[Deluge-my]</span>
 <span class="na">title</span><span class="o">=</span><span class="s">Deluge</span>
 <span class="na">description</span><span class="o">=</span><span class="s">Deluge BitTorrent client</span>
@@ -524,12 +529,12 @@ drwxr-xr-x <span class="m">3</span> root root <span class="m">4096</span> Apr  <
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># enable custom application rule</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># enable custom application rule</span>
 ufw delete allow Deluge
 ufw allow Deluge-my
 </code></pre></td></tr></table>
@@ -537,7 +542,7 @@ ufw allow Deluge-my
 </div><h2 id="blacklist-ip-addresses">Blacklist IP Addresses</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -549,7 +554,7 @@ ufw allow Deluge-my
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/ufw/before.rules</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/ufw/before.rules</span>
 <span class="na">...</span>
 <span class="c1"># blacklist section</span>
 <span class="c1"># block just 199.115.117.99</span>
@@ -568,10 +573,10 @@ ufw allow Deluge-my
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">ufw limit ssh/tcp
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">ufw limit ssh/tcp
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="user-config">User Config</h2>
@@ -580,7 +585,7 @@ ufw allow Deluge-my
 <p>Disable icmp protocol</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -589,7 +594,7 @@ ufw allow Deluge-my
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/ufw/before.rules</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/ufw/before.rules</span>
 <span class="c1"># ok icmp codes</span>
 <span class="na">-A ufw-before-input -p icmp --icmp-type destination-unreachable -j DROP</span>
 <span class="na">-A ufw-before-input -p icmp --icmp-type source-quench -j DROP</span>
@@ -610,14 +615,14 @@ ufw allow Deluge-my
 <p>Other useful commands</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">man ufw
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">man ufw
 
 <span class="c1"># --dry-run</span>
 
@@ -627,7 +632,7 @@ sudo ufw reload
 </div><h3 id="show">show</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -637,7 +642,7 @@ sudo ufw reload
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo ufw show REPORTS
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo ufw show REPORTS
 <span class="c1"># raw, comp0lte firewall</span>
 <span class="c1"># builtins, before-rules, user-rules, after-rules, logging-rules, listening, added</span>
 
@@ -655,11 +660,11 @@ ip6tables -n -L -v -x -t &lt;table&gt;
 <p>Enable/disable logging.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo ufw logging on<span class="p">|</span>off<span class="p">|</span>LEVEL <span class="c1"># level like low,medium,full,high</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo ufw logging on<span class="p">|</span>off<span class="p">|</span>LEVEL <span class="c1"># level like low,medium,full,high</span>
 sudo ufw allow log 22/tcp <span class="c1"># per rule logging</span>
 </code></pre></td></tr></table>
 </div>
@@ -668,7 +673,7 @@ sudo ufw allow log 22/tcp <span class="c1"># per rule logging</span>
 <p>For rules destined for the host itself, use <code>route</code> keyword</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -688,7 +693,7 @@ sudo ufw allow log 22/tcp <span class="c1"># per rule logging</span>
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo ufw allow in on eth0 from 192.168.0.0/16
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo ufw allow in on eth0 from 192.168.0.0/16
 ufw allow out on eth1 to 10.0.0.0/8
 
 <span class="c1"># add comment</span>
@@ -711,16 +716,16 @@ ufw allow proto udp from 1.2.3.5 port <span class="m">5469</span> to 1.2.3.4 por
 </div><h3 id="route">route</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">ufw route allow in on eth1 out on eth2
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">ufw route allow in on eth1 out on eth2
 </code></pre></td></tr></table>
 </div>
 </div><p>Setup <strong>IP forwarding</strong> to use routing rules.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -729,7 +734,7 @@ ufw allow proto udp from 1.2.3.5 port <span class="m">5469</span> to 1.2.3.4 por
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/ufw/sysctl.conf</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/ufw/sysctl.conf</span>
 <span class="na">net/ipv4/ip_forward</span><span class="o">=</span><span class="s">1</span>
 <span class="na">net/ipov6/conf/default/forwarding</span><span class="o">=</span><span class="s">1</span>
 <span class="na">net/ipv6/conf/all/forwarding</span><span class="o">=</span><span class="s">1</span>
@@ -742,11 +747,11 @@ ufw allow proto udp from 1.2.3.5 port <span class="m">5469</span> to 1.2.3.4 por
 <p>Use <code>reject</code> instead of <code>deny</code> to let user know they&rsquo;re rejected</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">ufw limit ssh/tcp
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">ufw limit ssh/tcp
 ufw reject auth
 </code></pre></td></tr></table>
 </div>
@@ -766,7 +771,7 @@ ufw reject auth
 <h3 id="app-integration">app integration</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -774,7 +779,7 @@ ufw reject auth
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">ufw app list
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">ufw app list
 ufw allow &lt;name&gt;
 ufw allow from 192.168.0.0./16 to any app &lt;name&gt;
 
@@ -888,13 +893,10 @@ sudo ufw allow in <span class="s2">&#34;Apache Full&#34;</span>
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">laggardkernel</span>
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>laggardkernel</span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -905,7 +907,10 @@ sudo ufw allow in <span class="s2">&#34;Apache Full&#34;</span>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.db1482bc438a2df971757df91e110bb84b31bb77ca2141978d165fcf453c642e.js"></script>
 
 
 

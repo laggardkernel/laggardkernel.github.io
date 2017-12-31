@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.81.0 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.pseudocold.com/post/2018/mysql-mariadb-setup/" />
@@ -35,7 +35,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.fa20e845db068df5bd1b183f37f2c2b1ccb88d6fc052a3d6c4f63a682a4d6d4c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -44,12 +45,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pseudocold.com/post/2018/mysql-mariadb-setup/" /><meta property="article:section" content="post" />
 
-<meta property="article:modified_time" content="2018-03-30T23:35:45&#43;08:00" />
+<meta property="article:modified_time" content="2018-03-30T23:35:45+08:00" />
 
 <meta itemprop="name" content="MariaDB/MySQL Setup: All in One">
 <meta itemprop="description" content="MariaDB, MySQL安装配置全指南。MySQL语法参考笔记《MySQL必知必会》读书笔记。">
-<meta itemprop="dateModified" content="2018-03-30T23:35:45&#43;08:00" />
-<meta itemprop="wordCount" content="2641">
+<meta itemprop="dateModified" content="2018-03-30T23:35:45+08:00" />
+<meta itemprop="wordCount" content="2566">
 <meta itemprop="keywords" content="mariadb,mysql," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="MariaDB/MySQL Setup: All in One"/>
 <meta name="twitter:description" content="MariaDB, MySQL安装配置全指南。MySQL语法参考笔记《MySQL必知必会》读书笔记。"/>
@@ -85,6 +86,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">🔍</li>
       </a>
   </ul>
 </nav>
@@ -107,6 +110,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">🔍</a>
       </li>
   </ul>
 </nav>
@@ -125,7 +130,7 @@
         <div class="post-category">
             <a href="/categories/devops/"> DevOps </a>
             </div>
-          <span class="more-meta"> 2641 words </span>
+          <span class="more-meta"> 2566 words </span>
           <span class="more-meta"> 6 mins read </span>
         
       </div>
@@ -206,23 +211,23 @@
 <p>改变某用户的验证方式，</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">ALTER</span> <span class="k">USER</span> <span class="k">user</span>  <span class="n">IDENTIFIED</span> <span class="k">WITH</span> <span class="n">caching_sha2_password</span>  <span class="k">BY</span> <span class="s1">&#39;password&#39;</span><span class="p">;</span>
-<span class="k">ALTER</span> <span class="k">USER</span> <span class="s1">&#39;root&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span> <span class="n">IDENTIFIED</span> <span class="k">WITH</span> <span class="n">mysql_native_password</span>  <span class="k">BY</span> <span class="s1">&#39;password&#39;</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="k">user</span><span class="w">  </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">caching_sha2_password</span><span class="w">  </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;password&#39;</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;root&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">mysql_native_password</span><span class="w">  </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;password&#39;</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>change <code>default_authentication_plugin</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># my.cnf</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># my.cnf</span>
 <span class="k">[mysqld]</span>
 <span class="na">default_authentication_plugin</span><span class="o">=</span><span class="s">mysql_native_password</span>
 </code></pre></td></tr></table>
@@ -238,10 +243,10 @@
 <p>ArchLinux 建议更改存储路径。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">mariadb-install-db --user<span class="o">=</span>mysql --basedir<span class="o">=</span>/usr --datadir<span class="o">=</span>/var/lib/mysql
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">mariadb-install-db --user<span class="o">=</span>mysql --basedir<span class="o">=</span>/usr --datadir<span class="o">=</span>/var/lib/mysql
 </code></pre></td></tr></table>
 </div>
 </div><blockquote>
@@ -249,14 +254,14 @@
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt update
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt update
 sudo apt install mariadb-server
 sudo mysql_secure_installation
 <span class="c1"># enter, not root password</span>
@@ -268,12 +273,12 @@ sudo mysql_secure_installation
 <p>disable remote root logins, and load these new rules so that MariaDB immediately respects the changes you have made.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># check installation</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># check installation</span>
 sudo mysql
 mysql&gt; SELECT user,authentication_string,plugin,host FROM mysql.user<span class="p">;</span>
 </code></pre></td></tr></table>
@@ -285,7 +290,7 @@ mysql&gt; SELECT user,authentication_string,plugin,host FROM mysql.user<span cla
 <p>create a new account called admin with the same capabilities as the root account, but configured for password authentication.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -293,7 +298,7 @@ mysql&gt; SELECT user,authentication_string,plugin,host FROM mysql.user<span cla
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo mysql
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo mysql
 
 <span class="c1"># config an account with password auth</span>
 GRANT ALL ON *.* TO <span class="s1">&#39;admin&#39;</span>@<span class="s1">&#39;localhost&#39;</span> IDENTIFIED BY <span class="s1">&#39;password&#39;</span> WITH GRANT OPTION<span class="p">;</span>
@@ -303,7 +308,7 @@ FLUSH PRIVILEGES<span class="p">;</span>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -312,7 +317,7 @@ FLUSH PRIVILEGES<span class="p">;</span>
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo systemctl status mariadb
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo systemctl status mariadb
 
 <span class="c1"># connect the database with mysqladmin tool</span>
 sudo mysqladmin version
@@ -325,13 +330,13 @@ mysqladmin -u admin -p version
 <h3 id="conf-location">Conf Location</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">mysqld --help --verbose <span class="p">|</span> less
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">mysqld --help --verbose <span class="p">|</span> less
 ...
 /etc/my.cnf /etc/my.cnf.d/ ~/.my.cnf
 ...
@@ -349,7 +354,7 @@ mysqladmin -u admin -p version
 <p>Bind to wan.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -357,7 +362,7 @@ mysqladmin -u admin -p version
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[mysqld]</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[mysqld]</span>
    <span class="na">...</span>
    <span class="c1"># uncheck skip-netwoking to disable remote access</span>
    <span class="c1">#skip-networking</span>
@@ -368,7 +373,7 @@ mysqladmin -u admin -p version
 </div><p>Create account for specific database, and grant remote access for that account.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -377,7 +382,7 @@ mysqladmin -u admin -p version
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">mysql -u root -p
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">mysql -u root -p
 
 <span class="c1"># check remote access privileged</span>
 <span class="k">select</span> user, host from mysql.user where host &lt;&gt; <span class="s1">&#39;lodalhost&#39;</span><span class="p">;</span>
@@ -390,11 +395,11 @@ grant all privileges on dbname.* to <span class="s1">&#39;account&#39;</span>@<s
 <p>disabled by default. Enable in the client conf, <code>/etc/mysql/my.cnf</code>,</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[mysql]</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[mysql]</span>
 <span class="na">auto-rehash</span>
 </code></pre></td></tr></table>
 </div>
@@ -406,7 +411,7 @@ grant all privileges on dbname.* to <span class="s1">&#39;account&#39;</span>@<s
 <p>utf8mb8 is compatible with utf8, with additional unicode support.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -418,7 +423,7 @@ grant all privileges on dbname.* to <span class="s1">&#39;account&#39;</span>@<s
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/mysql/my.cnf</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/mysql/my.cnf</span>
 <span class="k">[client]</span>
 <span class="na">default-character-set</span> <span class="o">=</span> <span class="s">utf8mb4</span>
 
@@ -448,15 +453,15 @@ grant all privileges on dbname.* to <span class="s1">&#39;account&#39;</span>@<s
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">show</span> <span class="n">variables</span> <span class="k">like</span> <span class="s1">&#39;tmpdir&#39;</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">show</span><span class="w"> </span><span class="n">variables</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;tmpdir&#39;</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -465,7 +470,7 @@ grant all privileges on dbname.* to <span class="s1">&#39;account&#39;</span>@<s
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># create a dir with approriate perm, writable by mysql user</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># create a dir with approriate perm, writable by mysql user</span>
 mkdir -pv /var/lib/mysqltmp
 chown mysql:mysql /var/lib/mysqltmp
 
@@ -477,20 +482,20 @@ $ id mysql
 </div><p>Mount tmpfs for &lsquo;tmpdir&rsquo; in <code>/etc/fstab</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">tmpfs /var/lib/mysqltmp tmpfs rw,gid</span><span class="o">=</span><span class="s">27,uid=27,size=100M,mode=0750,noatime 0 0</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="na">tmpfs /var/lib/mysqltmp tmpfs rw,gid</span><span class="o">=</span><span class="s">27,uid=27,size=100M,mode=0750,noatime 0 0</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="populate-time-zone-tables">Populate time zone tables</h3>
 <p>Created automatically, but not populated. Used in <code>CONVERT_TZ()</code> sql queries.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">mysql_tzinfo_to_sql /usr/share/zoneinfo <span class="p">|</span> mysql -u root -p mysql
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">mysql_tzinfo_to_sql /usr/share/zoneinfo <span class="p">|</span> mysql -u root -p mysql
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="db-maintenance">Db Maintenance</h2>
@@ -503,17 +508,17 @@ $ id mysql
 </ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">mysql_upgrade -u root -p
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">mysql_upgrade -u root -p
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="check-optimize-repair-the-db">Check, Optimize, Repair the DB</h3>
 <p><code>mysqlcheck</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -525,7 +530,7 @@ $ id mysql
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># check all</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># check all</span>
 mysqlcheck --all-databases -u root -p -c
 
 <span class="c1"># analyze all</span>
@@ -540,7 +545,7 @@ mysqlcheck --all-databases -u root -p -a
 </div><h3 id="backup">Backup</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -559,7 +564,7 @@ mysqlcheck --all-databases -u root -p -a
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># for InnoDB</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># for InnoDB</span>
 mysqldump --single-transaction --flush-logs --master-data<span class="o">=</span><span class="m">2</span> --all-databases -u root -p &gt; all_databases.sql
 
 <span class="c1"># backup with compression，其实就是管道加gzip</span>
@@ -609,14 +614,14 @@ mysql -u username -p new_database &lt; data-dump.sql
 <h3 id="禁止root登录phpmyadmin">禁止root登录phpmyadmin</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="c1"># sudo nano /etc/phpmyadmin/conf.d/pma_secure.php
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1"># sudo nano /etc/phpmyadmin/conf.d/pma_secure.php
 </span><span class="c1"></span>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;auth_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;cookie&#39;</span><span class="p">;</span>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;AllowNoPassword&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span> <span class="c1"># *
@@ -626,25 +631,25 @@ mysql -u username -p new_database &lt; data-dump.sql
 </div><h3 id="nginx-access-control">Nginx Access Control</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt install phpmyadmin
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt install phpmyadmin
 sudo ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin
 </code></pre></td></tr></table>
 </div>
 </div><h4 id="basic-auth">Basic Auth</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">openssl passwd
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">openssl passwd
 <span class="c1"># generate a password like &#34;O5az.RSPzd.HE&#34;</span>
 
 sudo nano /etc/nginx/pma_pass
@@ -654,7 +659,7 @@ sudo nano /etc/nginx/pma_pass
 </div><p>Enable basic auth.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -667,7 +672,7 @@ sudo nano /etc/nginx/pma_pass
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
     <span class="kn">.</span> <span class="s">.</span> <span class="s">.</span>
 
         <span class="s">location</span> <span class="s">/nothingtosee</span> <span class="p">{</span>
@@ -684,7 +689,7 @@ sudo nano /etc/nginx/pma_pass
 <p>利用 <code>allow</code>, <code>deny</code> 做访问控制。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -702,7 +707,7 @@ sudo nano /etc/nginx/pma_pass
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
     <span class="kn">.</span> <span class="s">.</span> <span class="s">.</span>
 
     <span class="s">location</span> <span class="s">/nothingtosee</span> <span class="p">{</span>
@@ -722,13 +727,13 @@ sudo nano /etc/nginx/pma_pass
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># local forwarding</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># local forwarding</span>
 ssh user@server_domain_or_IP -L 8000:localhost:80 -L 8443:localhost:443 -N
 <span class="c1"># -N, do not execute remote commands. 即不打开交互式shell</span>
 <span class="c1"># -f, run in bg</span>
@@ -737,18 +742,18 @@ ssh user@server_domain_or_IP -L 8000:localhost:80 -L 8443:localhost:443 -N
 </div><h3 id="apache-access-control">Apache Access Control</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt install phpmyadmin php-mbstring php-gettext
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt install phpmyadmin php-mbstring php-gettext
 sudo phpenmod mbstring
 </code></pre></td></tr></table>
 </div>
 </div><h4 id="basic-auth-1">Basic Auth</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -756,7 +761,7 @@ sudo phpenmod mbstring
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-apache" data-lang="apache"><span class="c"># /etc/apache2/conf-available/phpmyadmin.conf</span>
+<pre tabindex="0" class="chroma"><code class="language-apache" data-lang="apache"><span class="c"># /etc/apache2/conf-available/phpmyadmin.conf</span>
 <span class="nt">&lt;Directory</span> <span class="s">/usr/share/phpmyadmin</span><span class="nt">&gt;</span>
     <span class="nb">Options</span> FollowSymLinks
     <span class="nb">DirectoryIndex</span> index.php
@@ -766,7 +771,7 @@ sudo phpenmod mbstring
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -775,7 +780,7 @@ sudo phpenmod mbstring
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-apache" data-lang="apache"><span class="c"># /usr/share/phpmyadmin/.htaccess</span>
+<pre tabindex="0" class="chroma"><code class="language-apache" data-lang="apache"><span class="c"># /usr/share/phpmyadmin/.htaccess</span>
 
 <span class="nb">AuthType</span> Basic
 <span class="nb">AuthName</span> <span class="s2">&#34;Restricted Files&#34;</span>
@@ -786,14 +791,14 @@ sudo phpenmod mbstring
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># create .htaccess file</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># create .htaccess file</span>
 sudo htpasswd -c /etc/phpmyadmin/.htpasswd username
 
 <span class="c1"># add an additional user</span>
@@ -814,7 +819,7 @@ sudo htpasswd /etc/phpmyadmin/.htpasswd additionaluser
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -849,7 +854,7 @@ sudo htpasswd /etc/phpmyadmin/.htpasswd additionaluser
 </span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
     <span class="kn">server_name</span> <span class="s">domain.tld</span><span class="p">;</span>
     <span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span> <span class="s">http2</span><span class="p">;</span>
     <span class="kn">listen</span> <span class="s">[::]:443</span> <span class="s">ssl</span> <span class="s">http2</span><span class="p">;</span>
@@ -887,7 +892,7 @@ sudo htpasswd /etc/phpmyadmin/.htpasswd additionaluser
 </div><p>From Ubuntu 18.04</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -911,7 +916,7 @@ sudo htpasswd /etc/phpmyadmin/.htpasswd additionaluser
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-apache" data-lang="apache"><span class="c"># Authorize for setup</span>
+<pre tabindex="0" class="chroma"><code class="language-apache" data-lang="apache"><span class="c"># Authorize for setup</span>
 <span class="nt">&lt;Directory</span> <span class="s">/usr/share/phpmyadmin/setup</span><span class="nt">&gt;</span>
     <span class="nt">&lt;IfModule</span> <span class="s">mod_authz_core.c</span><span class="nt">&gt;</span>
         <span class="nt">&lt;IfModule</span> <span class="s">mod_authn_file.c</span><span class="nt">&gt;</span>
@@ -948,11 +953,11 @@ sudo htpasswd /etc/phpmyadmin/.htpasswd additionaluser
 <h4 id="stop-db-service">Stop db service</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># stop the db services</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># stop the db services</span>
 sudo systemctl stop mariadb
 </code></pre></td></tr></table>
 </div>
@@ -961,12 +966,12 @@ sudo systemctl stop mariadb
 <p>MariaDB only, disable loading grant table</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo systemctl set-environment <span class="nv">MYSQLD_OPTS</span><span class="o">=</span><span class="s2">&#34;--skip-grant-table --skip-networking&#34;</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo systemctl set-environment <span class="nv">MYSQLD_OPTS</span><span class="o">=</span><span class="s2">&#34;--skip-grant-table --skip-networking&#34;</span>
 <span class="c1"># 其实也可以写到配置里</span>
 sudo systemctl start mariadb
 </code></pre></td></tr></table>
@@ -974,22 +979,22 @@ sudo systemctl start mariadb
 </div><p>MySQL only with <em>service overrides</em>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo systemctl edit mysql
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo systemctl edit mysql
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[Service]</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[Service]</span>
 <span class="c1"># clear the default value</span>
 <span class="na">ExecStart</span><span class="o">=</span>
 <span class="c1"># new</span>
@@ -998,12 +1003,12 @@ sudo systemctl start mariadb
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># reload the new service def</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># reload the new service def</span>
 sudo systemctl daemon-reload
 sudo systemctl start mysql
 </code></pre></td></tr></table>
@@ -1011,13 +1016,13 @@ sudo systemctl start mysql
 </div><h4 id="reset-password-1">Reset password</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo mysql -u root
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo mysql -u root
 
 <span class="c1"># load the grant table after login into db, otherwise we&#39;re unable to execute commands altering data</span>
 flush privileges<span class="p">;</span>
@@ -1026,35 +1031,35 @@ flush privileges<span class="p">;</span>
 </div><p>MariaDB doesn&rsquo;t use <code>authentication_string</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">UPDATE</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span> <span class="k">SET</span> <span class="n">password</span> <span class="o">=</span> <span class="n">PASSWORD</span><span class="p">(</span><span class="s1">&#39;new_password&#39;</span><span class="p">)</span> <span class="k">WHERE</span> <span class="k">user</span> <span class="o">=</span> <span class="s1">&#39;root&#39;</span><span class="p">;</span>
-
-<span class="o">#</span> <span class="k">in</span> <span class="k">case</span> <span class="n">you</span> <span class="n">changed</span> <span class="n">the</span> <span class="k">default</span> <span class="n">auth</span> <span class="n">mechanism</span>
-<span class="k">UPDATE</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span> <span class="k">SET</span> <span class="n">authentication_string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="k">WHERE</span> <span class="k">user</span> <span class="o">=</span> <span class="s1">&#39;root&#39;</span><span class="p">;</span>
-<span class="k">UPDATE</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span> <span class="k">SET</span> <span class="n">plugin</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="k">WHERE</span> <span class="k">user</span> <span class="o">=</span> <span class="s1">&#39;root&#39;</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">UPDATE</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PASSWORD</span><span class="p">(</span><span class="s1">&#39;new_password&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;root&#39;</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">changed</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">auth</span><span class="w"> </span><span class="n">mechanism</span><span class="w">
+</span><span class="w"></span><span class="k">UPDATE</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">authentication_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;root&#39;</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">UPDATE</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">plugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;root&#39;</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>MySQL still use the auth string</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">UPDATE</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span> <span class="k">SET</span> <span class="n">authentication_string</span> <span class="o">=</span> <span class="n">PASSWORD</span><span class="p">(</span><span class="s1">&#39;new_password&#39;</span><span class="p">)</span> <span class="k">WHERE</span> <span class="k">user</span> <span class="o">=</span> <span class="s1">&#39;root&#39;</span><span class="p">;</span>
-<span class="k">UPDATE</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span> <span class="k">SET</span> <span class="n">plugin</span> <span class="o">=</span> <span class="s1">&#39;mysql_native_password&#39;</span> <span class="k">WHERE</span> <span class="k">user</span> <span class="o">=</span> <span class="s1">&#39;root&#39;</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">UPDATE</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">authentication_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PASSWORD</span><span class="p">(</span><span class="s1">&#39;new_password&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;root&#39;</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">UPDATE</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">plugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;mysql_native_password&#39;</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;root&#39;</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><h4 id="revert-systemd-changes">Revert systemd changes</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1064,7 +1069,7 @@ flush privileges<span class="p">;</span>
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># for mariadb</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># for mariadb</span>
 sudo systemctl unset-environment MYSQLD_OPTS
 sudo systemctl restart mariadb
 
@@ -1159,13 +1164,10 @@ sudo systemctl restart mysql
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">laggardkernel</span>
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>laggardkernel</span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -1176,7 +1178,10 @@ sudo systemctl restart mysql
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.db1482bc438a2df971757df91e110bb84b31bb77ca2141978d165fcf453c642e.js"></script>
 
 
 

@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.81.0 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.pseudocold.com/post/2019/flask-uploads-code-reading/" />
@@ -35,7 +35,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.fa20e845db068df5bd1b183f37f2c2b1ccb88d6fc052a3d6c4f63a682a4d6d4c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -43,12 +44,12 @@
 <meta property="og:description" content="flask-uploads 源码阅读个人笔记， 不做解读。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pseudocold.com/post/2019/flask-uploads-code-reading/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-08-04T12:15:28&#43;08:00" />
-<meta property="article:modified_time" content="2019-08-04T12:15:28&#43;08:00" />
+<meta property="article:published_time" content="2019-08-04T12:15:28+08:00" />
+<meta property="article:modified_time" content="2019-08-04T12:15:28+08:00" />
 
 <meta itemprop="name" content="Flask-Uploads 源码阅读笔记">
-<meta itemprop="description" content="flask-uploads 源码阅读个人笔记， 不做解读。"><meta itemprop="datePublished" content="2019-08-04T12:15:28&#43;08:00" />
-<meta itemprop="dateModified" content="2019-08-04T12:15:28&#43;08:00" />
+<meta itemprop="description" content="flask-uploads 源码阅读个人笔记， 不做解读。"><meta itemprop="datePublished" content="2019-08-04T12:15:28+08:00" />
+<meta itemprop="dateModified" content="2019-08-04T12:15:28+08:00" />
 <meta itemprop="wordCount" content="1665">
 <meta itemprop="keywords" content="flask," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Flask-Uploads 源码阅读笔记"/>
@@ -85,6 +86,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">🔍</li>
       </a>
   </ul>
 </nav>
@@ -107,6 +110,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">🔍</a>
       </li>
   </ul>
 </nav>
@@ -165,7 +170,7 @@
 <p>0.2.0，貌似一直没有更新。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -185,7 +190,7 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">flask-uploads
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">flask-uploads
 ├── docs
 ├── example
 │   ├── static
@@ -213,7 +218,7 @@
 <p>建议扩展<code>UploadSet</code>类，添加<code>self.mimetypes</code>元组，重载<code>file_allowed()</code>函数做MIME类型判断。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -234,7 +239,7 @@
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Flask-Uploads源码自带</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Flask-Uploads源码自带</span>
 <span class="n">IMAGES</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="s1">&#39;jpg jpe jpeg png gif svg bmp&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
 <span class="c1"># 自定义</span>
 <span class="n">IMAGE_MIMES</span> <span class="o">=</span> <span class="p">[</span>
@@ -277,7 +282,7 @@
 <h3 id="_uploads-蓝图">_uploads 蓝图</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -289,14 +294,14 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">uploads_mod</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="s1">&#39;_uploads&#39;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">,</span> <span class="n">url_prefix</span><span class="o">=</span><span class="s1">&#39;/_uploads&#39;</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">uploads_mod</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="s1">&#39;_uploads&#39;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">,</span> <span class="n">url_prefix</span><span class="o">=</span><span class="s1">&#39;/_uploads&#39;</span><span class="p">)</span>
 
 <span class="c1"># 视图 _uploads.uploaded_file 对应URL /_uploads/&lt;setname&gt;/&lt;filename&gt;</span>
 <span class="c1"># 路径部分 `_uploads` 可以被 UPLOADS_DEFAULT_DEST 代替</span>
-<span class="nd">@uploads_mod.route</span><span class="p">(</span><span class="s1">&#39;/&lt;setname&gt;/&lt;path:filename&gt;&#39;</span><span class="p">)</span>
+<span class="nd">@uploads_mod</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&lt;setname&gt;/&lt;path:filename&gt;&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">uploaded_file</span><span class="p">(</span><span class="n">setname</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
     <span class="n">config</span> <span class="o">=</span> <span class="n">current_app</span><span class="o">.</span><span class="n">upload_set_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">setname</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">config</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">abort</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">send_from_directory</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">destination</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 </code></pre></td></tr></table>
@@ -416,13 +421,10 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">laggardkernel</span>
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>laggardkernel</span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -433,7 +435,10 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.db1482bc438a2df971757df91e110bb84b31bb77ca2141978d165fcf453c642e.js"></script>
 
 
 

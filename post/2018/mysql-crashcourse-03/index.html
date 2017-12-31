@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.81.0 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.pseudocold.com/post/2018/mysql-crashcourse-03/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.fa20e845db068df5bd1b183f37f2c2b1ccb88d6fc052a3d6c4f63a682a4d6d4c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -42,13 +43,13 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pseudocold.com/post/2018/mysql-crashcourse-03/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2018-03-29T23:47:09&#43;08:00" />
-<meta property="article:modified_time" content="2018-03-29T23:47:09&#43;08:00" />
+<meta property="article:published_time" content="2018-03-29T23:47:09+08:00" />
+<meta property="article:modified_time" content="2018-03-29T23:47:09+08:00" />
 
 <meta itemprop="name" content="MySQL必知必会：21-30">
-<meta itemprop="description" content=""><meta itemprop="datePublished" content="2018-03-29T23:47:09&#43;08:00" />
-<meta itemprop="dateModified" content="2018-03-29T23:47:09&#43;08:00" />
-<meta itemprop="wordCount" content="4536">
+<meta itemprop="description" content=""><meta itemprop="datePublished" content="2018-03-29T23:47:09+08:00" />
+<meta itemprop="dateModified" content="2018-03-29T23:47:09+08:00" />
+<meta itemprop="wordCount" content="4074">
 <meta itemprop="keywords" content="mysql," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="MySQL必知必会：21-30"/>
 <meta name="twitter:description" content=""/>
@@ -84,6 +85,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">🔍</li>
       </a>
   </ul>
 </nav>
@@ -106,6 +109,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">🔍</a>
       </li>
   </ul>
 </nav>
@@ -124,8 +129,8 @@
         <div class="post-category">
             <a href="/categories/notes/"> Notes </a>
             </div>
-          <span class="more-meta"> 4536 words </span>
-          <span class="more-meta"> 10 mins read </span>
+          <span class="more-meta"> 4074 words </span>
+          <span class="more-meta"> 9 mins read </span>
         
       </div>
     </header>
@@ -158,7 +163,7 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -173,25 +178,25 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">customers</span>
-<span class="p">(</span>
-  <span class="n">cust_id</span>      <span class="nb">int</span>       <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
-  <span class="n">cust_name</span>    <span class="nb">char</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>  <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">,</span>
-  <span class="n">cust_address</span> <span class="nb">char</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>  <span class="k">NULL</span> <span class="p">,</span> <span class="cm">/* default &#39;foobar&#39;; */</span>
-  <span class="n">cust_city</span>    <span class="nb">char</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>  <span class="k">NULL</span> <span class="p">,</span>
-  <span class="n">cust_state</span>   <span class="nb">char</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>   <span class="k">NULL</span> <span class="p">,</span>
-  <span class="n">cust_zip</span>     <span class="nb">char</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="k">NULL</span> <span class="p">,</span>
-  <span class="n">cust_country</span> <span class="nb">char</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>  <span class="k">NULL</span> <span class="p">,</span>
-  <span class="n">cust_contact</span> <span class="nb">char</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>  <span class="k">NULL</span> <span class="p">,</span>
-  <span class="n">cust_email</span>   <span class="nb">char</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NULL</span> <span class="p">,</span>
-  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">cust_id</span><span class="p">)</span>
-<span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">customers</span><span class="w">
+</span><span class="w"></span><span class="p">(</span><span class="w">
+</span><span class="w">  </span><span class="n">cust_id</span><span class="w">      </span><span class="nb">int</span><span class="w">       </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="n">cust_name</span><span class="w">    </span><span class="nb">char</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w">  </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="n">cust_address</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w">  </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="cm">/* default &#39;foobar&#39;; */</span><span class="w">
+</span><span class="w">  </span><span class="n">cust_city</span><span class="w">    </span><span class="nb">char</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w">  </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="n">cust_state</span><span class="w">   </span><span class="nb">char</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="w">   </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="n">cust_zip</span><span class="w">     </span><span class="nb">char</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w">  </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="n">cust_country</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w">  </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="n">cust_contact</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w">  </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="n">cust_email</span><span class="w">   </span><span class="nb">char</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">cust_id</span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p><code>mysqldump</code>导出内容中，表创键前先删除，导入数据前加锁。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -202,16 +207,16 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">DROP</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="o">`</span><span class="n">customers</span><span class="o">`</span><span class="p">;</span>
-<span class="cm">/*!40101 SET @saved_cs_client     = @@character_set_client */</span><span class="p">;</span>
-<span class="cm">/*!50503 SET character_set_client = utf8mb4 */</span><span class="p">;</span>
-<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">customers</span><span class="o">`</span> <span class="p">(</span>
-<span class="o">-</span> <span class="p">...</span>
-
-<span class="k">LOCK</span> <span class="n">TABLES</span> <span class="o">`</span><span class="n">customers</span><span class="o">`</span> <span class="k">WRITE</span><span class="p">;</span>
-<span class="cm">/*!40000 ALTER TABLE `customers` DISABLE KEYS */</span><span class="p">;</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="o">`</span><span class="n">customers</span><span class="o">`</span> <span class="cm">/* ... */</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="o">`</span><span class="n">customers</span><span class="o">`</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="cm">/*!40101 SET @saved_cs_client     = @@character_set_client */</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="cm">/*!50503 SET character_set_client = utf8mb4 */</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="o">`</span><span class="n">customers</span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span><span class="w"></span><span class="o">-</span><span class="w"> </span><span class="p">...</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">LOCK</span><span class="w"> </span><span class="n">TABLES</span><span class="w"> </span><span class="o">`</span><span class="n">customers</span><span class="o">`</span><span class="w"> </span><span class="k">WRITE</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="cm">/*!40000 ALTER TABLE `customers` DISABLE KEYS */</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="o">`</span><span class="n">customers</span><span class="o">`</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>默认情况，不明确指定时允许 <code>NULL</code>；
@@ -246,7 +251,7 @@
 <p>更新表</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -258,17 +263,17 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- 增加列
-</span><span class="c1"></span><span class="k">alter</span> <span class="k">table</span> <span class="n">vendors</span> <span class="k">add</span> <span class="n">vend_phone</span> <span class="nb">char</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
-<span class="c1">-- 删除列
-</span><span class="c1"></span><span class="k">alter</span> <span class="k">table</span> <span class="n">vendors</span> <span class="k">drop</span> <span class="k">column</span> <span class="n">vend_phone</span><span class="p">;</span>
-
-<span class="c1">-- 修改表引擎？
-</span><span class="c1"></span><span class="k">alter</span> <span class="k">table</span> <span class="k">table_name</span> <span class="p">()</span> <span class="n">engine</span><span class="o">=</span><span class="n">InnoDB</span><span class="p">;</span> <span class="cm">/* 覆盖原表 */</span>
-
-<span class="c1">-- 改变列名
-</span><span class="c1"></span><span class="k">alter</span> <span class="k">table</span> <span class="n">change</span> <span class="n">col_name</span> <span class="n">new_name</span> <span class="nb">boolean</span> <span class="k">not</span> <span class="k">null</span> <span class="k">default</span> <span class="k">false</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- 增加列
+</span><span class="c1"></span><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">vendors</span><span class="w"> </span><span class="k">add</span><span class="w"> </span><span class="n">vend_phone</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span><span class="w">
+</span><span class="w"></span><span class="c1">-- 删除列
+</span><span class="c1"></span><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">vendors</span><span class="w"> </span><span class="k">drop</span><span class="w"> </span><span class="k">column</span><span class="w"> </span><span class="n">vend_phone</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c1">-- 修改表引擎？
+</span><span class="c1"></span><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="n">engine</span><span class="o">=</span><span class="n">InnoDB</span><span class="p">;</span><span class="w"> </span><span class="cm">/* 覆盖原表 */</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c1">-- 改变列名
+</span><span class="c1"></span><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">change</span><span class="w"> </span><span class="n">col_name</span><span class="w"> </span><span class="n">new_name</span><span class="w"> </span><span class="nb">boolean</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="k">false</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p><code>ALTER TABLE</code> 定义外键</p>
 <ul>
@@ -277,7 +282,7 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -286,30 +291,30 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">alter</span> <span class="k">table</span> <span class="n">orderitems</span>
-<span class="k">add</span> <span class="k">constraint</span> <span class="n">fk_orderitems_orders</span>
-<span class="k">foreign</span> <span class="k">key</span> <span class="p">(</span><span class="n">order_num</span><span class="p">)</span> <span class="k">references</span> <span class="k">order</span> <span class="p">(</span><span class="n">order_num</span><span class="p">);</span>
-
-<span class="k">alter</span> <span class="k">table</span> <span class="n">orderitems</span>
-<span class="k">add</span> <span class="n">contraint</span> <span class="n">fk_orderitems_products</span> <span class="k">foreign</span> <span class="k">key</span> <span class="p">(</span><span class="n">prod_id</span><span class="p">)</span>
-<span class="k">references</span> <span class="n">products</span> <span class="p">(</span><span class="n">prod_id</span><span class="p">);</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">orderitems</span><span class="w">
+</span><span class="w"></span><span class="k">add</span><span class="w"> </span><span class="k">constraint</span><span class="w"> </span><span class="n">fk_orderitems_orders</span><span class="w">
+</span><span class="w"></span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">order_num</span><span class="p">)</span><span class="w"> </span><span class="k">references</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="p">(</span><span class="n">order_num</span><span class="p">);</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">orderitems</span><span class="w">
+</span><span class="w"></span><span class="k">add</span><span class="w"> </span><span class="n">contraint</span><span class="w"> </span><span class="n">fk_orderitems_products</span><span class="w"> </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">prod_id</span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="k">references</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="p">(</span><span class="n">prod_id</span><span class="p">);</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- 删除表
-</span><span class="c1"></span><span class="k">drop</span> <span class="k">table</span> <span class="n">tabelname</span><span class="p">;</span>
-
-<span class="c1">-- 重命名表
-</span><span class="c1"></span><span class="k">rename</span> <span class="k">table</span> <span class="n">oldtablename</span> <span class="k">to</span> <span class="n">newtablename</span><span class="p">[,</span> <span class="k">old</span> <span class="k">to</span> <span class="k">new</span><span class="p">];</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- 删除表
+</span><span class="c1"></span><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">tabelname</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c1">-- 重命名表
+</span><span class="c1"></span><span class="k">rename</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">oldtablename</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">newtablename</span><span class="p">[,</span><span class="w"> </span><span class="k">old</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">new</span><span class="p">];</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><h2 id="chapter-22-使用视图">Chapter 22: 使用视图</h2>
 <p>视图(MySQL 5+)是虚拟的表，<code>SELECT</code>语句层次的<strong>封装</strong>；</p>
@@ -334,7 +339,7 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -350,25 +355,25 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- 列出所有视图
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- 列出所有视图
 </span><span class="c1">-- show table status where comment=&#39;view&#39;;
 </span><span class="c1">-- preferred
-</span><span class="c1"></span><span class="k">SHOW</span> <span class="k">FULL</span> <span class="n">TABLES</span> <span class="k">IN</span> <span class="n">database_name</span> <span class="k">WHERE</span> <span class="n">TABLE_TYPE</span> <span class="k">LIKE</span> <span class="s1">&#39;VIEW&#39;</span><span class="p">;</span>
-
-<span class="c1">-- 创建视图
-</span><span class="c1"></span><span class="k">create</span> <span class="k">view</span> <span class="n">viewname</span> <span class="k">as</span> <span class="k">select</span> <span class="p">...;</span>
-<span class="c1">-- 查看视图创建语句
-</span><span class="c1"></span><span class="k">show</span> <span class="k">create</span> <span class="k">view</span> <span class="n">viewname</span><span class="p">;</span>
-<span class="k">drop</span> <span class="k">view</span> <span class="n">viewname</span><span class="p">;</span>
-<span class="c1">-- 创建新视图，自动替换存在的同名视图
-</span><span class="c1"></span><span class="k">create</span> <span class="k">or</span> <span class="k">replace</span> <span class="k">view</span> <span class="n">viewname</span> <span class="p">...;</span>
-<span class="c1">-- rename a view
-</span><span class="c1"></span><span class="k">rename</span> <span class="k">view</span> <span class="n">viewname</span> <span class="k">to</span> <span class="n">viewname2</span><span class="p">;</span>
-</code></pre></td></tr></table>
+</span><span class="c1"></span><span class="k">SHOW</span><span class="w"> </span><span class="k">FULL</span><span class="w"> </span><span class="n">TABLES</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="n">database_name</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">TABLE_TYPE</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;VIEW&#39;</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c1">-- 创建视图
+</span><span class="c1"></span><span class="k">create</span><span class="w"> </span><span class="k">view</span><span class="w"> </span><span class="n">viewname</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="p">...;</span><span class="w">
+</span><span class="w"></span><span class="c1">-- 查看视图创建语句
+</span><span class="c1"></span><span class="k">show</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="k">view</span><span class="w"> </span><span class="n">viewname</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">drop</span><span class="w"> </span><span class="k">view</span><span class="w"> </span><span class="n">viewname</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="c1">-- 创建新视图，自动替换存在的同名视图
+</span><span class="c1"></span><span class="k">create</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">replace</span><span class="w"> </span><span class="k">view</span><span class="w"> </span><span class="n">viewname</span><span class="w"> </span><span class="p">...;</span><span class="w">
+</span><span class="w"></span><span class="c1">-- rename a view
+</span><span class="c1"></span><span class="k">rename</span><span class="w"> </span><span class="k">view</span><span class="w"> </span><span class="n">viewname</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">viewname2</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -381,18 +386,18 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span> <span class="k">view</span> <span class="n">productcustomers</span> <span class="k">as</span>
-<span class="k">select</span> <span class="n">cust_name</span><span class="p">,</span> <span class="n">cust_contact</span><span class="p">,</span> <span class="n">prod_id</span>
-<span class="k">from</span> <span class="n">customers</span> <span class="k">as</span> <span class="k">c</span><span class="p">,</span> <span class="n">orders</span> <span class="k">as</span> <span class="n">o</span><span class="p">,</span> <span class="n">orderitems</span> <span class="k">as</span> <span class="n">oi</span>
-<span class="k">where</span> <span class="k">c</span><span class="p">.</span><span class="n">cust_id</span><span class="o">=</span><span class="n">o</span><span class="p">.</span><span class="n">cust_id</span> <span class="k">and</span> <span class="n">oi</span><span class="p">.</span><span class="n">order_num</span><span class="o">=</span><span class="n">o</span><span class="p">.</span><span class="n">order_num</span><span class="p">;</span>
-
-<span class="k">create</span> <span class="k">view</span> <span class="n">vendorlocations</span> <span class="k">as</span>
-<span class="k">select</span> <span class="n">concat</span> <span class="p">(</span><span class="n">rtrim</span><span class="p">(</span><span class="n">vend_name</span><span class="p">),</span> <span class="s1">&#39; (&#39;</span><span class="p">,</span> <span class="n">rtrim</span><span class="p">(</span><span class="n">vend_country</span><span class="p">),</span> <span class="s1">&#39;)&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">vend_title</span>
-<span class="k">from</span> <span class="n">vendors</span>
-<span class="k">order</span> <span class="k">by</span> <span class="n">vend_name</span><span class="p">;</span>
-
-<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">vendorlocations</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span><span class="w"> </span><span class="k">view</span><span class="w"> </span><span class="n">productcustomers</span><span class="w"> </span><span class="k">as</span><span class="w">
+</span><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="n">cust_name</span><span class="p">,</span><span class="w"> </span><span class="n">cust_contact</span><span class="p">,</span><span class="w"> </span><span class="n">prod_id</span><span class="w">
+</span><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">c</span><span class="p">,</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">o</span><span class="p">,</span><span class="w"> </span><span class="n">orderitems</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">oi</span><span class="w">
+</span><span class="w"></span><span class="k">where</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">cust_id</span><span class="o">=</span><span class="n">o</span><span class="p">.</span><span class="n">cust_id</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">oi</span><span class="p">.</span><span class="n">order_num</span><span class="o">=</span><span class="n">o</span><span class="p">.</span><span class="n">order_num</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">create</span><span class="w"> </span><span class="k">view</span><span class="w"> </span><span class="n">vendorlocations</span><span class="w"> </span><span class="k">as</span><span class="w">
+</span><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="n">concat</span><span class="w"> </span><span class="p">(</span><span class="n">rtrim</span><span class="p">(</span><span class="n">vend_name</span><span class="p">),</span><span class="w"> </span><span class="s1">&#39; (&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">rtrim</span><span class="p">(</span><span class="n">vend_country</span><span class="p">),</span><span class="w"> </span><span class="s1">&#39;)&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">vend_title</span><span class="w">
+</span><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">vendors</span><span class="w">
+</span><span class="w"></span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">vend_name</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">vendorlocations</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>其他应用</p>
 <ul>
@@ -416,7 +421,7 @@
 <p>调用存储过程，<code>call procedurename(@param1,@param2); select @param1,@param2;</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -428,17 +433,17 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">delimiter</span> <span class="o">//</span>
-
-<span class="k">create</span> <span class="k">procedure</span> <span class="n">productpricing</span><span class="p">()</span>
-<span class="k">begin</span>
-  <span class="k">select</span> <span class="k">avg</span><span class="p">(</span><span class="n">prod_price</span><span class="p">)</span> <span class="k">as</span> <span class="n">priceaverage</span>
-  <span class="k">from</span> <span class="n">products</span><span class="p">;</span>
-<span class="k">end</span> <span class="o">//</span>
-<span class="k">delimiter</span> <span class="p">;</span>
-
-<span class="k">call</span> <span class="n">productpricing</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">delimiter</span><span class="w"> </span><span class="o">//</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">create</span><span class="w"> </span><span class="k">procedure</span><span class="w"> </span><span class="n">productpricing</span><span class="p">()</span><span class="w">
+</span><span class="w"></span><span class="k">begin</span><span class="w">
+</span><span class="w">  </span><span class="k">select</span><span class="w"> </span><span class="k">avg</span><span class="p">(</span><span class="n">prod_price</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">priceaverage</span><span class="w">
+</span><span class="w">  </span><span class="k">from</span><span class="w"> </span><span class="n">products</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">end</span><span class="w"> </span><span class="o">//</span><span class="w">
+</span><span class="w"></span><span class="k">delimiter</span><span class="w"> </span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">call</span><span class="w"> </span><span class="n">productpricing</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>创建存储过程需要临时修改分隔符</p>
 <ul>
@@ -447,7 +452,7 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -474,32 +479,32 @@
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">delimiter</span> <span class="o">//</span>
-<span class="k">create</span> <span class="k">procedure</span> <span class="n">ordertotal</span><span class="p">(</span>
-  <span class="k">in</span> <span class="n">onumber</span> <span class="nb">int</span><span class="p">,</span>
-  <span class="k">in</span> <span class="n">taxable</span> <span class="nb">boolean</span><span class="p">,</span>
-  <span class="k">out</span> <span class="n">ototal</span> <span class="nb">decimal</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="p">)</span> <span class="k">comment</span> <span class="s1">&#39;Obtain order total, optionally adding tax&#39;</span>
-<span class="k">begin</span>
-  <span class="k">declare</span> <span class="n">total</span> <span class="nb">decimal</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
-  <span class="k">declare</span> <span class="n">taxrate</span> <span class="nb">int</span> <span class="k">default</span> <span class="mi">6</span><span class="p">;</span>
-
-  <span class="k">select</span> <span class="k">sum</span><span class="p">(</span><span class="n">item_price</span><span class="o">*</span><span class="n">quantity</span><span class="p">)</span>
-  <span class="k">from</span> <span class="n">orderitems</span>
-  <span class="k">where</span> <span class="n">order_num</span> <span class="o">=</span> <span class="n">onumber</span>
-  <span class="k">into</span> <span class="n">total</span><span class="p">;</span> <span class="c1">-- 也可以调到select行之后
-</span><span class="c1"></span>
-  <span class="k">if</span> <span class="n">taxable</span> <span class="k">then</span>
-    <span class="k">select</span> <span class="n">total</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">taxrate</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span> <span class="k">into</span> <span class="n">total</span><span class="p">;</span>
-  <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-
-  <span class="k">select</span> <span class="n">total</span> <span class="k">into</span> <span class="n">ototal</span><span class="p">;</span>
-<span class="k">end</span><span class="o">//</span>
-<span class="k">delimiter</span> <span class="p">;</span>
-
-<span class="k">call</span> <span class="n">ordertotal</span><span class="p">(</span><span class="mi">20005</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">@</span><span class="n">total</span><span class="p">);</span> <span class="c1">-- store data in variable total
-</span><span class="c1"></span><span class="k">select</span> <span class="o">@</span><span class="n">total</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">delimiter</span><span class="w"> </span><span class="o">//</span><span class="w">
+</span><span class="w"></span><span class="k">create</span><span class="w"> </span><span class="k">procedure</span><span class="w"> </span><span class="n">ordertotal</span><span class="p">(</span><span class="w">
+</span><span class="w">  </span><span class="k">in</span><span class="w"> </span><span class="n">onumber</span><span class="w"> </span><span class="nb">int</span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="k">in</span><span class="w"> </span><span class="n">taxable</span><span class="w"> </span><span class="nb">boolean</span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="k">out</span><span class="w"> </span><span class="n">ototal</span><span class="w"> </span><span class="nb">decimal</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="k">comment</span><span class="w"> </span><span class="s1">&#39;Obtain order total, optionally adding tax&#39;</span><span class="w">
+</span><span class="w"></span><span class="k">begin</span><span class="w">
+</span><span class="w">  </span><span class="k">declare</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="nb">decimal</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span><span class="w">
+</span><span class="w">  </span><span class="k">declare</span><span class="w"> </span><span class="n">taxrate</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="k">select</span><span class="w"> </span><span class="k">sum</span><span class="p">(</span><span class="n">item_price</span><span class="o">*</span><span class="n">quantity</span><span class="p">)</span><span class="w">
+</span><span class="w">  </span><span class="k">from</span><span class="w"> </span><span class="n">orderitems</span><span class="w">
+</span><span class="w">  </span><span class="k">where</span><span class="w"> </span><span class="n">order_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">onumber</span><span class="w">
+</span><span class="w">  </span><span class="k">into</span><span class="w"> </span><span class="n">total</span><span class="p">;</span><span class="w"> </span><span class="c1">-- 也可以调到select行之后
+</span><span class="c1"></span><span class="w">
+</span><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">taxable</span><span class="w"> </span><span class="k">then</span><span class="w">
+</span><span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="n">total</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">taxrate</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">total</span><span class="p">;</span><span class="w">
+</span><span class="w">  </span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="k">select</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">ototal</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">end</span><span class="o">//</span><span class="w">
+</span><span class="w"></span><span class="k">delimiter</span><span class="w"> </span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">call</span><span class="w"> </span><span class="n">ordertotal</span><span class="p">(</span><span class="mi">20005</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">total</span><span class="p">);</span><span class="w"> </span><span class="c1">-- store data in variable total
+</span><span class="c1"></span><span class="k">select</span><span class="w"> </span><span class="o">@</span><span class="n">total</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>删除存储过程，<code>drop procedure productpricing if exists;</code></p>
 <p>检查存储过程</p>
@@ -525,7 +530,7 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -555,35 +560,35 @@
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="n">delimter</span> <span class="o">//</span>
-<span class="k">create</span> <span class="k">procedure</span> <span class="n">processorders</span><span class="p">()</span>
-<span class="k">begin</span>
-  <span class="k">declare</span> <span class="n">done</span> <span class="nb">boolean</span> <span class="k">default</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="k">declare</span> <span class="n">o</span> <span class="nb">int</span><span class="p">;</span>
-  <span class="k">declare</span> <span class="n">t</span> <span class="nb">decimal</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
-
-  <span class="k">declare</span> <span class="n">ordernumbers</span> <span class="k">cursor</span>
-  <span class="k">for</span>
-  <span class="k">select</span> <span class="n">order_num</span> <span class="k">from</span> <span class="n">orders</span><span class="p">;</span>
-
-  <span class="c1">-- set done=1 when sqlstate &#39;02000&#39;, 02000表示未找到，循环结束时出现
-</span><span class="c1"></span>  <span class="k">declare</span> <span class="k">continue</span> <span class="k">handler</span> <span class="k">for</span> <span class="k">sqlstate</span> <span class="s1">&#39;02000&#39;</span> <span class="k">set</span> <span class="n">done</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
-
-  <span class="k">create</span> <span class="k">table</span> <span class="k">if</span> <span class="k">not</span> <span class="k">exists</span> <span class="n">ordertotals</span>
-    <span class="p">(</span><span class="n">order_num</span> <span class="nb">int</span><span class="p">,</span> <span class="n">total</span> <span class="nb">decimal</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">));</span>
-
-  <span class="c1">-- open cursor
-</span><span class="c1"></span>  <span class="k">open</span> <span class="n">ordernumbers</span><span class="p">;</span>
-  <span class="n">repeat</span>
-    <span class="k">fetch</span> <span class="n">ordernumbers</span> <span class="k">into</span> <span class="n">o</span><span class="p">;</span>
-    <span class="k">call</span> <span class="n">ordertotal</span><span class="p">(</span><span class="n">o</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
-    <span class="c1">-- insert result into a new table
-</span><span class="c1"></span>    <span class="k">insert</span> <span class="k">into</span> <span class="n">ordertotals</span><span class="p">(</span><span class="n">order_num</span><span class="p">,</span><span class="n">total</span><span class="p">)</span> <span class="k">values</span><span class="p">(</span><span class="n">o</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
-  <span class="k">until</span> <span class="n">done</span> <span class="k">end</span> <span class="n">repeat</span><span class="p">;</span>
-  <span class="k">close</span> <span class="n">ordernumbers</span><span class="p">;</span>
-<span class="k">end</span><span class="o">//</span>
-<span class="n">delimter</span> <span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">delimter</span><span class="w"> </span><span class="o">//</span><span class="w">
+</span><span class="w"></span><span class="k">create</span><span class="w"> </span><span class="k">procedure</span><span class="w"> </span><span class="n">processorders</span><span class="p">()</span><span class="w">
+</span><span class="w"></span><span class="k">begin</span><span class="w">
+</span><span class="w">  </span><span class="k">declare</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="nb">boolean</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">
+</span><span class="w">  </span><span class="k">declare</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="nb">int</span><span class="p">;</span><span class="w">
+</span><span class="w">  </span><span class="k">declare</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="nb">decimal</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="k">declare</span><span class="w"> </span><span class="n">ordernumbers</span><span class="w"> </span><span class="k">cursor</span><span class="w">
+</span><span class="w">  </span><span class="k">for</span><span class="w">
+</span><span class="w">  </span><span class="k">select</span><span class="w"> </span><span class="n">order_num</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">orders</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="c1">-- set done=1 when sqlstate &#39;02000&#39;, 02000表示未找到，循环结束时出现
+</span><span class="c1"></span><span class="w">  </span><span class="k">declare</span><span class="w"> </span><span class="k">continue</span><span class="w"> </span><span class="k">handler</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">sqlstate</span><span class="w"> </span><span class="s1">&#39;02000&#39;</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">done</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">exists</span><span class="w"> </span><span class="n">ordertotals</span><span class="w">
+</span><span class="w">    </span><span class="p">(</span><span class="n">order_num</span><span class="w"> </span><span class="nb">int</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="nb">decimal</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">));</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span><span class="c1">-- open cursor
+</span><span class="c1"></span><span class="w">  </span><span class="k">open</span><span class="w"> </span><span class="n">ordernumbers</span><span class="p">;</span><span class="w">
+</span><span class="w">  </span><span class="n">repeat</span><span class="w">
+</span><span class="w">    </span><span class="k">fetch</span><span class="w"> </span><span class="n">ordernumbers</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">o</span><span class="p">;</span><span class="w">
+</span><span class="w">    </span><span class="k">call</span><span class="w"> </span><span class="n">ordertotal</span><span class="p">(</span><span class="n">o</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="p">);</span><span class="w">
+</span><span class="w">    </span><span class="c1">-- insert result into a new table
+</span><span class="c1"></span><span class="w">    </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">ordertotals</span><span class="p">(</span><span class="n">order_num</span><span class="p">,</span><span class="n">total</span><span class="p">)</span><span class="w"> </span><span class="k">values</span><span class="p">(</span><span class="n">o</span><span class="p">,</span><span class="n">t</span><span class="p">);</span><span class="w">
+</span><span class="w">  </span><span class="k">until</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="n">repeat</span><span class="p">;</span><span class="w">
+</span><span class="w">  </span><span class="k">close</span><span class="w"> </span><span class="n">ordernumbers</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">end</span><span class="o">//</span><span class="w">
+</span><span class="w"></span><span class="n">delimter</span><span class="w"> </span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p><code>declare continue handler for sqlstate '02000' set done=1;</code></p>
 <ul>
@@ -601,15 +606,15 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span> <span class="k">trigger</span> <span class="n">triggername</span> <span class="k">before</span><span class="o">/</span><span class="k">after</span> <span class="k">delete</span><span class="o">/</span><span class="k">update</span><span class="o">/</span><span class="k">create</span> <span class="k">on</span> <span class="n">tablename</span> <span class="k">for</span> <span class="k">each</span> <span class="k">row</span> <span class="p">...;</span>
-
-<span class="k">drop</span> <span class="k">trigger</span> <span class="n">triggername</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span><span class="w"> </span><span class="k">trigger</span><span class="w"> </span><span class="n">triggername</span><span class="w"> </span><span class="k">before</span><span class="o">/</span><span class="k">after</span><span class="w"> </span><span class="k">delete</span><span class="o">/</span><span class="k">update</span><span class="o">/</span><span class="k">create</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">tablename</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">each</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="p">...;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">drop</span><span class="w"> </span><span class="k">trigger</span><span class="w"> </span><span class="n">triggername</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>若触发器执行失败，MySQL将不执行触发器对应事件语句。若干<code>BEFORE</code>触发器或者语句本身失败，MySQL将不执行<code>AFTER</code>触发器；</p>
 <p><code>INSERT</code>触发器</p>
@@ -620,7 +625,7 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -628,13 +633,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- select `auto_increament`ed column
-</span><span class="c1"></span><span class="k">create</span> <span class="k">trigger</span> <span class="n">neworder</span> <span class="k">after</span> <span class="k">insert</span> <span class="k">on</span> <span class="n">orders</span>
-<span class="k">for</span> <span class="k">each</span> <span class="k">row</span> <span class="k">select</span> <span class="k">new</span><span class="p">.</span><span class="n">order_num</span><span class="p">;</span>
-
-<span class="c1">-- test
-</span><span class="c1"></span><span class="k">insert</span> <span class="k">into</span> <span class="n">orders</span><span class="p">(</span><span class="n">order_date</span><span class="p">,</span> <span class="n">cust_id</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="n">now</span><span class="p">(),</span> <span class="mi">10001</span><span class="p">);</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- select `auto_increament`ed column
+</span><span class="c1"></span><span class="k">create</span><span class="w"> </span><span class="k">trigger</span><span class="w"> </span><span class="n">neworder</span><span class="w"> </span><span class="k">after</span><span class="w"> </span><span class="k">insert</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">orders</span><span class="w">
+</span><span class="w"></span><span class="k">for</span><span class="w"> </span><span class="k">each</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="k">new</span><span class="p">.</span><span class="n">order_num</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="c1">-- test
+</span><span class="c1"></span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">orders</span><span class="p">(</span><span class="n">order_date</span><span class="p">,</span><span class="w"> </span><span class="n">cust_id</span><span class="p">)</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="n">now</span><span class="p">(),</span><span class="w"> </span><span class="mi">10001</span><span class="p">);</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p><a href="https://stackoverflow.com/questions/12474489/not-allowed-to-return-a-resultset-from-a-trigger-mysql">1415, &lsquo;Not allowed to return a result set from a trigger&rsquo;</a></p>
 <p>本书示例存在错误，实际上从触发器中select出数据被禁止。</p>
@@ -646,7 +651,7 @@
 <p>使用 <code>BEGIN ... END</code> 块定义多语句触发器；</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -654,13 +659,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span> <span class="k">trigger</span> <span class="n">deleteorder</span> <span class="k">before</span> <span class="k">delete</span> <span class="k">on</span> <span class="n">orders</span>
-<span class="k">for</span> <span class="k">each</span> <span class="k">row</span>
-<span class="k">begin</span>
-  <span class="k">insert</span> <span class="k">into</span> <span class="n">archive_orders</span><span class="p">(</span><span class="n">order_num</span><span class="p">,</span> <span class="n">order_date</span><span class="p">,</span> <span class="n">cust_id</span><span class="p">)</span>
-  <span class="k">values</span><span class="p">(</span><span class="k">old</span><span class="p">.</span><span class="n">order_num</span><span class="p">,</span> <span class="k">old</span><span class="p">.</span><span class="n">order_date</span><span class="p">,</span> <span class="k">old</span><span class="p">.</span><span class="n">cust_id</span><span class="p">);</span>
-<span class="k">end</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span><span class="w"> </span><span class="k">trigger</span><span class="w"> </span><span class="n">deleteorder</span><span class="w"> </span><span class="k">before</span><span class="w"> </span><span class="k">delete</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">orders</span><span class="w">
+</span><span class="w"></span><span class="k">for</span><span class="w"> </span><span class="k">each</span><span class="w"> </span><span class="k">row</span><span class="w">
+</span><span class="w"></span><span class="k">begin</span><span class="w">
+</span><span class="w">  </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">archive_orders</span><span class="p">(</span><span class="n">order_num</span><span class="p">,</span><span class="w"> </span><span class="n">order_date</span><span class="p">,</span><span class="w"> </span><span class="n">cust_id</span><span class="p">)</span><span class="w">
+</span><span class="w">  </span><span class="k">values</span><span class="p">(</span><span class="k">old</span><span class="p">.</span><span class="n">order_num</span><span class="p">,</span><span class="w"> </span><span class="k">old</span><span class="p">.</span><span class="n">order_date</span><span class="p">,</span><span class="w"> </span><span class="k">old</span><span class="p">.</span><span class="n">cust_id</span><span class="p">);</span><span class="w">
+</span><span class="w"></span><span class="k">end</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p><code>UPDATE</code>触发器</p>
 <ul>
@@ -671,13 +676,13 @@
 <p>在<code>INSERT</code>, <code>UPDATE</code>触发器中，<code>BEFORE</code>通常用于数据验证和净化；</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span> <span class="k">trigger</span> <span class="n">updatevendor</span> <span class="k">before</span> <span class="k">update</span> <span class="k">on</span> <span class="n">vendors</span>
-<span class="k">for</span> <span class="k">each</span> <span class="k">row</span> <span class="k">set</span> <span class="k">new</span><span class="p">.</span><span class="n">vend_state</span><span class="o">=</span><span class="k">upper</span><span class="p">(</span><span class="k">new</span><span class="p">.</span><span class="n">vend_state</span><span class="p">);</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span><span class="w"> </span><span class="k">trigger</span><span class="w"> </span><span class="n">updatevendor</span><span class="w"> </span><span class="k">before</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">vendors</span><span class="w">
+</span><span class="w"></span><span class="k">for</span><span class="w"> </span><span class="k">each</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="k">new</span><span class="p">.</span><span class="n">vend_state</span><span class="o">=</span><span class="k">upper</span><span class="p">(</span><span class="k">new</span><span class="p">.</span><span class="n">vend_state</span><span class="p">);</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>应用触发器保证数据的一致性(大小写、格式等)。其优点是这种处理总是进行，且透明，与客户端无关；</li>
@@ -698,7 +703,7 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -708,15 +713,15 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">set</span> <span class="n">autocommit</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-<span class="k">start</span> <span class="k">transaction</span><span class="p">;</span>
-<span class="p">...</span>
-<span class="n">savepoint</span> <span class="n">p1</span><span class="p">;</span>
-<span class="p">...</span>
-<span class="o">#</span> <span class="k">rollback</span> <span class="k">to</span> <span class="p">[</span><span class="n">savepointname</span><span class="p">];</span>
-<span class="k">commit</span><span class="p">;</span>
-<span class="k">set</span> <span class="n">autocommit</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">set</span><span class="w"> </span><span class="n">autocommit</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">start</span><span class="w"> </span><span class="k">transaction</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="p">...</span><span class="w">
+</span><span class="w"></span><span class="n">savepoint</span><span class="w"> </span><span class="n">p1</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="p">...</span><span class="w">
+</span><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="k">rollback</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">[</span><span class="n">savepointname</span><span class="p">];</span><span class="w">
+</span><span class="w"></span><span class="k">commit</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">set</span><span class="w"> </span><span class="n">autocommit</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li><strong><code>CREATE</code>和<code>DROP</code>操作不可被回退</strong>；</li>
@@ -764,7 +769,7 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -773,14 +778,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span> <span class="k">table</span> <span class="n">mytable</span>
-<span class="p">(</span>
-    <span class="n">column1</span> <span class="nb">int</span><span class="p">,</span>
-    <span class="n">column2</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
-    <span class="n">column3</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="nb">character</span> <span class="k">set</span> <span class="n">latin1</span> <span class="k">collate</span> <span class="n">latin1_general_ci</span>
-<span class="p">)</span> <span class="k">default</span> <span class="nb">character</span> <span class="k">set</span> <span class="n">hebrew</span>
-  <span class="k">collate</span> <span class="n">hebrew_general_ci</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">mytable</span><span class="w">
+</span><span class="w"></span><span class="p">(</span><span class="w">
+</span><span class="w">    </span><span class="n">column1</span><span class="w"> </span><span class="nb">int</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">column2</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="w">
+</span><span class="w">    </span><span class="n">column3</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">latin1</span><span class="w"> </span><span class="k">collate</span><span class="w"> </span><span class="n">latin1_general_ci</span><span class="w">
+</span><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">hebrew</span><span class="w">
+</span><span class="w">  </span><span class="k">collate</span><span class="w"> </span><span class="n">hebrew_general_ci</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>利用<code>COLLATE</code>临时区分大小写；</p>
 <ul>
@@ -788,28 +793,28 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">customers</span>
-<span class="k">order</span> <span class="k">by</span> <span class="n">lastname</span><span class="p">,</span> <span class="n">firstname</span> <span class="k">collate</span> <span class="n">latin1_general_cs</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">customers</span><span class="w">
+</span><span class="w"></span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">lastname</span><span class="p">,</span><span class="w"> </span><span class="n">firstname</span><span class="w"> </span><span class="k">collate</span><span class="w"> </span><span class="n">latin1_general_cs</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><h2 id="chapter-28-安全管理">Chapter 28: 安全管理</h2>
 <p>MySQL服务器的安全基础：用户应该对他们需要的数据具有<strong>适当的访问权，既不能多也不能少</strong>。</p>
 <p>MySQL用户账号和信息存储在名为mysql的MySQL数据库中</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- 列出所有用户，包括特殊用户；
-</span><span class="c1"></span><span class="n">use</span> <span class="n">mysql</span><span class="p">;</span>
-<span class="k">select</span> <span class="k">user</span> <span class="k">from</span> <span class="k">user</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- 列出所有用户，包括特殊用户；
+</span><span class="c1"></span><span class="n">use</span><span class="w"> </span><span class="n">mysql</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="k">user</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>创建用户账号</p>
 <ul>
@@ -833,13 +838,13 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">grant</span> <span class="k">select</span><span class="p">[,</span> <span class="k">insert</span><span class="p">]</span> <span class="k">on</span> <span class="n">databasename</span><span class="p">.</span><span class="o">*</span> <span class="k">to</span> <span class="n">username</span><span class="p">;</span>
-<span class="k">revoke</span> <span class="k">select</span> <span class="k">on</span> <span class="n">dbname</span><span class="p">.</span><span class="o">*</span> <span class="k">from</span> <span class="n">username</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">grant</span><span class="w"> </span><span class="k">select</span><span class="p">[,</span><span class="w"> </span><span class="k">insert</span><span class="p">]</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">databasename</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">username</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">revoke</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">dbname</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">username</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>常见权限</p>
 <ul>
@@ -971,13 +976,10 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">laggardkernel</span>
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>laggardkernel</span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -988,7 +990,10 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.db1482bc438a2df971757df91e110bb84b31bb77ca2141978d165fcf453c642e.js"></script>
 
 
 

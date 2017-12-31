@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.81.0 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.pseudocold.com/post/2018/archiving-and-compression/" />
@@ -35,7 +35,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.fa20e845db068df5bd1b183f37f2c2b1ccb88d6fc052a3d6c4f63a682a4d6d4c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -43,12 +44,12 @@
 <meta property="og:description" content="在命令行里该用什么命令解压什么文件？压缩命令使用总结。个人笔记，非入门教程。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pseudocold.com/post/2018/archiving-and-compression/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-02-05T15:48:50&#43;08:00" />
-<meta property="article:modified_time" content="2019-02-05T15:48:50&#43;08:00" />
+<meta property="article:published_time" content="2019-02-05T15:48:50+08:00" />
+<meta property="article:modified_time" content="2019-02-05T15:48:50+08:00" />
 
 <meta itemprop="name" content="命令行压缩、解压命令总结">
-<meta itemprop="description" content="在命令行里该用什么命令解压什么文件？压缩命令使用总结。个人笔记，非入门教程。"><meta itemprop="datePublished" content="2019-02-05T15:48:50&#43;08:00" />
-<meta itemprop="dateModified" content="2019-02-05T15:48:50&#43;08:00" />
+<meta itemprop="description" content="在命令行里该用什么命令解压什么文件？压缩命令使用总结。个人笔记，非入门教程。"><meta itemprop="datePublished" content="2019-02-05T15:48:50+08:00" />
+<meta itemprop="dateModified" content="2019-02-05T15:48:50+08:00" />
 <meta itemprop="wordCount" content="1308">
 <meta itemprop="keywords" content="linux,macos," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="命令行压缩、解压命令总结"/>
@@ -85,6 +86,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">🔍</li>
       </a>
   </ul>
 </nav>
@@ -107,6 +110,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">🔍</a>
       </li>
   </ul>
 </nav>
@@ -207,22 +212,22 @@
 <p>对压入的文件筛选</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">tar -jcv -f /root/etc.newer.then.passwd.tar.bz2 --newer-mtime<span class="o">=</span><span class="s2">&#34;2015/06/17&#34;</span> /etc/*
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">tar -jcv -f /root/etc.newer.then.passwd.tar.bz2 --newer-mtime<span class="o">=</span><span class="s2">&#34;2015/06/17&#34;</span> /etc/*
 </code></pre></td></tr></table>
 </div>
 </div><p><code>/var/spool/mail/</code> (系統中，所有帳號的郵件信箱)</p>
 <p><code>/var/spool/cron/</code> (所有帳號的工作排成設定檔)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">tar -jcv -f /backups/backup-system-20150701.tar.bz2 <span class="se">\
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">tar -jcv -f /backups/backup-system-20150701.tar.bz2 <span class="se">\
 </span><span class="se"></span>  --exclude<span class="o">=</span>/root/*.bz2 --exclude<span class="o">=</span>/root/*.gz --exclude<span class="o">=</span>/home/loop* <span class="se">\
 </span><span class="se"></span>  /etc /home /var/spool/mail /var/spool/cron /root
 </code></pre></td></tr></table>
@@ -236,7 +241,7 @@
 <p><a href="https://stackoverflow.com/q/36917882/5101148">How to use Pigz with Tar</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -246,7 +251,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 调用 --use-compress-program</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 调用 --use-compress-program</span>
 tar --use-compress-program<span class="o">=</span><span class="s2">&#34;pigz --best --recursive&#34;</span> -cf archive.tar.gz YourData
 
 <span class="c1"># monitor progress with pv</span>
@@ -261,11 +266,11 @@ tar cf - paths-to-archive <span class="p">|</span> pigz -9 -p <span class="m">32
 <p>To set SELinux permissive, modify <code>/etc/selinux/config</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 修复对应文件SELinux</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 修复对应文件SELinux</span>
 restorecon -Rv /etc
 </code></pre></td></tr></table>
 </div>
@@ -277,10 +282,10 @@ restorecon -Rv /etc
 <p><code>dd</code>，基于扇区拷贝</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">dd <span class="k">if</span><span class="o">=</span><span class="s2">&#34;input_file&#34;</span> <span class="nv">of</span><span class="o">=</span><span class="s2">&#34;output_file&#34;</span> <span class="nv">bs</span><span class="o">=</span><span class="s2">&#34;block_size&#34;</span> <span class="nv">count</span><span class="o">=</span><span class="s2">&#34;number&#34;</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">dd <span class="k">if</span><span class="o">=</span><span class="s2">&#34;input_file&#34;</span> <span class="nv">of</span><span class="o">=</span><span class="s2">&#34;output_file&#34;</span> <span class="nv">bs</span><span class="o">=</span><span class="s2">&#34;block_size&#34;</span> <span class="nv">count</span><span class="o">=</span><span class="s2">&#34;number&#34;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>如果是拷贝整个分区，也会复制 UUID，还原到其他机器最好重新分配一个新 UUID，以避免重复。</p>
@@ -302,10 +307,10 @@ restorecon -Rv /etc
 <p><code>unar</code> is command from <code>unarchiver</code> pkg, with support for more than 40 archive formats. 仅支持解压和查看。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">7z x abc.rar
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">7z x abc.rar
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="7z">7z</h3>
@@ -318,7 +323,7 @@ restorecon -Rv /etc
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -334,7 +339,7 @@ restorecon -Rv /etc
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">pacman -S p7zip
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">pacman -S p7zip
 
 <span class="c1"># archive</span>
 7z a &lt;archive name&gt; &lt;file name&gt;
@@ -353,7 +358,7 @@ restorecon -Rv /etc
 </div><p>Extract</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -363,7 +368,7 @@ restorecon -Rv /etc
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># extract to current dir</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># extract to current dir</span>
 7z e &lt;archive name&gt;
 
 <span class="c1"># extract with full paths</span>
@@ -376,10 +381,10 @@ restorecon -Rv /etc
 </div><p>Check integrity</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">7z t &lt;archive name&gt;
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">7z t &lt;archive name&gt;
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="并行压缩">并行压缩</h3>
@@ -397,15 +402,15 @@ restorecon -Rv /etc
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">yay -S unzip-iconv
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">yay -S unzip-iconv
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -413,7 +418,7 @@ restorecon -Rv /etc
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ unzip -h
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">$ unzip -h
 UnZip 6.00 of 20 April 2009, by Debian. Original by Info-ZIP.
   ...
   -O CHARSET  specify a character encoding for DOS, Windows and OS/2 archives
@@ -423,22 +428,22 @@ UnZip 6.00 of 20 April 2009, by Debian. Original by Info-ZIP.
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">unzip -O &lt;encoding&gt; &lt;filename&gt; -d &lt;target_dir&gt;
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">unzip -O &lt;encoding&gt; &lt;filename&gt; -d &lt;target_dir&gt;
 
 unzip -I &lt;encoding&gt; &lt;filename&gt; -d &lt;target_dir&gt;
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">unar -e gb18030 gb18030.zip
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">unar -e gb18030 gb18030.zip
 </code></pre></td></tr></table>
 </div>
 </div><p>或者先直接解压，解压后做编码转换</p>
@@ -532,13 +537,10 @@ unzip -I &lt;encoding&gt; &lt;filename&gt; -d &lt;target_dir&gt;
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">laggardkernel</span>
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>laggardkernel</span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -549,7 +551,10 @@ unzip -I &lt;encoding&gt; &lt;filename&gt; -d &lt;target_dir&gt;
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.db1482bc438a2df971757df91e110bb84b31bb77ca2141978d165fcf453c642e.js"></script>
 
 
 

@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.81.0 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.pseudocold.com/post/2019/setup-dhcp-systemd-networkd/" />
@@ -35,7 +35,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.fa20e845db068df5bd1b183f37f2c2b1ccb88d6fc052a3d6c4f63a682a4d6d4c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -43,12 +44,12 @@
 <meta property="og:description" content="Former package group &ldquo;base&rdquo; from Archlinux contains 2 network managers - netctl and systemd-networkd, and 1 DHCP client dhcpcd, which is obviously redundant for a network setup. After pkg group &ldquo;base&rdquo; replaced by the same name meta pkg, only systemd-networkd is left. For a simple network setup with DHCP, systemd-networkd is enough to get the work done." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pseudocold.com/post/2019/setup-dhcp-systemd-networkd/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-10-15T17:19:31&#43;08:00" />
-<meta property="article:modified_time" content="2019-10-15T17:19:31&#43;08:00" />
+<meta property="article:published_time" content="2019-10-15T17:19:31+08:00" />
+<meta property="article:modified_time" content="2019-10-15T17:19:31+08:00" />
 
 <meta itemprop="name" content="Setup DHCP Client with systemd-networkd">
-<meta itemprop="description" content="Former package group &ldquo;base&rdquo; from Archlinux contains 2 network managers - netctl and systemd-networkd, and 1 DHCP client dhcpcd, which is obviously redundant for a network setup. After pkg group &ldquo;base&rdquo; replaced by the same name meta pkg, only systemd-networkd is left. For a simple network setup with DHCP, systemd-networkd is enough to get the work done."><meta itemprop="datePublished" content="2019-10-15T17:19:31&#43;08:00" />
-<meta itemprop="dateModified" content="2019-10-15T17:19:31&#43;08:00" />
+<meta itemprop="description" content="Former package group &ldquo;base&rdquo; from Archlinux contains 2 network managers - netctl and systemd-networkd, and 1 DHCP client dhcpcd, which is obviously redundant for a network setup. After pkg group &ldquo;base&rdquo; replaced by the same name meta pkg, only systemd-networkd is left. For a simple network setup with DHCP, systemd-networkd is enough to get the work done."><meta itemprop="datePublished" content="2019-10-15T17:19:31+08:00" />
+<meta itemprop="dateModified" content="2019-10-15T17:19:31+08:00" />
 <meta itemprop="wordCount" content="348">
 <meta itemprop="keywords" content="systemd,dhcp,linux,archlinux," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Setup DHCP Client with systemd-networkd"/>
@@ -85,6 +86,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">🔍</li>
       </a>
   </ul>
 </nav>
@@ -107,6 +110,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">🔍</a>
       </li>
   </ul>
 </nav>
@@ -151,18 +156,18 @@
 <p>Get the network interface name with</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># installd by package iproute2</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># installd by package iproute2</span>
 ip addr
 </code></pre></td></tr></table>
 </div>
 </div><p>For network interface &ldquo;ens3&rdquo;.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -170,7 +175,7 @@ ip addr
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/systemd/network/ens3.network</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/systemd/network/ens3.network</span>
 <span class="k">[Match]</span>
 <span class="na">Name</span><span class="o">=</span><span class="s">ens3</span>
 
@@ -181,14 +186,14 @@ ip addr
 </div><p>Restart the service and check the IP address again.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">systemctl <span class="nb">enable</span> --now systemd-networkd
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">systemctl <span class="nb">enable</span> --now systemd-networkd
 
 <span class="c1"># check the network again</span>
 ip addr
@@ -200,14 +205,14 @@ networkctl status ens3
 <p>To use the systemd DNS stub file.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo systemctl --now systemd-resolved
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo systemctl --now systemd-resolved
 sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
 <span class="c1"># check the status</span>
@@ -223,7 +228,7 @@ resolvectl status
 <p>To disable IPv6 on a per-interface basis.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -234,7 +239,7 @@ resolvectl status
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/systemd/network/ens3.network</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/systemd/network/ens3.network</span>
 <span class="k">[Match]</span>
 <span class="na">Name</span><span class="o">=</span><span class="s">ens3</span>
 
@@ -249,7 +254,7 @@ resolvectl status
 <p>You may also notice the IPv4 address is preferred over IPv6 address. To prefer IPv4, configure <code>getaddrinfo</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -258,7 +263,7 @@ resolvectl status
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/gai.conf</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/gai.conf</span>
 <span class="c1"># Uncomment the following line to decrease the priority of IPv6 route/gateway</span>
 
 <span class="c1">#</span>
@@ -361,13 +366,10 @@ resolvectl status
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">laggardkernel</span>
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>laggardkernel</span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -378,7 +380,10 @@ resolvectl status
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.db1482bc438a2df971757df91e110bb84b31bb77ca2141978d165fcf453c642e.js"></script>
 
 
 

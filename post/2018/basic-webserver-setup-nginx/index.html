@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.81.0 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.pseudocold.com/post/2018/basic-webserver-setup-nginx/" />
@@ -35,7 +35,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.fa20e845db068df5bd1b183f37f2c2b1ccb88d6fc052a3d6c4f63a682a4d6d4c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -43,12 +44,12 @@
 <meta property="og:description" content="Setup HTTP/2, TLS 1.3 with LEMP. (个人笔记，不做注解)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pseudocold.com/post/2018/basic-webserver-setup-nginx/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2018-11-02T10:10:00&#43;08:00" />
-<meta property="article:modified_time" content="2018-11-02T10:10:00&#43;08:00" />
+<meta property="article:published_time" content="2018-11-02T10:10:00+08:00" />
+<meta property="article:modified_time" content="2018-11-02T10:10:00+08:00" />
 
 <meta itemprop="name" content="Basic HTTP2 Setup Part 2: Nginx">
-<meta itemprop="description" content="Setup HTTP/2, TLS 1.3 with LEMP. (个人笔记，不做注解)"><meta itemprop="datePublished" content="2018-11-02T10:10:00&#43;08:00" />
-<meta itemprop="dateModified" content="2018-11-02T10:10:00&#43;08:00" />
+<meta itemprop="description" content="Setup HTTP/2, TLS 1.3 with LEMP. (个人笔记，不做注解)"><meta itemprop="datePublished" content="2018-11-02T10:10:00+08:00" />
+<meta itemprop="dateModified" content="2018-11-02T10:10:00+08:00" />
 <meta itemprop="wordCount" content="2047">
 <meta itemprop="keywords" content="linux,nginx,mysql,php,h2,tls," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Basic HTTP2 Setup Part 2: Nginx"/>
@@ -85,6 +86,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">🔍</li>
       </a>
   </ul>
 </nav>
@@ -107,6 +110,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">🔍</a>
       </li>
   </ul>
 </nav>
@@ -174,19 +179,19 @@
 <p>install, ufw, vhosts(optional),</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt install nginx
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt install nginx
 sudo ufw app list
 sudo ufw allow in <span class="s2">&#34;Nginx Full&#34;</span>
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -197,7 +202,7 @@ sudo ufw allow in <span class="s2">&#34;Nginx Full&#34;</span>
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="c">&lt;!-- /var/www/example.com/html/index.html --&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="c">&lt;!-- /var/www/example.com/html/index.html --&gt;</span>
 <span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Welcome to Example.com!<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
@@ -210,7 +215,7 @@ sudo ufw allow in <span class="s2">&#34;Nginx Full&#34;</span>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -226,7 +231,7 @@ sudo ufw allow in <span class="s2">&#34;Nginx Full&#34;</span>
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/sites-available/example.com
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/sites-available/example.com
 server {
         listen 80;
         listen [::]:80;
@@ -246,16 +251,16 @@ server {
 <p>enable vhost</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
 </code></pre></td></tr></table>
 </div>
 </div><p><strong>bucket memory problem</strong>?</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -265,7 +270,7 @@ server {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/nginx.conf
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/nginx.conf
 ...
 http {
     ...
@@ -277,11 +282,11 @@ http {
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo nginx -t
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo nginx -t
 sudo systemctl restart nginx
 </code></pre></td></tr></table>
 </div>
@@ -289,16 +294,16 @@ sudo systemctl restart nginx
 <p>setup mysql. 见上面</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt install php-fpm php-mysql
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt install php-fpm php-mysql
 </code></pre></td></tr></table>
 </div>
 </div><p>config php use vhosts(optional)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -321,7 +326,7 @@ sudo systemctl restart nginx
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/sites-available/example.conf
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/sites-available/example.conf
 server {
         listen 80;
         root /var/www/html;
@@ -348,23 +353,23 @@ server {
 <p>enable vhost and disable default</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
 sudo unlink /etc/nginx/sites-enabled/default
 </code></pre></td></tr></table>
 </div>
 </div><p>php test <code>info.php</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="c1"># /var/www/html/info.php
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1"># /var/www/html/info.php
 </span><span class="c1"></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nx">phpinfo</span><span class="p">();</span>
 </code></pre></td></tr></table>
@@ -372,11 +377,11 @@ sudo unlink /etc/nginx/sites-enabled/default
 </div><p>restart</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo nginx -t
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo nginx -t
 sudo systemctl restart nginx
 </code></pre></td></tr></table>
 </div>
@@ -388,7 +393,7 @@ sudo systemctl restart nginx
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -425,7 +430,7 @@ sudo systemctl restart nginx
 </span><span class="lnt">35
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
     <span class="kn">server_name</span> <span class="s">pma.mubuntu-pd.test</span><span class="p">;</span>
     <span class="c1"># listen 80; # also listen on http
 </span><span class="c1"></span>    <span class="c1"># listen [::]:80;
@@ -474,7 +479,7 @@ sudo systemctl restart nginx
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -538,7 +543,7 @@ sudo systemctl restart nginx
 </span><span class="lnt">62
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="c1"># vim: syntax=nginx ts=4 sw=4 sts=4 sr noet
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="c1"># vim: syntax=nginx ts=4 sw=4 sts=4 sr noet
 </span><span class="c1"># https://wiki.archlinux.org/index.php/PhpMyAdmin#Nginx
 </span><span class="c1"># https://serverfault.com/questions/223028/alias-using-nginx-causing-phpmyadmin-login-endless-loop
 </span><span class="c1"></span><span class="k">location</span> <span class="s">/phpmyadmin/</span> <span class="p">{</span>
@@ -605,7 +610,7 @@ sudo systemctl restart nginx
 </div><h2 id="config">Config</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -628,7 +633,7 @@ sudo systemctl restart nginx
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">❯ tree /etc/nginx -L 1
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">❯ tree /etc/nginx -L 1
 /etc/nginx
 ├── conf.d
 ├── modules-available
@@ -658,7 +663,7 @@ sudo systemctl restart nginx
 <h2 id="debug">Debug</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -667,7 +672,7 @@ sudo systemctl restart nginx
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo nginx -t
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo nginx -t
 
 sudo nginx
 sudo nginx -s stop <span class="c1"># SIGTERM</span>
@@ -684,7 +689,7 @@ sudo ngxin -s reload <span class="c1"># SIGHUP</span>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -697,7 +702,7 @@ sudo ngxin -s reload <span class="c1"># SIGHUP</span>
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo openssl req -x509 -nodes -days <span class="m">365</span> -newkey rsa:2048 <span class="se">\
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo openssl req -x509 -nodes -days <span class="m">365</span> -newkey rsa:2048 <span class="se">\
 </span><span class="se"></span>-keyout /etc/ssl/private/nginx-selfsigned.key <span class="se">\
 </span><span class="se"></span>-out /etc/ssl/certs/nginx-selfsigned.crt
 <span class="c1"># req, X.509 certificate signing request (CSR) management</span>
@@ -713,7 +718,7 @@ sudo openssl dhparam -out /etc/nginx/dhparam.pem <span class="m">4096</span>
 </div><p>前向保密（Perfect Forward Secrecy，PFS）：长期使用的主密钥泄漏不会导致过去的会话密钥泄漏。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -722,7 +727,7 @@ sudo openssl dhparam -out /etc/nginx/dhparam.pem <span class="m">4096</span>
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/conf.d/*
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/conf.d/*
 # or prefer
 # /etc/nginx/snippets/self-signed.conf
 ssl_certificate     /etc/nginx/ssl/homestead.app.pem;
@@ -734,7 +739,7 @@ ssl_certificate_key /etc/nginx/ssl/homestead.app-key.pem;
 </div><p>strong encryption settings from <a href="https://cipherli.st/">cipherli.st</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -758,7 +763,7 @@ ssl_certificate_key /etc/nginx/ssl/homestead.app-key.pem;
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/snippets/ssl-params.conf
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/snippets/ssl-params.conf
 ssl_protocols TLSv1.3;# Requires nginx &gt;= 1.13.0 else use TLSv1.2
 ssl_prefer_server_ciphers on;
 ssl_dhparam /etc/nginx/dhparam.pem; # openssl dhparam -out /etc/nginx/dhparam.pem 4096
@@ -786,7 +791,7 @@ add_header X-XSS-Protection &#34;1; mode=block&#34;;
 <p>enable SSL in vhost</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -813,7 +818,7 @@ add_header X-XSS-Protection &#34;1; mode=block&#34;;
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/sites-available/example.com
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/sites-available/example.com
 server {
     listen 443 ssl;    # ssl
     listen [::]:443 ssl;
@@ -845,7 +850,7 @@ server {
 <p>separate your config into http and https.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -857,7 +862,7 @@ server {
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">server {
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">server {
     listen 443 ssl default_server;
     listen [::]:443 ssl default_server;
     include snippets/self-signed.conf;
@@ -881,13 +886,13 @@ server {
 <p>h2 over cleartext 目前没有主流浏览器支持，但是某些非浏览器<code>curl</code>等支持。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">...
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">...
     listen [::]:443 ssl http2 ipv6only=on;
     listen 443 ssl http2;
 ...
@@ -896,13 +901,13 @@ server {
 </div><p>remove old and insecure cipher suite <a href="https://http2.github.io/http2-spec/#BadCipherSuites">blacklist</a>. ciperli.st配置过应该可以跳过此步骤。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/sites-available/your_domain
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/sites-available/your_domain
 
 # include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
 ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
@@ -910,7 +915,7 @@ ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -943,7 +948,7 @@ ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH
 </span><span class="lnt">31
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># reload</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># reload</span>
 sudo nginx -t
 sudo systemctl reload nginx
 
@@ -986,7 +991,7 @@ accept-ranges: bytes
 <p>add <code>Strict-Transport-Security</code> header to make</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1000,7 +1005,7 @@ accept-ranges: bytes
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/nginx.conf # 应用到全局?
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/nginx.conf # 应用到全局?
 http {
 ...
     ##
@@ -1018,11 +1023,11 @@ http {
 <p>应用到子域名。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># remember HTTPS protocol 6 months
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># remember HTTPS protocol 6 months
 add_header Strict-Transport-Security &#34;max-age=15768000; includeSubDomains&#34; always;
 </code></pre></td></tr></table>
 </div>
@@ -1031,12 +1036,12 @@ add_header Strict-Transport-Security &#34;max-age=15768000; includeSubDomains&#3
 <p><a href="https://security.stackexchange.com/questions/92954/how-can-i-see-which-sites-have-set-the-hsts-flag-in-my-browser">How can I see which sites have set the HSTS flag in my browser?</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">about:profile
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">about:profile
 ~/Library/Application Support/Firefox/Profiles
 SiteSecurityServiceState.txt
 </code></pre></td></tr></table>
@@ -1135,13 +1140,10 @@ SiteSecurityServiceState.txt
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">laggardkernel</span>
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>laggardkernel</span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -1152,7 +1154,10 @@ SiteSecurityServiceState.txt
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.db1482bc438a2df971757df91e110bb84b31bb77ca2141978d165fcf453c642e.js"></script>
 
 
 

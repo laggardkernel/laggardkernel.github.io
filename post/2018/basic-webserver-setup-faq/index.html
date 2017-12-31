@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.81.0 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.pseudocold.com/post/2018/basic-webserver-setup-faq/" />
@@ -35,7 +35,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.fa20e845db068df5bd1b183f37f2c2b1ccb88d6fc052a3d6c4f63a682a4d6d4c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -43,12 +44,12 @@
 <meta property="og:description" content="Setup HTTP/2, TLS 1.3. 拾遗。 (个人笔记，不做注解)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pseudocold.com/post/2018/basic-webserver-setup-faq/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2018-11-02T10:20:00&#43;08:00" />
-<meta property="article:modified_time" content="2018-11-02T10:20:00&#43;08:00" />
+<meta property="article:published_time" content="2018-11-02T10:20:00+08:00" />
+<meta property="article:modified_time" content="2018-11-02T10:20:00+08:00" />
 
 <meta itemprop="name" content="Basic HTTP2 Setup Part 3: FAQ">
-<meta itemprop="description" content="Setup HTTP/2, TLS 1.3. 拾遗。 (个人笔记，不做注解)"><meta itemprop="datePublished" content="2018-11-02T10:20:00&#43;08:00" />
-<meta itemprop="dateModified" content="2018-11-02T10:20:00&#43;08:00" />
+<meta itemprop="description" content="Setup HTTP/2, TLS 1.3. 拾遗。 (个人笔记，不做注解)"><meta itemprop="datePublished" content="2018-11-02T10:20:00+08:00" />
+<meta itemprop="dateModified" content="2018-11-02T10:20:00+08:00" />
 <meta itemprop="wordCount" content="1690">
 <meta itemprop="keywords" content="linux,apache,nginx,mysql,php,h2,tls," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Basic HTTP2 Setup Part 3: FAQ"/>
@@ -85,6 +86,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">🔍</li>
       </a>
   </ul>
 </nav>
@@ -107,6 +110,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">🔍</a>
       </li>
   </ul>
 </nav>
@@ -187,7 +192,7 @@
 <h3 id="apache2">Apache2</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -198,7 +203,7 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt install phpmyadmin php-mbstring php-gettext
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt install phpmyadmin php-mbstring php-gettext
 <span class="c1"># install for apache, and dbconfigc-common in the prompt</span>
 <span class="c1"># phpmyadmin conf is put in /etc/apache2/conf-enabled</span>
 
@@ -213,7 +218,7 @@ sudo systemctl restart apache2
 <p>初始化mysql</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -228,7 +233,7 @@ sudo systemctl restart apache2
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">mysql_secure_installation <span class="c1"># init</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">mysql_secure_installation <span class="c1"># init</span>
 <span class="c1"># switch its authentication method from auth_socket to</span>
 mysql_native_password
 sudo mysql
@@ -246,13 +251,13 @@ grant all privileges on *.* to <span class="s1">&#39;sammy&#39;</span>@<span cla
 </div><p>secure phpMyAdmin with <code>.htaccess</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/conf-available/phpmyadmin.conf
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/conf-available/phpmyadmin.conf
 
 &lt;Directory /usr/share/phpmyadmin&gt;
     AllowOverride All # enable .htaccess control support
@@ -260,14 +265,14 @@ grant all privileges on *.* to <span class="s1">&#39;sammy&#39;</span>@<span cla
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-apache" data-lang="apache"><span class="c"># /usr/share/phpmyadmin/.htaccess</span>
+<pre tabindex="0" class="chroma"><code class="language-apache" data-lang="apache"><span class="c"># /usr/share/phpmyadmin/.htaccess</span>
 <span class="nb">AuthType</span> Basic
 <span class="nb">AuthName</span> <span class="s2">&#34;Restricted Files&#34;</span>
 <span class="nb">AuthUserFile</span> <span class="sx">/etc/phpmyadmin/.htpasswd</span>
@@ -277,7 +282,7 @@ grant all privileges on *.* to <span class="s1">&#39;sammy&#39;</span>@<span cla
 </div><p>可参考<code>/etc/phpadmin/apache.conf</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -290,7 +295,7 @@ grant all privileges on *.* to <span class="s1">&#39;sammy&#39;</span>@<span cla
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-apache" data-lang="apache"><span class="c"># Authorize for setup</span>
+<pre tabindex="0" class="chroma"><code class="language-apache" data-lang="apache"><span class="c"># Authorize for setup</span>
 <span class="nt">&lt;Directory</span> <span class="s">/usr/share/phpmyadmin/setup</span><span class="nt">&gt;</span>
     <span class="nt">&lt;IfModule</span> <span class="s">mod_authz_core.c</span><span class="nt">&gt;</span>
         <span class="nt">&lt;IfModule</span> <span class="s">mod_authn_file.c</span><span class="nt">&gt;</span>
@@ -305,12 +310,12 @@ grant all privileges on *.* to <span class="s1">&#39;sammy&#39;</span>@<span cla
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo systemctl reload apache2
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo systemctl reload apache2
 sudo htpasswd -c /etc/phpmyadmin/.htpasswd <span class="o">{</span>username<span class="o">}</span> <span class="c1"># -c for create</span>
 sudo htpasswd /etc/phpmyadmin/.htpasswd <span class="o">{</span>anotheruser<span class="o">}</span>
 </code></pre></td></tr></table>
@@ -319,7 +324,7 @@ sudo htpasswd /etc/phpmyadmin/.htpasswd <span class="o">{</span>anotheruser<span
 <h3 id="nginx">Nginx</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -327,7 +332,7 @@ sudo htpasswd /etc/phpmyadmin/.htpasswd <span class="o">{</span>anotheruser<span
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt install phpmyadmin
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt install phpmyadmin
 <span class="c1"># prompt setup, dbconfig-common to conf app db</span>
 <span class="c1"># This will set up the internal database and administrative user for phpMyAdmin.</span>
 
@@ -338,7 +343,7 @@ sudo ln -s /usr/share/phpmyadmin /var/www/html
 </div><p>Disable root login in phpmyadmin with custom config</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -355,7 +360,7 @@ sudo ln -s /usr/share/phpmyadmin /var/www/html
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="c1"># /etc/phpmyadmin/conf.d/pma_secure.php
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1"># /etc/phpmyadmin/conf.d/pma_secure.php
 </span><span class="c1"></span><span class="o">&lt;?</span><span class="nx">php</span>
 
 <span class="c1"># PhpMyAdmin Settings
@@ -374,25 +379,25 @@ sudo ln -s /usr/share/phpmyadmin /var/www/html
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># encryp password with `crypt()` fun</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># encryp password with `crypt()` fun</span>
 openssl passwd
 <span class="c1"># apache2-utils: /usr/bin/htpasswd 在做相同的事情</span>
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># paste it into /etc/nginx/pma_pass
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># paste it into /etc/nginx/pma_pass
 sammy:O5az.RSPzd.HE
 
 # admin:* # * 导致所有密码均无效
@@ -402,7 +407,7 @@ sammy:O5az.RSPzd.HE
 <p>Nginx basic auth</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -413,7 +418,7 @@ sammy:O5az.RSPzd.HE
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="c1"># /etc/nginx/sites-available/default
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="c1"># /etc/nginx/sites-available/default
 </span><span class="c1"></span><span class="k">server</span> <span class="p">{</span>
     <span class="kn">.</span> <span class="s">.</span> <span class="s">.</span>
     <span class="s">location</span> <span class="s">/nothingtosee</span> <span class="p">{</span> <span class="c1"># symlink to /usr/share/phpmyadmin
@@ -428,17 +433,17 @@ sammy:O5az.RSPzd.HE
 <p>IP-based access control. only have access to your phpMyAdmin interface if they&rsquo;re accessing from either an <strong>authorized IP address</strong> or <strong>localhost via SSH tunneling</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># get local public ip</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># get local public ip</span>
 curl -i myip.ipip.net <span class="c1"># -i for headers in response</span>
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -455,7 +460,7 @@ curl -i myip.ipip.net <span class="c1"># -i for headers in response</span>
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="c1"># /etc/nginx/sites-available/exmaple.com
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="c1"># /etc/nginx/sites-available/exmaple.com
 </span><span class="c1"></span><span class="k">server</span> <span class="p">{</span>
     <span class="kn">.</span> <span class="s">.</span> <span class="s">.</span>
     <span class="s">location</span> <span class="s">/nothingtosee</span> <span class="p">{</span>
@@ -475,18 +480,18 @@ curl -i myip.ipip.net <span class="c1"># -i for headers in response</span>
 </div><p>access phpmyadmin through local SSH tunnels</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">ssh user@server_domain_or_IP -L 8000:localhost:80 -L 8443:localhost:443 -N
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">ssh user@server_domain_or_IP -L 8000:localhost:80 -L 8443:localhost:443 -N
 <span class="c1"># https://localhost:443/nothingtosee</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Similar effect could be achived in Apache.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -496,7 +501,7 @@ curl -i myip.ipip.net <span class="c1"># -i for headers in response</span>
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-apache" data-lang="apache"><span class="nb">Alias</span> <span class="sx">/phpmyadmin</span> <span class="s2">&#34;/usr/share/webapps/phpMyAdmin&#34;</span>
+<pre tabindex="0" class="chroma"><code class="language-apache" data-lang="apache"><span class="nb">Alias</span> <span class="sx">/phpmyadmin</span> <span class="s2">&#34;/usr/share/webapps/phpMyAdmin&#34;</span>
 <span class="nt">&lt;Directory</span> <span class="s">&#34;/usr/share/webapps/phpMyAdmin&#34;</span><span class="nt">&gt;</span>
     <span class="nb">DirectoryIndex</span> index.php
     <span class="nb">AllowOverride</span> <span class="k">All</span>
@@ -520,12 +525,12 @@ curl -i myip.ipip.net <span class="c1"># -i for headers in response</span>
 <p>Reverse proxy apache virtual hosts with nginx server.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt install nginx
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt install nginx
 <span class="c1"># disable default site</span>
 sudo rm /etc/nginx/sites-enabled/default
 </code></pre></td></tr></table>
@@ -533,7 +538,7 @@ sudo rm /etc/nginx/sites-enabled/default
 </div><p>define a <code>default_server</code>, <code>listen 80 default_server;</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -551,7 +556,7 @@ sudo rm /etc/nginx/sites-enabled/default
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
     <span class="kn">listen</span> <span class="mi">80</span> <span class="s">default_server</span><span class="p">;</span>
 
     <span class="kn">root</span> <span class="s">/usr/share/nginx/example.com</span><span class="p">;</span>
@@ -571,16 +576,16 @@ sudo rm /etc/nginx/sites-enabled/default
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo nginx -t
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo nginx -t
 </code></pre></td></tr></table>
 </div>
 </div><p>reverse proxy with <code>proxy_pass</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -593,7 +598,7 @@ sudo rm /etc/nginx/sites-enabled/default
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-nginx" data-lang="nginx">    <span class="k">listen</span> <span class="mi">80</span><span class="p">;</span>
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx">    <span class="k">listen</span> <span class="mi">80</span><span class="p">;</span>
     <span class="k">server_name</span> <span class="s">foobar.net</span> <span class="s">www.foobar.net</span> <span class="s">test.io</span> <span class="s">www.test.io</span><span class="p">;</span>
 
     <span class="k">location</span> <span class="s">/</span> <span class="p">{</span>
@@ -610,7 +615,7 @@ sudo rm /etc/nginx/sites-enabled/default
 <p>rewrites the values of <code>REMOTE_ADDR</code>, <code>HTTPS</code> and <code>HTTP_PORT</code> based on the values provided by a reverse proxy, with <code>mod_rpaf</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -624,7 +629,7 @@ sudo rm /etc/nginx/sites-enabled/default
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-apache" data-lang="apache"><span class="c"># /etc/apache2/mods-available/rpaf.conf</span>
+<pre tabindex="0" class="chroma"><code class="language-apache" data-lang="apache"><span class="c"># /etc/apache2/mods-available/rpaf.conf</span>
 <span class="nt">&lt;IfModule</span> <span class="s">mod_rpaf.c</span><span class="nt">&gt;</span>
     <span class="nb">RPAF_Enable</span>             <span class="k">On</span>
     <span class="nb">RPAF_Header</span>             X-Real-Ip
@@ -640,12 +645,12 @@ sudo rm /etc/nginx/sites-enabled/default
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo a2enmod rpaf <span class="c1"># write by yourself</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo a2enmod rpaf <span class="c1"># write by yourself</span>
 sudo apachectl -t
 sudo systemctl reload apache2
 </code></pre></td></tr></table>
@@ -653,11 +658,11 @@ sudo systemctl reload apache2
 </div><p>optional: disable direct access to apache:8080</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># sudo apt install iptables-persistent</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># sudo apt install iptables-persistent</span>
 sudo iptables -I INPUT -p tcp --dport <span class="m">8080</span> ! -s your_server_ip -j REJECT --reject-with tcp-reset
 </code></pre></td></tr></table>
 </div>
@@ -675,7 +680,7 @@ sudo iptables -I INPUT -p tcp --dport <span class="m">8080</span> ! -s your_serv
 <p>提示：本文测试采用了Flask app监听8080.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -686,10 +691,10 @@ sudo iptables -I INPUT -p tcp --dport <span class="m">8080</span> ! -s your_serv
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">home</span><span class="p">():</span>
     <span class="k">return</span> <span class="s1">&#39;Howdy world!&#39;</span>
 
@@ -700,7 +705,7 @@ sudo iptables -I INPUT -p tcp --dport <span class="m">8080</span> ! -s your_serv
 </div><p>Reverse proxy a single backend server</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -710,7 +715,7 @@ sudo iptables -I INPUT -p tcp --dport <span class="m">8080</span> ! -s your_serv
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-apache" data-lang="apache"><span class="nt">&lt;VirtualHost</span> <span class="s">*:80</span><span class="nt">&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-apache" data-lang="apache"><span class="nt">&lt;VirtualHost</span> <span class="s">*:80</span><span class="nt">&gt;</span>
     <span class="nb">ProxyPreserveHost</span> <span class="k">On</span> # pass Host header
 
     <span class="nb">ProxyPass</span> / http://127.0.0.1:8080/
@@ -723,7 +728,7 @@ sudo iptables -I INPUT -p tcp --dport <span class="m">8080</span> ! -s your_serv
 </div><p>loading balance across multiple backend</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -736,7 +741,7 @@ sudo iptables -I INPUT -p tcp --dport <span class="m">8080</span> ! -s your_serv
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-apache" data-lang="apache"><span class="nt">&lt;VirtualHost</span> <span class="s">*:80</span><span class="nt">&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-apache" data-lang="apache"><span class="nt">&lt;VirtualHost</span> <span class="s">*:80</span><span class="nt">&gt;</span>
 <span class="nt">&lt;Proxy</span> <span class="s">balancer://mycluster</span><span class="nt">&gt;</span> <span class="c"># proxy group</span>
     <span class="nb">BalancerMember</span> http://127.0.0.1:8080
     <span class="nb">BalancerMember</span> http://127.0.0.1:8081
@@ -763,7 +768,7 @@ sudo iptables -I INPUT -p tcp --dport <span class="m">8080</span> ! -s your_serv
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -771,7 +776,7 @@ sudo iptables -I INPUT -p tcp --dport <span class="m">8080</span> ! -s your_serv
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">curl -I -L https://your_domain
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">curl -I -L https://your_domain
 <span class="c1"># -k, --insecure</span>
 <span class="c1"># --cacert, location for cacert</span>
 <span class="c1"># auto edirect HTTP/1.1 to HTTP/2</span>
@@ -786,14 +791,14 @@ sudo iptables -I INPUT -p tcp --dport <span class="m">8080</span> ! -s your_serv
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">brew tap laggardkernel/tap
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">brew tap laggardkernel/tap
 brew install laggardkernel/tap/curl-openssl --with-openssl@1.1
 /usr/local/opt/curl-openssl/bin/curl --version
 
@@ -806,10 +811,10 @@ curl --tlsv1.3 https://enabled.tls13.com/
 <p>nginx直接切换依赖到最新OpenSSL即可。curl同样。但是apache在Homebrew中略复杂，需要考虑apr-util。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">openssl version -a
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">openssl version -a
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="tls-support-in-openssl-102">TLS Support in OpenSSL 1.0.2?</h3>
@@ -822,10 +827,10 @@ curl --tlsv1.3 https://enabled.tls13.com/
 <p><a href="https://serverfault.com/questions/671200/what-is-the-difference-between-apache-modules-with-and-without-the-c-extensio">What is the difference between apache modules with and without the “.c” extension?</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-apache" data-lang="apache"><span class="nt">&lt;IfModule</span> <span class="s">mod_rewrite.c</span><span class="nt">&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-apache" data-lang="apache"><span class="nt">&lt;IfModule</span> <span class="s">mod_rewrite.c</span><span class="nt">&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><blockquote>
@@ -835,10 +840,10 @@ curl --tlsv1.3 https://enabled.tls13.com/
 <p>identifier 则为 <code>rewrite_module</code>，加载时人为定义。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-apache" data-lang="apache"><span class="nb">LoadModule</span> rewrite_module <span class="sx">/usr/lib/apache2/modules/mod_rewrite.so</span>
+<pre tabindex="0" class="chroma"><code class="language-apache" data-lang="apache"><span class="nb">LoadModule</span> rewrite_module <span class="sx">/usr/lib/apache2/modules/mod_rewrite.so</span>
 </code></pre></td></tr></table>
 </div>
 </div>
@@ -931,13 +936,10 @@ curl --tlsv1.3 https://enabled.tls13.com/
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">laggardkernel</span>
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>laggardkernel</span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -948,7 +950,10 @@ curl --tlsv1.3 https://enabled.tls13.com/
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.db1482bc438a2df971757df91e110bb84b31bb77ca2141978d165fcf453c642e.js"></script>
 
 
 

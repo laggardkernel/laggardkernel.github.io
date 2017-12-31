@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.81.0 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.pseudocold.com/post/2019/migrate-from-base-pkg-group-to-meta-pkg-in-archlinux/" />
@@ -35,7 +35,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.fa20e845db068df5bd1b183f37f2c2b1ccb88d6fc052a3d6c4f63a682a4d6d4c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -43,12 +44,12 @@
 <meta property="og:description" content="Package group &ldquo;base&rdquo; is replaced as meta package &ldquo;base&rdquo; on 2019-10-06. The biggest change introduced by this move is that the kernel pkg linux is not part of &ldquo;base&rdquo; anymore." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pseudocold.com/post/2019/migrate-from-base-pkg-group-to-meta-pkg-in-archlinux/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-10-15T15:44:09&#43;08:00" />
-<meta property="article:modified_time" content="2019-10-15T15:44:09&#43;08:00" />
+<meta property="article:published_time" content="2019-10-15T15:44:09+08:00" />
+<meta property="article:modified_time" content="2019-10-15T15:44:09+08:00" />
 
 <meta itemprop="name" content="Migrate from base Group Package to Meta Pkg in Archlinux">
-<meta itemprop="description" content="Package group &ldquo;base&rdquo; is replaced as meta package &ldquo;base&rdquo; on 2019-10-06. The biggest change introduced by this move is that the kernel pkg linux is not part of &ldquo;base&rdquo; anymore."><meta itemprop="datePublished" content="2019-10-15T15:44:09&#43;08:00" />
-<meta itemprop="dateModified" content="2019-10-15T15:44:09&#43;08:00" />
+<meta itemprop="description" content="Package group &ldquo;base&rdquo; is replaced as meta package &ldquo;base&rdquo; on 2019-10-06. The biggest change introduced by this move is that the kernel pkg linux is not part of &ldquo;base&rdquo; anymore."><meta itemprop="datePublished" content="2019-10-15T15:44:09+08:00" />
+<meta itemprop="dateModified" content="2019-10-15T15:44:09+08:00" />
 <meta itemprop="wordCount" content="932">
 <meta itemprop="keywords" content="linux,archlinux," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Migrate from base Group Package to Meta Pkg in Archlinux"/>
@@ -85,6 +86,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">🔍</li>
       </a>
   </ul>
 </nav>
@@ -107,6 +110,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">🔍</a>
       </li>
   </ul>
 </nav>
@@ -152,11 +157,11 @@
 <p>For later archlinux installation, users have to specify the kernel explicitly. Otherwise, the system won&rsquo;t boot up.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># The new way to do pacstrap</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># The new way to do pacstrap</span>
 pacstrap /mnt base linux linux-firmware
 </code></pre></td></tr></table>
 </div>
@@ -207,7 +212,7 @@ pacstrap /mnt base linux linux-firmware
 <p>Packages exist in the group package but not in the meta package.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -237,7 +242,7 @@ pacstrap /mnt base linux linux-firmware
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">$ comm -23 &lt;<span class="o">(</span>pacman -Sgq base <span class="p">|</span> sort<span class="o">)</span> &lt;<span class="o">(</span>expac -S <span class="s2">&#34;%D&#34;</span> base <span class="p">|</span> tr -s <span class="s2">&#34; &#34;</span> <span class="s2">&#34;\n&#34;</span> <span class="p">|</span> sort<span class="o">)</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ comm -23 &lt;<span class="o">(</span>pacman -Sgq base <span class="p">|</span> sort<span class="o">)</span> &lt;<span class="o">(</span>expac -S <span class="s2">&#34;%D&#34;</span> base <span class="p">|</span> tr -s <span class="s2">&#34; &#34;</span> <span class="s2">&#34;\n&#34;</span> <span class="p">|</span> sort<span class="o">)</span>
 
 cryptsetup -- indirect dependency of base
 device-mapper -- indirect dependency of base
@@ -274,12 +279,12 @@ xfsprogs
 <p>A package is defined as a part of a package by following content within this description files,</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">%GROUPS%
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">%GROUPS%
 base
 base-devel
 </code></pre></td></tr></table>
@@ -288,7 +293,7 @@ base-devel
 <p>Before removing the content, check the content to be removed with its context.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -297,7 +302,7 @@ base-devel
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash
 </span><span class="cp"></span><span class="k">for</span> item in /var/lib/pacman/local/*/desc<span class="p">;</span> <span class="k">do</span>
   <span class="k">if</span> grep -q -E <span class="s1">&#39;^base$&#39;</span> <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">then</span>
     <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">&#34;</span>
@@ -310,7 +315,7 @@ base-devel
 <p>If the script match exactly what we want, then remove the &ldquo;base&rdquo; group info with <code>sed</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -320,7 +325,7 @@ base-devel
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash
 </span><span class="cp"></span><span class="k">for</span> item in /var/lib/pacman/local/*/desc<span class="p">;</span> <span class="k">do</span>
   <span class="k">if</span> grep -q -E <span class="s1">&#39;^base$&#39;</span> <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">then</span>
     <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">&#34;</span>
@@ -333,7 +338,7 @@ base-devel
 </div><p>After moving all the packages out of the base group, mark the related packages as dependencies of the &ldquo;base&rdquo; meta package.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -341,7 +346,7 @@ base-devel
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># use expac to extract packages included in the &#34;base&#34; meta pkg</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># use expac to extract packages included in the &#34;base&#34; meta pkg</span>
 sudo pacman -S expac
 expac -S <span class="s2">&#34;%D&#34;</span> base
 
@@ -352,7 +357,7 @@ sudo pacman -D --asdeps <span class="k">$(</span>expac -S <span class="s2">&#34;
 </div><p>In the former part, we listed the unique packages within &ldquo;base&rdquo; group. Check the list and decide what to do with them.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -368,7 +373,7 @@ sudo pacman -D --asdeps <span class="k">$(</span>expac -S <span class="s2">&#34;
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># Mark the indirect dependencies</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># Mark the indirect dependencies</span>
 sudo pacman -D --asdeps cryptsetup device-mapper e2fsprogs less
 
 <span class="c1"># if you don&#39;t use LVM or RAID</span>
@@ -476,13 +481,10 @@ sudo pacman -Rs nano vi
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">laggardkernel</span>
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>laggardkernel</span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -493,7 +495,10 @@ sudo pacman -Rs nano vi
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.db1482bc438a2df971757df91e110bb84b31bb77ca2141978d165fcf453c642e.js"></script>
 
 
 

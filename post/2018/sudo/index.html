@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.81.0 with theme even" />
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.pseudocold.com/post/2018/sudo/" />
@@ -35,7 +35,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.fa20e845db068df5bd1b183f37f2c2b1ccb88d6fc052a3d6c4f63a682a4d6d4c.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -43,12 +44,12 @@
 <meta property="og:description" content="sudo 使用全解。sudo -i, sudo -s, su, su -l 对比。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.pseudocold.com/post/2018/sudo/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-02-03T16:27:56&#43;08:00" />
-<meta property="article:modified_time" content="2019-02-03T16:27:56&#43;08:00" />
+<meta property="article:published_time" content="2019-02-03T16:27:56+08:00" />
+<meta property="article:modified_time" content="2019-02-03T16:27:56+08:00" />
 
 <meta itemprop="name" content="Sudo">
-<meta itemprop="description" content="sudo 使用全解。sudo -i, sudo -s, su, su -l 对比。"><meta itemprop="datePublished" content="2019-02-03T16:27:56&#43;08:00" />
-<meta itemprop="dateModified" content="2019-02-03T16:27:56&#43;08:00" />
+<meta itemprop="description" content="sudo 使用全解。sudo -i, sudo -s, su, su -l 对比。"><meta itemprop="datePublished" content="2019-02-03T16:27:56+08:00" />
+<meta itemprop="dateModified" content="2019-02-03T16:27:56+08:00" />
 <meta itemprop="wordCount" content="1433">
 <meta itemprop="keywords" content="sudo,linux,macos," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Sudo"/>
@@ -85,6 +86,8 @@
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">🔍</li>
       </a>
   </ul>
 </nav>
@@ -107,6 +110,8 @@
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">🔍</a>
       </li>
   </ul>
 </nav>
@@ -189,7 +194,7 @@
 <h2 id="command-usage">Command Usage</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -199,7 +204,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># run command as user admin</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># run command as user admin</span>
 sudo -u admin -- netctl start home
 
 <span class="c1"># enter login shell, change to new $HOME</span>
@@ -217,13 +222,13 @@ sudo -s
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># list conf of current user</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># list conf of current user</span>
 sudo -ll
 <span class="c1"># list conf of specific user</span>
 sudo -lU
@@ -236,7 +241,7 @@ sudo -lU
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -245,7 +250,7 @@ sudo -lU
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># -c, check only</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># -c, check only</span>
 sudo visudo -c
 sudo visudo -c -f /etc/sudoers
 
@@ -257,13 +262,13 @@ sudo visudo -f /etc/sudoers.d/override
 </div><p>Change default editor. <code>EDITOR</code> is not used when <code>VISUAL</code> is set.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># Reset environment by default</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># Reset environment by default</span>
 <span class="na">Defaults      env_reset</span>
 <span class="c1"># Set default EDITOR to nano, and do not allow visudo to use EDITOR/VISUAL.</span>
 <span class="na">Defaults      editor</span><span class="o">=</span><span class="s">/usr/bin/nano, !env_editor</span>
@@ -272,11 +277,11 @@ sudo visudo -f /etc/sudoers.d/override
 </div><p>Temporay change in command line</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo <span class="nv">EDITOR</span><span class="o">=</span>vim visudo
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo <span class="nv">EDITOR</span><span class="o">=</span>vim visudo
 sudo <span class="nv">EDITOR</span><span class="o">=</span>vim visudo -f /etc/sudoers.d/override.conf
 </code></pre></td></tr></table>
 </div>
@@ -284,7 +289,7 @@ sudo <span class="nv">EDITOR</span><span class="o">=</span>vim visudo -f /etc/su
 <p>假设用户名 USER_NAME，主机名 HOST_NAME.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -294,7 +299,7 @@ sudo <span class="nv">EDITOR</span><span class="o">=</span>vim visudo -f /etc/su
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># full privileges</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># full privileges</span>
 <span class="na">USER_NAME ALL</span><span class="o">=</span><span class="s">(ALL) ALL</span>
 
 <span class="c1"># to a specific HOST_NAME</span>
@@ -307,22 +312,22 @@ sudo <span class="nv">EDITOR</span><span class="o">=</span>vim visudo -f /etc/su
 </div><p>pattern to limit on specific commands</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">USER_NAME HOST_NAME</span><span class="o">=</span><span class="s">/usr/bin/halt,/usr/bin/poweroff,/usr/bin/reboot,/usr/bin/pacman -Syu</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="na">USER_NAME HOST_NAME</span><span class="o">=</span><span class="s">/usr/bin/halt,/usr/bin/poweroff,/usr/bin/reboot,/usr/bin/pacman -Syu</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Disableble password asking</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Defaults:USER_NAME !authenticate</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Defaults:USER_NAME !authenticate</span>
 
 <span class="c1"># specific commands and HOST_NAME</span>
 <span class="na">USER_NAME HOST_NAME</span><span class="o">=</span> <span class="s">NOPASSWD: /usr/bin/halt,/usr/bin/poweroff,/usr/bin/reboot,/usr/bin/pacman -Syu</span>
@@ -331,12 +336,12 @@ sudo <span class="nv">EDITOR</span><span class="o">=</span>vim visudo -f /etc/su
 </div><h3 id="etcsudoers-default-perm">/etc/sudoers default perm</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># -c, --chages, report only when a change is made</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># -c, --chages, report only when a change is made</span>
 chown -c root:root /etc/sudoers
 chmod -c <span class="m">0444</span> /etc/sudoers
 </code></pre></td></tr></table>
@@ -351,10 +356,10 @@ chmod -c <span class="m">0444</span> /etc/sudoers
 <p>可通过 <code>SUDO_EIDTOR</code> 变量指定 <code>sudoedit</code> 命令的编辑器。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">$ <span class="nb">export</span> <span class="nv">SUDO_EDITOR</span><span class="o">=</span>vim
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ <span class="nb">export</span> <span class="nv">SUDO_EDITOR</span><span class="o">=</span>vim
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="su-vs-sudo">su v.s. sudo</h2>
@@ -369,15 +374,15 @@ chmod -c <span class="m">0444</span> /etc/sudoers
 <p><a href="https://unix.stackexchange.com/questions/40719/stay-at-same-working-directory-when-changing-to-sudo">Stay at same working directory when changing to sudo</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo -s
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo -s
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -390,7 +395,7 @@ chmod -c <span class="m">0444</span> /etc/sudoers
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">				                     corrupted by user&#39;s
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">				                     corrupted by user&#39;s
 		HOME=/root	uses root&#39;s PATH     env vars
 sudo -i		Y		Y[2]                 Y
 sudo -s		N		Y[2]                 Y
@@ -407,19 +412,19 @@ sudo su		Y		N[1]                 Y
 <h3 id="pasword-prompt-timeout">Pasword Prompt Timeout</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Defaults passwd_timeout</span><span class="o">=</span><span class="s">0</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Defaults passwd_timeout</span><span class="o">=</span><span class="s">0</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="disable-per-terminal-sudo">Disable per-terminal sudo</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Defaults !tty_tickets</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Defaults !tty_tickets</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Reuse existing session in a new terminal.</p>
@@ -427,28 +432,28 @@ sudo su		Y		N[1]                 Y
 <p>Inherit env var into sudo.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo -E pacman -Syu
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo -E pacman -Syu
 </code></pre></td></tr></table>
 </div>
 </div><p>Preserve environment variables using conf.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Defaults env_keep +</span><span class="o">=</span> <span class="s">&#34;ftp_proxy http_proxy https_proxy no_proxy&#34;</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Defaults env_keep +</span><span class="o">=</span> <span class="s">&#34;ftp_proxy http_proxy https_proxy no_proxy&#34;</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="passing-aliases">Passing aliases</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">alias sudo=&#39;sudo &#39;
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">alias sudo=&#39;sudo &#39;
 </code></pre></td></tr></table>
 </div>
 </div><p><a href="https://askubuntu.com/questions/22037/aliases-not-available-when-using-sudo">Alias is not available when using <code>sudo</code></a></p>
@@ -461,7 +466,7 @@ alias expansion.</p>
 <p>This mimics the behavior of <code>su</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -472,7 +477,7 @@ alias expansion.</p>
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># targetpw, target user, defaults to root</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># targetpw, target user, defaults to root</span>
 <span class="na">Defaults targetpw</span>
 
 <span class="c1"># or</span>
@@ -487,14 +492,14 @@ alias expansion.</p>
 <p>不要使用，目前仅配置禁用 root SSH 登录。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># lock root user from login</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># lock root user from login</span>
 passwd -l root
 
 <span class="c1"># unlock root from login</span>
@@ -504,29 +509,29 @@ sudo passwd -u root
 </div><p>Or, edit <code>/etc/shadow</code> replace the encrypted passwd with <code>!</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">root:!:12345::::::
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">root:!:12345::::::
 </code></pre></td></tr></table>
 </div>
 </div><p>Enable it again with</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">sudo passwd root
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo passwd root
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="enable-insults">Enable Insults</h3>
 <p>easter egg, print insulting msg when sudo fails with incorrect password.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Defaults insults</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Defaults insults</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="troubleshooting">Troubleshooting</h2>
@@ -534,12 +539,12 @@ sudo passwd -u root
 <p>Without a tty, <code>sudo</code> cannot disable echo when prompting for a password. 密码有泄露到标准输出。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># Disable &#34;ssh hostname sudo &lt;cmd&gt;&#34;, because it will show the password in clear text. You have to run &#34;ssh -t hostname sudo &lt;cmd&gt;&#34;.
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># Disable &#34;ssh hostname sudo &lt;cmd&gt;&#34;, because it will show the password in clear text. You have to run &#34;ssh -t hostname sudo &lt;cmd&gt;&#34;.
 #
 #Defaults    requiretty
 </code></pre></td></tr></table>
@@ -555,25 +560,25 @@ sudo passwd -u root
 <p><a href="https://support.apple.com/en-us/HT201684">Set a custom umask in macOS</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># user 不需要替换，只替换nnn</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># user 不需要替换，只替换nnn</span>
 sudo launchctl config user <span class="nb">umask</span> nnn
 </code></pre></td></tr></table>
 </div>
 </div><p><a href="https://superuser.com/questions/79914/how-do-i-tell-sudo-to-write-files-with-a-umask-of-0022">How do I tell sudo to write files with a umask of 0022?</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Defaults umask</span><span class="o">=</span><span class="s">0022</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Defaults umask</span><span class="o">=</span><span class="s">0022</span>
 <span class="c1"># default behavior: sudo will union the user&#39;s umask value with its own umask (which defaults to 0022)</span>
 <span class="c1"># this can lead to situations where a utility run by sudo may create files with different permissions than if run by root directly.</span>
 <span class="c1"># Force use our custom umask, without doing a union</span>
@@ -583,7 +588,7 @@ sudo launchctl config user <span class="nb">umask</span> nnn
 </div><p>建议直接修改<code>/etc/sudoers.d</code>，这样全局有效。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -599,7 +604,7 @@ sudo launchctl config user <span class="nb">umask</span> nnn
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># https://superuser.com/questions/79914/how-do-i-tell-sudo-to-write-files-with-a-umask-of-0022</span>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># https://superuser.com/questions/79914/how-do-i-tell-sudo-to-write-files-with-a-umask-of-0022</span>
 <span class="k">function</span> sudo <span class="o">{</span>
     <span class="nb">local</span> <span class="nv">old_value</span><span class="o">=</span><span class="k">$(</span><span class="nb">umask</span><span class="k">)</span>
     <span class="nb">umask</span> <span class="m">0022</span>
@@ -618,7 +623,7 @@ sudo launchctl config user <span class="nb">umask</span> nnn
 </div><h2 id="mine-conf">Mine Conf</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -629,7 +634,7 @@ sudo launchctl config user <span class="nb">umask</span> nnn
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Defaults editor</span><span class="o">=</span><span class="s">/usr/bin/vim:/usr/bin/vi:/usr/bin/nano</span>
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Defaults editor</span><span class="o">=</span><span class="s">/usr/bin/vim:/usr/bin/vi:/usr/bin/nano</span>
 <span class="na">Defaults !tty_tickets</span>
 <span class="c1"># Defaults insults</span>
 
@@ -729,13 +734,10 @@ sudo launchctl config user <span class="nb">umask</span> nnn
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">laggardkernel</span>
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>laggardkernel</span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -746,7 +748,10 @@ sudo launchctl config user <span class="nb">umask</span> nnn
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.db1482bc438a2df971757df91e110bb84b31bb77ca2141978d165fcf453c642e.js"></script>
 
 
 
