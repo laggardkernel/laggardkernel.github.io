@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mariadb on Home</title>
+    <link>https://blog.pseudocold.com/tags/mariadb/</link>
+    <description>Recent content in mariadb on Home</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 15 Apr 2018 00:18:59 +0800</lastBuildDate><atom:link href="https://blog.pseudocold.com/tags/mariadb/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MariaDB/MySQL Option Groups</title>
+      <link>https://blog.pseudocold.com/post/2018/mysql-mariadb-option-groups/</link>
+      <pubDate>Sun, 15 Apr 2018 00:18:59 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/mysql-mariadb-option-groups/</guid>
+      <description>&lt;p&gt;What&amp;rsquo;s the difference between &lt;code&gt;[mysql]&lt;/code&gt; and &lt;code&gt;[client]&lt;/code&gt; group in &lt;code&gt;/etc/my.cnf&lt;/code&gt;. Here is it.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MariaDB/MySQL Setup: All in One</title>
+      <link>https://blog.pseudocold.com/post/2018/mysql-mariadb-setup/</link>
+      <pubDate>Fri, 30 Mar 2018 23:35:45 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/mysql-mariadb-setup/</guid>
+      <description>&lt;p&gt;MariaDB, MySQL安装配置全指南。MySQL语法参考笔记《MySQL必知必会》读书笔记。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

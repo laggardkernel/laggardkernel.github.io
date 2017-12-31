@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Su Usage - Home</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="laggardkernel" /><meta name="description" content="su 使用，个人笔记。主要理解 su 默认行为与 sudo 区别即可。
+" /><meta name="keywords" content="su, unix, linux" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.pseudocold.com/post/2018/su/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Su Usage" />
+<meta property="og:description" content="su 使用，个人笔记。主要理解 su 默认行为与 sudo 区别即可。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pseudocold.com/post/2018/su/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-02-03T13:15:48&#43;08:00" />
+<meta property="article:modified_time" content="2019-02-03T13:15:48&#43;08:00" />
+
+<meta itemprop="name" content="Su Usage">
+<meta itemprop="description" content="su 使用，个人笔记。主要理解 su 默认行为与 sudo 区别即可。"><meta itemprop="datePublished" content="2019-02-03T13:15:48&#43;08:00" />
+<meta itemprop="dateModified" content="2019-02-03T13:15:48&#43;08:00" />
+<meta itemprop="wordCount" content="311">
+<meta itemprop="keywords" content="linux,su," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Su Usage"/>
+<meta name="twitter:description" content="su 使用，个人笔记。主要理解 su 默认行为与 sudo 区别即可。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Home</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Home</a>
+</div>
+
+<nav class="site-navbar">
+    
+      <div class="top-progress-bar"></div>
+    
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Su Usage</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-02-03 </span>
+        <div class="post-category">
+            <a href="/categories/devops/"> DevOps </a>
+            <a href="/categories/cli/"> CLI </a>
+            <a href="/categories/notes/"> Notes </a>
+            </div>
+          <span class="more-meta"> 311 words </span>
+          <span class="more-meta"> 1 min read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#configure">Configure</a></li>
+    <li><a href="#su-vs-sudo">su v.s. sudo</a></li>
+    <li><a href="#tips">Tips</a>
+      <ul>
+        <li><a href="#login-shell">Login Shell</a></li>
+        <li><a href="#su-and-wheel">su and wheel</a></li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><code>su</code> 使用，个人笔记。主要理解 <code>su</code> 默认行为与 <code>sudo</code> 区别即可。</p>
+<p><code>su</code>, part of the core utility (<code>util-linux</code>), used to switch identity/account.</p>
+<h2 id="usage">Usage</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">su &lt;username&gt;
+<span class="c1"># then input the password of the username</span>
+
+<span class="c1"># no username implies root user</span>
+su
+</code></pre></td></tr></table>
+</div>
+</div><p>The default behavior of su is to remain within the current directory and to maintain the environmental variables of the original user (rather than switch to those of the new user).</p>
+<p><code>su</code> 默认停留在PWD，且<strong>保留原用户的环境变量</strong>。<code>su -</code>, <code>su -l</code> 抛弃原有环境变量，切换到新用户家目录。</p>
+<h2 id="configure">Configure</h2>
+<p>Check PAM</p>
+<h2 id="su-vs-sudo">su v.s. sudo</h2>
+<p><code>sudo</code></p>
+<ul>
+<li>more configurable</li>
+<li>prompt for you own password, not the passwd of the account you&rsquo;re switching to
+<ul>
+<li>no need to share password between users</li>
+<li>need sudo access to use <code>sudo</code></li>
+</ul>
+</li>
+</ul>
+<p><code>sudo</code> options</p>
+<ul>
+<li><code>-s</code> shell, stay under <code>$PWD</code>, mimics <code>su</code></li>
+<li><code>-i</code> login, change to <code>/root</code>, mimics <code>su -l</code> <code>su -</code>
+<ul>
+<li><code>sudo -u john -l</code> mimics <code>su -l john</code>.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Note</strong>: <code>su -</code>, <code>su -l</code> is different with <code>sudo -i</code>. <code>su -l</code> discard the env vars belonging to the original user and only the ones from the new user, which doesn&rsquo;t happen with <code>sudo -i</code>.</p>
+<h2 id="tips">Tips</h2>
+<h3 id="login-shell">Login Shell</h3>
+<p><code>su -l</code></p>
+<ul>
+<li>switch to the home dir of the new user</li>
+<li>don&rsquo;t reuse former env vars</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">alias</span> <span class="nv">su</span><span class="o">=</span><span class="s2">&#34;su -l&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="su-and-wheel">su and wheel</h3>
+<p><em>BSD su</em> allows only members of the <code>wheel</code> user group to assume <code>root</code>&rsquo;s identity by default. This is not the default behavior of GNU su, but this behavior can be mimicked using PAM. Uncomment the appropriate line in <code>/etc/pam.d/su and /etc/pam.d/su-l</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">auth required pam_wheel.so use_uid
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="references">References</h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/Su">su from arch wiki</a></li>
+</ul>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">laggardkernel</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-02-03
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/linux/">linux</a>
+          <a href="/tags/su/">su</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2018/sudo/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Sudo</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/2019/arch-pkg-downgrade/">
+            <span class="next-text nav-default">Downgrade Packages in Arch</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'pseudocold';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/5101148" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/laggardkernel" class="iconfont icon-github" title="github"></a>
+  <a href="https://blog.pseudocold.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">laggardkernel</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

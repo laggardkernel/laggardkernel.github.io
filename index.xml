@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Home</title>
+    <link>https://blog.pseudocold.com/</link>
+    <description>Recent content on Home</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 16 Oct 2019 16:04:22 +0800</lastBuildDate><atom:link href="https://blog.pseudocold.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TCPKeepAlive v.s. ServerAlive in SSH</title>
+      <link>https://blog.pseudocold.com/post/2019/ssh-tcpkeepalive-vs-serveralive/</link>
+      <pubDate>Wed, 16 Oct 2019 16:04:22 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/ssh-tcpkeepalive-vs-serveralive/</guid>
+      <description>&lt;p&gt;Both &lt;code&gt;TCPKeepAlive&lt;/code&gt; and &lt;code&gt;ServerAliveInterval&lt;/code&gt; for &lt;code&gt;ssh&lt;/code&gt;, are used to keep SSH connection alive. What&amp;rsquo;s the difference between them? Which one should you use?&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Setup DHCP Client with systemd-networkd</title>
+      <link>https://blog.pseudocold.com/post/2019/setup-dhcp-systemd-networkd/</link>
+      <pubDate>Tue, 15 Oct 2019 17:19:31 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/setup-dhcp-systemd-networkd/</guid>
+      <description>&lt;p&gt;Former package group &amp;ldquo;base&amp;rdquo; from Archlinux contains 2 network managers - &lt;code&gt;netctl&lt;/code&gt; and &lt;code&gt;systemd-networkd&lt;/code&gt;, and 1 DHCP client &lt;code&gt;dhcpcd&lt;/code&gt;, which is obviously redundant for a network setup. After &lt;a href=&#34;https://blog.pseudocold.com/post/2019/base-group-replaced-by-mandatory-base-package-in-archlinux&#34;&gt;pkg group &amp;ldquo;base&amp;rdquo; replaced by the same name meta pkg&lt;/a&gt;, only &lt;code&gt;systemd-networkd&lt;/code&gt; is left. For a simple network setup with DHCP, &lt;code&gt;systemd-networkd&lt;/code&gt; is enough to get the work done.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Size of XDG Runtime Dir</title>
+      <link>https://blog.pseudocold.com/post/2019/size-of-xdg-runtime-dir/</link>
+      <pubDate>Tue, 15 Oct 2019 16:27:15 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/size-of-xdg-runtime-dir/</guid>
+      <description>&lt;p&gt;The default size of &lt;code&gt;XDG_RUNTIME_DIR&lt;/code&gt; is 10% of the physical RAM of your machine. What if you wanna increase the size of it?&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Migrate from base Group Package to Meta Pkg in Archlinux</title>
+      <link>https://blog.pseudocold.com/post/2019/migrate-from-base-pkg-group-to-meta-pkg-in-archlinux/</link>
+      <pubDate>Tue, 15 Oct 2019 15:44:09 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/migrate-from-base-pkg-group-to-meta-pkg-in-archlinux/</guid>
+      <description>&lt;p&gt;Package group &amp;ldquo;base&amp;rdquo; is replaced as &lt;a href=&#34;https://www.archlinux.org/news/base-group-replaced-by-mandatory-base-package-manual-intervention-required/&#34;&gt;meta package &amp;ldquo;base&amp;rdquo; on 2019-10-06&lt;/a&gt;. The biggest change introduced by this move is that the kernel pkg &lt;code&gt;linux&lt;/code&gt; is not part of &amp;ldquo;base&amp;rdquo; anymore.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Pip v.s. Conda</title>
+      <link>https://blog.pseudocold.com/post/2019/pip-vs-conda/</link>
+      <pubDate>Sun, 29 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/pip-vs-conda/</guid>
+      <description>&lt;p&gt;Differences between &lt;code&gt;pip&lt;/code&gt; and &lt;code&gt;conda.&lt;/code&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Rewrite the Status Code in Nginx</title>
+      <link>https://blog.pseudocold.com/post/2019/nginx-rewrite-status-code/</link>
+      <pubDate>Tue, 17 Sep 2019 23:53:21 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/nginx-rewrite-status-code/</guid>
+      <description>&lt;p&gt;In consideration of privacy or security, we use &lt;code&gt;deny&lt;/code&gt; and return 403 Forbidden to deny access to some resources. But what if even you don&amp;rsquo;t wanna requesters realize the existence of these resources? It&amp;rsquo;s feasible to rewrite the status code with custom &lt;code&gt;error_page&lt;/code&gt;s.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Nginx 部署 Hugo 静态博客始终本地可用</title>
+      <link>https://blog.pseudocold.com/post/2019/serve-hugo-blog-with-nginx-locally/</link>
+      <pubDate>Mon, 16 Sep 2019 09:28:41 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/serve-hugo-blog-with-nginx-locally/</guid>
+      <description>&lt;p&gt;&lt;code&gt;hugo&lt;/code&gt; 自带测试服务器可以将静态博客运行在本地 &lt;code&gt;https://localhost:1313&lt;/code&gt; 作为测试。本文通过配置 Nginx Web 服务器，部署博客本地始终可用，方便的进行内容检索、查询。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Flask Pitfalls</title>
+      <link>https://blog.pseudocold.com/post/2019/flask-pitfalls/</link>
+      <pubDate>Thu, 12 Sep 2019 22:37:35 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/flask-pitfalls/</guid>
+      <description>&lt;p&gt;尝试总结 Flask 开发中一些碰到的问题，有待完善。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Flask 0.1 源码解读</title>
+      <link>https://blog.pseudocold.com/post/2019/flask-0.1/</link>
+      <pubDate>Tue, 20 Aug 2019 01:20:54 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/flask-0.1/</guid>
+      <description>&lt;p&gt;在理解WSGI规范后，阅读Flask 0.1源码，深入理解整个应用创建、请求处理的过程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>wsigref 源码阅读笔记</title>
+      <link>https://blog.pseudocold.com/post/2019/wsigref-code-reading/</link>
+      <pubDate>Tue, 20 Aug 2019 00:08:19 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/wsigref-code-reading/</guid>
+      <description>&lt;p&gt;&lt;code&gt;wsgiref&lt;/code&gt; 源码阅读个人笔记， 不做解读。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> Multi User Anaconda/Miniconda Installation</title>
+      <link>https://blog.pseudocold.com/post/2018/miniconda-multi-user-installation/</link>
+      <pubDate>Sat, 10 Aug 2019 00:41:23 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/miniconda-multi-user-installation/</guid>
+      <description>&lt;p&gt;在 Linux 中脚本安装 Anaconda/Miniconda 使所有人均可调用。需要 &lt;code&gt;sudo&lt;/code&gt; 权限。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>为何 Flask-Mail 需要上下文环境</title>
+      <link>https://blog.pseudocold.com/post/2019/flask-mail/</link>
+      <pubDate>Fri, 09 Aug 2019 11:09:58 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/flask-mail/</guid>
+      <description>&lt;p&gt;Flask-Mail 扩展源码内容实际和 Flask 关系不大，主要是封装 Python 内置 &lt;code&gt;email&lt;/code&gt; 库来发送邮件。我的第一直觉是跳过这个模块源码。不过，这时候我突然想到一个问题，Flask-Mail 发送邮件为什么需要应用上下文？每个教程都这么告诉我，但却没有解释过原因。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Flask HTTPAuth 源码阅读笔记</title>
+      <link>https://blog.pseudocold.com/post/2019/flask-httpauth-code-reading/</link>
+      <pubDate>Sun, 04 Aug 2019 12:15:28 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/flask-httpauth-code-reading/</guid>
+      <description>&lt;p&gt;&lt;code&gt;flask-httpauth&lt;/code&gt; 源码阅读个人笔记， 不做解读。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Flask-Uploads 源码阅读笔记</title>
+      <link>https://blog.pseudocold.com/post/2019/flask-uploads-code-reading/</link>
+      <pubDate>Sun, 04 Aug 2019 12:15:28 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/flask-uploads-code-reading/</guid>
+      <description>&lt;p&gt;&lt;code&gt;flask-uploads&lt;/code&gt; 源码阅读个人笔记， 不做解读。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Flask-Login 源码阅读笔记</title>
+      <link>https://blog.pseudocold.com/post/2019/flask-login-code-reading/</link>
+      <pubDate>Fri, 02 Aug 2019 02:04:13 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/flask-login-code-reading/</guid>
+      <description>&lt;p&gt;&lt;code&gt;flask-login&lt;/code&gt; 源码阅读个人笔记， 不做解读。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Flask-WTF 源码阅读笔记</title>
+      <link>https://blog.pseudocold.com/post/2019/flask-wtf-code-reading/</link>
+      <pubDate>Fri, 02 Aug 2019 01:58:42 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/flask-wtf-code-reading/</guid>
+      <description>&lt;p&gt;&lt;code&gt;flask-wtf&lt;/code&gt; 源码阅读个人笔记， 不做解读。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Implement a Custom chpwd Hook for Bash</title>
+      <link>https://blog.pseudocold.com/post/2019/chpwd-equivalent-in-bash/</link>
+      <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/chpwd-equivalent-in-bash/</guid>
+      <description>&lt;p&gt;Implement a chpwd hook in Bash to trigger functions on working dir changes.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Trigger chpwd hook on ZSH startup</title>
+      <link>https://blog.pseudocold.com/post/2019/trigger-chpwd-on-zsh-startup/</link>
+      <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/trigger-chpwd-on-zsh-startup/</guid>
+      <description>&lt;p&gt;By default, ZSH hook &lt;code&gt;chpwd&lt;/code&gt; is not triggered on shell startup. The tutorial here provides some ideas to fix this.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Dynamic Umask Based on Current Working Directory</title>
+      <link>https://blog.pseudocold.com/post/2019/dynamic-umask-based-on-cwd/</link>
+      <pubDate>Fri, 19 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/dynamic-umask-based-on-cwd/</guid>
+      <description>&lt;p&gt;Set umask values per-directory.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Share Configuration Files between Vim and Neovim</title>
+      <link>https://blog.pseudocold.com/post/2019/share-conf-between-vim-and-nvim/</link>
+      <pubDate>Fri, 19 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/share-conf-between-vim-and-nvim/</guid>
+      <description>&lt;p&gt;Share configuration files between &lt;code&gt;vim&lt;/code&gt; and &lt;code&gt;nvim&lt;/code&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Determine Whether a Command Exists in ZSH</title>
+      <link>https://blog.pseudocold.com/post/2019/whether-a-command-exists-in-zsh/</link>
+      <pubDate>Sun, 16 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/whether-a-command-exists-in-zsh/</guid>
+      <description>&lt;p&gt;Check whether a command exists using ZSH.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>在 Linux 上利用 Logrotate 切割日志</title>
+      <link>https://blog.pseudocold.com/post/2019/logrotate/</link>
+      <pubDate>Wed, 06 Feb 2019 22:33:27 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/logrotate/</guid>
+      <description>&lt;p&gt;&lt;code&gt;logrotate&lt;/code&gt; 切割日志使用方法，以及以 dnsmasq 为例切割非 root 拥有的日志。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>命令行压缩、解压命令总结</title>
+      <link>https://blog.pseudocold.com/post/2018/archiving-and-compression/</link>
+      <pubDate>Tue, 05 Feb 2019 15:48:50 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/archiving-and-compression/</guid>
+      <description>&lt;p&gt;在命令行里该用什么命令解压什么文件？压缩命令使用总结。个人笔记，非入门教程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Sudo</title>
+      <link>https://blog.pseudocold.com/post/2018/sudo/</link>
+      <pubDate>Sun, 03 Feb 2019 16:27:56 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/sudo/</guid>
+      <description>&lt;p&gt;&lt;code&gt;sudo&lt;/code&gt; 使用全解。&lt;code&gt;sudo -i&lt;/code&gt;, &lt;code&gt;sudo -s&lt;/code&gt;, &lt;code&gt;su&lt;/code&gt;, &lt;code&gt;su -l&lt;/code&gt; 对比。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Su Usage</title>
+      <link>https://blog.pseudocold.com/post/2018/su/</link>
+      <pubDate>Sun, 03 Feb 2019 13:15:48 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/su/</guid>
+      <description>&lt;p&gt;&lt;code&gt;su&lt;/code&gt; 使用，个人笔记。主要理解 &lt;code&gt;su&lt;/code&gt; 默认行为与 &lt;code&gt;sudo&lt;/code&gt; 区别即可。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Downgrade Packages in Arch</title>
+      <link>https://blog.pseudocold.com/post/2019/arch-pkg-downgrade/</link>
+      <pubDate>Sat, 02 Feb 2019 14:54:27 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/arch-pkg-downgrade/</guid>
+      <description>&lt;p&gt;Downgrade packages in Arch.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Pacman Notes</title>
+      <link>https://blog.pseudocold.com/post/2019/pacman-notes/</link>
+      <pubDate>Fri, 01 Feb 2019 22:19:22 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/pacman-notes/</guid>
+      <description>&lt;p&gt;&lt;code&gt;pacman&lt;/code&gt; 使用速查，，个人笔记，非入门教程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>UFW Notes</title>
+      <link>https://blog.pseudocold.com/post/2019/ufw-notes/</link>
+      <pubDate>Fri, 01 Feb 2019 17:36:09 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/ufw-notes/</guid>
+      <description>&lt;p&gt;UFW (Uncomplicated Firewall) 使用速查，个人笔记，非入门教程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Comparison of ZSH Frameworks and Plugin Managers</title>
+      <link>https://blog.pseudocold.com/post/2019/comparison-of-zsh-plugin-managers/</link>
+      <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/comparison-of-zsh-plugin-managers/</guid>
+      <description>&lt;p&gt;A comparison of all kinds of ZSH frameworks and plugin manager. Try to find the fastest one.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>iproute2 Usage</title>
+      <link>https://blog.pseudocold.com/post/2018/iproute2/</link>
+      <pubDate>Fri, 16 Nov 2018 10:25:55 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/iproute2/</guid>
+      <description>&lt;p&gt;net-tools 已经常年无人维护，新工具 iproute2 与 Linux 内核更为紧密。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Netcat</title>
+      <link>https://blog.pseudocold.com/post/2018/netcat/</link>
+      <pubDate>Thu, 15 Nov 2018 22:03:21 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/netcat/</guid>
+      <description>&lt;p&gt;&lt;code&gt;netcat&lt;/code&gt; 个人笔记&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>macOS 中的隐藏字体</title>
+      <link>https://blog.pseudocold.com/post/2018/hidden-fonts-on-macos/</link>
+      <pubDate>Wed, 07 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/hidden-fonts-on-macos/</guid>
+      <description>&lt;p&gt;从Safari页面渲染异开始，仔细检查后发现其调用了一款其他浏览器调用不到的字体。那么这款字体是哪里来的呢？&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Basic HTTP2 Setup Part 3: FAQ</title>
+      <link>https://blog.pseudocold.com/post/2018/basic-webserver-setup-faq/</link>
+      <pubDate>Fri, 02 Nov 2018 10:20:00 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/basic-webserver-setup-faq/</guid>
+      <description>&lt;p&gt;Setup HTTP/2, TLS 1.3. 拾遗。 (个人笔记，不做注解)&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Basic HTTP2 Setup Part 2: Nginx</title>
+      <link>https://blog.pseudocold.com/post/2018/basic-webserver-setup-nginx/</link>
+      <pubDate>Fri, 02 Nov 2018 10:10:00 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/basic-webserver-setup-nginx/</guid>
+      <description>&lt;p&gt;Setup HTTP/2, TLS 1.3 with LEMP. (个人笔记，不做注解)&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Basic HTTP2 Setup Part 1: Apache</title>
+      <link>https://blog.pseudocold.com/post/2018/basic-webserver-setup-apache/</link>
+      <pubDate>Fri, 02 Nov 2018 10:00:00 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/basic-webserver-setup-apache/</guid>
+      <description>&lt;p&gt;Setup HTTP/2, TLS 1.3 with LAMP. (个人笔记，不做注解)&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MariaDB/MySQL Option Groups</title>
+      <link>https://blog.pseudocold.com/post/2018/mysql-mariadb-option-groups/</link>
+      <pubDate>Sun, 15 Apr 2018 00:18:59 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/mysql-mariadb-option-groups/</guid>
+      <description>&lt;p&gt;What&amp;rsquo;s the difference between &lt;code&gt;[mysql]&lt;/code&gt; and &lt;code&gt;[client]&lt;/code&gt; group in &lt;code&gt;/etc/my.cnf&lt;/code&gt;. Here is it.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MariaDB/MySQL Setup: All in One</title>
+      <link>https://blog.pseudocold.com/post/2018/mysql-mariadb-setup/</link>
+      <pubDate>Fri, 30 Mar 2018 23:35:45 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/mysql-mariadb-setup/</guid>
+      <description>&lt;p&gt;MariaDB, MySQL安装配置全指南。MySQL语法参考笔记《MySQL必知必会》读书笔记。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MySQL必知必会：21-30</title>
+      <link>https://blog.pseudocold.com/post/2018/mysql-crashcourse-03/</link>
+      <pubDate>Thu, 29 Mar 2018 23:47:09 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/mysql-crashcourse-03/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MySQL必知必会：11-20</title>
+      <link>https://blog.pseudocold.com/post/2018/mysql-crashcourse-02/</link>
+      <pubDate>Thu, 29 Mar 2018 23:47:06 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/mysql-crashcourse-02/</guid>
+      <description>&lt;p&gt;《MySQL必知必会》个人笔记，不做解读。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MySQL必知必会：01-10</title>
+      <link>https://blog.pseudocold.com/post/2018/mysql-crashcourse-01/</link>
+      <pubDate>Thu, 29 Mar 2018 23:47:02 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/mysql-crashcourse-01/</guid>
+      <description>&lt;p&gt;《MySQL必知必会》个人笔记，不做解读。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>强制 MacBook Touchbar显示为 Function Key 功能键</title>
+      <link>https://blog.pseudocold.com/post/2018/function-key-in-touchbar/</link>
+      <pubDate>Fri, 09 Feb 2018 08:49:54 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/function-key-in-touchbar/</guid>
+      <description>&lt;p&gt;Touchbar 上不能默认显示功能键，苹果只给出单独设置某个应用默认为功能键的方案，参考&lt;a href=&#34;https://support.apple.com/zh-cn/HT207240&#34;&gt;如何在配备 Multi-Touch Bar 的 MacBook Pro 上使用功能键&lt;/a&gt;。但实际上存在隐藏配置项，可以将功能键作为默认显示。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

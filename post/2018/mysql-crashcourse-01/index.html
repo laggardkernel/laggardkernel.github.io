@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>MySQL必知必会：01-10 - Home</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="laggardkernel" /><meta name="description" content="《MySQL必知必会》个人笔记，不做解读。
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.pseudocold.com/post/2018/mysql-crashcourse-01/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="MySQL必知必会：01-10" />
+<meta property="og:description" content="《MySQL必知必会》个人笔记，不做解读。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pseudocold.com/post/2018/mysql-crashcourse-01/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-03-29T23:47:02&#43;08:00" />
+<meta property="article:modified_time" content="2018-03-29T23:47:02&#43;08:00" />
+
+<meta itemprop="name" content="MySQL必知必会：01-10">
+<meta itemprop="description" content="《MySQL必知必会》个人笔记，不做解读。"><meta itemprop="datePublished" content="2018-03-29T23:47:02&#43;08:00" />
+<meta itemprop="dateModified" content="2018-03-29T23:47:02&#43;08:00" />
+<meta itemprop="wordCount" content="2660">
+<meta itemprop="keywords" content="mysql," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MySQL必知必会：01-10"/>
+<meta name="twitter:description" content="《MySQL必知必会》个人笔记，不做解读。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Home</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Home</a>
+</div>
+
+<nav class="site-navbar">
+    
+      <div class="top-progress-bar"></div>
+    
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">MySQL必知必会：01-10</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-03-29 </span>
+        <div class="post-category">
+            <a href="/categories/notes/"> Notes </a>
+            </div>
+          <span class="more-meta"> 2660 words </span>
+          <span class="more-meta"> 6 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#chapter-03-使用-mysql">Chapter 03: 使用 MySQL</a></li>
+    <li><a href="#chapter-04-检索数据">Chapter 04: 检索数据</a></li>
+    <li><a href="#chapter-05-排序检索数据">Chapter 05: 排序检索数据</a></li>
+    <li><a href="#chapter-06-07-过滤数据">Chapter 06-07: 过滤数据</a></li>
+    <li><a href="#chapter-08-通配符过滤">Chapter 08: 通配符过滤</a></li>
+    <li><a href="#chapter-09-用正则表达式进行搜索">Chapter 09: 用正则表达式进行搜索</a>
+      <ul>
+        <li><a href="#匹配字符类-预定义字符集">匹配字符类 (预定义字符集)</a></li>
+      </ul>
+    </li>
+    <li><a href="#chapter-10-创建计算字段-field">Chapter 10: 创建计算字段 (field)</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>《MySQL必知必会》个人笔记，不做解读。</p>
+<p>名词解释</p>
+<ul>
+<li>DBMS，database management system，数据库管理系统。</li>
+<li>schema，模式，关于数据库和表的布局及特性的信息。</li>
+<li>SQL，sequel。结构化查询语言（Structured Query Language）</li>
+</ul>
+<p>存储引擎，<code>show engines</code>.</p>
+<ul>
+<li>查看单个数据库所使用的引擎，<code>show variables like 'storage_engine</code>;</li>
+<li>InnoDB, 事务型数据库首选引擎</li>
+<li>MyISAM，较高的插入、查询速度。不支持事务，但支持全文检索</li>
+<li>MEMORY： 所有的数据都在内存中，数据的处理速度快，但是安全性不高</li>
+</ul>
+<p>关键词次序</p>
+<ol>
+<li><code>select</code></li>
+<li><code>from</code></li>
+<li><code>where</code></li>
+<li><code>group by</code></li>
+<li><code>having</code></li>
+<li><code>order by</code></li>
+<li><code>limit</code></li>
+</ol>
+<p>MySQL中双引号、单引号、反引号没有区别？都可以用来显示表明字符串。</p>
+<p><code>.sql</code>脚本注释符，行内注释<code>/* */</code>, 整行注释<code>--</code>开头。</p>
+<p>复习完后参考一下其他人笔记</p>
+<ul>
+<li><input disabled="" type="checkbox"> <a href="https://sherlockgy.github.io/2018/08/07/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94MySQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/">读书笔记——MySQL必知必会</a></li>
+<li><input disabled="" type="checkbox"> <a href="https://yuyang0.github.io/notes/sql.html">MySQL笔记</a></li>
+</ul>
+<p>面试前有时间把书中内容全部敲一遍。</p>
+<h2 id="chapter-03-使用-mysql">Chapter 03: 使用 MySQL</h2>
+<p>使用 <code>.sql</code> 脚本创建数据库信息</p>
+<ol>
+<li><code>create database db_name;</code></li>
+<li><code>use db_name;</code></li>
+<li><code>source path_to_file/filename.sql;</code></li>
+<li>删除数据库时使用 <code>drop database db_name;</code></li>
+</ol>
+<p>列出数据库，<code>show databases;</code></p>
+<p>列出表，<code>show tables;</code>。需要先选中一个数据库；</p>
+<p>列出列名</p>
+<ul>
+<li><code>show columns from table_name;</code></li>
+<li><code>describe table_name;</code> 在 <code>MySQL</code> 同样用来查看列；</li>
+</ul>
+<p>显示授权用户权限，<code>show grants;</code></p>
+<h2 id="chapter-04-检索数据">Chapter 04: 检索数据</h2>
+<p><strong>注</strong>：<code>SQL</code> 语句 <strong>不区分大写小</strong> ;</p>
+<ul>
+<li>标识符 (如数据库名、表名、列名) 可能区分大小写：
+<ul>
+<li>MySQL 4.1 及之前版本中，标识符默认 (可以变更) 是区分大小写的；</li>
+<li>MySQL 4.1.1 版本中，标识符默认不再区分大小写；</li>
+</ul>
+</li>
+<li>SQL 语句以分号 <code>;</code> 为结束符，可以使用空格、换行使其容易阅读；</li>
+<li>通配符 <code>*</code> 用来检索所有项，但检索不必要的列会降低检索性能；</li>
+<li>检索结果项目的顺序可能是数据被添加到表中的顺序，也可能不是(更新、删除过)；</li>
+<li>检索只返回不同值 <code>DISTINCT</code> 关键词，<code>select distinct col_name from table_name;</code></li>
+<li>限制检索结果，<code>LIMIT</code>. <code>select col_name from table_name limit 5</code>，限制返回 5 项；
+<ul>
+<li><code>limit 5,5</code>，从第 5 行开始返回 5 项；<strong>行序号从 0 开始</strong>；项目数目不足时只返回那么多；</li>
+<li><code>MySQL</code> 支持 <code>limit</code> 另外一种替代语法：<code>limit 4 offset 3</code>，从索引 3 的行开始返回 4 项；</li>
+</ul>
+</li>
+<li>列名冲突，不同表中列的列名可能发生冲突，可能给检索带来不便。使用<strong>完全限定的名字</strong>来引用列、表：
+<ul>
+<li><code>table_name.col_name</code>，使用 <code>.</code> 点号分隔，完全限定列名；</li>
+<li>亦或 <code>db_name.table_name</code>完全限定表名，</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">products</span><span class="p">;</span>
+<span class="k">select</span> <span class="k">distinct</span> <span class="n">vend_id</span> <span class="k">from</span> <span class="n">products</span><span class="p">;</span>
+<span class="k">select</span> <span class="n">prod_name</span> <span class="k">from</span> <span class="n">products</span> <span class="k">limit</span> <span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">;</span>
+<span class="k">select</span> <span class="n">products</span><span class="p">.</span><span class="n">prod_name</span> <span class="k">from</span> <span class="n">crashcourse</span><span class="p">.</span><span class="n">products</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="chapter-05-排序检索数据">Chapter 05: 排序检索数据</h2>
+<ul>
+<li>不明确规定排序顺序时，<strong>不应该假定检索出来数据的排序有意义</strong>；</li>
+<li><code>select col_name from table_name order by col_name[,another_name] [desc]</code>;
+<ul>
+<li>与 <code>DESC</code> 对应的升序关键词是 <code>ASC</code>，但后者没什么用处，毕竟是作为默认值；</li>
+</ul>
+</li>
+<li>排序时可以使用<strong>非选择列</strong>，即使用没有输出的列。同时降序关键字也要对每个排序列单独使用；</li>
+<li>MySQL <strong>默认不区分大小写</strong>，可以通过<strong>服务端配置开启大小写敏感</strong>；</li>
+<li><strong><code>order by</code>必须位于<code>from</code>之后</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- 多个排序依据
+</span><span class="c1"></span><span class="k">select</span> <span class="n">prod_id</span><span class="p">,</span> <span class="n">prod_price</span><span class="p">,</span> <span class="n">prod_name</span> <span class="k">from</span> <span class="n">products</span> <span class="k">order</span> <span class="k">by</span> <span class="n">prod_price</span><span class="p">,</span> <span class="n">prod_name</span><span class="p">;</span>
+<span class="k">select</span> <span class="n">prod_id</span><span class="p">,</span> <span class="n">prod_price</span><span class="p">,</span> <span class="n">prod_name</span> <span class="k">from</span> <span class="n">products</span> <span class="k">order</span> <span class="k">by</span> <span class="n">prod_price</span> <span class="k">desc</span><span class="p">,</span> <span class="n">prod_name</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="chapter-06-07-过滤数据">Chapter 06-07: 过滤数据</h2>
+<p>search criteria, filter condition</p>
+<ul>
+<li><code>where col_name=value</code> 过滤一个列具有指定值；
+<ul>
+<li>如果过滤值为字符串，则需要为 value 使用引号 (单双均可)；</li>
+<li><code>where col_name BETWEEN value_a and value_b</code>，范围筛选，闭区间范围；</li>
+<li><code>where col_name is NULL</code>，空值筛选；</li>
+<li><strong>不匹配筛选不会返回 NULL 的行</strong>，因为 NULL 未知具有特殊意义，数据库无法知道它们是否匹配；</li>
+</ul>
+</li>
+<li><code>NULL</code> 代表没有设置，而不是不匹配；</li>
+<li>SQL 过滤与应用过滤，通常前者发生在服务端，而后者发生在客户端；前者服务端过滤优先，以免影响客户端性能；</li>
+<li>组合 <code>where</code> 子句过滤；
+<ul>
+<li><code>and</code> &gt; <code>or</code></li>
+<li>圆括号对过滤子句分组影响结合顺序；</li>
+<li><code>where col_name in (value1,value2,value3)</code>;</li>
+</ul>
+</li>
+<li><code>in</code> 操作符的特别
+<ul>
+<li><code>in</code> 操作符的执行比 <code>or</code> 快，尽管后者也可以查询出相同结果；</li>
+<li><strong><code>in</code> 操作符可以后接其他 <code>select</code> 语句</strong>，即从筛选结果中再次筛选；</li>
+</ul>
+</li>
+<li><code>not</code> 操作符用在上面几种逻辑操作符之前，否定；
+<ul>
+<li>MySQL 支持 <code>not</code> 对 <code>in</code>, <code>between</code>, <code>exists</code> 子句取反，这与其他 DBMS 中 <code>not</code> 对各种条件取反有很大差别；</li>
+</ul>
+</li>
+<li><strong><code>order by</code>位于<code>where</code>之后</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">prod_name</span><span class="p">,</span> <span class="n">prod_price</span> <span class="k">from</span> <span class="n">products</span> <span class="k">where</span> <span class="n">prod_price</span> <span class="o">=</span> <span class="mi">2</span><span class="p">.</span><span class="mi">50</span><span class="p">;</span>
+<span class="c1">-- where prod_name = &#39;fuses&#39;;
+</span><span class="c1">-- where prod_price &lt; 10;
+</span><span class="c1">-- where prod_price &lt;= 10;
+</span><span class="c1">-- &lt;&gt; !=
+</span><span class="c1"></span><span class="k">select</span> <span class="n">prod_name</span><span class="p">,</span> <span class="n">prod_price</span> <span class="k">from</span> <span class="n">products</span> <span class="k">where</span> <span class="n">prod_price</span> <span class="k">between</span> <span class="mi">5</span> <span class="k">and</span> <span class="mi">10</span><span class="p">;</span>
+
+<span class="k">select</span> <span class="n">cust_id</span> <span class="k">from</span> <span class="n">customers</span> <span class="k">where</span> <span class="n">cust_email</span> <span class="k">is</span> <span class="k">null</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>logical operator</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">prod_id</span><span class="p">,</span> <span class="n">prod_price</span><span class="p">,</span> <span class="n">prod_name</span>
+<span class="k">from</span> <span class="n">products</span>
+<span class="k">where</span> <span class="n">vend_id</span> <span class="o">=</span> <span class="mi">1002</span> <span class="k">and</span> <span class="n">prod_price</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span>
+
+<span class="c1">-- 逻辑优先级 and &gt; or
+</span><span class="c1"></span><span class="k">select</span> <span class="n">prod_name</span><span class="p">,</span> <span class="n">prod_price</span>
+<span class="k">from</span> <span class="n">products</span>
+<span class="k">where</span> <span class="n">vend_id</span> <span class="o">=</span> <span class="mi">1002</span> <span class="k">or</span> <span class="n">vend_id</span> <span class="o">=</span> <span class="mi">1003</span> <span class="k">and</span> <span class="n">prod_price</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="c1">-- 实际列出了价格小于10元商品
+</span><span class="c1"></span>
+<span class="k">select</span> <span class="n">prod_name</span><span class="p">,</span> <span class="n">prod_price</span>
+<span class="k">from</span> <span class="n">products</span>
+<span class="k">where</span> <span class="p">(</span><span class="n">vend_id</span> <span class="o">=</span> <span class="mi">1002</span> <span class="k">or</span> <span class="n">vend_id</span> <span class="o">=</span> <span class="mi">1003</span><span class="p">)</span> <span class="k">and</span> <span class="n">prod_price</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="c1">-- where vend_id in (1002, 1003) and prod_price &gt;= 10;
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="chapter-08-通配符过滤">Chapter 08: 通配符过滤</h2>
+<p><code>like</code> 操作符，从头匹配。<strong><code>LIKE</code>匹配整个列</strong></p>
+<p>通配符 (wildcard): <code>%</code> 匹配任意个字符，<code>_</code> 匹配<strong>一个</strong>字符；</p>
+<ul>
+<li><code>select col_name from table_name where col_name like [binary] 'anvil%'</code></li>
+<li>匹配模式前加 <code>bianry</code> 关键字将严格区分匹配字符大小写；</li>
+<li>尾空格将影响字符匹配，可以再匹配字符串尾加 <code>%</code> 或是使用函数去除尾空格；</li>
+<li><strong><code>'%'</code> 不能匹配 <code>null</code></strong>；</li>
+</ul>
+<p>通配符使用技巧</p>
+<ul>
+<li>通配符比其他搜索消耗大；</li>
+<li>不要过度使用通配符，优先使用其他操作符筛选；</li>
+<li>尽量不要把通配符使用在搜索字符串的开始处，以免影响搜索速度；</li>
+</ul>
+<p><code>like</code>是谓词</p>
+<h2 id="chapter-09-用正则表达式进行搜索">Chapter 09: 用正则表达式进行搜索</h2>
+<p><code>regexp</code> 操作符</p>
+<ul>
+<li>匹配字符串一定要使用<strong>引号</strong>引起来；</li>
+</ul>
+<p><code>like</code>, <code>regexp</code> 比较</p>
+<ul>
+<li><strong><code>like</code> 匹配整个列</strong>，即列内容从头匹配到尾；</li>
+<li><strong><code>regexp</code> 在列的值内匹配</strong>，出现即匹配成功；使用 <code>^$</code> 定位符也可以做到整列匹配；</li>
+<li>二者匹配均<strong>不区分大小写</strong>，需要在匹配模式字符串前使用 <code>binary</code> 关键词；</li>
+</ul>
+<p>MySQL 中转义需要使用<strong>双反斜杠</strong>，MySQL 自身解释一个，正则表达式库解释一个。例如 <code>\\-</code>, <code>\\.</code>, <code>\\\</code>；</p>
+<p>regexp表达式不加<code>^$</code>则匹配部分，一旦匹配成功，返回整列内容。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">prod_name</span> <span class="k">from</span> <span class="n">products</span> <span class="k">where</span> <span class="n">prod_name</span> <span class="n">regexp</span> <span class="s1">&#39;1000|2000&#39;</span> <span class="k">order</span> <span class="k">by</span> <span class="n">prod_name</span><span class="p">;</span>
+<span class="k">select</span> <span class="n">prod_name</span> <span class="k">from</span> <span class="n">products</span> <span class="k">where</span> <span class="n">prod_name</span> <span class="n">regexp</span> <span class="s1">&#39;[123] Ton&#39;</span> <span class="k">order</span> <span class="k">by</span> <span class="n">prod_name</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="匹配字符类-预定义字符集">匹配字符类 (预定义字符集)</h3>
+<table>
+<thead>
+<tr>
+<th>类</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[:alnum:]</code></td>
+<td>任意字母和数字（同 <code>[a-zA-Z0-9]</code>）</td>
+</tr>
+<tr>
+<td><code>[:alpha:]</code></td>
+<td>任意字符（同 <code>[a-zA-Z]</code>）</td>
+</tr>
+<tr>
+<td><code>[:blank:]</code></td>
+<td>空格和制表（同 <code>[\\t]</code>）</td>
+</tr>
+<tr>
+<td><code>[:cntrl:]</code></td>
+<td>ASCII 控制字符（ASCII 0 到 31 和 127）</td>
+</tr>
+<tr>
+<td><code>[:digit:]</code></td>
+<td>任意数字（同 <code>[0-9]</code>）</td>
+</tr>
+<tr>
+<td><code>[:graph:]</code></td>
+<td>与 <code>[:print:]</code> 相同，但不包括空格</td>
+</tr>
+<tr>
+<td><code>[:lower:]</code></td>
+<td>任意小写字母（同 <code>[a-z]</code>）</td>
+</tr>
+<tr>
+<td><code>[:print:]</code></td>
+<td>任意可打印字符</td>
+</tr>
+<tr>
+<td><code>[:punct:]</code></td>
+<td>既不在 <code>[:alnum:]</code> 又不在 <code>[:cntrl:]</code> 中的任意字符</td>
+</tr>
+<tr>
+<td><code>[:space:]</code></td>
+<td>包括空格在内的任意空白字符（同 <code>[\\f\\n\\r\\t\\v]</code>）</td>
+</tr>
+<tr>
+<td><code>[:upper:]</code></td>
+<td>任意大写字母（同 <code>[A-Z]</code>）</td>
+</tr>
+<tr>
+<td><code>[:xdigit:]</code></td>
+<td>任意十六进制数字（同 <code>[a-fA-F0-9]</code>）</td>
+</tr>
+</tbody>
+</table>
+<p>以上字符类使用时要额外使用中括号，即<strong>两层中括号 <code>[[:digit:]]</code></strong>。<code>[:digit:]</code> 仅代表数字的一个集合，再加上一层 <code>[]</code> 表示匹配集合中任意一个数字；</p>
+<p>定位元字符</p>
+<ul>
+<li><code>[[:&lt;:]]</code>，词的开始；</li>
+<li><code>[[:&gt;:]]</code>，词的结束；</li>
+</ul>
+<p>简单的正则表达式测试，<code>select 'test_string' regexp '[0-9]';</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">prod_name</span> <span class="k">from</span> <span class="n">products</span>
+<span class="k">where</span> <span class="n">prod_name</span> <span class="n">regexp</span> <span class="s1">&#39;\\([0-9] sticks?\\)&#39;</span> <span class="k">order</span> <span class="k">by</span> <span class="n">prod_name</span><span class="p">;</span>
+<span class="c1">-- where prod_name regexp &#39;[[:digit:]]{4}&#39; order by prod_name;
+</span><span class="c1">-- &#39;[0-9\\.]&#39;
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="chapter-10-创建计算字段-field">Chapter 10: 创建计算字段 (field)</h2>
+<p>计算字段，运行 <code>select</code> 语句内创建的字段</p>
+<ul>
+<li>筛选输出不同表中的数据；</li>
+<li>合并输出不同列内容；</li>
+<li>改变输出数据格式 (大小写)；</li>
+<li>计算总值、平均值等；</li>
+</ul>
+<p>拼接字段 (concatenation)</p>
+<ul>
+<li><code>select concat(col_name_1,string1,col_name_2,string2) from...</code></li>
+<li><code>trim(col_name)</code> 删除列中左右空格，另外还有 <code>ltrim()</code>, <code>rtrim()</code>；</li>
+<li>别名 <code>as</code>, 又称导出列(derived column)
+<ul>
+<li><code>select sth as alias_name from</code></li>
+<li>别名也可视作重命名，以解决不规则命名 (含空格) 的列名，或是容易混淆的列名等等；</li>
+</ul>
+</li>
+</ul>
+<p>执行算术计算</p>
+<ul>
+<li><code>select col_name_1*col_name_2 as alias_name from...</code></li>
+<li>算术支持简单的 <code>+, -, *, /</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">concat</span><span class="p">(</span><span class="n">vend_name</span><span class="p">,</span> <span class="s1">&#39; (&#39;</span><span class="p">,</span> <span class="n">vend_country</span><span class="p">,</span> <span class="s1">&#39;)&#39;</span><span class="p">)</span>
+<span class="k">from</span> <span class="n">vendors</span> <span class="k">order</span> <span class="k">by</span> <span class="n">vend_name</span><span class="p">;</span>
+<span class="c1">-- 表头 concat(vend_name, &#39; (&#39;, vend_country, &#39;)&#39;)
+</span><span class="c1"></span>
+<span class="c1">-- trim, 此处无意义，只是作为演示
+</span><span class="c1">-- concat(rtrim(vend_name), &#39; (&#39;, rtrim(vend_country), &#39;)&#39;)
+</span><span class="c1"></span>
+<span class="c1">-- use alias as title
+</span><span class="c1"></span><span class="k">select</span> <span class="n">concat</span><span class="p">(</span><span class="n">vend_name</span><span class="p">,</span> <span class="s1">&#39; (&#39;</span><span class="p">,</span> <span class="n">vend_country</span><span class="p">,</span> <span class="s1">&#39;)&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">vend_title</span>
+<span class="k">from</span> <span class="n">vendors</span> <span class="k">order</span> <span class="k">by</span> <span class="n">vend_name</span><span class="p">;</span>
+
+<span class="c1">-- calc price
+</span><span class="c1"></span><span class="k">select</span> <span class="n">prod_id</span><span class="p">,</span> <span class="n">quantity</span><span class="p">,</span> <span class="n">item_price</span><span class="p">,</span>
+<span class="n">quantity</span><span class="o">*</span><span class="n">item_price</span> <span class="k">as</span> <span class="n">expanded_price</span>
+<span class="k">from</span> <span class="n">orderitems</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">laggardkernel</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2018-03-29
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/mysql/">mysql</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2018/mysql-crashcourse-02/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">MySQL必知必会：11-20</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/2018/function-key-in-touchbar/">
+            <span class="next-text nav-default">强制 MacBook Touchbar显示为 Function Key 功能键</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'pseudocold';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/5101148" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/laggardkernel" class="iconfont icon-github" title="github"></a>
+  <a href="https://blog.pseudocold.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">laggardkernel</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

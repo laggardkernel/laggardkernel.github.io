@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>MySQL必知必会：21-30 - Home</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="laggardkernel" /><meta name="description" content="" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.pseudocold.com/post/2018/mysql-crashcourse-03/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="MySQL必知必会：21-30" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pseudocold.com/post/2018/mysql-crashcourse-03/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-03-29T23:47:09&#43;08:00" />
+<meta property="article:modified_time" content="2018-03-29T23:47:09&#43;08:00" />
+
+<meta itemprop="name" content="MySQL必知必会：21-30">
+<meta itemprop="description" content=""><meta itemprop="datePublished" content="2018-03-29T23:47:09&#43;08:00" />
+<meta itemprop="dateModified" content="2018-03-29T23:47:09&#43;08:00" />
+<meta itemprop="wordCount" content="4536">
+<meta itemprop="keywords" content="mysql," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MySQL必知必会：21-30"/>
+<meta name="twitter:description" content=""/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Home</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Home</a>
+</div>
+
+<nav class="site-navbar">
+    
+      <div class="top-progress-bar"></div>
+    
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">MySQL必知必会：21-30</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-03-29 </span>
+        <div class="post-category">
+            <a href="/categories/notes/"> Notes </a>
+            </div>
+          <span class="more-meta"> 4536 words </span>
+          <span class="more-meta"> 10 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#chapter-22-使用视图">Chapter 22: 使用视图</a></li>
+    <li><a href="#chapter-23-使用存储过程">Chapter 23: 使用存储过程</a></li>
+    <li><a href="#chapter-24-使用游标">Chapter 24: 使用游标</a></li>
+    <li><a href="#chapter-25-使用触发器">Chapter 25: 使用触发器</a></li>
+    <li><a href="#chapter-27-管理事务处理">Chapter 27: 管理事务处理</a></li>
+    <li><a href="#chapter-27-全球化和本地化">Chapter 27: 全球化和本地化</a></li>
+    <li><a href="#chapter-28-安全管理">Chapter 28: 安全管理</a></li>
+    <li><a href="#chapter-29-数据库维护">Chapter 29: 数据库维护</a></li>
+    <li><a href="#chapter-30-改善性能">Chapter 30: 改善性能</a></li>
+    <li><a href="#附录">附录</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>GUI创建、管理表实际还是基于SQL语句。</p>
+<p><code>create table tablename;</code></p>
+<ul>
+<li>为防止创建的表覆盖旧有表，应先手动删除旧表 <code>drop table tablename;</code></li>
+<li><code>create table tablename if not exists;</code>, <strong>仅当表名不存在时创建</strong>；</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">customers</span>
+<span class="p">(</span>
+  <span class="n">cust_id</span>      <span class="nb">int</span>       <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+  <span class="n">cust_name</span>    <span class="nb">char</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>  <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">,</span>
+  <span class="n">cust_address</span> <span class="nb">char</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>  <span class="k">NULL</span> <span class="p">,</span> <span class="cm">/* default &#39;foobar&#39;; */</span>
+  <span class="n">cust_city</span>    <span class="nb">char</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>  <span class="k">NULL</span> <span class="p">,</span>
+  <span class="n">cust_state</span>   <span class="nb">char</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>   <span class="k">NULL</span> <span class="p">,</span>
+  <span class="n">cust_zip</span>     <span class="nb">char</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="k">NULL</span> <span class="p">,</span>
+  <span class="n">cust_country</span> <span class="nb">char</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>  <span class="k">NULL</span> <span class="p">,</span>
+  <span class="n">cust_contact</span> <span class="nb">char</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>  <span class="k">NULL</span> <span class="p">,</span>
+  <span class="n">cust_email</span>   <span class="nb">char</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NULL</span> <span class="p">,</span>
+  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">cust_id</span><span class="p">)</span>
+<span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>mysqldump</code>导出内容中，表创键前先删除，导入数据前加锁。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">DROP</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="o">`</span><span class="n">customers</span><span class="o">`</span><span class="p">;</span>
+<span class="cm">/*!40101 SET @saved_cs_client     = @@character_set_client */</span><span class="p">;</span>
+<span class="cm">/*!50503 SET character_set_client = utf8mb4 */</span><span class="p">;</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">customers</span><span class="o">`</span> <span class="p">(</span>
+<span class="o">-</span> <span class="p">...</span>
+
+<span class="k">LOCK</span> <span class="n">TABLES</span> <span class="o">`</span><span class="n">customers</span><span class="o">`</span> <span class="k">WRITE</span><span class="p">;</span>
+<span class="cm">/*!40000 ALTER TABLE `customers` DISABLE KEYS */</span><span class="p">;</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="o">`</span><span class="n">customers</span><span class="o">`</span> <span class="cm">/* ... */</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>默认情况，不明确指定时允许 <code>NULL</code>；
+<ul>
+<li><strong>Note</strong>: <code>NULL</code> 值是<strong>没有值</strong>之意，<code>''</code> 才是指空串；</li>
+</ul>
+</li>
+<li>主键值必须唯一。但可以使用多个列作为主键，其组合值必须唯一；
+<ul>
+<li><code>PRIMARY KEY (order_num, order_item)</code></li>
+<li>主键只可使用<code>NOT NULL</code>列；</li>
+</ul>
+</li>
+<li><strong>每个表只允许一个 <code>AUTO_INCREMENT</code> 列，并且必须被索引</strong>；
+<ul>
+<li><code>AUTO_INCREMENT</code>列值可以通过<code>INSERT</code>手动指定，后续增量将基于此手动插入值；</li>
+<li><code>SELECT last_insert_id()</code>，确定最后的自动增量，必须在插入后使用才有效，且不区分插入的表；</li>
+</ul>
+</li>
+</ul>
+<p>默认值</p>
+<ul>
+<li>MySQL 数据库中不允许使用函数作为默认值，这与其他大多数据库不同；<code>default 1</code></li>
+</ul>
+<p>MySQL 与其他 DBMS 不一样，支持多种引擎；</p>
+<ul>
+<li>InnoDB 引擎是一个可靠的事务处理引擎，但不支持全文搜索；</li>
+<li>MEMORY 引擎在功能上等同于MyISAM，但由于数据存储在内存中，速度快(特别适合于临时表)；</li>
+<li>MyISAM 是一个高性能引擎，支持全文搜索，但不支持事务处理；</li>
+<li><strong>外键不能跨引擎</strong></li>
+</ul>
+<p>更新表</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- 增加列
+</span><span class="c1"></span><span class="k">alter</span> <span class="k">table</span> <span class="n">vendors</span> <span class="k">add</span> <span class="n">vend_phone</span> <span class="nb">char</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+<span class="c1">-- 删除列
+</span><span class="c1"></span><span class="k">alter</span> <span class="k">table</span> <span class="n">vendors</span> <span class="k">drop</span> <span class="k">column</span> <span class="n">vend_phone</span><span class="p">;</span>
+
+<span class="c1">-- 修改表引擎？
+</span><span class="c1"></span><span class="k">alter</span> <span class="k">table</span> <span class="k">table_name</span> <span class="p">()</span> <span class="n">engine</span><span class="o">=</span><span class="n">InnoDB</span><span class="p">;</span> <span class="cm">/* 覆盖原表 */</span>
+
+<span class="c1">-- 改变列名
+</span><span class="c1"></span><span class="k">alter</span> <span class="k">table</span> <span class="n">change</span> <span class="n">col_name</span> <span class="n">new_name</span> <span class="nb">boolean</span> <span class="k">not</span> <span class="k">null</span> <span class="k">default</span> <span class="k">false</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>ALTER TABLE</code> 定义外键</p>
+<ul>
+<li>先定义键及类型，再调整为外键；</li>
+<li>小心使用<code>ALTER TABLE</code>，<strong>更改前备份</strong>；</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">alter</span> <span class="k">table</span> <span class="n">orderitems</span>
+<span class="k">add</span> <span class="k">constraint</span> <span class="n">fk_orderitems_orders</span>
+<span class="k">foreign</span> <span class="k">key</span> <span class="p">(</span><span class="n">order_num</span><span class="p">)</span> <span class="k">references</span> <span class="k">order</span> <span class="p">(</span><span class="n">order_num</span><span class="p">);</span>
+
+<span class="k">alter</span> <span class="k">table</span> <span class="n">orderitems</span>
+<span class="k">add</span> <span class="n">contraint</span> <span class="n">fk_orderitems_products</span> <span class="k">foreign</span> <span class="k">key</span> <span class="p">(</span><span class="n">prod_id</span><span class="p">)</span>
+<span class="k">references</span> <span class="n">products</span> <span class="p">(</span><span class="n">prod_id</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- 删除表
+</span><span class="c1"></span><span class="k">drop</span> <span class="k">table</span> <span class="n">tabelname</span><span class="p">;</span>
+
+<span class="c1">-- 重命名表
+</span><span class="c1"></span><span class="k">rename</span> <span class="k">table</span> <span class="n">oldtablename</span> <span class="k">to</span> <span class="n">newtablename</span><span class="p">[,</span> <span class="k">old</span> <span class="k">to</span> <span class="k">new</span><span class="p">];</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="chapter-22-使用视图">Chapter 22: 使用视图</h2>
+<p>视图(MySQL 5+)是虚拟的表，<code>SELECT</code>语句层次的<strong>封装</strong>；</p>
+<ul>
+<li>由于视图本身不包含数据，每次使用时处理查询执行，太过复杂的视图存在性能问题；</li>
+<li>视图主要用于数据检索；</li>
+<li>查询视图与查询表无异；</li>
+</ul>
+<p>使用意图</p>
+<ul>
+<li>重用SQL语句，简化操作；</li>
+<li>保护数据，类似于封装；</li>
+<li>更改数据格式和表示，视图可返回与底层表的表示和格式不同的数据；</li>
+</ul>
+<p>视图规则</p>
+<ul>
+<li>名字唯一，数目无限制</li>
+<li>需要一定访问权限创建</li>
+<li>可嵌套使用；</li>
+<li><strong>视图外<code>ORDER BY</code>优先</strong>，自动覆盖视图内<code>ORDER BY</code>；</li>
+<li><strong>视图不可索引</strong>；</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- 列出所有视图
+</span><span class="c1">-- show table status where comment=&#39;view&#39;;
+</span><span class="c1">-- preferred
+</span><span class="c1"></span><span class="k">SHOW</span> <span class="k">FULL</span> <span class="n">TABLES</span> <span class="k">IN</span> <span class="n">database_name</span> <span class="k">WHERE</span> <span class="n">TABLE_TYPE</span> <span class="k">LIKE</span> <span class="s1">&#39;VIEW&#39;</span><span class="p">;</span>
+
+<span class="c1">-- 创建视图
+</span><span class="c1"></span><span class="k">create</span> <span class="k">view</span> <span class="n">viewname</span> <span class="k">as</span> <span class="k">select</span> <span class="p">...;</span>
+<span class="c1">-- 查看视图创建语句
+</span><span class="c1"></span><span class="k">show</span> <span class="k">create</span> <span class="k">view</span> <span class="n">viewname</span><span class="p">;</span>
+<span class="k">drop</span> <span class="k">view</span> <span class="n">viewname</span><span class="p">;</span>
+<span class="c1">-- 创建新视图，自动替换存在的同名视图
+</span><span class="c1"></span><span class="k">create</span> <span class="k">or</span> <span class="k">replace</span> <span class="k">view</span> <span class="n">viewname</span> <span class="p">...;</span>
+<span class="c1">-- rename a view
+</span><span class="c1"></span><span class="k">rename</span> <span class="k">view</span> <span class="n">viewname</span> <span class="k">to</span> <span class="n">viewname2</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span> <span class="k">view</span> <span class="n">productcustomers</span> <span class="k">as</span>
+<span class="k">select</span> <span class="n">cust_name</span><span class="p">,</span> <span class="n">cust_contact</span><span class="p">,</span> <span class="n">prod_id</span>
+<span class="k">from</span> <span class="n">customers</span> <span class="k">as</span> <span class="k">c</span><span class="p">,</span> <span class="n">orders</span> <span class="k">as</span> <span class="n">o</span><span class="p">,</span> <span class="n">orderitems</span> <span class="k">as</span> <span class="n">oi</span>
+<span class="k">where</span> <span class="k">c</span><span class="p">.</span><span class="n">cust_id</span><span class="o">=</span><span class="n">o</span><span class="p">.</span><span class="n">cust_id</span> <span class="k">and</span> <span class="n">oi</span><span class="p">.</span><span class="n">order_num</span><span class="o">=</span><span class="n">o</span><span class="p">.</span><span class="n">order_num</span><span class="p">;</span>
+
+<span class="k">create</span> <span class="k">view</span> <span class="n">vendorlocations</span> <span class="k">as</span>
+<span class="k">select</span> <span class="n">concat</span> <span class="p">(</span><span class="n">rtrim</span><span class="p">(</span><span class="n">vend_name</span><span class="p">),</span> <span class="s1">&#39; (&#39;</span><span class="p">,</span> <span class="n">rtrim</span><span class="p">(</span><span class="n">vend_country</span><span class="p">),</span> <span class="s1">&#39;)&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">vend_title</span>
+<span class="k">from</span> <span class="n">vendors</span>
+<span class="k">order</span> <span class="k">by</span> <span class="n">vend_name</span><span class="p">;</span>
+
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">vendorlocations</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>其他应用</p>
+<ul>
+<li>视图<code>where</code>语句过滤表</li>
+<li>计算字段</li>
+</ul>
+<p>更新视图存在一定条件，并不总是可以更新。由于更新视图实际是在更新其基表，对于不能正确的确定被更新的基数据，则不允许更新(包含插入和删除)；</p>
+<ul>
+<li>视图主要用于数据检索；</li>
+</ul>
+<h2 id="chapter-23-使用存储过程">Chapter 23: 使用存储过程</h2>
+<p>存储过程(MySQL 5+)，事先保存的一条或多条MySQL语句集合，可视其为批文件；</p>
+<ul>
+<li>封装，简化复杂操作，直接调用；</li>
+<li>规范化一系列处理操作，使所有人使用相同代码，防止出错，保护数据完整性；</li>
+<li>简化对变动的管理，批操作有了名字；</li>
+<li>安全性，限制对基础数据的访问减少了数据的讹误，类似于封装；</li>
+</ul>
+<p>存储过程类似于函数，可以有输入，输出，也可以只是执行语句。</p>
+<p>编写存储过程和访问、执行存储过程的过程是相分离的，其权限可以分开控制。</p>
+<p>调用存储过程，<code>call procedurename(@param1,@param2); select @param1,@param2;</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">delimiter</span> <span class="o">//</span>
+
+<span class="k">create</span> <span class="k">procedure</span> <span class="n">productpricing</span><span class="p">()</span>
+<span class="k">begin</span>
+  <span class="k">select</span> <span class="k">avg</span><span class="p">(</span><span class="n">prod_price</span><span class="p">)</span> <span class="k">as</span> <span class="n">priceaverage</span>
+  <span class="k">from</span> <span class="n">products</span><span class="p">;</span>
+<span class="k">end</span> <span class="o">//</span>
+<span class="k">delimiter</span> <span class="p">;</span>
+
+<span class="k">call</span> <span class="n">productpricing</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>创建存储过程需要临时修改分隔符</p>
+<ul>
+<li>记录集不是允许的类型，存储过程重要输出多个数据时，需要使用多个参数；</li>
+<li>定义过程中的<code>comment 'string'</code>将会在<code>show precedure status like 'procedurename'</code>中出现；</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">delimiter</span> <span class="o">//</span>
+<span class="k">create</span> <span class="k">procedure</span> <span class="n">ordertotal</span><span class="p">(</span>
+  <span class="k">in</span> <span class="n">onumber</span> <span class="nb">int</span><span class="p">,</span>
+  <span class="k">in</span> <span class="n">taxable</span> <span class="nb">boolean</span><span class="p">,</span>
+  <span class="k">out</span> <span class="n">ototal</span> <span class="nb">decimal</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">)</span> <span class="k">comment</span> <span class="s1">&#39;Obtain order total, optionally adding tax&#39;</span>
+<span class="k">begin</span>
+  <span class="k">declare</span> <span class="n">total</span> <span class="nb">decimal</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+  <span class="k">declare</span> <span class="n">taxrate</span> <span class="nb">int</span> <span class="k">default</span> <span class="mi">6</span><span class="p">;</span>
+
+  <span class="k">select</span> <span class="k">sum</span><span class="p">(</span><span class="n">item_price</span><span class="o">*</span><span class="n">quantity</span><span class="p">)</span>
+  <span class="k">from</span> <span class="n">orderitems</span>
+  <span class="k">where</span> <span class="n">order_num</span> <span class="o">=</span> <span class="n">onumber</span>
+  <span class="k">into</span> <span class="n">total</span><span class="p">;</span> <span class="c1">-- 也可以调到select行之后
+</span><span class="c1"></span>
+  <span class="k">if</span> <span class="n">taxable</span> <span class="k">then</span>
+    <span class="k">select</span> <span class="n">total</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">taxrate</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span> <span class="k">into</span> <span class="n">total</span><span class="p">;</span>
+  <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+
+  <span class="k">select</span> <span class="n">total</span> <span class="k">into</span> <span class="n">ototal</span><span class="p">;</span>
+<span class="k">end</span><span class="o">//</span>
+<span class="k">delimiter</span> <span class="p">;</span>
+
+<span class="k">call</span> <span class="n">ordertotal</span><span class="p">(</span><span class="mi">20005</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">@</span><span class="n">total</span><span class="p">);</span> <span class="c1">-- store data in variable total
+</span><span class="c1"></span><span class="k">select</span> <span class="o">@</span><span class="n">total</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>删除存储过程，<code>drop procedure productpricing if exists;</code></p>
+<p>检查存储过程</p>
+<ul>
+<li><code>show create procedure procedurename;</code></li>
+<li><code>show procedure status like 'procedurename';</code></li>
+<li><code>show procedure status</code> 列出所有存储过程（包括系统内置）</li>
+</ul>
+<h2 id="chapter-24-使用游标">Chapter 24: 使用游标</h2>
+<p>游标(cursor)时一个存储在MySQL数据库上的数据库查询，它不是一条<code>SELECT</code>语句，而是被该语句检索出来的<strong>结果集</strong>；</p>
+<ul>
+<li>游标一般被创建在存储过程内，调用存储过程-打开游标-使用数据-关闭游标；
+<ul>
+<li><code>declare ordernumbers cursor for select order_num from orders;</code></li>
+</ul>
+</li>
+<li><code>open cursorname;</code></li>
+<li><code>CLOSE cursorname;</code> 释放游标所使用的所有内存和资源;
+<ul>
+<li>MySQL在到达<code>END</code>语句后隐式关闭游标；</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="n">delimter</span> <span class="o">//</span>
+<span class="k">create</span> <span class="k">procedure</span> <span class="n">processorders</span><span class="p">()</span>
+<span class="k">begin</span>
+  <span class="k">declare</span> <span class="n">done</span> <span class="nb">boolean</span> <span class="k">default</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">declare</span> <span class="n">o</span> <span class="nb">int</span><span class="p">;</span>
+  <span class="k">declare</span> <span class="n">t</span> <span class="nb">decimal</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+
+  <span class="k">declare</span> <span class="n">ordernumbers</span> <span class="k">cursor</span>
+  <span class="k">for</span>
+  <span class="k">select</span> <span class="n">order_num</span> <span class="k">from</span> <span class="n">orders</span><span class="p">;</span>
+
+  <span class="c1">-- set done=1 when sqlstate &#39;02000&#39;, 02000表示未找到，循环结束时出现
+</span><span class="c1"></span>  <span class="k">declare</span> <span class="k">continue</span> <span class="k">handler</span> <span class="k">for</span> <span class="k">sqlstate</span> <span class="s1">&#39;02000&#39;</span> <span class="k">set</span> <span class="n">done</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+
+  <span class="k">create</span> <span class="k">table</span> <span class="k">if</span> <span class="k">not</span> <span class="k">exists</span> <span class="n">ordertotals</span>
+    <span class="p">(</span><span class="n">order_num</span> <span class="nb">int</span><span class="p">,</span> <span class="n">total</span> <span class="nb">decimal</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">));</span>
+
+  <span class="c1">-- open cursor
+</span><span class="c1"></span>  <span class="k">open</span> <span class="n">ordernumbers</span><span class="p">;</span>
+  <span class="n">repeat</span>
+    <span class="k">fetch</span> <span class="n">ordernumbers</span> <span class="k">into</span> <span class="n">o</span><span class="p">;</span>
+    <span class="k">call</span> <span class="n">ordertotal</span><span class="p">(</span><span class="n">o</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
+    <span class="c1">-- insert result into a new table
+</span><span class="c1"></span>    <span class="k">insert</span> <span class="k">into</span> <span class="n">ordertotals</span><span class="p">(</span><span class="n">order_num</span><span class="p">,</span><span class="n">total</span><span class="p">)</span> <span class="k">values</span><span class="p">(</span><span class="n">o</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
+  <span class="k">until</span> <span class="n">done</span> <span class="k">end</span> <span class="n">repeat</span><span class="p">;</span>
+  <span class="k">close</span> <span class="n">ordernumbers</span><span class="p">;</span>
+<span class="k">end</span><span class="o">//</span>
+<span class="n">delimter</span> <span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>declare continue handler for sqlstate '02000' set done=1;</code></p>
+<ul>
+<li>定义<code>CONTINUE HANDLER</code>，在条件出现时被执行的代码；</li>
+<li>02000表示未找到，循环结束时出现</li>
+</ul>
+<p><strong><code>DECLARE</code>定义次序</strong>：局部变量定义必须先于游标和句柄，句柄定义必须晚于游标；</p>
+<h2 id="chapter-25-使用触发器">Chapter 25: 使用触发器</h2>
+<p>触发器(MySQL 5+)，在某表发生更改时自动处理；</p>
+<ul>
+<li>触发器针对<code>DELETE</code>, <code>INSERT</code>, <code>UPDATE</code>，之前或者之后触发；</li>
+<li>确保每个数据库的触发器名唯一；</li>
+<li>只有表支持触发器，视图不支持触发器；</li>
+<li>触发器中不允许返回值。定义带输出参数的存储过程<code>select into param</code>，并在触发器中调用，以传出参数；</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span> <span class="k">trigger</span> <span class="n">triggername</span> <span class="k">before</span><span class="o">/</span><span class="k">after</span> <span class="k">delete</span><span class="o">/</span><span class="k">update</span><span class="o">/</span><span class="k">create</span> <span class="k">on</span> <span class="n">tablename</span> <span class="k">for</span> <span class="k">each</span> <span class="k">row</span> <span class="p">...;</span>
+
+<span class="k">drop</span> <span class="k">trigger</span> <span class="n">triggername</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>若触发器执行失败，MySQL将不执行触发器对应事件语句。若干<code>BEFORE</code>触发器或者语句本身失败，MySQL将不执行<code>AFTER</code>触发器；</p>
+<p><code>INSERT</code>触发器</p>
+<ul>
+<li>在<code>INSERT</code>触发器代码内，可引用一个名为<code>NEW</code>的虚拟表，访问被插入的行；</li>
+<li>在<code>BEFORE INSERT</code>触发器中，<code>NEW</code>中的值也可以被更新（允许更改被插入的值）；</li>
+<li>对于<code>AUTO_INCREMENT</code>列，<code>NEW</code>在<code>INSERT</code>执行之前包含0，在<code>INSERT</code>执行之后包含新的自动生成值。故，以此可以传出<code>AUTO_INCREMENT</code>列新生成的值；</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- select `auto_increament`ed column
+</span><span class="c1"></span><span class="k">create</span> <span class="k">trigger</span> <span class="n">neworder</span> <span class="k">after</span> <span class="k">insert</span> <span class="k">on</span> <span class="n">orders</span>
+<span class="k">for</span> <span class="k">each</span> <span class="k">row</span> <span class="k">select</span> <span class="k">new</span><span class="p">.</span><span class="n">order_num</span><span class="p">;</span>
+
+<span class="c1">-- test
+</span><span class="c1"></span><span class="k">insert</span> <span class="k">into</span> <span class="n">orders</span><span class="p">(</span><span class="n">order_date</span><span class="p">,</span> <span class="n">cust_id</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="n">now</span><span class="p">(),</span> <span class="mi">10001</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><a href="https://stackoverflow.com/questions/12474489/not-allowed-to-return-a-resultset-from-a-trigger-mysql">1415, &lsquo;Not allowed to return a result set from a trigger&rsquo;</a></p>
+<p>本书示例存在错误，实际上从触发器中select出数据被禁止。</p>
+<p><code>DELETE</code> 触发器</p>
+<ul>
+<li>在<code>DELETE</code>触发器代码内，你可以引用一个名为<code>OLD</code>的虚拟表，访问被删除的行；</li>
+<li><code>OLD</code>中的值全都是只读的，不能更新。</li>
+</ul>
+<p>使用 <code>BEGIN ... END</code> 块定义多语句触发器；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span> <span class="k">trigger</span> <span class="n">deleteorder</span> <span class="k">before</span> <span class="k">delete</span> <span class="k">on</span> <span class="n">orders</span>
+<span class="k">for</span> <span class="k">each</span> <span class="k">row</span>
+<span class="k">begin</span>
+  <span class="k">insert</span> <span class="k">into</span> <span class="n">archive_orders</span><span class="p">(</span><span class="n">order_num</span><span class="p">,</span> <span class="n">order_date</span><span class="p">,</span> <span class="n">cust_id</span><span class="p">)</span>
+  <span class="k">values</span><span class="p">(</span><span class="k">old</span><span class="p">.</span><span class="n">order_num</span><span class="p">,</span> <span class="k">old</span><span class="p">.</span><span class="n">order_date</span><span class="p">,</span> <span class="k">old</span><span class="p">.</span><span class="n">cust_id</span><span class="p">);</span>
+<span class="k">end</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>UPDATE</code>触发器</p>
+<ul>
+<li>在<code>UPDATE</code>触发器代码中，你可以引用一个名为<code>OLD</code>的虚拟表访问以前（<code>UPDATE</code>语句前）的值，引用一个名为<code>NEW</code>的虚拟表访问新更新的值；</li>
+<li>在<code>BEFORE UPDATE</code>触发器中，<code>NEW</code>中的值可能也被更新（允许更改将要用于<code>UPDATE</code>语句中的值）；</li>
+<li><code>OLD</code>中的值全都是只读的，不能更新。</li>
+</ul>
+<p>在<code>INSERT</code>, <code>UPDATE</code>触发器中，<code>BEFORE</code>通常用于数据验证和净化；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span> <span class="k">trigger</span> <span class="n">updatevendor</span> <span class="k">before</span> <span class="k">update</span> <span class="k">on</span> <span class="n">vendors</span>
+<span class="k">for</span> <span class="k">each</span> <span class="k">row</span> <span class="k">set</span> <span class="k">new</span><span class="p">.</span><span class="n">vend_state</span><span class="o">=</span><span class="k">upper</span><span class="p">(</span><span class="k">new</span><span class="p">.</span><span class="n">vend_state</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>应用触发器保证数据的一致性(大小写、格式等)。其优点是这种处理总是进行，且透明，与客户端无关；</li>
+<li>创建审计跟踪。利用触发器将更改(甚至包括之前和之后的状态)记录到另一个表中；</li>
+<li>触发器不支持<code>CALL</code>语句，<strong>无法再触发器内调用存储过程</strong>；</li>
+</ul>
+<h2 id="chapter-27-管理事务处理">Chapter 27: 管理事务处理</h2>
+<ul>
+<li>并非所有引擎都支持事务处理，在MySQL中使用InnoDB引擎进行事务处理；</li>
+<li>事务处理(transaction processing)可以用来<strong>维护数据库的完整性</strong>，要么保证呈批的MySQL操作完全执行，要么完全不执行；</li>
+</ul>
+<p>术语</p>
+<ul>
+<li>事务（transaction），一组SQL语句或者说一组执行动作</li>
+<li>回退（rollback），撤销指定SQL语句的过程</li>
+<li>提交（commit），将为存储的SQL语句结果写入数据库表</li>
+<li>保留点（savepoint），事务处理过程中临时占位符，作为回退位置</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">set</span> <span class="n">autocommit</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">start</span> <span class="k">transaction</span><span class="p">;</span>
+<span class="p">...</span>
+<span class="n">savepoint</span> <span class="n">p1</span><span class="p">;</span>
+<span class="p">...</span>
+<span class="o">#</span> <span class="k">rollback</span> <span class="k">to</span> <span class="p">[</span><span class="n">savepointname</span><span class="p">];</span>
+<span class="k">commit</span><span class="p">;</span>
+<span class="k">set</span> <span class="n">autocommit</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong><code>CREATE</code>和<code>DROP</code>操作不可被回退</strong>；</li>
+<li>事务处理中需要手动提交<code>COMMIT</code>；
+<ul>
+<li>当<code>COMMIT</code>或<code>ROLLBACK</code>语句执行后，事务会自动关闭，且自动释放保留点。在之后的操作恢复平常的隐式提交；</li>
+</ul>
+</li>
+<li>手动释放保留点，<code>RELEASE SAVEPOINT identifier;</code>；</li>
+</ul>
+<p>MySQL默认行为时自动提交所有更改，更改这种行为，<code>SET autocommit=0;</code>。恢复<code>set autocommit=1;</code></p>
+<h2 id="chapter-27-全球化和本地化">Chapter 27: 全球化和本地化</h2>
+<p>术语</p>
+<ul>
+<li>字符集：字母和符号的集合；</li>
+<li>编码：某个字符集成员的内部表示；</li>
+<li>校对：规定字符如何比较的指令；
+<ul>
+<li>是否区分大小写；</li>
+</ul>
+</li>
+</ul>
+<p>校对在排序时期重要作用。</p>
+<p>MySQL 8 开始，使用 <code>utf8mb4</code> 作为 MySQL 的默认字符集。</p>
+<p>使用何种字符集和校对的决定在服务器、数据库和表这三级进行；</p>
+<ul>
+<li><code>show character set;</code> 查看可用字符集</li>
+<li><code>show collation;</code> 查看可用校对以及对应于字符集的默认校对；
+<ul>
+<li><code>_cs</code> 表示 case sensitive, <code>_ci</code> case insensitive;</li>
+</ul>
+</li>
+</ul>
+<p>查看当前系统默认字符集</p>
+<ul>
+<li><code>show variables like 'character%';</code></li>
+<li><code>show variables like 'collation%';</code></li>
+<li>其中<code>character_set_system</code>为系统默认，只读</li>
+</ul>
+<p>字符集设定优先顺序</p>
+<ul>
+<li>如果指定<code>CHARACTER SET</code>和<code>COLLATE</code>两者，则使用这些值。</li>
+<li>如果只指定<code>CHARACTER SET</code>，则使用此字符集及其默认的校对（如<code>SHOW CHARACTER SET</code>的结果中所示）。</li>
+<li>如果既不指定<code>CHARACTER SET</code>，也不指定<code>COLLATE</code>，则使用数据库默认。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span> <span class="k">table</span> <span class="n">mytable</span>
+<span class="p">(</span>
+    <span class="n">column1</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">column2</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+    <span class="n">column3</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="nb">character</span> <span class="k">set</span> <span class="n">latin1</span> <span class="k">collate</span> <span class="n">latin1_general_ci</span>
+<span class="p">)</span> <span class="k">default</span> <span class="nb">character</span> <span class="k">set</span> <span class="n">hebrew</span>
+  <span class="k">collate</span> <span class="n">hebrew_general_ci</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>利用<code>COLLATE</code>临时区分大小写；</p>
+<ul>
+<li><code>collate</code>还可用于<code>select</code>, <code>group by</code>, <code>having</code>, 聚集函数和别名等；</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">customers</span>
+<span class="k">order</span> <span class="k">by</span> <span class="n">lastname</span><span class="p">,</span> <span class="n">firstname</span> <span class="k">collate</span> <span class="n">latin1_general_cs</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="chapter-28-安全管理">Chapter 28: 安全管理</h2>
+<p>MySQL服务器的安全基础：用户应该对他们需要的数据具有<strong>适当的访问权，既不能多也不能少</strong>。</p>
+<p>MySQL用户账号和信息存储在名为mysql的MySQL数据库中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- 列出所有用户，包括特殊用户；
+</span><span class="c1"></span><span class="n">use</span> <span class="n">mysql</span><span class="p">;</span>
+<span class="k">select</span> <span class="k">user</span> <span class="k">from</span> <span class="k">user</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>创建用户账号</p>
+<ul>
+<li><code>create user username identified by 'password';</code></li>
+<li>重命名，<code>rename user oldname to newname;</code></li>
+<li><code>grant</code> 授权时创建；</li>
+<li><del><code>insert</code> 到 mysql.user 表</del>；</li>
+</ul>
+<p>删除账号，<code>drop user username;</code></p>
+<ul>
+<li>MySQL 5+ 以后删除用户是自动删除用户相关权限，对于之前版本要先<code>revoke</code>相关权限；</li>
+</ul>
+<p>访问权限</p>
+<ul>
+<li><code>show grants for username;</code> 列出权限；</li>
+</ul>
+<ul>
+<li><code>USAGE ON *.*</code>, <code>usage</code> 表示<strong>根本没有权限</strong>；</li>
+<li><code>'username'@'host'</code>, <code>%</code> 默认主机名表示对于主机无限制；</li>
+<li><code>grant all</code>, <code>revoke all</code>操作用户在整个服务器的权限</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">grant</span> <span class="k">select</span><span class="p">[,</span> <span class="k">insert</span><span class="p">]</span> <span class="k">on</span> <span class="n">databasename</span><span class="p">.</span><span class="o">*</span> <span class="k">to</span> <span class="n">username</span><span class="p">;</span>
+<span class="k">revoke</span> <span class="k">select</span> <span class="k">on</span> <span class="n">dbname</span><span class="p">.</span><span class="o">*</span> <span class="k">from</span> <span class="n">username</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>常见权限</p>
+<ul>
+<li><code>all</code>, 除<code>grant option</code>外所有权限</li>
+<li><code>alter</code></li>
+<li><code>alter routine</code> for <code>alter procedure</code>, <code>drop procedure</code></li>
+<li><code>create</code> for <code>create table</code></li>
+<li><code>delete</code></li>
+<li><code>drop</code> for <code>drop table</code></li>
+<li><code>index</code> for <code>create/drop index</code></li>
+<li><code>insert</code></li>
+<li><code>reload</code> for <code>flush</code> command</li>
+<li><code>select</code></li>
+<li><code>show databases</code></li>
+<li><code>show view</code> for <code>show create view</code></li>
+<li><code>update</code></li>
+<li><code>usage</code>无访问权限</li>
+</ul>
+<p>使用<code>grant</code>, <code>revoke</code> 时，<strong>用户账户必须存在</strong>，但对其所涉及的对象(数据库，表)不需要。可实现<strong>在创建数据库和表之前设计和实现安全措施</strong>；</p>
+<p>更改密码，<code>set password [for username] = password('password');</code></p>
+<h2 id="chapter-29-数据库维护">Chapter 29: 数据库维护</h2>
+<p>数据库备份</p>
+<ul>
+<li>命令行实用程序 <code>mysqldump</code> 转储所有数据库内容到某个外部文件。</li>
+<li>命令行实用程序 <code>mysqlhotcopy</code> 从一个数据库复制所有数据（并非所有数据库引擎都支持这个实用程序）。</li>
+<li>使用MySQL的<code>BACKUP TABLE</code>或<code>SELECT INTO OUTFILE</code>转储所有数据到某个外部文件。
+<ul>
+<li><code>[mysqld] secure-file-priv=''</code> 开启外部文件写入；</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>备份前使用<code>flush tables</code>刷新未写数据；</li>
+</ul>
+<p>数据库维护</p>
+<ul>
+<li><code>analyze table tablename;</code></li>
+<li><code>check table tablename;</code></li>
+</ul>
+<h2 id="chapter-30-改善性能">Chapter 30: 改善性能</h2>
+<ul>
+<li>存储过程比一条一条执行其中语句快；</li>
+<li>导入数据前，关闭自动提交。或先删除索引，在导入后再重建，否则多次触发索引影响性能；</li>
+<li><code>select ... union ...;</code> 性能优于 <code>select ... or ...;</code></li>
+<li><code>like</code> 很慢，最好使用 <code>FULLTEXT</code>；</li>
+</ul>
+<h2 id="附录">附录</h2>
+<p>数据类型表，用的时候参照，不再贴在这里。</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">laggardkernel</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2018-03-29
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/mysql/">mysql</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2018/mysql-mariadb-setup/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">MariaDB/MySQL Setup: All in One</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/2018/mysql-crashcourse-02/">
+            <span class="next-text nav-default">MySQL必知必会：11-20</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'pseudocold';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/5101148" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/laggardkernel" class="iconfont icon-github" title="github"></a>
+  <a href="https://blog.pseudocold.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">laggardkernel</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

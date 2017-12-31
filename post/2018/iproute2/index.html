@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>iproute2 Usage - Home</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="laggardkernel" /><meta name="description" content="net-tools 已经常年无人维护，新工具 iproute2 与 Linux 内核更为紧密。
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.pseudocold.com/post/2018/iproute2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="iproute2 Usage" />
+<meta property="og:description" content="net-tools 已经常年无人维护，新工具 iproute2 与 Linux 内核更为紧密。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pseudocold.com/post/2018/iproute2/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-11-16T10:25:55&#43;08:00" />
+<meta property="article:modified_time" content="2018-11-16T10:25:55&#43;08:00" />
+
+<meta itemprop="name" content="iproute2 Usage">
+<meta itemprop="description" content="net-tools 已经常年无人维护，新工具 iproute2 与 Linux 内核更为紧密。"><meta itemprop="datePublished" content="2018-11-16T10:25:55&#43;08:00" />
+<meta itemprop="dateModified" content="2018-11-16T10:25:55&#43;08:00" />
+<meta itemprop="wordCount" content="1061">
+<meta itemprop="keywords" content="linux,iproute2,networking," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="iproute2 Usage"/>
+<meta name="twitter:description" content="net-tools 已经常年无人维护，新工具 iproute2 与 Linux 内核更为紧密。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Home</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Home</a>
+</div>
+
+<nav class="site-navbar">
+    
+      <div class="top-progress-bar"></div>
+    
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">iproute2 Usage</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-11-16 </span>
+        <div class="post-category">
+            <a href="/categories/devops/"> DevOps </a>
+            <a href="/categories/cli/"> CLI </a>
+            </div>
+          <span class="more-meta"> 1061 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#iproute2-vs-net-tools">iproute2 v.s. net-tools</a>
+      <ul>
+        <li><a href="#network-interface">Network Interface</a></li>
+        <li><a href="#interface-info">Interface Info</a></li>
+        <li><a href="#operate-ip-addresses-on-the-interfaces">Operate IP addresses on the interfaces</a></li>
+        <li><a href="#ipv6-addresses-operation">IPv6 addresses operation</a></li>
+        <li><a href="#change-mac">Change MAC</a></li>
+        <li><a href="#mtu">MTU</a></li>
+        <li><a href="#route">Route</a></li>
+        <li><a href="#socket">Socket</a></li>
+        <li><a href="#arp-table">ARP table</a></li>
+        <li><a href="#组播地址">组播地址</a></li>
+      </ul>
+    </li>
+    <li><a href="#formulae">Formulae</a>
+      <ul>
+        <li><a href="#whos-listening-the-port">Who&rsquo;s listening the port</a></li>
+        <li><a href="#add-static-route">Add Static Route</a></li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>net-tools 已经常年无人维护，新工具 iproute2 与 Linux 内核更为紧密。</p>
+<h2 id="iproute2-vs-net-tools">iproute2 v.s. net-tools</h2>
+<table>
+<thead>
+<tr>
+<th>Deprecated command</th>
+<th>Replacement commands</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>arp</td>
+<td>ip neighbor</td>
+</tr>
+<tr>
+<td>ifconfig</td>
+<td>ip address, ip link</td>
+</tr>
+<tr>
+<td>netstat</td>
+<td>ss</td>
+</tr>
+<tr>
+<td>route</td>
+<td>ip route</td>
+</tr>
+</tbody>
+</table>
+<h3 id="network-interface">Network Interface</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">ifconfig -a
+ip link show
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="interface-info">Interface Info</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">ifconfig
+ip a <span class="c1"># ip addr, ip address</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>activate interface (sudo is needed)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">ifconfig eth1 up
+ifconfig eth1 down
+
+ip link <span class="nb">set</span> up eth1
+ip link <span class="nb">set</span> down eth1
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="operate-ip-addresses-on-the-interfaces">Operate IP addresses on the interfaces</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># set ipv4 addresses</span>
+ifconfig eth1 add 10.0.0.1/24
+ip addr<span class="o">[</span>ess<span class="o">]</span> add 10.0.0.1/24 dev eth1
+<span class="c1"># ip addr 可以方便的添加多个地址</span>
+ip addr add 10.0.0.1/24 broadcast 10.0.0.255 dev eth1
+ip addr add 10.0.0.2/24 broadcast 10.0.0.255 dev eth1
+ip addr add 10.0.0.3/24 broadcast 10.0.0.255 dev eth1
+
+<span class="c1"># remove ip addresses</span>
+ifconfig eth1 del 0<span class="o">[</span>.0.0.0<span class="o">]</span>
+ip addr del 10.0.0.1/24 dev eth1
+
+<span class="c1"># show addresses</span>
+ifconfig eth1 <span class="c1"># only 1 address</span>
+ip addr show dev eth1
+
+<span class="c1"># flush all</span>
+ip address flush dev interface
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="ipv6-addresses-operation">IPv6 addresses operation</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># ifconfig 支持添加多个v6地址</span>
+ifconfig eth1 inet6 add 2002:0db5:0:f102:1/64
+ifconfig eth1 inet6 add 2003:0db5:0:f102:1/64
+ip -6 addr add 2002:0db5:0:f102:1/64 dev eth1
+ip -6 addr add 2003:0db5:0:f102:1/64 dev eth1
+
+<span class="c1"># show v6 addresses</span>
+ifconfig eth1
+ip -6 addr show dev eth1
+
+ifconfig eth1 inet6 del 2002:0db5:0:f102:1/64
+ip -6 addr del 2002:0db5:0:f102:1/64 dev eth1
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="change-mac">Change MAC</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># disable interface beforehand</span>
+ifconfig eth1 hw ether 08:00:27:75:2a:66
+ip link <span class="nb">set</span> dev eth1 address 08:00:27:75:2a:66
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="mtu">MTU</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">ifconfig etho0 mtu <span class="m">2000</span>
+ip link <span class="nb">set</span> dev eth0 mtu <span class="m">2000</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="route">Route</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">route -n
+netstat -rn
+
+ip route show <span class="c1"># 这里没有提及 ss，ss不能列出路由</span>
+
+<span class="c1"># route 修改默认网关，需先删除原有，再添加</span>
+route add default gw 192.168.1.2 eth0 <span class="c1"># default 为目标</span>
+route del default gw 192.168.1.1 eth0
+
+ip route add default via 192.168.1.2 dev eth0
+ip route replace default via 192.168.1.2 dev eth0 <span class="c1"># metric 200</span>
+
+<span class="c1"># 静态路由</span>
+route add -net 172.16.32.0/24 gw 192.168.2.1 dev eth0
+route del -net 172.16.32.0/24
+
+<span class="c1"># ip 添加静态路由和默认路由方法一致，较为统一</span>
+ip route add 172.16.32.0/24 via 192.168.1.1 dev eth0
+ip route del 172.16.32.0/24
+</code></pre></td></tr></table>
+</div>
+</div><p><code>ip -6 route</code>, route for IPv6.</p>
+<h3 id="socket">Socket</h3>
+<p><code>netstat</code>, <code>ss</code> 常用选项较为一致</p>
+<ul>
+<li><code>-a</code>, <code>--all</code>, list both listening and non-listeing sockets</li>
+<li><code>-l</code>, listening</li>
+<li><code>-u</code>, <code>-t</code>. udp, tcp</li>
+<li><code>-x</code>, <code>--unix</code>, unix socket</li>
+<li><code>-n</code>, <code>--numeric</code>.</li>
+<li><code>-4</code>, <code>-6</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">netstat
+
+<span class="c1"># list port and socket in LISTEN state</span>
+netstat -l
+
+ss
+ss -l
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="arp-table">ARP table</h3>
+<p>address resolution</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">arp -an <span class="c1"># list and print address as number</span>
+ip neigh<span class="o">[</span>bour<span class="o">]</span>
+
+arp -s 192.168.1.100 00:0c:29:c0:5a:ef <span class="c1"># -s create</span>
+arp -d 192.168.1.100
+
+ip neigh add 192.168.1.100 lladdr 00:0c:29:c0:5a:ef dev eth0
+ip neigh del 192.168.1.100
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="组播地址">组播地址</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">ipmaddr add 33:44:00:00:00:01 dev eth0
+ipmaddr del 33:44:00:00:00:01 dev eth0
+ipmaddr show dev eth0
+netstat -g <span class="c1"># group</span>
+
+ip maddr add 33:44:00:00:00:01 dev eth0
+ip maddr del 33:44:00:00:00:01 dev eth0
+ip maddr list dev etho0
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>组播也是一种IP包，也有源IP地址，目的IP地址，源IP地址为组播源的服务器IP地址，目的地址为一个特殊的IP地址，它位于 224.0.0.0 - 239.255.255.255 中，由于 224.0.0.0/8用于本地链路，即一跳的组播，239.0.0.0/8 为私有组播地址，所以实际的可用于在互联网上组播地址是225.0.0.0/8 - 238.0.0.0/8，这个组播地址不属于任何服务器或个人，它有点类似一个微信群号，任何成员（组播源）往微信群（组播IP）发送消息（组播数据），这个群里的成员（组播接收者）都会接收到此消息。</p>
+<p>IPTV就是组播的应用</p>
+<p><a href="https://www.zhihu.com/question/27233903">https://www.zhihu.com/question/27233903</a></p>
+</blockquote>
+<h2 id="formulae">Formulae</h2>
+<h3 id="whos-listening-the-port">Who&rsquo;s listening the port</h3>
+<p><a href="https://superuser.com/a/170860/733022">https://superuser.com/a/170860/733022</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">netstat -lnp <span class="p">|</span> grep <span class="m">1234</span> <span class="c1"># -p should be feeded a value on macOS</span>
+
+<span class="c1"># remember to use sudo</span>
+sudo lsof -i :1234 <span class="c1"># list open file on interface *:1234</span>
+lsof -Pi :1234 <span class="c1"># -P 改善速度</span>
+<span class="c1"># -P inhibits the conversion of port numbers to port names for network files</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="add-static-route">Add Static Route</h3>
+<p>答案可能过于古老，如Ubuntu现在使用<code>netplan</code>, <code>/etc/netplan/</code>配置路由。</p>
+<p><a href="https://www.tecmint.com/ip-command-examples/">ip command examples</a></p>
+<p>for RHEL/CentOS/Fedora</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/sysconfig/network-scripts/route-eth0
+10.10.20.0/24 via 192.168.50.100 dev eth0
+</code></pre></td></tr></table>
+</div>
+</div><p>for Ubuntu/Debian/Linux Mint (过于古老)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/network/interface
+auto eth0
+iface eth0 inet static
+address 192.168.50.2
+netmask 255.255.255.0
+gateway 192.168.50.100
+
+### Static Route ###
+up ip route add 10.10.20.0/24 via 192.168.50.100 dev eth0
+
+# sudo /etc/init.d/network restart
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="references">References</h2>
+<ul>
+<li><a href="https://linux.cn/article-4326-1.html">Comparision between iproute2 and net-tools</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Network_configuration#Network_management">Network management from Arch Wiki</a></li>
+<li><a href="https://dougvitale.wordpress.com/2011/12/21/deprecated-linux-networking-commands-and-their-replacements/">Deprecated Linux networking commands and their replacements</a></li>
+</ul>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">laggardkernel</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2018-11-16
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/linux/">linux</a>
+          <a href="/tags/iproute2/">iproute2</a>
+          <a href="/tags/networking/">networking</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2019/comparison-of-zsh-plugin-managers/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Comparison of ZSH Frameworks and Plugin Managers</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/2018/netcat/">
+            <span class="next-text nav-default">Netcat</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'pseudocold';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/5101148" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/laggardkernel" class="iconfont icon-github" title="github"></a>
+  <a href="https://blog.pseudocold.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">laggardkernel</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

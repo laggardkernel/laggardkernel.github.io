@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DevOps on Home</title>
+    <link>https://blog.pseudocold.com/categories/devops/</link>
+    <description>Recent content in DevOps on Home</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 16 Oct 2019 16:04:22 +0800</lastBuildDate><atom:link href="https://blog.pseudocold.com/categories/devops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TCPKeepAlive v.s. ServerAlive in SSH</title>
+      <link>https://blog.pseudocold.com/post/2019/ssh-tcpkeepalive-vs-serveralive/</link>
+      <pubDate>Wed, 16 Oct 2019 16:04:22 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/ssh-tcpkeepalive-vs-serveralive/</guid>
+      <description>&lt;p&gt;Both &lt;code&gt;TCPKeepAlive&lt;/code&gt; and &lt;code&gt;ServerAliveInterval&lt;/code&gt; for &lt;code&gt;ssh&lt;/code&gt;, are used to keep SSH connection alive. What&amp;rsquo;s the difference between them? Which one should you use?&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Setup DHCP Client with systemd-networkd</title>
+      <link>https://blog.pseudocold.com/post/2019/setup-dhcp-systemd-networkd/</link>
+      <pubDate>Tue, 15 Oct 2019 17:19:31 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/setup-dhcp-systemd-networkd/</guid>
+      <description>&lt;p&gt;Former package group &amp;ldquo;base&amp;rdquo; from Archlinux contains 2 network managers - &lt;code&gt;netctl&lt;/code&gt; and &lt;code&gt;systemd-networkd&lt;/code&gt;, and 1 DHCP client &lt;code&gt;dhcpcd&lt;/code&gt;, which is obviously redundant for a network setup. After &lt;a href=&#34;https://blog.pseudocold.com/post/2019/base-group-replaced-by-mandatory-base-package-in-archlinux&#34;&gt;pkg group &amp;ldquo;base&amp;rdquo; replaced by the same name meta pkg&lt;/a&gt;, only &lt;code&gt;systemd-networkd&lt;/code&gt; is left. For a simple network setup with DHCP, &lt;code&gt;systemd-networkd&lt;/code&gt; is enough to get the work done.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Size of XDG Runtime Dir</title>
+      <link>https://blog.pseudocold.com/post/2019/size-of-xdg-runtime-dir/</link>
+      <pubDate>Tue, 15 Oct 2019 16:27:15 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/size-of-xdg-runtime-dir/</guid>
+      <description>&lt;p&gt;The default size of &lt;code&gt;XDG_RUNTIME_DIR&lt;/code&gt; is 10% of the physical RAM of your machine. What if you wanna increase the size of it?&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Migrate from base Group Package to Meta Pkg in Archlinux</title>
+      <link>https://blog.pseudocold.com/post/2019/migrate-from-base-pkg-group-to-meta-pkg-in-archlinux/</link>
+      <pubDate>Tue, 15 Oct 2019 15:44:09 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/migrate-from-base-pkg-group-to-meta-pkg-in-archlinux/</guid>
+      <description>&lt;p&gt;Package group &amp;ldquo;base&amp;rdquo; is replaced as &lt;a href=&#34;https://www.archlinux.org/news/base-group-replaced-by-mandatory-base-package-manual-intervention-required/&#34;&gt;meta package &amp;ldquo;base&amp;rdquo; on 2019-10-06&lt;/a&gt;. The biggest change introduced by this move is that the kernel pkg &lt;code&gt;linux&lt;/code&gt; is not part of &amp;ldquo;base&amp;rdquo; anymore.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Rewrite the Status Code in Nginx</title>
+      <link>https://blog.pseudocold.com/post/2019/nginx-rewrite-status-code/</link>
+      <pubDate>Tue, 17 Sep 2019 23:53:21 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/nginx-rewrite-status-code/</guid>
+      <description>&lt;p&gt;In consideration of privacy or security, we use &lt;code&gt;deny&lt;/code&gt; and return 403 Forbidden to deny access to some resources. But what if even you don&amp;rsquo;t wanna requesters realize the existence of these resources? It&amp;rsquo;s feasible to rewrite the status code with custom &lt;code&gt;error_page&lt;/code&gt;s.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Nginx 部署 Hugo 静态博客始终本地可用</title>
+      <link>https://blog.pseudocold.com/post/2019/serve-hugo-blog-with-nginx-locally/</link>
+      <pubDate>Mon, 16 Sep 2019 09:28:41 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/serve-hugo-blog-with-nginx-locally/</guid>
+      <description>&lt;p&gt;&lt;code&gt;hugo&lt;/code&gt; 自带测试服务器可以将静态博客运行在本地 &lt;code&gt;https://localhost:1313&lt;/code&gt; 作为测试。本文通过配置 Nginx Web 服务器，部署博客本地始终可用，方便的进行内容检索、查询。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> Multi User Anaconda/Miniconda Installation</title>
+      <link>https://blog.pseudocold.com/post/2018/miniconda-multi-user-installation/</link>
+      <pubDate>Sat, 10 Aug 2019 00:41:23 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/miniconda-multi-user-installation/</guid>
+      <description>&lt;p&gt;在 Linux 中脚本安装 Anaconda/Miniconda 使所有人均可调用。需要 &lt;code&gt;sudo&lt;/code&gt; 权限。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>在 Linux 上利用 Logrotate 切割日志</title>
+      <link>https://blog.pseudocold.com/post/2019/logrotate/</link>
+      <pubDate>Wed, 06 Feb 2019 22:33:27 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/logrotate/</guid>
+      <description>&lt;p&gt;&lt;code&gt;logrotate&lt;/code&gt; 切割日志使用方法，以及以 dnsmasq 为例切割非 root 拥有的日志。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>命令行压缩、解压命令总结</title>
+      <link>https://blog.pseudocold.com/post/2018/archiving-and-compression/</link>
+      <pubDate>Tue, 05 Feb 2019 15:48:50 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/archiving-and-compression/</guid>
+      <description>&lt;p&gt;在命令行里该用什么命令解压什么文件？压缩命令使用总结。个人笔记，非入门教程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Sudo</title>
+      <link>https://blog.pseudocold.com/post/2018/sudo/</link>
+      <pubDate>Sun, 03 Feb 2019 16:27:56 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/sudo/</guid>
+      <description>&lt;p&gt;&lt;code&gt;sudo&lt;/code&gt; 使用全解。&lt;code&gt;sudo -i&lt;/code&gt;, &lt;code&gt;sudo -s&lt;/code&gt;, &lt;code&gt;su&lt;/code&gt;, &lt;code&gt;su -l&lt;/code&gt; 对比。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Su Usage</title>
+      <link>https://blog.pseudocold.com/post/2018/su/</link>
+      <pubDate>Sun, 03 Feb 2019 13:15:48 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/su/</guid>
+      <description>&lt;p&gt;&lt;code&gt;su&lt;/code&gt; 使用，个人笔记。主要理解 &lt;code&gt;su&lt;/code&gt; 默认行为与 &lt;code&gt;sudo&lt;/code&gt; 区别即可。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Pacman Notes</title>
+      <link>https://blog.pseudocold.com/post/2019/pacman-notes/</link>
+      <pubDate>Fri, 01 Feb 2019 22:19:22 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/pacman-notes/</guid>
+      <description>&lt;p&gt;&lt;code&gt;pacman&lt;/code&gt; 使用速查，，个人笔记，非入门教程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>UFW Notes</title>
+      <link>https://blog.pseudocold.com/post/2019/ufw-notes/</link>
+      <pubDate>Fri, 01 Feb 2019 17:36:09 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/ufw-notes/</guid>
+      <description>&lt;p&gt;UFW (Uncomplicated Firewall) 使用速查，个人笔记，非入门教程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>iproute2 Usage</title>
+      <link>https://blog.pseudocold.com/post/2018/iproute2/</link>
+      <pubDate>Fri, 16 Nov 2018 10:25:55 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/iproute2/</guid>
+      <description>&lt;p&gt;net-tools 已经常年无人维护，新工具 iproute2 与 Linux 内核更为紧密。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Netcat</title>
+      <link>https://blog.pseudocold.com/post/2018/netcat/</link>
+      <pubDate>Thu, 15 Nov 2018 22:03:21 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/netcat/</guid>
+      <description>&lt;p&gt;&lt;code&gt;netcat&lt;/code&gt; 个人笔记&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Basic HTTP2 Setup Part 3: FAQ</title>
+      <link>https://blog.pseudocold.com/post/2018/basic-webserver-setup-faq/</link>
+      <pubDate>Fri, 02 Nov 2018 10:20:00 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/basic-webserver-setup-faq/</guid>
+      <description>&lt;p&gt;Setup HTTP/2, TLS 1.3. 拾遗。 (个人笔记，不做注解)&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Basic HTTP2 Setup Part 2: Nginx</title>
+      <link>https://blog.pseudocold.com/post/2018/basic-webserver-setup-nginx/</link>
+      <pubDate>Fri, 02 Nov 2018 10:10:00 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/basic-webserver-setup-nginx/</guid>
+      <description>&lt;p&gt;Setup HTTP/2, TLS 1.3 with LEMP. (个人笔记，不做注解)&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Basic HTTP2 Setup Part 1: Apache</title>
+      <link>https://blog.pseudocold.com/post/2018/basic-webserver-setup-apache/</link>
+      <pubDate>Fri, 02 Nov 2018 10:00:00 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/basic-webserver-setup-apache/</guid>
+      <description>&lt;p&gt;Setup HTTP/2, TLS 1.3 with LAMP. (个人笔记，不做注解)&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MariaDB/MySQL Option Groups</title>
+      <link>https://blog.pseudocold.com/post/2018/mysql-mariadb-option-groups/</link>
+      <pubDate>Sun, 15 Apr 2018 00:18:59 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/mysql-mariadb-option-groups/</guid>
+      <description>&lt;p&gt;What&amp;rsquo;s the difference between &lt;code&gt;[mysql]&lt;/code&gt; and &lt;code&gt;[client]&lt;/code&gt; group in &lt;code&gt;/etc/my.cnf&lt;/code&gt;. Here is it.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MariaDB/MySQL Setup: All in One</title>
+      <link>https://blog.pseudocold.com/post/2018/mysql-mariadb-setup/</link>
+      <pubDate>Fri, 30 Mar 2018 23:35:45 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/mysql-mariadb-setup/</guid>
+      <description>&lt;p&gt;MariaDB, MySQL安装配置全指南。MySQL语法参考笔记《MySQL必知必会》读书笔记。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

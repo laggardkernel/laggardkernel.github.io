@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TUI on Home</title>
+    <link>https://blog.pseudocold.xyz/categories/tui/</link>
+    <description>Recent content in TUI on Home</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 29 Sep 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.pseudocold.xyz/categories/tui/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Pip v.s. Conda</title>
+      <link>https://blog.pseudocold.xyz/post/2019/pip-vs-conda/</link>
+      <pubDate>Sun, 29 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.xyz/post/2019/pip-vs-conda/</guid>
+      <description>&lt;p&gt;Differences between &lt;code&gt;pip&lt;/code&gt; and &lt;code&gt;conda.&lt;/code&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> Multi User Anaconda/Miniconda Installation</title>
+      <link>https://blog.pseudocold.xyz/post/2018/miniconda-multi-user-installation/</link>
+      <pubDate>Sat, 10 Aug 2019 00:41:23 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.xyz/post/2018/miniconda-multi-user-installation/</guid>
+      <description>&lt;p&gt;在 Linux 中脚本安装 Anaconda/Miniconda 使所有人均可调用。需要 &lt;code&gt;sudo&lt;/code&gt; 权限。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Implement a Custom chpwd Hook for Bash</title>
+      <link>https://blog.pseudocold.xyz/post/2019/chpwd-equivalent-in-bash/</link>
+      <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.xyz/post/2019/chpwd-equivalent-in-bash/</guid>
+      <description>&lt;p&gt;Implement a chpwd hook in Bash to trigger functions on working dir changes.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Trigger chpwd hook on ZSH startup</title>
+      <link>https://blog.pseudocold.xyz/post/2019/trigger-chpwd-on-zsh-startup/</link>
+      <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.xyz/post/2019/trigger-chpwd-on-zsh-startup/</guid>
+      <description>&lt;p&gt;By default, ZSH hook &lt;code&gt;chpwd&lt;/code&gt; is not triggered on shell startup. The tutorial here provides some ideas to fix this.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Dynamic Umask Based on Current Working Directory</title>
+      <link>https://blog.pseudocold.xyz/post/2019/dynamic-umask-based-on-cwd/</link>
+      <pubDate>Fri, 19 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.xyz/post/2019/dynamic-umask-based-on-cwd/</guid>
+      <description>&lt;p&gt;Set umask values per-directory.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Share Configuration Files between Vim and Neovim</title>
+      <link>https://blog.pseudocold.xyz/post/2019/share-conf-between-vim-and-nvim/</link>
+      <pubDate>Fri, 19 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.xyz/post/2019/share-conf-between-vim-and-nvim/</guid>
+      <description>&lt;p&gt;Share configuration files between &lt;code&gt;vim&lt;/code&gt; and &lt;code&gt;nvim&lt;/code&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Determine Whether a Command Exists in ZSH</title>
+      <link>https://blog.pseudocold.xyz/post/2019/whether-a-command-exists-in-zsh/</link>
+      <pubDate>Sun, 16 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.xyz/post/2019/whether-a-command-exists-in-zsh/</guid>
+      <description>&lt;p&gt;Check whether a command exists using ZSH.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>命令行压缩、解压命令总结</title>
+      <link>https://blog.pseudocold.xyz/post/2018/archiving-and-compression/</link>
+      <pubDate>Tue, 05 Feb 2019 15:48:50 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.xyz/post/2018/archiving-and-compression/</guid>
+      <description>&lt;p&gt;在命令行里该用什么命令解压什么文件？压缩命令使用总结。个人笔记，非入门教程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Sudo</title>
+      <link>https://blog.pseudocold.xyz/post/2018/sudo/</link>
+      <pubDate>Sun, 03 Feb 2019 16:27:56 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.xyz/post/2018/sudo/</guid>
+      <description>&lt;p&gt;&lt;code&gt;sudo&lt;/code&gt; 使用全解。&lt;code&gt;sudo -i&lt;/code&gt;, &lt;code&gt;sudo -s&lt;/code&gt;, &lt;code&gt;su&lt;/code&gt;, &lt;code&gt;su -l&lt;/code&gt; 对比。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Su Usage</title>
+      <link>https://blog.pseudocold.xyz/post/2018/su/</link>
+      <pubDate>Sun, 03 Feb 2019 13:15:48 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.xyz/post/2018/su/</guid>
+      <description>&lt;p&gt;&lt;code&gt;su&lt;/code&gt; 使用，个人笔记。主要理解 &lt;code&gt;su&lt;/code&gt; 默认行为与 &lt;code&gt;sudo&lt;/code&gt; 区别即可。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Pacman Notes</title>
+      <link>https://blog.pseudocold.xyz/post/2019/pacman-notes/</link>
+      <pubDate>Fri, 01 Feb 2019 22:19:22 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.xyz/post/2019/pacman-notes/</guid>
+      <description>&lt;p&gt;&lt;code&gt;pacman&lt;/code&gt; 使用速查，，个人笔记，非入门教程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>UFW Notes</title>
+      <link>https://blog.pseudocold.xyz/post/2019/ufw-notes/</link>
+      <pubDate>Fri, 01 Feb 2019 17:36:09 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.xyz/post/2019/ufw-notes/</guid>
+      <description>&lt;p&gt;UFW (Uncomplicated Firewall) 使用速查，个人笔记，非入门教程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Comparison of ZSH Frameworks and Plugin Managers</title>
+      <link>https://blog.pseudocold.xyz/post/2019/comparison-of-zsh-plugin-managers/</link>
+      <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.xyz/post/2019/comparison-of-zsh-plugin-managers/</guid>
+      <description>&lt;p&gt;A comparison of all kinds of ZSH frameworks and plugin manager. Try to find the fastest one.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Netcat</title>
+      <link>https://blog.pseudocold.xyz/post/2018/netcat/</link>
+      <pubDate>Thu, 15 Nov 2018 22:03:21 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.xyz/post/2018/netcat/</guid>
+      <description>&lt;p&gt;&lt;code&gt;netcat&lt;/code&gt; 个人笔记&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

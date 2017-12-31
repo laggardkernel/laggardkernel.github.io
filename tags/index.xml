@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Home</title>
+    <link>https://blog.pseudocold.com/tags/</link>
+    <description>Recent content in Tags on Home</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 16 Oct 2019 16:04:22 +0800</lastBuildDate><atom:link href="https://blog.pseudocold.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>linux</title>
+      <link>https://blog.pseudocold.com/tags/linux/</link>
+      <pubDate>Wed, 16 Oct 2019 16:04:22 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>macos</title>
+      <link>https://blog.pseudocold.com/tags/macos/</link>
+      <pubDate>Wed, 16 Oct 2019 16:04:22 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/macos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ssh</title>
+      <link>https://blog.pseudocold.com/tags/ssh/</link>
+      <pubDate>Wed, 16 Oct 2019 16:04:22 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/ssh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>archlinux</title>
+      <link>https://blog.pseudocold.com/tags/archlinux/</link>
+      <pubDate>Tue, 15 Oct 2019 17:19:31 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/archlinux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dhcp</title>
+      <link>https://blog.pseudocold.com/tags/dhcp/</link>
+      <pubDate>Tue, 15 Oct 2019 17:19:31 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/dhcp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>systemd</title>
+      <link>https://blog.pseudocold.com/tags/systemd/</link>
+      <pubDate>Tue, 15 Oct 2019 17:19:31 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/systemd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>xdg</title>
+      <link>https://blog.pseudocold.com/tags/xdg/</link>
+      <pubDate>Tue, 15 Oct 2019 16:27:15 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/xdg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>conda</title>
+      <link>https://blog.pseudocold.com/tags/conda/</link>
+      <pubDate>Sun, 29 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/conda/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pip</title>
+      <link>https://blog.pseudocold.com/tags/pip/</link>
+      <pubDate>Sun, 29 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/pip/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nginx</title>
+      <link>https://blog.pseudocold.com/tags/nginx/</link>
+      <pubDate>Tue, 17 Sep 2019 23:53:21 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>h2</title>
+      <link>https://blog.pseudocold.com/tags/h2/</link>
+      <pubDate>Mon, 16 Sep 2019 09:28:41 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/h2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>https</title>
+      <link>https://blog.pseudocold.com/tags/https/</link>
+      <pubDate>Mon, 16 Sep 2019 09:28:41 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/https/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>https://blog.pseudocold.com/tags/hugo/</link>
+      <pubDate>Mon, 16 Sep 2019 09:28:41 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tls</title>
+      <link>https://blog.pseudocold.com/tags/tls/</link>
+      <pubDate>Mon, 16 Sep 2019 09:28:41 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/tls/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>flask</title>
+      <link>https://blog.pseudocold.com/tags/flask/</link>
+      <pubDate>Thu, 12 Sep 2019 22:37:35 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/flask/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>web</title>
+      <link>https://blog.pseudocold.com/tags/web/</link>
+      <pubDate>Thu, 12 Sep 2019 22:37:35 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>flask-mail</title>
+      <link>https://blog.pseudocold.com/tags/flask-mail/</link>
+      <pubDate>Fri, 09 Aug 2019 11:09:58 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/flask-mail/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bash</title>
+      <link>https://blog.pseudocold.com/tags/bash/</link>
+      <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/bash/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>zsh</title>
+      <link>https://blog.pseudocold.com/tags/zsh/</link>
+      <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/zsh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>direnv</title>
+      <link>https://blog.pseudocold.com/tags/direnv/</link>
+      <pubDate>Fri, 19 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/direnv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>neovim</title>
+      <link>https://blog.pseudocold.com/tags/neovim/</link>
+      <pubDate>Fri, 19 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/neovim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>umask</title>
+      <link>https://blog.pseudocold.com/tags/umask/</link>
+      <pubDate>Fri, 19 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/umask/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vim</title>
+      <link>https://blog.pseudocold.com/tags/vim/</link>
+      <pubDate>Fri, 19 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/vim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>logrotate</title>
+      <link>https://blog.pseudocold.com/tags/logrotate/</link>
+      <pubDate>Wed, 06 Feb 2019 22:33:27 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/logrotate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sudo</title>
+      <link>https://blog.pseudocold.com/tags/sudo/</link>
+      <pubDate>Sun, 03 Feb 2019 16:27:56 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/sudo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>su</title>
+      <link>https://blog.pseudocold.com/tags/su/</link>
+      <pubDate>Sun, 03 Feb 2019 13:15:48 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/su/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pacman</title>
+      <link>https://blog.pseudocold.com/tags/pacman/</link>
+      <pubDate>Fri, 01 Feb 2019 22:19:22 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/pacman/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>firewall</title>
+      <link>https://blog.pseudocold.com/tags/firewall/</link>
+      <pubDate>Fri, 01 Feb 2019 17:36:09 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/firewall/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ufw</title>
+      <link>https://blog.pseudocold.com/tags/ufw/</link>
+      <pubDate>Fri, 01 Feb 2019 17:36:09 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/ufw/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>iproute2</title>
+      <link>https://blog.pseudocold.com/tags/iproute2/</link>
+      <pubDate>Fri, 16 Nov 2018 10:25:55 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/iproute2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>networking</title>
+      <link>https://blog.pseudocold.com/tags/networking/</link>
+      <pubDate>Fri, 16 Nov 2018 10:25:55 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/networking/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>netcat</title>
+      <link>https://blog.pseudocold.com/tags/netcat/</link>
+      <pubDate>Thu, 15 Nov 2018 22:03:21 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/netcat/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>network</title>
+      <link>https://blog.pseudocold.com/tags/network/</link>
+      <pubDate>Thu, 15 Nov 2018 22:03:21 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/network/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>font</title>
+      <link>https://blog.pseudocold.com/tags/font/</link>
+      <pubDate>Wed, 07 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/font/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>apache</title>
+      <link>https://blog.pseudocold.com/tags/apache/</link>
+      <pubDate>Fri, 02 Nov 2018 10:20:00 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/apache/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mysql</title>
+      <link>https://blog.pseudocold.com/tags/mysql/</link>
+      <pubDate>Fri, 02 Nov 2018 10:20:00 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/mysql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>php</title>
+      <link>https://blog.pseudocold.com/tags/php/</link>
+      <pubDate>Fri, 02 Nov 2018 10:20:00 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/php/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mariadb</title>
+      <link>https://blog.pseudocold.com/tags/mariadb/</link>
+      <pubDate>Sun, 15 Apr 2018 00:18:59 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/mariadb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>defaults</title>
+      <link>https://blog.pseudocold.com/tags/defaults/</link>
+      <pubDate>Fri, 09 Feb 2018 08:49:54 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/defaults/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>touchbar</title>
+      <link>https://blog.pseudocold.com/tags/touchbar/</link>
+      <pubDate>Fri, 09 Feb 2018 08:49:54 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/tags/touchbar/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

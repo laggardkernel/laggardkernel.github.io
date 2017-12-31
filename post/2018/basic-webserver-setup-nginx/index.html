@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Basic HTTP2 Setup Part 2: Nginx - Home</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="laggardkernel" /><meta name="description" content="Setup HTTP/2, TLS 1.3 with LEMP. (个人笔记，不做注解)
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.pseudocold.com/post/2018/basic-webserver-setup-nginx/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Basic HTTP2 Setup Part 2: Nginx" />
+<meta property="og:description" content="Setup HTTP/2, TLS 1.3 with LEMP. (个人笔记，不做注解)" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pseudocold.com/post/2018/basic-webserver-setup-nginx/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-11-02T10:10:00&#43;08:00" />
+<meta property="article:modified_time" content="2018-11-02T10:10:00&#43;08:00" />
+
+<meta itemprop="name" content="Basic HTTP2 Setup Part 2: Nginx">
+<meta itemprop="description" content="Setup HTTP/2, TLS 1.3 with LEMP. (个人笔记，不做注解)"><meta itemprop="datePublished" content="2018-11-02T10:10:00&#43;08:00" />
+<meta itemprop="dateModified" content="2018-11-02T10:10:00&#43;08:00" />
+<meta itemprop="wordCount" content="2047">
+<meta itemprop="keywords" content="linux,nginx,mysql,php,h2,tls," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Basic HTTP2 Setup Part 2: Nginx"/>
+<meta name="twitter:description" content="Setup HTTP/2, TLS 1.3 with LEMP. (个人笔记，不做注解)"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Home</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Home</a>
+</div>
+
+<nav class="site-navbar">
+    
+      <div class="top-progress-bar"></div>
+    
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Basic HTTP2 Setup Part 2: Nginx</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-11-02 </span>
+        <div class="post-category">
+            <a href="/categories/devops/"> DevOps </a>
+            <a href="/categories/notes/"> Notes </a>
+            </div>
+          <span class="more-meta"> 2047 words </span>
+          <span class="more-meta"> 5 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#installation">Installation</a>
+      <ul>
+        <li><a href="#lemp">LEMP</a></li>
+        <li><a href="#phpmyadmin">phpMyAdmin</a></li>
+      </ul>
+    </li>
+    <li><a href="#config">Config</a></li>
+    <li><a href="#debug">Debug</a></li>
+    <li><a href="#custom-ssl-certificate">Custom SSL Certificate</a>
+      <ul>
+        <li><a href="#disable-gzip-for-https">Disable gzip for HTTPS</a></li>
+      </ul>
+    </li>
+    <li><a href="#http2">HTTP/2</a></li>
+    <li><a href="#redirect-and-hstp">Redirect and HSTP</a></li>
+    <li><a href="#nginx-3rd-party-modules">NginX 3rd Party Modules</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Setup HTTP/2, TLS 1.3 with LEMP. (个人笔记，不做注解)</p>
+<h1 id="nginx">Nginx</h1>
+<p>配置项要以分号<code>;</code>结尾。</p>
+<h2 id="installation">Installation</h2>
+<p>references</p>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04">How To Install Nginx on Ubuntu 18.04</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-ubuntu-18-04">How To Install Linux, Nginx, MySQL, PHP (LEMP stack) on Ubuntu 18.04</a>
+<ul>
+<li><code>E</code> for <code>Engine-X</code></li>
+</ul>
+</li>
+</ul>
+<p>install, ufw, vhosts(optional),</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt install nginx
+sudo ufw app list
+sudo ufw allow in <span class="s2">&#34;Nginx Full&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="c">&lt;!-- /var/www/example.com/html/index.html --&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Welcome to Example.com!<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Success!  The example.com server block is working!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/sites-available/example.com
+server {
+        listen 80;
+        listen [::]:80;
+
+        root /var/www/example.com/html;
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name example.com www.example.com;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>apache与nginx同时测试时把<code>index.nginx-debian.html</code>优先级提高。</p>
+<p>enable vhost</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>bucket memory problem</strong>?</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/nginx.conf
+...
+http {
+    ...
+    server_names_hash_bucket_size 64;
+    ...
+}
+...
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo nginx -t
+sudo systemctl restart nginx
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="lemp">LEMP</h3>
+<p>setup mysql. 见上面</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt install php-fpm php-mysql
+</code></pre></td></tr></table>
+</div>
+</div><p>config php use vhosts(optional)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/sites-available/example.conf
+server {
+        listen 80;
+        root /var/www/html;
+        index index.php index.nginx-debian.html index.html index.htm;
+        server_name example.com www.example.com;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+
+        location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+                fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+                #fastcgi_pass 127.0.0.1:9000;
+        }
+
+        location ~ /\.ht {
+                deny all; # block deals with .htaccess files
+        }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>Linux中<code>fpm-php</code>默认监听<code>/run/php/php7.2-fpm.sock</code> (<code>/etc/php/7.2/fpm/pool.d/www.conf</code>)</p>
+<p>enable vhost and disable default</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
+sudo unlink /etc/nginx/sites-enabled/default
+</code></pre></td></tr></table>
+</div>
+</div><p>php test <code>info.php</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="c1"># /var/www/html/info.php
+</span><span class="c1"></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nx">phpinfo</span><span class="p">();</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>restart</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo nginx -t
+sudo systemctl restart nginx
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="phpmyadmin">phpMyAdmin</h3>
+<p>Ubuntu phpmyadmin包自带apache.conf配置，但是其他distro没有。不管怎样，哪个distro都需要我们为phpmyadmin手写nginx配置。</p>
+<ul>
+<li>subdomain</li>
+<li>subdirectory (按教程中配置未生效，与全局root位置有关？)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
+    <span class="kn">server_name</span> <span class="s">pma.mubuntu-pd.test</span><span class="p">;</span>
+    <span class="c1"># listen 80; # also listen on http
+</span><span class="c1"></span>    <span class="c1"># listen [::]:80;
+</span><span class="c1"></span>    <span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span> <span class="s">http2</span><span class="p">;</span>
+    <span class="c1">#listen [::]:443 ssl http2 ipv6only=on;
+</span><span class="c1"></span>    <span class="kn">include</span> <span class="s">snippets/self-signed.conf</span><span class="p">;</span> <span class="c1"># cert
+</span><span class="c1"></span>    <span class="kn">include</span> <span class="s">snippets/ssl-params.conf</span><span class="p">;</span>
+    <span class="kn">gzip</span> <span class="no">off</span><span class="p">;</span>
+
+    <span class="kn">index</span> <span class="s">index.php</span><span class="p">;</span>
+    <span class="kn">access_log</span> <span class="s">/var/log/nginx/pma.access.log</span><span class="p">;</span>
+    <span class="kn">error_log</span> <span class="s">/var/log/nginx/pma.error.log</span><span class="p">;</span>
+
+    <span class="c1"># Allows limiting access to certain client addresses.
+</span><span class="c1"></span>    <span class="c1"># allow 192.168.1.0/24;
+</span><span class="c1"></span>    <span class="c1"># allow my-ip;
+</span><span class="c1"></span>    <span class="c1"># deny all;
+</span><span class="c1"></span>
+    <span class="kn">root</span> <span class="s">/usr/share/phpmyadmin</span><span class="p">;</span>
+    <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+        <span class="kn">try_files</span> <span class="nv">$uri</span> <span class="nv">$uri/</span> <span class="p">=</span><span class="mi">404</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kn">location</span> <span class="p">~</span> <span class="sr">/\.ht</span> <span class="p">{</span>
+        <span class="kn">deny</span> <span class="s">all</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kn">error_page</span> <span class="mi">404</span> <span class="s">/index.php</span><span class="p">;</span>
+
+    <span class="kn">location</span> <span class="p">~</span> <span class="sr">\.php$</span> <span class="p">{</span>
+        <span class="kn">include</span> <span class="s">snippets/fastcgi-php.conf</span><span class="p">;</span>
+        <span class="kn">fastcgi_pass</span> <span class="s">unix:/var/run/php/php7.2-fpm.sock</span><span class="p">;</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>subdirectory with <code>alias</code></p>
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/PhpMyAdmin#Nginx">phpmyadmin on arch wiki</a></li>
+<li><a href="https://serverfault.com/questions/223028/alias-using-nginx-causing-phpmyadmin-login-endless-loop">Alias using Nginx causing phpMyAdmin login endless loop
+</a>
+<ul>
+<li><code>DOCUMENT_ROOT</code> does the trick</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="c1"># vim: syntax=nginx ts=4 sw=4 sts=4 sr noet
+</span><span class="c1"># https://wiki.archlinux.org/index.php/PhpMyAdmin#Nginx
+</span><span class="c1"># https://serverfault.com/questions/223028/alias-using-nginx-causing-phpmyadmin-login-endless-loop
+</span><span class="c1"></span><span class="k">location</span> <span class="s">/phpmyadmin/</span> <span class="p">{</span>
+	<span class="kn">alias</span> <span class="s">/usr/share/phpmyadmin/</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">location</span> <span class="p">~</span> <span class="sr">^/phpmyadmin/(.+\.php)$</span> <span class="p">{</span>
+	<span class="kn">alias</span> <span class="s">/usr/share/phpmyadmin/</span><span class="nv">$1</span><span class="p">;</span>
+	<span class="kn">fastcgi_pass</span>   <span class="s">unix:/var/run/php/php7.2-fpm.sock</span><span class="p">;</span>
+	<span class="kn">fastcgi_index</span>  <span class="s">index.php</span><span class="p">;</span>
+	<span class="kn">fastcgi_param</span>  <span class="s">SCRIPT_FILENAME</span>  <span class="nv">$request_filename</span><span class="p">;</span>
+	<span class="c1"># change document root
+</span><span class="c1"></span>	<span class="kn">fastcgi_param</span>  <span class="s">DOCUMENT_ROOT</span>      <span class="s">/usr/share/phpmyadmin</span><span class="p">;</span>
+
+	<span class="c1"># borrowed from fastcgi.conf
+</span><span class="c1"></span>	<span class="c1">#fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;
+</span><span class="c1"></span>	<span class="kn">fastcgi_param</span>  <span class="s">QUERY_STRING</span>       <span class="nv">$query_string</span><span class="p">;</span>
+	<span class="kn">fastcgi_param</span>  <span class="s">REQUEST_METHOD</span>     <span class="nv">$request_method</span><span class="p">;</span>
+	<span class="kn">fastcgi_param</span>  <span class="s">CONTENT_TYPE</span>       <span class="nv">$content_type</span><span class="p">;</span>
+	<span class="kn">fastcgi_param</span>  <span class="s">CONTENT_LENGTH</span>     <span class="nv">$content_length</span><span class="p">;</span>
+
+	<span class="kn">fastcgi_param</span>  <span class="s">SCRIPT_NAME</span>        <span class="nv">$fastcgi_script_name</span><span class="p">;</span>
+	<span class="kn">fastcgi_param</span>  <span class="s">REQUEST_URI</span>        <span class="nv">$request_uri</span><span class="p">;</span>
+	<span class="kn">fastcgi_param</span>  <span class="s">DOCUMENT_URI</span>       <span class="nv">$document_uri</span><span class="p">;</span>
+	<span class="c1">#fastcgi_param  DOCUMENT_ROOT      $document_root;
+</span><span class="c1"></span>	<span class="kn">fastcgi_param</span>  <span class="s">SERVER_PROTOCOL</span>    <span class="nv">$server_protocol</span><span class="p">;</span>
+	<span class="kn">fastcgi_param</span>  <span class="s">REQUEST_SCHEME</span>     <span class="nv">$scheme</span><span class="p">;</span>
+	<span class="kn">fastcgi_param</span>  <span class="s">HTTPS</span>              <span class="nv">$https</span> <span class="s">if_not_empty</span><span class="p">;</span>
+
+	<span class="kn">fastcgi_param</span>  <span class="s">GATEWAY_INTERFACE</span>  <span class="s">CGI/1.1</span><span class="p">;</span>
+	<span class="kn">fastcgi_param</span>  <span class="s">SERVER_SOFTWARE</span>    <span class="s">nginx/</span><span class="nv">$nginx_version</span><span class="p">;</span>
+
+	<span class="kn">fastcgi_param</span>  <span class="s">REMOTE_ADDR</span>        <span class="nv">$remote_addr</span><span class="p">;</span>
+	<span class="kn">fastcgi_param</span>  <span class="s">REMOTE_PORT</span>        <span class="nv">$remote_port</span><span class="p">;</span>
+	<span class="kn">fastcgi_param</span>  <span class="s">SERVER_ADDR</span>        <span class="nv">$server_addr</span><span class="p">;</span>
+	<span class="kn">fastcgi_param</span>  <span class="s">SERVER_PORT</span>        <span class="nv">$server_port</span><span class="p">;</span>
+	<span class="kn">fastcgi_param</span>  <span class="s">SERVER_NAME</span>        <span class="nv">$server_name</span><span class="p">;</span>
+
+<span class="c1"># PHP only, required if PHP was built with --enable-force-cgi-redirect
+</span><span class="c1"></span>	<span class="kn">fastcgi_param</span>  <span class="s">REDIRECT_STATUS</span>    <span class="mi">200</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># Deny static files
+</span><span class="c1"></span><span class="k">location</span> <span class="p">~</span> <span class="sr">^/phpmyadmin/(README|LICENSE|ChangeLog|DCO)$</span> <span class="p">{</span>
+	<span class="kn">deny</span> <span class="s">all</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># Deny .md files
+</span><span class="c1"></span><span class="k">location</span> <span class="p">~</span> <span class="sr">^/phpmyadmin/(.+\.md)$</span> <span class="p">{</span>
+	<span class="kn">deny</span> <span class="s">all</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># Deny setup directories
+</span><span class="c1"></span><span class="k">location</span> <span class="p">~</span> <span class="sr">^/phpmyadmin/(doc|sql|setup)/</span> <span class="p">{</span>
+	<span class="kn">deny</span> <span class="s">all</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># borrowed from /etc/phpadmin/apache.conf
+</span><span class="c1"></span><span class="k">location</span> <span class="p">~</span> <span class="sr">^/phpmyadmin/(templates|libraries)/</span> <span class="p">{</span>
+	<span class="kn">deny</span> <span class="s">all</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="config">Config</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">❯ tree /etc/nginx -L 1
+/etc/nginx
+├── conf.d
+├── modules-available
+├── modules-enabled
+├── sites-available
+├── sites-enabled
+├── snippets
+├── dhparam.pem
+├── fastcgi.conf
+├── fastcgi_params
+├── koi-utf
+├── koi-win
+├── mime.types
+├── nginx.conf
+├── proxy_params
+├── scgi_params
+├── uwsgi_params
+└── win-utf
+
+6 directories, 11 files
+</code></pre></td></tr></table>
+</div>
+</div><p>Tip</p>
+<ul>
+<li><code>snippets</code>中配置通用片段（如SSL cert，param），在vhost中引入</li>
+</ul>
+<h2 id="debug">Debug</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo nginx -t
+
+sudo nginx
+sudo nginx -s stop <span class="c1"># SIGTERM</span>
+sudo nginx -s quit
+sudo nginx -s reopen <span class="c1"># SIGUSR1</span>
+sudo ngxin -s reload <span class="c1"># SIGHUP</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="custom-ssl-certificate">Custom SSL Certificate</h2>
+<p>references</p>
+<ul>
+<li><a href="https://keer.me/Using-mkcert-to-generate-local-HTTPS-certificates/">使用mkcert生成本地HTTPS证书</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-18-04">How To Create a Self-Signed SSL Certificate for Nginx in Ubuntu 18.04</a></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo openssl req -x509 -nodes -days <span class="m">365</span> -newkey rsa:2048 <span class="se">\
+</span><span class="se"></span>-keyout /etc/ssl/private/nginx-selfsigned.key <span class="se">\
+</span><span class="se"></span>-out /etc/ssl/certs/nginx-selfsigned.crt
+<span class="c1"># req, X.509 certificate signing request (CSR) management</span>
+<span class="c1"># -x509, make self-signed certificate instead of generating a certificate signing request</span>
+<span class="c1"># -nodes, skip securing cert with passphrase</span>
+<span class="c1"># -newkey rsa:2048, new cert and new key at the same time 否则还是两次操作</span>
+
+<span class="c1"># Diffie-Hellman group for negotiating Perfect Forward Secrecy</span>
+<span class="c1"># https://en.wikipedia.org/wiki/Forward_secrecy</span>
+sudo openssl dhparam -out /etc/nginx/dhparam.pem <span class="m">4096</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>前向保密（Perfect Forward Secrecy，PFS）：长期使用的主密钥泄漏不会导致过去的会话密钥泄漏。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/conf.d/*
+# or prefer
+# /etc/nginx/snippets/self-signed.conf
+ssl_certificate     /etc/nginx/ssl/homestead.app.pem;
+ssl_certificate_key /etc/nginx/ssl/homestead.app-key.pem;
+
+# chmod 644
+</code></pre></td></tr></table>
+</div>
+</div><p>strong encryption settings from <a href="https://cipherli.st/">cipherli.st</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/snippets/ssl-params.conf
+ssl_protocols TLSv1.3;# Requires nginx &gt;= 1.13.0 else use TLSv1.2
+ssl_prefer_server_ciphers on;
+ssl_dhparam /etc/nginx/dhparam.pem; # openssl dhparam -out /etc/nginx/dhparam.pem 4096
+ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384;
+ssl_ecdh_curve secp384r1; # Requires nginx &gt;= 1.1.0
+ssl_session_timeout  10m;
+ssl_session_cache shared:SSL:10m;
+ssl_session_tickets off; # Requires nginx &gt;= 1.5.9
+ssl_stapling on; # Requires nginx &gt;= 1.3.7
+ssl_stapling_verify on; # Requires nginx =&gt; 1.3.7
+# resolver $DNS-IP-1 $DNS-IP-2 valid=300s;
+resolver 114.114.114.114 8.8.4.4 valid=300s;
+resolver_timeout 5s;
+# Disable strict transport security for now. You can uncomment the following
+# line if you understand the implications.
+# add_header Strict-Transport-Security &#34;max-age=63072000; includeSubDomains; preload&#34;;
+add_header X-Frame-Options DENY;
+add_header X-Content-Type-Options nosniff;
+add_header X-XSS-Protection &#34;1; mode=block&#34;;
+
+# chmod 644
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Note</strong>: self-signed certificate can&rsquo;t use SSL stapling.</p>
+<p>enable SSL in vhost</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/sites-available/example.com
+server {
+    listen 443 ssl;    # ssl
+    listen [::]:443 ssl;
+    include snippets/self-signed.conf;
+    include snippets/ssl-params.conf;
+
+    server_name example.com www.example.com;
+
+    root /var/www/example.com/html;
+    index index.html index.htm index.nginx-debian.html;
+
+    . . .
+}
+
+. . .
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name example.com www.example.com;
+
+    return 302 https://$server_name$request_uri;
+    # return 301 https://$server_name$request_uri;
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="disable-gzip-for-https">Disable gzip for HTTPS</h3>
+<p><a href="https://serverfault.com/questions/544279/nginx-disable-gzip-compression-for-https-only">Nginx: Disable gzip-compression for https only</a></p>
+<p>separate your config into http and https.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">server {
+    listen 443 ssl default_server;
+    listen [::]:443 ssl default_server;
+    include snippets/self-signed.conf;
+    include snippets/ssl-params.conf;
+
+    # Note: You should disable gzip for SSL traffic.
+    # See: https://bugs.debian.org/773332
+    gzip off;
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="http2">HTTP/2</h2>
+<p><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-with-http-2-support-on-ubuntu-18-04">How To Set Up Nginx with HTTP/2 Support on Ubuntu 18.04</a></p>
+<p>features of HTTP/2</p>
+<ul>
+<li>All requests are downloaded in <strong>parallel</strong>, not in a queue</li>
+<li>HTTP <strong>headers are compressed</strong></li>
+<li>Pages transfer as a <strong>binary</strong>, not as a text file, which is more efficient</li>
+<li>Servers can <strong>“push”</strong> data even without the user’s request, which improves speed for users with high latency</li>
+</ul>
+<p>h2 over cleartext 目前没有主流浏览器支持，但是某些非浏览器<code>curl</code>等支持。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">...
+    listen [::]:443 ssl http2 ipv6only=on;
+    listen 443 ssl http2;
+...
+</code></pre></td></tr></table>
+</div>
+</div><p>remove old and insecure cipher suite <a href="https://http2.github.io/http2-spec/#BadCipherSuites">blacklist</a>. ciperli.st配置过应该可以跳过此步骤。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/sites-available/your_domain
+
+# include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># reload</span>
+sudo nginx -t
+sudo systemctl reload nginx
+
+curl -I -L http://your_domain
+<span class="c1"># -k, --insecure</span>
+<span class="c1"># --cacert, location for cacert</span>
+<span class="c1"># redirect HTTP/1.1 to HTTP(S)/2</span>
+<span class="c1"># 这里作者笔误，应该是curl HTTP，curl HTTPS直接使用HTTP/2</span>
+
+❯ curl -k -I -L http://mubuntu-pd.test/
+HTTP/1.1 <span class="m">302</span> Moved Temporarily
+Server: nginx/1.15.5 <span class="o">(</span>Ubuntu<span class="o">)</span>
+Date: Wed, <span class="m">10</span> Apr <span class="m">2019</span> 20:16:04 GMT
+Content-Type: text/html
+Content-Length: <span class="m">154</span>
+Connection: keep-alive
+Location: https://mubuntu-pd.test/
+
+HTTP/2 <span class="m">200</span>
+server: nginx/1.15.5 <span class="o">(</span>Ubuntu<span class="o">)</span>
+date: Wed, <span class="m">10</span> Apr <span class="m">2019</span> 20:16:04 GMT
+content-type: text/html
+content-length: <span class="m">612</span>
+last-modified: Wed, <span class="m">10</span> Apr <span class="m">2019</span> 17:12:04 GMT
+etag: <span class="s2">&#34;5cae23e4-264&#34;</span>
+x-frame-options: DENY
+x-content-type-options: nosniff
+x-xss-protection: 1<span class="p">;</span> <span class="nv">mode</span><span class="o">=</span>block
+accept-ranges: bytes
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="redirect-and-hstp">Redirect and HSTP</h2>
+<p>HTTP Strict Transport Security (HSTS)</p>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-with-http-2-support-on-ubuntu-18-04#step-4-%E2%80%94-enabling-http-strict-transport-security-hsts">Enable HSTS to avoid HTTPS redirection</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Downgrade_attack">downgrade attacks</a></li>
+</ul>
+<p>enable HTTP Strict Transport Security (HSTS) to <strong>avoid</strong> having to do those <strong>redirects</strong>. If the browser finds an HSTS header. 避免HTTP冲定向HTTPS，让浏览器记住协议HTTPS。</p>
+<p>add <code>Strict-Transport-Security</code> header to make</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/nginx/nginx.conf # 应用到全局?
+http {
+...
+    ##
+    # Virtual Host Configs
+    ##
+
+    include /etc/nginx/conf.d/*.conf;
+    include /etc/nginx/sites-enabled/*;
+    add_header Strict-Transport-Security &#34;max-age=15768000&#34; always; # 6 months
+}
+...
+</code></pre></td></tr></table>
+</div>
+</div><p>这里配置有问题，HSTS需要配置到具体vhost文件的<code>server</code>部分下。</p>
+<p>应用到子域名。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># remember HTTPS protocol 6 months
+add_header Strict-Transport-Security &#34;max-age=15768000; includeSubDomains&#34; always;
+</code></pre></td></tr></table>
+</div>
+</div><p>check site HSTS status.</p>
+<p><code>chrome://net-internals/#hsts</code></p>
+<p><a href="https://security.stackexchange.com/questions/92954/how-can-i-see-which-sites-have-set-the-hsts-flag-in-my-browser">How can I see which sites have set the HSTS flag in my browser?</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">about:profile
+~/Library/Application Support/Firefox/Profiles
+SiteSecurityServiceState.txt
+</code></pre></td></tr></table>
+</div>
+</div><p><del>暂时认定自签证书不能使用HSTS。</del></p>
+<h2 id="nginx-3rd-party-modules">NginX 3rd Party Modules</h2>
+<ul>
+<li><a href="https://www.nginx.com/resources/wiki/modules/">NGINX 3rd Party Modules</a></li>
+<li><a href="https://github.com/denji/homebrew-nginx">Nginx with 3rd party modules, homebrew formula</a></li>
+</ul>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">laggardkernel</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2018-11-02
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/linux/">linux</a>
+          <a href="/tags/nginx/">nginx</a>
+          <a href="/tags/mysql/">mysql</a>
+          <a href="/tags/php/">php</a>
+          <a href="/tags/h2/">h2</a>
+          <a href="/tags/tls/">tls</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2018/basic-webserver-setup-faq/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Basic HTTP2 Setup Part 3: FAQ</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/2018/basic-webserver-setup-apache/">
+            <span class="next-text nav-default">Basic HTTP2 Setup Part 1: Apache</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'pseudocold';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/5101148" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/laggardkernel" class="iconfont icon-github" title="github"></a>
+  <a href="https://blog.pseudocold.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">laggardkernel</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

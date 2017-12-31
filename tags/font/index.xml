@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>font on Home</title>
+    <link>https://blog.pseudocold.com/tags/font/</link>
+    <description>Recent content in font on Home</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 07 Nov 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pseudocold.com/tags/font/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>macOS 中的隐藏字体</title>
+      <link>https://blog.pseudocold.com/post/2018/hidden-fonts-on-macos/</link>
+      <pubDate>Wed, 07 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/hidden-fonts-on-macos/</guid>
+      <description>&lt;p&gt;从Safari页面渲染异开始，仔细检查后发现其调用了一款其他浏览器调用不到的字体。那么这款字体是哪里来的呢？&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Basic HTTP2 Setup Part 1: Apache - Home</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="laggardkernel" /><meta name="description" content="Setup HTTP/2, TLS 1.3 with LAMP. (个人笔记，不做注解)
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.pseudocold.com/post/2018/basic-webserver-setup-apache/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Basic HTTP2 Setup Part 1: Apache" />
+<meta property="og:description" content="Setup HTTP/2, TLS 1.3 with LAMP. (个人笔记，不做注解)" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pseudocold.com/post/2018/basic-webserver-setup-apache/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-11-02T10:00:00&#43;08:00" />
+<meta property="article:modified_time" content="2018-11-02T10:00:00&#43;08:00" />
+
+<meta itemprop="name" content="Basic HTTP2 Setup Part 1: Apache">
+<meta itemprop="description" content="Setup HTTP/2, TLS 1.3 with LAMP. (个人笔记，不做注解)"><meta itemprop="datePublished" content="2018-11-02T10:00:00&#43;08:00" />
+<meta itemprop="dateModified" content="2018-11-02T10:00:00&#43;08:00" />
+<meta itemprop="wordCount" content="1953">
+<meta itemprop="keywords" content="linux,apache,mysql,php,h2,tls," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Basic HTTP2 Setup Part 1: Apache"/>
+<meta name="twitter:description" content="Setup HTTP/2, TLS 1.3 with LAMP. (个人笔记，不做注解)"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Home</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Home</a>
+</div>
+
+<nav class="site-navbar">
+    
+      <div class="top-progress-bar"></div>
+    
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Basic HTTP2 Setup Part 1: Apache</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-11-02 </span>
+        <div class="post-category">
+            <a href="/categories/devops/"> DevOps </a>
+            <a href="/categories/notes/"> Notes </a>
+            </div>
+          <span class="more-meta"> 1953 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#installation">Installation</a>
+      <ul>
+        <li><a href="#mysql">MySQL</a></li>
+        <li><a href="#enable-php-with-mod_php">Enable PHP with <code>mod_php</code></a></li>
+        <li><a href="#phpmyadmin">phpMyAdmin</a></li>
+      </ul>
+    </li>
+    <li><a href="#related-files">Related Files</a></li>
+    <li><a href="#debug">Debug</a></li>
+    <li><a href="#apache-htaccess-basic-auth">Apache htaccess Basic Auth</a></li>
+    <li><a href="#lets-encrypt">Let&rsquo;s Encrypt</a>
+      <ul>
+        <li><a href="#ubuntu">Ubuntu</a></li>
+      </ul>
+    </li>
+    <li><a href="#custom-ssl-certificate">Custom SSL Certificate</a>
+      <ul>
+        <li><a href="#macos">macOS</a></li>
+        <li><a href="#ubuntu-1">Ubuntu</a></li>
+      </ul>
+    </li>
+    <li><a href="#http2">HTTP/2</a>
+      <ul>
+        <li><a href="#problem-of-mod_mpm_prefork">Problem of <code>mod_mpm_prefork</code></a></li>
+        <li><a href="#http2-server-push">HTTP/2 Server Push</a></li>
+      </ul>
+    </li>
+    <li><a href="#redirect-and-hsts">Redirect and HSTS</a></li>
+    <li><a href="#faq">FAQ</a>
+      <ul>
+        <li><a href="#could-not-reliably-determine-the-servers-fully-qualified-domain-name">Could not reliably determine the server&rsquo;s fully qualified domain name</a></li>
+        <li><a href="#hide-server-infomation">Hide Server Infomation</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Setup HTTP/2, TLS 1.3 with LAMP. (个人笔记，不做注解)</p>
+<p>个人笔记：涵盖LAMP，LEMP基本配置，HTTPS，TLS 1.3的开启。本地测试推荐<code>mkcert</code>生成自签证书。</p>
+<p>Tips:</p>
+<ul>
+<li>服务器部署默认使用vhost，方便迁移</li>
+<li><a href="https://cipherli.st">ciperli.st</a></li>
+<li><del>Homebrew没有使用openssl 1.1作为默认依赖，所以包全部没有tls 1.3支持。</del>（201909 Homebrew官方完成迁移）</li>
+</ul>
+<h1 id="apache">Apache</h1>
+<p><a href="https://cipherli.st/">Strong Ciphers for Apache, nginx and Lighttpd</a></p>
+<p>Don&rsquo;t enable preload in HSTS.</p>
+<p><a href="https://www.cloudflare.com/ssl/encrypted-sni/">TLS 1.3 and Encrypted SNI check</a></p>
+<h2 id="installation">Installation</h2>
+<p>references</p>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-18-04#step-5-%E2%80%94-setting-up-virtual-hosts-(recommended)">How To Install the Apache Web Server on Ubuntu 18.04</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04">How To Install Linux, Apache, MySQL, PHP (LAMP) stack on Ubuntu 18.04</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-18-04">How To Install and Secure phpMyAdmin on Ubuntu 18.04</a></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt install apache2
+sudo ufw app list
+sudo ufw allow in <span class="s2">&#34;Apache Full&#34;</span>
+
+hostname -I
+
+sudo systemctl reload apache2 <span class="c1"># reload conf</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Setup virtual hosts (可选)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo mkdir -p /var/www/example.com/html
+sudo chown -R $USER:$USER /var/www/example.com/html
+sudo chmod -R 755 /var/www/example.com
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="c">&lt;!-- vim /var/www/example.com/html/index.html --&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Welcome to Example.com!<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Success!  The example.com server block is working!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/sites-available/example.com.conf
+&lt;VirtualHost *:80&gt;
+    ServerAdmin admin@example.com
+    ServerName example.com
+    ServerAlias www.example.com
+    DocumentRoot /var/www/example.com/html
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+&lt;/VirtualHost&gt;
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo a2ensite example.com.conf
+sudo a2dissite 000-default.conf
+
+sudo apache2ctl configtest
+sudo systemctl restart apache2
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="mysql">MySQL</h3>
+<p>Install MySQL and config it. switch its authentication method from <code>auth_socket</code> to <code>mysql_native_password</code>. Otherwise <code>sudo mysql</code> will login automatically.</p>
+<h3 id="enable-php-with-mod_php">Enable PHP with <code>mod_php</code></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt install php libapache2-mod-php php-mysql
+</code></pre></td></tr></table>
+</div>
+</div><p>Use <code>index.php</code> as the 1st index file.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/mods-enabled/dir.conf
+
+&lt;IfModule mod_dir.c&gt;
+    DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
+&lt;/IfModule&gt;
+
+# sudo systemctl restart apache2
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt install php-cli
+</code></pre></td></tr></table>
+</div>
+</div><p>Test PHP with <code>info.php</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="c1"># /var/www/html/info.php
+</span><span class="c1"></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nx">phpinfo</span><span class="p">();</span>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="phpmyadmin">phpMyAdmin</h3>
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/PhpMyAdmin">phpMyAdmin from arch wiki</a></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt install phpmyadmin php-mbstring php-gettext
+<span class="c1"># choose apache2, use dbconfig-common</span>
+
+sudo phpenmod mbstring
+sudo systemctl restart apache2
+</code></pre></td></tr></table>
+</div>
+</div><p>Secure phpMyAdmin with HTTP basic auth. <code>.htaccess</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/conf-available/phpmyadmin.conf
+&lt;Directory /usr/share/phpmyadmin&gt;
+    Options FollowSymLinks
+    DirectoryIndex index.php
+    AllowOverride All # add this to enable .htaccess
+
+# sudo systemctl restart apache2
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /usr/share/phpmyadmin/.htaccess, chmod 644
+AuthType Basic
+AuthName &#34;Restricted Files&#34;
+AuthUserFile /etc/phpmyadmin/.htpasswd
+Require valid-user
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo htpasswd /etc/phpmyadmin/.htpasswd <span class="o">{</span>username<span class="o">}</span>
+<span class="c1"># -c create, otherwise use existing .htpasswd file</span>
+
+chmod <span class="m">644</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="related-files">Related Files</h2>
+<ul>
+<li><code>/var/www/html</code>, default web content, can be changed by conf files</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">❯ tree /etc/apache2 -L 1
+/etc/apache2
+├── conf-available # conf fragments belonging in a virtual host
+├── conf-enabled   # a2enconf
+├── mods-available # .load contain fragments to load specific modules
+├── mods-enabled   # a2enmod
+├── sites-available # per-site virtual hosts
+├── sites-enabled   # a2ensite
+├── apache2.conf
+├── envvars
+├── magic
+└── ports.conf
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>/var/log/apache2/access.log</code></li>
+<li><code>/var/log/apache2/error.log</code></li>
+</ul>
+<h2 id="debug">Debug</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">apachectl configtest
+
+apachectl start/stop <span class="c1"># equivalent to -k start</span>
+apachectl reload
+apachectl graceful <span class="c1"># restart without terminate request processing</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="apache-htaccess-basic-auth">Apache htaccess Basic Auth</h2>
+<p><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-18-04">How To Install and Secure phpMyAdmin on Ubuntu 18.04</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /usr/share/phpmyadmin/.htaccess
+AuthType Basic
+AuthName &#34;Restricted Files&#34;
+AuthUserFile /etc/phpmyadmin/.htpasswd
+Require valid-user
+
+# chmod 644 .htaccess
+sudo htpasswd -c /etc/phpmyadmin/.htpasswd {username} # for basis auth only
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="lets-encrypt">Let&rsquo;s Encrypt</h2>
+<h3 id="ubuntu">Ubuntu</h3>
+<p>references</p>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-18-04">How To Secure Apache with Let&rsquo;s Encrypt on Ubuntu 18.04</a></li>
+<li><a href="https://certbot.eff.org/docs/">certbot docs</a></li>
+</ul>
+<p>Install certbot</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo add-apt-repository ppa:certbot/certbot
+sudo apt update
+sudo apt install python-certbot-apache
+</code></pre></td></tr></table>
+</div>
+</div><p>vhost example.com</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo nano /etc/apache2/sites-available/example.com.conf
+# ServerName example.com;
+
+sudo apache2ctl configtest
+sudo systemctl reload apache2
+</code></pre></td></tr></table>
+</div>
+</div><p>firewall</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo ufw status verbose
+sudo ufw allow in &#39;Apache Full&#39;
+</code></pre></td></tr></table>
+</div>
+</div><p>obtain SSL certificate</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo certbot --apache -d example.com -d www.example.com
+
+IMPORTANT NOTES:
+ - Congratulations! Your certificate and chain have been saved at:
+   /etc/letsencrypt/live/example.com/fullchain.pem
+   Your key file has been saved at:
+   /etc/letsencrypt/live/example.com/privkey.pem
+</code></pre></td></tr></table>
+</div>
+</div><p>Your certificates are downloaded, installed, and loaded <strong>automatically</strong>.</p>
+<p>The <code>certbot</code> package we installed takes care of <strong>renewal</strong> for us by adding a renew script to <code>/etc/cron.d</code>.</p>
+<h2 id="custom-ssl-certificate">Custom SSL Certificate</h2>
+<p>Note:</p>
+<ul>
+<li>OCSP stapling is only implemented for managed ACME certificates</li>
+</ul>
+<h3 id="macos">macOS</h3>
+<p>macOS httpd 和 apache 的配置好像有点不同，尽管都是同一种服务器。</p>
+<p><a href="https://getgrav.org/blog/macos-mojave-apache-ssl">macOS 10.14 Mojave Apache Setup: SSL</a></p>
+<ol>
+<li>enable necessary modules</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /usr/local/etc/httpd/httpd.conf
+LoadModule socache_shmcb_module ...
+LoadModule ssl_module ...
+Include /usr/local/etc/httpd/extra/httpd-ssl.conf
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>Global SSL conf: port, cert, key</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /usr/local/etc/httpd/extra/httpd-ssl.conf
+Listen 443
+
+&lt;VirtualHost _default_:443&gt;
+
+# General setup for the virtual host
+#DocumentRoot &#34;/usr/local/var/www&#34;
+#ServerName www.example.com:443
+
+SSLCertificateFile &#34;/usr/local/share/mkcert/example.test+4.pem&#34;
+SSLCertificateKeyFile &#34;/usr/local/share/mkcert/example.test+4-key.pem&#34;
+</code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>add conf for each virtual host individually (if needed)</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /usr/local/etc/httpd/extra/httpd-vhosts.conf
+&lt;VirtualHost *:443&gt;
+    DocumentRoot &#34;/usr/local/var/www&#34;
+    ServerName localhost
+    SSLEngine on
+    SSLCertificateFile &#34;/usr/local/share/mkcert/example.test+4.pem&#34;
+    SSLCertificateKeyFile &#34;/usr/local/share/mkcert/example.test+4-key.pem&#34;
+&lt;/VirtualHost&gt;
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="ubuntu-1">Ubuntu</h3>
+<p>references</p>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-ubuntu-18-04">How To Create a Self-Signed SSL Certificate for Apache in Ubuntu 18.04</a></li>
+</ul>
+<p>Use recommended SSL parameters from <a href="https://cipherli.st/">cipherli.st</a>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/conf-available/ssl-params.conf
+SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
+SSLProtocol All -SSLv2 -SSLv3 -TLSv1 -TLSv1.1 # remove ancient protocols
+SSLHonorCipherOrder On
+# Disable preloading HSTS for now.  You can use the commented out header line that includes
+# the &#34;preload&#34; directive if you understand the implications.
+# Header always set Strict-Transport-Security &#34;max-age=63072000; includeSubDomains; preload&#34;
+Header always set X-Frame-Options DENY
+Header always set X-Content-Type-Options nosniff
+# Requires Apache &gt;= 2.4
+SSLCompression off
+SSLUseStapling on
+SSLStaplingCache &#34;shmcb:logs/stapling-cache(150000)&#34;
+# Requires Apache &gt;= 2.4.11
+SSLSessionTickets Off
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：homebrew httpd 可能不支持tls 1.3. 同curl中tls 1.3支持问题一样，需要使用openssl@1.1.</p>
+<p>SSL vhosts</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/sites-available/default-ssl.conf
+# add conf below
+ServerAdmin your_email@example.com
+ServerName server_domain_or_IP
+
+SSLCertificateFile      /etc/ssl/certs/apache-selfsigned.crt
+SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
+</code></pre></td></tr></table>
+</div>
+</div><p>redirect HTTP to HTTPS</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/sites-available/000-default.conf
+Redirect &#34;/&#34; &#34;https://your_domain/&#34; # 302
+# Redirect permanent &#34;/&#34; &#34;https://your_domain/&#34; # 301
+</code></pre></td></tr></table>
+</div>
+</div><p>上面重定向到HTTPS写得太烂，host不具有兼容性，参看后面HSTS示例中重定向。</p>
+<p>firewall</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo ufw app list
+sudo ufw allow in <span class="s2">&#34;Apache Full&#34;</span>
+sudo ufw status verbose
+</code></pre></td></tr></table>
+</div>
+</div><p>Enable apache2 modules, conf, changes</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo a2enmod ssl <span class="c1"># mod_ssl</span>
+sudo a2enmod headers <span class="c1">#needed by some of the settings in our SSL snippet</span>
+sudo a2ensite default-ssl
+sudo a2enconf ssl-params
+
+sudo apache2ctl configtest
+sudo systemctl restart apache2
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="http2">HTTP/2</h2>
+<p>references</p>
+<ul>
+<li><a href="https://httpd.apache.org/docs/2.4/howto/http2.html">Apache HTTP/2 guide</a></li>
+<li><a href="https://http2.pro/doc/Apache">How to enable HTTP/2 support in Apache from http2.pro</a></li>
+<li><a href="https://wiki.apache.org/httpd/PHP-FPM">PHP on apache httpd 2.4.x using mod_proxy_fcgi and php-fpm</a></li>
+<li><a href="https://cnzhx.net/blog/apache-httpd-mod_proxy_fcgi-php-fpm/">Apache httpd 2.4.x 使用 mod_proxy_fcgi 和 PHP-FPM 的<strong>各种</strong>方式比较</a></li>
+</ul>
+<p>Terms</p>
+<ul>
+<li>HTTP/2 is a <strong>binary protocol</strong></li>
+<li><strong>h2</strong> is HTTP/2 over TLS (protocol negotiation via <strong>ALPN</strong>).</li>
+<li><strong>h2c</strong> is HTTP/2 over TCP. h2c is <strong>HTTP/2 over cleartext</strong> (http:)</li>
+<li>A <strong>frame</strong> is the smallest unit of communication within an HTTP/2 connection, consisting of a header and a variable-length sequence of octets structured according to the frame type.</li>
+<li>A <strong>stream</strong> is a bidirectional flow of frames within the HTTP/2 connection.</li>
+<li>HTTP/2 is able to run <strong>multiple streams</strong> of data over the same TCP connection, avoiding the classic HTTP 1.1 head of blocking slow request and avoiding to re-instantiate TCP connections for each request/response (KeepAlive patched the problem in HTTP 1.1 but did not fully solve it). 避免头阻塞，重用TCP连接</li>
+<li>mpm, multi-processing modules</li>
+</ul>
+<p><strong>Note</strong>: Speaking of SSL, you need to be aware that most <strong>browsers</strong> will speak HTTP/2 <strong>only on <code>https:</code></strong> URLs. Several of the <strong>non-browser client</strong> implementations support <strong>HTTP/2 over cleartext</strong>, h2c. The most versatile being <code>curl</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /usr/local/etc/http/httpd.conf
+LoadModule http2_module modules/mod_http2.so
+Protocols h2 http/1.1
+# Protocols h2 h2c http/1.1
+
+# ignore client&#39;s preferences
+# ProtocolsHonorOrder Off
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="problem-of-mod_mpm_prefork">Problem of <code>mod_mpm_prefork</code></h3>
+<blockquote>
+<p>In <code>prefork</code>, <code>mod_http2</code> will only process <strong>one request at at time</strong> per connection. But clients, such as browsers, will <strong>send many requests at the same time</strong>.</p>
+<p>If your setup can handle it, configuring <code>event</code> mpm is nowadays the best one (if supported on your platform).</p>
+</blockquote>
+<h4 id="macos-1">macOS</h4>
+<p>Enable php-fpm, disable <code>mod_php</code> first.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /usr/local/etc/http/httpd.conf
+# enable prerequsite
+LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so
+</code></pre></td></tr></table>
+</div>
+</div><p>Activate php-fpm with <code>SetHandler</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/php-fpm.d/www.conf
+listen = 127.0.0.1:9000
+
+# /usr/local/etc/http/httpd.conf
+&lt;FilesMatch \.php$&gt;
+         SetHandler &#34;proxy:fcgi://127.0.0.1:9000&#34;
+&lt;/FilesMatch&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p><code>php-fpm</code>监听</p>
+<ul>
+<li>listen on <code>/run/php/php7.2-fpm.sock</code> in Linux (<code>/etc/php/7.2/fpm/pool.d/www.conf</code>)</li>
+<li><code>127.0.0.1:9000</code> on macOS (<code>/usr/local/etc/php/7.3/php-fpm.d/www.conf.default</code>)</li>
+</ul>
+<p>检查 <code>info.php</code> 中&quot;Server API&quot;, &ldquo;SERVER_SOFTWARE&quot;字段。</p>
+<h4 id="linux">Linux</h4>
+<p>Linux 下无需手动配置，<code>a2enmod</code>, <code>a2dismod</code>即可完成大部分操作。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">apachectl stop
+a2enmod http2
+apt-get install php-fpm <span class="c1"># Install the php-fpm from your PHP repository. This package name depends on the vendor.</span>
+<span class="c1"># php7.2-fpm.service, auto enabled</span>
+
+a2enmod proxy_fcgi setenvif
+a2enconf php7.1-fpm <span class="c1"># Again, this depends on your PHP vendor.</span>
+a2dismod php7.1 <span class="c1"># This disables mod_php.</span>
+a2dismod mpm_prefork <span class="c1"># This disables the prefork MPM. Only one MPM can run at a time.</span>
+a2enmod mpm_event <span class="c1"># Enable event MPM. You could also enable mpm_worker.</span>
+apachectl start
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="http2-server-push">HTTP/2 Server Push</h3>
+<p>响应头包含以下即可</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Link: &lt;/assets/styles.css&gt;;rel=preload, &lt;/assets/scripts.css&gt;; rel=preload
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># config
+&lt;Location /index.htmll&gt;
+  Header add Link &#34;&lt;/assets/styles.css&gt;;rel=preload, &lt;/assets/scripts.css&gt;; rel=preload&#34;
+  Header add Link &#34;&lt;/assets/image.jpg&gt;;rel=preload&#34;
+&lt;/Location&gt;
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="redirect-and-hsts">Redirect and HSTS</h2>
+<p><a href="https://linux-audit.com/configure-hsts-http-strict-transport-security-apache-nginx/">Configure HSTS (HTTP Strict Transport Security) for Apache and Nginx</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># Load modules (or use the IfModule)
+LoadModule headers_module modules/mod_headers.so
+LoadModule rewrite_module modules/mod_rewrite.so
+</code></pre></td></tr></table>
+</div>
+</div><p>Rewrite HTTP connections and redirect them to HTTPS:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># Redirect HTTP connections to HTTPS
+&lt;IfModule mod_rewrite.c&gt;
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+&lt;/IfModule&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>Now configure the virtual host:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;VirtualHost 192.168.1.1:443&gt;
+Header always set Strict-Transport-Security &#34;max-age=15768000; includeSubDomains&#34; # 6 months
+# 31536000 # 1y
+&lt;/VirtualHost&gt;
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="faq">FAQ</h2>
+<h3 id="could-not-reliably-determine-the-servers-fully-qualified-domain-name">Could not reliably determine the server&rsquo;s fully qualified domain name</h3>
+<p>缺少默认/全局<code>ServerName</code>设置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /etc/apache2/apache2.conf
+ServerName localhost
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="hide-server-infomation">Hide Server Infomation</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">ServerSignature Off
+# hide info like Apache and PHP versions
+ServerTokens Prod # least info
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">laggardkernel</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2018-11-02
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/linux/">linux</a>
+          <a href="/tags/apache/">apache</a>
+          <a href="/tags/mysql/">mysql</a>
+          <a href="/tags/php/">php</a>
+          <a href="/tags/h2/">h2</a>
+          <a href="/tags/tls/">tls</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2018/basic-webserver-setup-nginx/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Basic HTTP2 Setup Part 2: Nginx</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/2018/mysql-mariadb-option-groups/">
+            <span class="next-text nav-default">MariaDB/MySQL Option Groups</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'pseudocold';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/5101148" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/laggardkernel" class="iconfont icon-github" title="github"></a>
+  <a href="https://blog.pseudocold.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">laggardkernel</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

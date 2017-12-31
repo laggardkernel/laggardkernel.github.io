@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>conda on Home</title>
+    <link>https://blog.pseudocold.com/tags/conda/</link>
+    <description>Recent content in conda on Home</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 29 Sep 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pseudocold.com/tags/conda/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pip v.s. Conda</title>
+      <link>https://blog.pseudocold.com/post/2019/pip-vs-conda/</link>
+      <pubDate>Sun, 29 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/pip-vs-conda/</guid>
+      <description>&lt;p&gt;Differences between &lt;code&gt;pip&lt;/code&gt; and &lt;code&gt;conda.&lt;/code&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> Multi User Anaconda/Miniconda Installation</title>
+      <link>https://blog.pseudocold.com/post/2018/miniconda-multi-user-installation/</link>
+      <pubDate>Sat, 10 Aug 2019 00:41:23 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/miniconda-multi-user-installation/</guid>
+      <description>&lt;p&gt;在 Linux 中脚本安装 Anaconda/Miniconda 使所有人均可调用。需要 &lt;code&gt;sudo&lt;/code&gt; 权限。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

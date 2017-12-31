@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title> Multi User Anaconda/Miniconda Installation - Home</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="laggardkernel" /><meta name="description" content="在 Linux 中脚本安装 Anaconda/Miniconda 使所有人均可调用。需要 sudo 权限。
+" /><meta name="keywords" content="anaconda, miniconda, installation" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.pseudocold.com/post/2018/miniconda-multi-user-installation/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content=" Multi User Anaconda/Miniconda Installation" />
+<meta property="og:description" content="在 Linux 中脚本安装 Anaconda/Miniconda 使所有人均可调用。需要 sudo 权限。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pseudocold.com/post/2018/miniconda-multi-user-installation/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-08-10T00:41:23&#43;08:00" />
+<meta property="article:modified_time" content="2019-08-10T00:41:23&#43;08:00" />
+
+<meta itemprop="name" content=" Multi User Anaconda/Miniconda Installation">
+<meta itemprop="description" content="在 Linux 中脚本安装 Anaconda/Miniconda 使所有人均可调用。需要 sudo 权限。"><meta itemprop="datePublished" content="2019-08-10T00:41:23&#43;08:00" />
+<meta itemprop="dateModified" content="2019-08-10T00:41:23&#43;08:00" />
+<meta itemprop="wordCount" content="471">
+<meta itemprop="keywords" content="conda,linux,macos," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=" Multi User Anaconda/Miniconda Installation"/>
+<meta name="twitter:description" content="在 Linux 中脚本安装 Anaconda/Miniconda 使所有人均可调用。需要 sudo 权限。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Home</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Home</a>
+</div>
+
+<nav class="site-navbar">
+    
+      <div class="top-progress-bar"></div>
+    
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title"> Multi User Anaconda/Miniconda Installation</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-08-10 </span>
+        <div class="post-category">
+            <a href="/categories/devops/"> DevOps </a>
+            <a href="/categories/cli/"> CLI </a>
+            </div>
+          <span class="more-meta"> 471 words </span>
+          <span class="more-meta"> 1 min read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#install-miniconda-in-command-line">Install Miniconda in Command Line</a></li>
+    <li><a href="#安装路径对于所有人可读">安装路径对于所有人可读</a></li>
+    <li><a href="#共享安装目录下的缓存环境">共享安装目录下的缓存、环境</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>在 Linux 中脚本安装 Anaconda/Miniconda 使所有人均可调用。需要 <code>sudo</code> 权限。</p>
+<p>使用 root 安装（<code>sudo</code>），安装目录选择 <code>/opt/miniconda3</code>.</p>
+<p>关于如何共享，有两个方案：</p>
+<ol>
+<li>安装文件夹对于非 root 用户可读、可访问，但不可写入。这样规避了 pkgs cache, envs 共享带来的安全隐患。</li>
+<li>安装文件夹对于非 root 用户可读、可访问，但不可写入。pkgs cache, envs 对应子目录对于所有人可写，这样共享环境、缓存，节省了空间。</li>
+</ol>
+<h2 id="install-miniconda-in-command-line">Install Miniconda in Command Line</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
+<span class="c1"># bash ~/miniconda.sh -b -p $HOME/miniconda</span>
+sudo bash ~/miniconda.sh -b -p /opt/miniconda3
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>-b</code>, batch mode. No PATH modification in shell init files.</li>
+<li><code>-p</code>, installation prefix.</li>
+<li><code>-f</code>, force even prefix already exists.</li>
+</ul>
+<h2 id="安装路径对于所有人可读">安装路径对于所有人可读</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo chown -R root:root /opt/miniconda3
+sudo chmod -R go-w+rX /opt/miniconda3
+</code></pre></td></tr></table>
+</div>
+</div><p>Put the env variables file into <code>/etc/profile.d</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># /etc/profile.d/miniconda3.sh</span>
+<span class="nv">_conda_installation_names</span><span class="o">=(</span>
+  miniconda
+  miniconda2
+  miniconda3
+  anaconda
+  anaconda2
+  anaconda2
+<span class="o">)</span>
+
+<span class="k">for</span> i in <span class="si">${</span><span class="nv">_conda_installation_names</span><span class="p">[@]</span><span class="si">}</span><span class="p">;</span> <span class="k">do</span>
+  <span class="o">[</span> -d <span class="s2">&#34;/opt/</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">/condabin&#34;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&#34;/opt/</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">/condabin:</span><span class="si">${</span><span class="nv">PATH</span><span class="si">}</span><span class="s2">&#34;</span>
+<span class="k">done</span>
+<span class="nb">export</span> PATH
+<span class="nb">unset</span> _conda_installation_names
+
+<span class="c1"># Note: `conda init` script may add the condabin into PATH again,</span>
+<span class="c1">#   which doesn&#39;t impact the usage of `conda` the command.</span>
+
+<span class="c1"># Avoid overriding users&#39; custom values</span>
+<span class="o">[</span> -z <span class="s2">&#34;</span><span class="nv">$CONDA_PKGS_DIRS</span><span class="s2">&#34;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">export</span> <span class="nv">CONDA_PKGS_DIRS</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$HOME</span><span class="s2">/.conda/pkgs&#34;</span>
+<span class="o">[</span> -z <span class="s2">&#34;</span><span class="nv">$CONDA_ENVS_PATH</span><span class="s2">&#34;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">export</span> <span class="nv">CONDA_ENVS_PATH</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$HOME</span><span class="s2">/.conda/envs&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="共享安装目录下的缓存环境">共享安装目录下的缓存、环境</h2>
+<p>Sharing files with others may compromise your system.</p>
+<p>利用 set group ID，ACL 控制权限。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo chown -R root:root /opt/miniconda3
+sudo chmod -R go-w+rX /opt/miniconda3
+
+sudo find /opt/miniconda3/<span class="o">{</span>envs,pkgs<span class="o">}</span> -type d -exec chmod <span class="m">777</span> <span class="o">{}</span> +
+sudo find /opt/miniconda3/<span class="o">{</span>envs,pkgs<span class="o">}</span> -type f -exec chmod go+rw <span class="o">{}</span> +
+
+<span class="c1"># use group &#34;users&#34; but not &#34;root&#34;, optional</span>
+<span class="c1"># set group id and fix perm of folers envs,pkgs</span>
+sudo chown -R root:users /opt/miniconda3/<span class="o">{</span>envs,pkgs<span class="o">}</span>
+sudo chmod <span class="m">2777</span> /opt/miniconda3/<span class="o">{</span>envs,pkgs<span class="o">}</span>
+
+sudo setfacl -d -m g::rwX /opt/miniconda3/<span class="o">{</span>envs,pkgs<span class="o">}</span>
+sudo setfacl -d -m o::rwX /opt/miniconda3/<span class="o">{</span>envs,pkgs<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="references">References</h2>
+<ul>
+<li><a href="https://unix.stackexchange.com/a/1315/246718">How to set default file permissions for all folders/files in a directory?</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Access_Control_Lists#Set_ACL"><em>Access Control Lists</em> from Arch Wiki</a></li>
+<li><a href="https://support.anaconda.com/hc/en-us/articles/360023865574-Multi-User-Anaconda-Installation-on-Linux">Multi User Anaconda Installation on Linux – Anaconda Knowledge Base</a></li>
+<li><a href="https://docs.anaconda.com/anaconda/install/silent-mode/">Installing Anaconda in silent mode</a></li>
+</ul>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">laggardkernel</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-08-10
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/conda/">conda</a>
+          <a href="/tags/linux/">linux</a>
+          <a href="/tags/macos/">macos</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2019/wsigref-code-reading/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">wsigref 源码阅读笔记</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/2019/flask-mail/">
+            <span class="next-text nav-default">为何 Flask-Mail 需要上下文环境</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'pseudocold';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/5101148" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/laggardkernel" class="iconfont icon-github" title="github"></a>
+  <a href="https://blog.pseudocold.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">laggardkernel</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>命令行压缩、解压命令总结 - Home</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="laggardkernel" /><meta name="description" content="在命令行里该用什么命令解压什么文件？压缩命令使用总结。个人笔记，非入门教程。
+" /><meta name="keywords" content="archiving, compression" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.pseudocold.com/post/2018/archiving-and-compression/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="命令行压缩、解压命令总结" />
+<meta property="og:description" content="在命令行里该用什么命令解压什么文件？压缩命令使用总结。个人笔记，非入门教程。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pseudocold.com/post/2018/archiving-and-compression/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-02-05T15:48:50&#43;08:00" />
+<meta property="article:modified_time" content="2019-02-05T15:48:50&#43;08:00" />
+
+<meta itemprop="name" content="命令行压缩、解压命令总结">
+<meta itemprop="description" content="在命令行里该用什么命令解压什么文件？压缩命令使用总结。个人笔记，非入门教程。"><meta itemprop="datePublished" content="2019-02-05T15:48:50&#43;08:00" />
+<meta itemprop="dateModified" content="2019-02-05T15:48:50&#43;08:00" />
+<meta itemprop="wordCount" content="1308">
+<meta itemprop="keywords" content="linux,macos," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="命令行压缩、解压命令总结"/>
+<meta name="twitter:description" content="在命令行里该用什么命令解压什么文件？压缩命令使用总结。个人笔记，非入门教程。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Home</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Home</a>
+</div>
+
+<nav class="site-navbar">
+    
+      <div class="top-progress-bar"></div>
+    
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">命令行压缩、解压命令总结</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-02-05 </span>
+        <div class="post-category">
+            <a href="/categories/devops/"> DevOps </a>
+            <a href="/categories/notes/"> Notes </a>
+            <a href="/categories/cli/"> CLI </a>
+            </div>
+          <span class="more-meta"> 1308 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#工具选择建议">工具选择建议</a></li>
+    <li><a href="#compress">Compress</a></li>
+    <li><a href="#gzip-bzip2-xz">gzip, bzip2, xz</a></li>
+    <li><a href="#tarball">tarball</a>
+      <ul>
+        <li><a href="#bsdtar-vs-gnutar">bsdtar v.s. gnutar</a></li>
+        <li><a href="#tar-自定义调用的压缩算法">tar 自定义调用的压缩算法</a></li>
+      </ul>
+    </li>
+    <li><a href="#修复selinux">修复SELinux</a></li>
+    <li><a href="#iso">ISO</a></li>
+    <li><a href="#dd">dd</a></li>
+    <li><a href="#cpio">cpio</a></li>
+    <li><a href="#其他">其他</a>
+      <ul>
+        <li><a href="#压缩算法">压缩算法</a></li>
+        <li><a href="#fuck-rar">Fuck rar</a></li>
+        <li><a href="#7z">7z</a></li>
+        <li><a href="#并行压缩">并行压缩</a></li>
+        <li><a href="#zip-wrong-encoding">ZIP wrong encoding</a></li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>在命令行里该用什么命令解压什么文件？压缩命令使用总结。个人笔记，非入门教程。</p>
+<p>压缩格式不重要，关键是其使用了什么压缩算法。</p>
+<p>TODO</p>
+<ul>
+<li><input disabled="" type="checkbox"> cpio 使用场景</li>
+</ul>
+<h2 id="工具选择建议">工具选择建议</h2>
+<ul>
+<li>分享Linux文件最好使用 tar 包，可以保留文件权限（默认不拷贝 attrs, xattr）</li>
+<li><code>p7zip</code> 用来解压各种格式，以及压缩 7z 格式。支持解压 rar 压缩包。
+<ul>
+<li>可替代 unzip，unrar</li>
+</ul>
+</li>
+<li>zip encoding，由于压缩包没有记录编码，需要工具支持自定编码参数
+<ul>
+<li><code>unzip-iconv</code>，<code>-O</code>, <code>-I</code>. Ubuntu 已经使用了此patch. macOS 直接使用 <code>unar</code></li>
+<li><code>unarchiver</code> on Linux, <code>unar</code> on macOS, <code>urar -e gb18030</code>. (此包只支持解压)</li>
+<li><code>iconv</code> and  <code>convmv</code></li>
+</ul>
+</li>
+<li>配合 <code>atool</code> 避免记忆压缩、解压参数</li>
+<li><code>pv</code> for progress in case you use custom compresion options in <code>tar</code></li>
+</ul>
+<h2 id="compress">Compress</h2>
+<p><code>.Z</code> compress压缩。已退出历史舞台</p>
+<h2 id="gzip-bzip2-xz">gzip, bzip2, xz</h2>
+<p><code>gzip</code> 支持解开 compress，zip，gzip 压缩文件</p>
+<p><code>gzip</code> 命令压缩、解压后默认删除原来文件</p>
+<p>zcat/zmore/zless/zgrep 一系列工具</p>
+<p><code>bzip2</code> 默认不会删除原来文件需要显式使用 <code>-k</code> 参数。</p>
+<h2 id="tarball">tarball</h2>
+<p><code>tar</code> 压缩，<code>-z</code> gzip, <code>-j</code> bzip2, <code>-J</code> xz</p>
+<ul>
+<li><code>-p</code>，保留权限与属性</li>
+<li><code>-P</code>，保留绝对路径。默认移除开头/</li>
+<li>解压部分文件 <code>tar -jxv -f /root/etc.tar.bz2 etc/shadow</code></li>
+</ul>
+<p>对压入的文件筛选</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">tar -jcv -f /root/etc.newer.then.passwd.tar.bz2 --newer-mtime<span class="o">=</span><span class="s2">&#34;2015/06/17&#34;</span> /etc/*
+</code></pre></td></tr></table>
+</div>
+</div><p><code>/var/spool/mail/</code> (系統中，所有帳號的郵件信箱)</p>
+<p><code>/var/spool/cron/</code> (所有帳號的工作排成設定檔)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">tar -jcv -f /backups/backup-system-20150701.tar.bz2 <span class="se">\
+</span><span class="se"></span>  --exclude<span class="o">=</span>/root/*.bz2 --exclude<span class="o">=</span>/root/*.gz --exclude<span class="o">=</span>/home/loop* <span class="se">\
+</span><span class="se"></span>  /etc /home /var/spool/mail /var/spool/cron /root
+</code></pre></td></tr></table>
+</div>
+</div><p><code>tar -a</code> 自动猜测压缩格式进行解压。</p>
+<h3 id="bsdtar-vs-gnutar">bsdtar v.s. gnutar</h3>
+<p>While BSD tar recognizes compression formats based on the format, GNU tar only guesses based on the file extension.</p>
+<p>BSD tar包名为 <code>libarchive</code>。命令名为 bsdtar。</p>
+<h3 id="tar-自定义调用的压缩算法">tar 自定义调用的压缩算法</h3>
+<p><code>tar</code> 调用自定义压缩</p>
+<p><a href="https://stackoverflow.com/q/36917882/5101148">How to use Pigz with Tar</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 调用 --use-compress-program</span>
+tar --use-compress-program<span class="o">=</span><span class="s2">&#34;pigz --best --recursive&#34;</span> -cf archive.tar.gz YourData
+
+<span class="c1"># monitor progress with pv</span>
+tar --use-compress-program<span class="o">=</span><span class="s2">&#34;pigz --best --recursive | pv&#34;</span> -cf archive.tar.gz YourData
+
+<span class="c1"># use - for stdin, stdout</span>
+tar cf - paths-to-archive <span class="p">|</span> pigz -9 -p <span class="m">32</span> &gt; archive.tar.gz
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="修复selinux">修复SELinux</h2>
+<p><code>tar -p</code> 保存了 SELinux 信息。</p>
+<p>To set SELinux permissive, modify <code>/etc/selinux/config</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 修复对应文件SELinux</span>
+restorecon -Rv /etc
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="iso">ISO</h2>
+<p><code>mkisofs</code> 创建 <code>ISO</code> 文件，一般不用，随用随查。</p>
+<p><code>isoinfo</code>命令查看 ISO 文件信息。</p>
+<p><code>wodim</code> 烧录 ISO 到光盘</p>
+<h2 id="dd">dd</h2>
+<p><code>dd</code>，基于扇区拷贝</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">dd <span class="k">if</span><span class="o">=</span><span class="s2">&#34;input_file&#34;</span> <span class="nv">of</span><span class="o">=</span><span class="s2">&#34;output_file&#34;</span> <span class="nv">bs</span><span class="o">=</span><span class="s2">&#34;block_size&#34;</span> <span class="nv">count</span><span class="o">=</span><span class="s2">&#34;number&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果是拷贝整个分区，也会复制 UUID，还原到其他机器最好重新分配一个新 UUID，以避免重复。</p>
+<h2 id="cpio">cpio</h2>
+<p>copy IO</p>
+<p><code>cpio</code>，操作标准输入、输出。不能直接传递文件名。随用随查。优势、使用场景是什么？</p>
+<h2 id="其他">其他</h2>
+<h3 id="压缩算法">压缩算法</h3>
+<p>注意压缩算法。xz GNU实现的LZMA压缩。</p>
+<p>p7zip 实现了多种压缩，LZMA2（加入多线程），不支持保存Linux文件权限。</p>
+<ul>
+<li>gzip, Burrows–Wheeler algorithm</li>
+<li>bzip2, DEFLATE</li>
+<li>xz, LZMA</li>
+<li>7zip, LZMA2, etc</li>
+</ul>
+<h3 id="fuck-rar">Fuck rar</h3>
+<p><code>unrar</code> is rar official app, not open sourced.</p>
+<p><code>unar</code> is command from <code>unarchiver</code> pkg, with support for more than 40 archive formats. 仅支持解压和查看。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">7z x abc.rar
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="7z">7z</h3>
+<p><a href="https://wiki.archlinux.org/index.php/P7zip">p7zip from arch wiki</a></p>
+<p>7z 不支持保留文件权限，不要用来备份</p>
+<ul>
+<li><code>7z</code> command, uses plugins to handle archives</li>
+<li><code>7za</code>, standalone executable handling fewer archive formats</li>
+<li><code>7zr</code>, standalone executable. only handles 7z archives, no encryption support</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">pacman -S p7zip
+
+<span class="c1"># archive</span>
+7z a &lt;archive name&gt; &lt;file name&gt;
+
+<span class="c1"># -p, password</span>
+<span class="c1"># -mhe=on, hide structure of the archive</span>
+7z a &lt;archive name&gt; &lt;file name&gt; -p -mhe<span class="o">=</span>on
+
+<span class="c1"># update existing archive</span>
+7z u &lt;archive name&gt; &lt;filename&gt;
+
+<span class="c1"># list content of the archive</span>
+7z l &lt;archive name&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>Extract</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># extract to current dir</span>
+7z e &lt;archive name&gt;
+
+<span class="c1"># extract with full paths</span>
+7z x &lt;archive name&gt;
+
+<span class="c1"># extract to specific folder</span>
+7z x -o&lt;foldername&gt; &lt;archive name&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>Check integrity</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">7z t &lt;archive name&gt;
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="并行压缩">并行压缩</h3>
+<p>GNU 实现的gzip，bzip2，xz均不支持并行。可以使用对应并行包进行压缩，解压不受影响。（参考archlinux wiki查看对应并行方案）</p>
+<ul>
+<li><code>pigz</code> replaces <code>gzip</code></li>
+<li><code>libzip2</code> or <code>pbzip2</code> replaces <code>bzip2</code></li>
+<li><code>pixz</code>, <code>pxz</code> replaces <code>xz</code></li>
+</ul>
+<h3 id="zip-wrong-encoding">ZIP wrong encoding</h3>
+<p><a href="https://superuser.com/a/1215271/733022">Decompress ZIP with given encoding</a></p>
+<ul>
+<li>linux, `unzip-iconv, Ubuntu 默认已经使用了此patch版本</li>
+<li><code>unarchive</code>, <code>unrar -e gb18030</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">yay -S unzip-iconv
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ unzip -h
+UnZip 6.00 of 20 April 2009, by Debian. Original by Info-ZIP.
+  ...
+  -O CHARSET  specify a character encoding for DOS, Windows and OS/2 archives
+  -I CHARSET  specify a character encoding for UNIX and other archives
+  ...
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">unzip -O &lt;encoding&gt; &lt;filename&gt; -d &lt;target_dir&gt;
+
+unzip -I &lt;encoding&gt; &lt;filename&gt; -d &lt;target_dir&gt;
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">unar -e gb18030 gb18030.zip
+</code></pre></td></tr></table>
+</div>
+</div><p>或者先直接解压，解压后做编码转换</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/Archiving_and_compression">archiving and compression from archlinux wiki</a></li>
+<li><a href="https://superuser.com/a/1215271/733022">Decompress ZIP with given encoding</a></li>
+<li><a href="http://linux.vbird.org/linux_basic/0240tarcompress.php">鸟哥私房菜：第八章 壓縮指令</a></li>
+</ul>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">laggardkernel</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-02-05
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/linux/">linux</a>
+          <a href="/tags/macos/">macos</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2019/logrotate/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">在 Linux 上利用 Logrotate 切割日志</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/2018/sudo/">
+            <span class="next-text nav-default">Sudo</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'pseudocold';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/5101148" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/laggardkernel" class="iconfont icon-github" title="github"></a>
+  <a href="https://blog.pseudocold.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">laggardkernel</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

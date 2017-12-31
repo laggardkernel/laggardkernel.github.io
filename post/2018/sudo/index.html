@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Sudo - Home</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="laggardkernel" /><meta name="description" content="sudo 使用全解。sudo -i, sudo -s, su, su -l 对比。
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.pseudocold.com/post/2018/sudo/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Sudo" />
+<meta property="og:description" content="sudo 使用全解。sudo -i, sudo -s, su, su -l 对比。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pseudocold.com/post/2018/sudo/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-02-03T16:27:56&#43;08:00" />
+<meta property="article:modified_time" content="2019-02-03T16:27:56&#43;08:00" />
+
+<meta itemprop="name" content="Sudo">
+<meta itemprop="description" content="sudo 使用全解。sudo -i, sudo -s, su, su -l 对比。"><meta itemprop="datePublished" content="2019-02-03T16:27:56&#43;08:00" />
+<meta itemprop="dateModified" content="2019-02-03T16:27:56&#43;08:00" />
+<meta itemprop="wordCount" content="1433">
+<meta itemprop="keywords" content="sudo,linux,macos," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Sudo"/>
+<meta name="twitter:description" content="sudo 使用全解。sudo -i, sudo -s, su, su -l 对比。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Home</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Home</a>
+</div>
+
+<nav class="site-navbar">
+    
+      <div class="top-progress-bar"></div>
+    
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Sudo</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-02-03 </span>
+        <div class="post-category">
+            <a href="/categories/devops/"> DevOps </a>
+            <a href="/categories/cli/"> CLI </a>
+            </div>
+          <span class="more-meta"> 1433 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#command-usage">Command Usage</a></li>
+    <li><a href="#conf">Conf</a>
+      <ul>
+        <li><a href="#always-visudo">Always visudo</a></li>
+        <li><a href="#grant-privileges">Grant Privileges</a></li>
+        <li><a href="#etcsudoers-default-perm">/etc/sudoers default perm</a></li>
+        <li><a href="#sudoersd-drop-in">sudoers.d drop-in</a></li>
+        <li><a href="#sudoedit">sudoedit</a></li>
+      </ul>
+    </li>
+    <li><a href="#su-vs-sudo">su v.s. sudo</a>
+      <ul>
+        <li><a href="#sudo--i-sudo--s-su-su--l">sudo -i, sudo -s, su, su -l</a></li>
+      </ul>
+    </li>
+    <li><a href="#formulae">Formulae</a>
+      <ul>
+        <li><a href="#pasword-prompt-timeout">Pasword Prompt Timeout</a></li>
+        <li><a href="#disable-per-terminal-sudo">Disable per-terminal sudo</a></li>
+        <li><a href="#passing-env-var">Passing Env Var</a></li>
+        <li><a href="#passing-aliases">Passing aliases</a></li>
+        <li><a href="#ask-for-root-passwd-instead-of-user-passwd">Ask for root Passwd instead of User Passwd</a></li>
+        <li><a href="#disable-root-login">Disable root login</a></li>
+        <li><a href="#enable-insults">Enable Insults</a></li>
+      </ul>
+    </li>
+    <li><a href="#troubleshooting">Troubleshooting</a>
+      <ul>
+        <li><a href="#tty-requirement">TTY requirement</a></li>
+        <li><a href="#umask-022-vs-077">umask 022 v.s. 077</a></li>
+      </ul>
+    </li>
+    <li><a href="#mine-conf">Mine Conf</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><code>sudo</code> 使用全解。<code>sudo -i</code>, <code>sudo -s</code>, <code>su</code>, <code>su -l</code> 对比。</p>
+<p>Features of <code>sudo</code></p>
+<ul>
+<li>run commands as other users</li>
+<li>grants S* privilege escalation</li>
+</ul>
+<p><a href="https://blog.yoitsu.moe/linux/su_sudo_and_pkexec.html"><code>su</code> v.s. <code>sudo</code></a></p>
+<blockquote>
+<p><code>su</code> 默认只改变 <code>HOME</code> 和 <code>SHELL</code> 变量，可以用 <code>--login</code> （或者更短些的 <code>-</code> ）来规避混合环境变量的副作用：<code>su -</code>。</p>
+</blockquote>
+<h2 id="command-usage">Command Usage</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># run command as user admin</span>
+sudo -u admin -- netctl start home
+
+<span class="c1"># enter login shell, change to new $HOME</span>
+sudo -i
+
+<span class="c1"># enter interactive shell, keep $PWD</span>
+sudo -s
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="conf">Conf</h2>
+<p>example file</p>
+<ul>
+<li><code>/usr/share/doc/sudo/examples/sudoers</code></li>
+<li><code>man 5 sudoers</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># list conf of current user</span>
+sudo -ll
+<span class="c1"># list conf of specific user</span>
+sudo -lU
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="always-visudo">Always visudo</h3>
+<p>Always edit <code>/etc/sudoers</code> with <code>visudo</code>, which could prevent errors.</p>
+<blockquote>
+<p><code>visudo</code> locks the sudoers file, saves edits to a temporary file, and checks that file&rsquo;s grammar before copying it to <code>/etc/sudoers</code>.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># -c, check only</span>
+sudo visudo -c
+sudo visudo -c -f /etc/sudoers
+
+sudo visudo
+<span class="c1"># modify drop-in files</span>
+sudo visudo -f /etc/sudoers.d/override
+</code></pre></td></tr></table>
+</div>
+</div><p>Change default editor. <code>EDITOR</code> is not used when <code>VISUAL</code> is set.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># Reset environment by default</span>
+<span class="na">Defaults      env_reset</span>
+<span class="c1"># Set default EDITOR to nano, and do not allow visudo to use EDITOR/VISUAL.</span>
+<span class="na">Defaults      editor</span><span class="o">=</span><span class="s">/usr/bin/nano, !env_editor</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Temporay change in command line</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo <span class="nv">EDITOR</span><span class="o">=</span>vim visudo
+sudo <span class="nv">EDITOR</span><span class="o">=</span>vim visudo -f /etc/sudoers.d/override.conf
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="grant-privileges">Grant Privileges</h3>
+<p>假设用户名 USER_NAME，主机名 HOST_NAME.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># full privileges</span>
+<span class="na">USER_NAME ALL</span><span class="o">=</span><span class="s">(ALL) ALL</span>
+
+<span class="c1"># to a specific HOST_NAME</span>
+<span class="na">USER_NAME HOST_NAME</span><span class="o">=</span><span class="s">(ALL) ALL</span>
+
+<span class="c1"># group</span>
+<span class="na">%wheel ALL</span><span class="o">=</span><span class="s">(ALL) ALL</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>pattern to limit on specific commands</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">USER_NAME HOST_NAME</span><span class="o">=</span><span class="s">/usr/bin/halt,/usr/bin/poweroff,/usr/bin/reboot,/usr/bin/pacman -Syu</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Disableble password asking</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Defaults:USER_NAME !authenticate</span>
+
+<span class="c1"># specific commands and HOST_NAME</span>
+<span class="na">USER_NAME HOST_NAME</span><span class="o">=</span> <span class="s">NOPASSWD: /usr/bin/halt,/usr/bin/poweroff,/usr/bin/reboot,/usr/bin/pacman -Syu</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="etcsudoers-default-perm">/etc/sudoers default perm</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># -c, --chages, report only when a change is made</span>
+chown -c root:root /etc/sudoers
+chmod -c <span class="m">0444</span> /etc/sudoers
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="sudoersd-drop-in">sudoers.d drop-in</h3>
+<p><code>visudo -f /etc/sudoers.d/custom.conf</code></p>
+<p><strong><code>sudoers.d</code></strong></p>
+<p>The files in <code>/etc/sudoers.d/</code> directory are parsed in <strong>lexicographical order</strong>, file names containing <code>.</code> or <code>~</code> are <em>skipped</em>. To avoid sorting problems, the file names should begin with two digits, e.g. <code>01_foo</code>.</p>
+<h3 id="sudoedit">sudoedit</h3>
+<p><code>sudo -e</code>, <code>sudoedit</code> edit a file as another user with current text editor. 实际为先编辑临时文件，保存时提权覆盖原文件。</p>
+<p>Running a text editor as root can be a security vulnerability as many editors can run arbitrary shell commands or affect files other than the one you intend to edit. To avoid this, use <code>sudoedit filename</code> (equivalently, <code>sudo --edit filename</code>) to edit files. This edits <strong>a copy of the file</strong> using your normal user privileges and then <strong>overwrites the original</strong> using sudo only after the editor is closed. You can change the editor this uses by setting the SUDO_EDITOR environment variable:</p>
+<p>可通过 <code>SUDO_EIDTOR</code> 变量指定 <code>sudoedit</code> 命令的编辑器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ <span class="nb">export</span> <span class="nv">SUDO_EDITOR</span><span class="o">=</span>vim
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="su-vs-sudo">su v.s. sudo</h2>
+<h3 id="sudo--i-sudo--s-su-su--l">sudo -i, sudo -s, su, su -l</h3>
+<p>Both commands <code>sudo -i</code>, <code>sudo -s</code> create a new shell. <code>SHLVL</code> is 1. And the environment variables from current user is kept.</p>
+<p><code>sudo -i</code>, <code>sudo --login</code> use the shell from <code>/etc/passwd</code> from the user you&rsquo;re switching to. The current dir is changed to the <code>HOME</code> dir of the new user.</p>
+<p><code>sudo -s</code>, uses the <code>SHELL</code> var of the current user you&rsquo;re running. And the cur dir is unchanged.</p>
+<p>While <code>su</code>, <code>su -l</code> don&rsquo;t keep the current environment variables.</p>
+<p><code>su</code> use an interactive, the current working dir is unchanged.</p>
+<p><code>su -l</code> uses a login shell, the cur dir is changed to the new <code>HOME</code>.</p>
+<p>In summary, <strong><code>sudo -i</code> mimics <code>su -l</code>, <code>sudo -s</code> mimics <code>su</code>. But the <code>sudo</code> commands keep the user&rsquo;s env vars.</strong></p>
+<p><a href="https://unix.stackexchange.com/questions/40719/stay-at-same-working-directory-when-changing-to-sudo">Stay at same working directory when changing to sudo</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo -s
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">				                     corrupted by user&#39;s
+		HOME=/root	uses root&#39;s PATH     env vars
+sudo -i		Y		Y[2]                 Y
+sudo -s		N		Y[2]                 Y
+sudo bash	N		Y[2]                 Y
+sudo su		Y		N[1]                 Y
+
+
+[1] PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+    probably set by /etc/environment
+[2] PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/X11R6/bin
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="formulae">Formulae</h2>
+<h3 id="pasword-prompt-timeout">Pasword Prompt Timeout</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Defaults passwd_timeout</span><span class="o">=</span><span class="s">0</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="disable-per-terminal-sudo">Disable per-terminal sudo</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Defaults !tty_tickets</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Reuse existing session in a new terminal.</p>
+<h3 id="passing-env-var">Passing Env Var</h3>
+<p>Inherit env var into sudo.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo -E pacman -Syu
+</code></pre></td></tr></table>
+</div>
+</div><p>Preserve environment variables using conf.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Defaults env_keep +</span><span class="o">=</span> <span class="s">&#34;ftp_proxy http_proxy https_proxy no_proxy&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="passing-aliases">Passing aliases</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">alias sudo=&#39;sudo &#39;
+</code></pre></td></tr></table>
+</div>
+</div><p><a href="https://askubuntu.com/questions/22037/aliases-not-available-when-using-sudo">Alias is not available when using <code>sudo</code></a></p>
+<blockquote>
+<p>If the last character of the alias value is a space or tab character,
+then the next command word following the alias is also checked for
+alias expansion.</p>
+</blockquote>
+<h3 id="ask-for-root-passwd-instead-of-user-passwd">Ask for root Passwd instead of User Passwd</h3>
+<p>This mimics the behavior of <code>su</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># targetpw, target user, defaults to root</span>
+<span class="na">Defaults targetpw</span>
+
+<span class="c1"># or</span>
+<span class="na">Defaults rootpw</span>
+
+<span class="c1"># use root passwd asking in specific group</span>
+<span class="na">Defaults:%wheel targetpw</span>
+<span class="na">%wheel ALL</span><span class="o">=</span><span class="s">(ALL) ALL</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="disable-root-login">Disable root login</h3>
+<p>不要使用，目前仅配置禁用 root SSH 登录。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># lock root user from login</span>
+passwd -l root
+
+<span class="c1"># unlock root from login</span>
+sudo passwd -u root
+</code></pre></td></tr></table>
+</div>
+</div><p>Or, edit <code>/etc/shadow</code> replace the encrypted passwd with <code>!</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">root:!:12345::::::
+</code></pre></td></tr></table>
+</div>
+</div><p>Enable it again with</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo passwd root
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="enable-insults">Enable Insults</h3>
+<p>easter egg, print insulting msg when sudo fails with incorrect password.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Defaults insults</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="tty-requirement">TTY requirement</h3>
+<p>Without a tty, <code>sudo</code> cannot disable echo when prompting for a password. 密码有泄露到标准输出。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># Disable &#34;ssh hostname sudo &lt;cmd&gt;&#34;, because it will show the password in clear text. You have to run &#34;ssh -t hostname sudo &lt;cmd&gt;&#34;.
+#
+#Defaults    requiretty
+</code></pre></td></tr></table>
+</div>
+</div><p><code>ssh -t</code> will allocate a tty by force.</p>
+<p>据《Docker从入门到实践》推荐，不使用 tty 命令最好使用 <code>gosu</code>。但实际上 Vagrant 官方教程中，shell provision 使用 sudo 也没有任何问题。暂时忽略。</p>
+<h3 id="umask-022-vs-077">umask 022 v.s. 077</h3>
+<p><a href="https://unix.stackexchange.com/questions/781/downsides-of-umask-077">Downsides of umask 077?</a></p>
+<p>安全考虑，<code>077</code>表示完全不共享新建文件、目录。也就是交给用户自己处理。</p>
+<blockquote>
+<p>You will get into trouble for the umask is inherited by the sudo session, so only root will be able to access files/dirs you create. sudo can be configured to automatically set the umask the way you want</p>
+</blockquote>
+<p><a href="https://support.apple.com/en-us/HT201684">Set a custom umask in macOS</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># user 不需要替换，只替换nnn</span>
+sudo launchctl config user <span class="nb">umask</span> nnn
+</code></pre></td></tr></table>
+</div>
+</div><p><a href="https://superuser.com/questions/79914/how-do-i-tell-sudo-to-write-files-with-a-umask-of-0022">How do I tell sudo to write files with a umask of 0022?</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Defaults umask</span><span class="o">=</span><span class="s">0022</span>
+<span class="c1"># default behavior: sudo will union the user&#39;s umask value with its own umask (which defaults to 0022)</span>
+<span class="c1"># this can lead to situations where a utility run by sudo may create files with different permissions than if run by root directly.</span>
+<span class="c1"># Force use our custom umask, without doing a union</span>
+<span class="na">Defaults umask_override</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>建议直接修改<code>/etc/sudoers.d</code>，这样全局有效。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># https://superuser.com/questions/79914/how-do-i-tell-sudo-to-write-files-with-a-umask-of-0022</span>
+<span class="k">function</span> sudo <span class="o">{</span>
+    <span class="nb">local</span> <span class="nv">old_value</span><span class="o">=</span><span class="k">$(</span><span class="nb">umask</span><span class="k">)</span>
+    <span class="nb">umask</span> <span class="m">0022</span>
+    <span class="nb">command</span> sudo <span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span>
+    <span class="nb">umask</span> <span class="nv">$old_value</span>
+<span class="o">}</span>
+
+<span class="c1"># pass aliases to sudo</span>
+<span class="c1"># https://askubuntu.com/questions/22037/aliases-not-available-when-using-sudo</span>
+<span class="c1"># If the last character of the alias value is a space or tab character,</span>
+<span class="c1"># then the next command word following the alias is also checked for</span>
+<span class="c1"># alias expansion.</span>
+<span class="nb">alias</span> <span class="nv">sudo</span><span class="o">=</span><span class="s1">&#39;sudo &#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="mine-conf">Mine Conf</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">Defaults editor</span><span class="o">=</span><span class="s">/usr/bin/vim:/usr/bin/vi:/usr/bin/nano</span>
+<span class="na">Defaults !tty_tickets</span>
+<span class="c1"># Defaults insults</span>
+
+<span class="na">Defaults umask</span><span class="o">=</span><span class="s">0022</span>
+<span class="c1"># default behavior: sudo will union the user&#39;s umask value with its own umask (which defaults to 0022)</span>
+<span class="c1"># this can lead to situations where a utility run by sudo may create files with different permissions than if run by root directly.</span>
+<span class="c1"># Force use our custom umask, without doing a union</span>
+<span class="na">Defaults umask_override</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="references">References</h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/Sudo">Sudo from Arch Wiki</a></li>
+</ul>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">laggardkernel</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-02-03
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/sudo/">sudo</a>
+          <a href="/tags/linux/">linux</a>
+          <a href="/tags/macos/">macos</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2018/archiving-and-compression/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">命令行压缩、解压命令总结</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/2018/su/">
+            <span class="next-text nav-default">Su Usage</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'pseudocold';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/5101148" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/laggardkernel" class="iconfont icon-github" title="github"></a>
+  <a href="https://blog.pseudocold.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">laggardkernel</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

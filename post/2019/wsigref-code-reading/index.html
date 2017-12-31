@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>wsigref 源码阅读笔记 - Home</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="laggardkernel" /><meta name="description" content="wsgiref 源码阅读个人笔记， 不做解读。
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.pseudocold.com/post/2019/wsigref-code-reading/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="wsigref 源码阅读笔记" />
+<meta property="og:description" content="wsgiref 源码阅读个人笔记， 不做解读。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pseudocold.com/post/2019/wsigref-code-reading/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-08-20T00:08:19&#43;08:00" />
+<meta property="article:modified_time" content="2019-08-20T00:08:19&#43;08:00" />
+
+<meta itemprop="name" content="wsigref 源码阅读笔记">
+<meta itemprop="description" content="wsgiref 源码阅读个人笔记， 不做解读。"><meta itemprop="datePublished" content="2019-08-20T00:08:19&#43;08:00" />
+<meta itemprop="dateModified" content="2019-08-20T00:08:19&#43;08:00" />
+<meta itemprop="wordCount" content="1364">
+<meta itemprop="keywords" content="flask," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="wsigref 源码阅读笔记"/>
+<meta name="twitter:description" content="wsgiref 源码阅读个人笔记， 不做解读。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Home</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Home</a>
+</div>
+
+<nav class="site-navbar">
+    
+      <div class="top-progress-bar"></div>
+    
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">wsigref 源码阅读笔记</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-08-20 </span>
+        <div class="post-category">
+            <a href="/categories/code-reading/"> Code Reading </a>
+            </div>
+          <span class="more-meta"> 1364 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#模块使用样码">模块使用样码</a></li>
+    <li><a href="#__init__py"><strong>init</strong>.py</a></li>
+    <li><a href="#simple_serverpy">simple_server.py</a></li>
+    <li><a href="#utilspy">utils.py</a></li>
+    <li><a href="#headerspy">headers.py</a></li>
+    <li><a href="#handlerspy">handlers.py</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><code>wsgiref</code> 源码阅读个人笔记， 不做解读。</p>
+<p>References</p>
+<ul>
+<li>PEP 3333，先了解 WSGI</li>
+<li><a href="https://docs.python.org/3.7/library/wsgiref.html">wsgiref doc</a></li>
+<li><a href="https://cizixs.com/2014/11/09/dive-into-wsgiref/">wsgiref 源码解析</a></li>
+</ul>
+<p>TODO</p>
+<ul>
+<li><input disabled="" type="checkbox"> 阅读 Flask 源码后重新梳理</li>
+</ul>
+<p>Python内置WSGI服务器：wsgiref。仅供开发及测试。</p>
+<p>version: Python 3.6.9</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">❯ tree wsgiref
+wsgiref
+├── __init__.py
+├── handlers.py
+├── headers.py
+├── simple_server.py
+├── util.py
+└── validate.py
+</code></pre></td></tr></table>
+</div>
+</div><p>源码只看两部分: <code>simple_server.py</code>, <code>handlers.py</code>。这两部分实现了WSGI服务端。<code>simple_server.py</code>中<code>demo_app</code>为WSGI应用端的简单实现。其他文件类似于这2者的辅助函数。</p>
+<p>流程总结，参考源码解析博文</p>
+<ol>
+<li>服务器程序创建 socket，并监听在特定的端口，等待客户端的连接</li>
+<li>客户端发送 http 请求</li>
+<li>socket server 读取请求的数据，交给 http server</li>
+<li>http server 根据 http 的规范解析请求，然后把请求交给 WSGIServer</li>
+<li>WSGIServer 把客户端的信息存放在 environ 变量里，然后交给绑定的 handler 处理请求</li>
+<li>HTTPHandler 解析请求，把 method、path 等放在 environ，然后 WSGIRequestHandler 把服务器端的信息也放到 environ 里</li>
+<li>WSGIRequestHandler 调用绑定的 wsgi ServerHandler，把上面包含了服务器信息，客户端信息，本次请求信息得 environ 传递过去。（ServerHandler解析<code>wsgi.</code>相关环境变量）</li>
+<li>wsgi ServerHandler 调用注册的 wsgi app，把 environ 和 start_response 传递过去</li>
+<li>wsgi app 将reponse header、status、body 回传给 wsgi handler</li>
+<li>然后 handler 逐层传递，最后把这些信息通过 socket 发送到客户端</li>
+<li>客户端的程序接到应答，解析应答，并把结果打印出来。</li>
+</ol>
+<h2 id="模块使用样码">模块使用样码</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># server.py</span>
+<span class="c1"># 从wsgiref模块导入:</span>
+<span class="kn">from</span> <span class="nn">wsgiref.simple_server</span> <span class="kn">import</span> <span class="n">make_server</span>
+<span class="c1"># 导入我们自己编写的application函数:</span>
+<span class="c1"># from hello import application</span>
+
+<span class="c1"># handler.py WSGI 处理函数</span>
+<span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+    <span class="n">start_response</span><span class="p">(</span><span class="s1">&#39;200 OK&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;text/html&#39;</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="p">[</span><span class="sa">b</span><span class="s1">&#39;&lt;h1&gt;Hello, web!&lt;/h1&gt;&#39;</span><span class="p">]</span>
+
+<span class="c1"># 创建一个服务器，IP地址为空，端口是8000，处理函数是application:</span>
+<span class="n">httpd</span> <span class="o">=</span> <span class="n">make_server</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">8000</span><span class="p">,</span> <span class="n">application</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Serving HTTP on port 8000...&#39;</span><span class="p">)</span>
+<span class="c1"># 开始监听HTTP请求:</span>
+<span class="n">httpd</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="__init__py"><strong>init</strong>.py</h2>
+<p>代码说明</p>
+<p>wsgiref &ndash; a WSGI (PEP 3333) Reference Library</p>
+<p>Current Contents:</p>
+<ul>
+<li>util &ndash; Miscellaneous useful functions and wrappers</li>
+<li>headers &ndash; Manage response headers</li>
+<li>handlers &ndash; base classes for server/gateway implementations</li>
+<li>simple_server &ndash; a simple BaseHTTPServer that supports WSGI</li>
+<li>validate &ndash; validation wrapper that sits between an app and a server to detect errors in either</li>
+</ul>
+<p>To-Do:</p>
+<ul>
+<li>cgi_gateway &ndash; Run WSGI apps under CGI (pending a deployment standard)</li>
+<li>cgi_wrapper &ndash; Run CGI apps under WSGI</li>
+<li>router &ndash; a simple middleware component that handles URL traversal</li>
+</ul>
+<h2 id="simple_serverpy">simple_server.py</h2>
+<p>基于<code>http.server</code>模块中<code>BaseHTTPRequestHandler</code>, <code>HTTPServer</code>实现HTTP服务监听。Python 2中对应<code>BaseHTTPServer</code>对应于Python 3中<code>http.server</code>。配合<a href="https://cizixs.com/2014/11/09/dive-into-wsgiref/">wsgiref 源码解析</a>阅读较好。</p>
+<ul>
+<li><a href="https://docs.python.org/3.7/library/http.server.html#http.server.HTTPServer">http.server doc</a>, 只了解上边2个类的使用即可</li>
+</ul>
+<p>直接运行<code>simple_server.py</code>文件，可以开启一个样例app，输出所有环境变量。<code>StringIO</code>对象被用来做缓冲，一次返回所有数据给WSGI服务端。</p>
+<p><code>BaseHTTPRequestHandler</code></p>
+<blockquote>
+<p>rfile</p>
+<p>An io.BufferedIOBase input stream, ready to read from the start of the optional input data.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># handler in class WSGIRequestHandler(BaseHTTPRequestHandler)</span>
+        <span class="n">handler</span> <span class="o">=</span> <span class="n">ServerHandler</span><span class="p">(</span> <span class="c1"># from handlers.py</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rfile</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_stderr</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_environ</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="n">handler</span><span class="o">.</span><span class="n">request_handler</span> <span class="o">=</span> <span class="bp">self</span>      <span class="c1"># backpointer for logging</span>
+        <span class="n">handler</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">get_app</span><span class="p">())</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>调用默认浏览器打开URL。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">webbrowser</span>
+<span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;http://localhost:8000/xyz?abc&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="utilspy">utils.py</h2>
+<p>没什么好说的，扫一眼每个函数的文档说明即可明白各个函数在做什么。在<code>handlers.py</code>中会被用到。</p>
+<h2 id="headerspy">headers.py</h2>
+<p>类，用来存储响应头，在<code>start_response</code>中被调用。</p>
+<h2 id="handlerspy">handlers.py</h2>
+<p>WSGI服务端实现。不需要全部理解，着重查看<code>run</code>和<code>start_response</code>函数。前者对应于<code>simple_server.py</code>中<code>handler.run()</code>，后者属于WSGI标准。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">BaseHandler</span><span class="p">:</span>
+    <span class="c1"># ...</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">application</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;Invoke the application&#34;&#34;&#34;</span>
+        <span class="c1"># Note to self: don&#39;t move the close()!  Asynchronous servers shouldn&#39;t</span>
+        <span class="c1"># call close() from finish_response(), so if you close() anywhere but</span>
+        <span class="c1"># the double-error branch here, you&#39;ll break asynchronous servers by</span>
+        <span class="c1"># prematurely closing.  Async servers must return from &#39;run()&#39; without</span>
+        <span class="c1"># closing if there might still be output to iterate over.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup_environ</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">application</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">environ</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_response</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">finish_response</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">handle_error</span><span class="p">()</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="c1"># If we get an error handling an error, just give up already!</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="k">raise</span>   <span class="c1"># ...and let the actual server figure it out.</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">laggardkernel</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-08-20
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/flask/">flask</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2019/flask-0.1/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Flask 0.1 源码解读</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/2018/miniconda-multi-user-installation/">
+            <span class="next-text nav-default"> Multi User Anaconda/Miniconda Installation</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'pseudocold';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/5101148" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/laggardkernel" class="iconfont icon-github" title="github"></a>
+  <a href="https://blog.pseudocold.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">laggardkernel</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

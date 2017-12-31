@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Nginx 部署 Hugo 静态博客始终本地可用 - Home</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="laggardkernel" /><meta name="description" content="hugo 自带测试服务器可以将静态博客运行在本地 https://localhost:1313 作为测试。本文通过配置 Nginx Web 服务器，部署博客本地始终可用，方便的进行内容检索、查询。
+" /><meta name="keywords" content="nginx, fallback, hugo" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.pseudocold.com/post/2019/serve-hugo-blog-with-nginx-locally/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Nginx 部署 Hugo 静态博客始终本地可用" />
+<meta property="og:description" content="hugo 自带测试服务器可以将静态博客运行在本地 https://localhost:1313 作为测试。本文通过配置 Nginx Web 服务器，部署博客本地始终可用，方便的进行内容检索、查询。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pseudocold.com/post/2019/serve-hugo-blog-with-nginx-locally/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-09-16T09:28:41&#43;08:00" />
+<meta property="article:modified_time" content="2019-09-16T09:33:20&#43;08:00" />
+
+<meta itemprop="name" content="Nginx 部署 Hugo 静态博客始终本地可用">
+<meta itemprop="description" content="hugo 自带测试服务器可以将静态博客运行在本地 https://localhost:1313 作为测试。本文通过配置 Nginx Web 服务器，部署博客本地始终可用，方便的进行内容检索、查询。"><meta itemprop="datePublished" content="2019-09-16T09:28:41&#43;08:00" />
+<meta itemprop="dateModified" content="2019-09-16T09:33:20&#43;08:00" />
+<meta itemprop="wordCount" content="1313">
+<meta itemprop="keywords" content="nginx,https,hugo,h2,tls," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Nginx 部署 Hugo 静态博客始终本地可用"/>
+<meta name="twitter:description" content="hugo 自带测试服务器可以将静态博客运行在本地 https://localhost:1313 作为测试。本文通过配置 Nginx Web 服务器，部署博客本地始终可用，方便的进行内容检索、查询。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Home</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Home</a>
+</div>
+
+<nav class="site-navbar">
+    
+      <div class="top-progress-bar"></div>
+    
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Nginx 部署 Hugo 静态博客始终本地可用</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-09-16 </span>
+        <div class="post-category">
+            <a href="/categories/devops/"> DevOps </a>
+            </div>
+          <span class="more-meta"> 1313 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#工具准备">工具准备</a></li>
+    <li><a href="#mkcert-创建本地域名证书">mkcert 创建本地域名证书</a></li>
+    <li><a href="#配置-nginx-本地博客服务">配置 Nginx 本地博客服务</a></li>
+    <li><a href="#检查效果">检查效果</a></li>
+    <li><a href="#扩展阅读">扩展阅读</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><code>hugo</code> 自带测试服务器可以将静态博客运行在本地 <code>https://localhost:1313</code> 作为测试。本文通过配置 Nginx Web 服务器，部署博客本地始终可用，方便的进行内容检索、查询。</p>
+<p>很多时候，个人博客也充当着个人资料库的功能。（尽管博主不这么干，且认为这是一种脑残行为）部署博客始终本地可访问，可以方便我们进行复习、查询。</p>
+<p>而在我们测试时，常常会使用 <code>hugo server -D -w</code> 启动 <code>hugo</code> 自带测试服务器测试草稿效果。也就是说，本地既有我们已经生成的静态 HTML 文档，也有可能启动着一个测试服务器提供当前最新的博客内容。最好的方式是先进行访问测试服务器查找内容（最新），若测试服务器不在线，再尝试访问本地 HTML 文件（有可能陈旧）。</p>
+<h2 id="工具准备">工具准备</h2>
+<ul>
+<li>Nginx</li>
+<li><a href="https://github.com/FiloSottile/mkcert">mkcert</a></li>
+<li>Hugo 以及其生成的静态文件</li>
+</ul>
+<h2 id="mkcert-创建本地域名证书">mkcert 创建本地域名证书</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># create a cert for self.test and example.test</span>
+mkcert example.test *.example.test self.test *.self.test localhost 127.0.0.1 ::1
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>注</strong>：上述示例使用了 <code>.test</code> 保留域，当然很多人也会使用 <code>exmaple.com</code> 作为测试域名。</p>
+<p>与 <code>openssl</code> 自签证书相比，<code>mkcert</code> 先自签一颗根证书出来，然后利用此 CA 证书下发站点证书。本地机器只需信任此 CA 证书即可。另外，<code>mkcert</code> 使用简单，无需像 <code>openssl</code> 一样记忆复杂的参数。</p>
+<p>将域名解析写入 hosts，或者是本地递归 DNS 服务器。有能力建议使用后者，支持泛域名解析。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/hosts</span>
+<span class="na">127.0.0.1 self.test</span>
+<span class="na">127.0.0.1 example.test</span>
+
+<span class="na">127.0.0.1 blog.self.test</span>
+<span class="na">127.0.0.1 blog.example.test</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="配置-nginx-本地博客服务">配置 Nginx 本地博客服务</h2>
+<p>本文并非手把手教程，此处直接提供配置文件，以实现 <code>http://localhost:1313</code> 反代为主，回落到本地静态文件为辅的效果。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="c1"># vim:fdm=marker:foldlevel=0:sw=4:ts=4:sts=4
+</span><span class="c1"></span>
+<span class="k">server</span> <span class="p">{</span>
+    <span class="kn">server_name</span> <span class="s">blog.example.test</span> <span class="s">blog.self.test</span><span class="p">;</span>
+    <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+    <span class="c1"># redirects to HTTPS
+</span><span class="c1"></span>    <span class="kn">return</span> <span class="mi">301</span> <span class="s">https://</span><span class="nv">$server_name$request_uri</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">server</span> <span class="p">{</span>
+    <span class="kn">server_name</span> <span class="s">blog.example.test</span> <span class="s">blog.self.test</span><span class="p">;</span>
+    <span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span> <span class="s">http2</span><span class="p">;</span>
+
+    <span class="c1"># location of the self-signed SSL certificate
+</span><span class="c1"></span>    <span class="kn">include</span> <span class="s">snippets/self-signed.conf</span><span class="p">;</span>
+    <span class="kn">include</span> <span class="s">snippets/ssl-params.conf</span><span class="p">;</span>
+
+    <span class="c1"># write access and error logs to /var/log on Linux, /usr/local/var on macOS
+</span><span class="c1"></span>    <span class="c1"># access_log /usr/local/var/log/nginx/blog_access.log;
+</span><span class="c1"></span>    <span class="c1"># error_log /usr/local/var/log/nginx/blog_error.log;
+</span><span class="c1"></span>
+    <span class="kn">index</span> <span class="s">index.html</span> <span class="s">index.htm</span><span class="p">;</span>
+    <span class="kn">root</span> <span class="s">/path/to/your/blog/content/public</span><span class="p">;</span>
+
+    <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+        <span class="kn">proxy_pass</span> <span class="s">http://localhost:1313</span><span class="p">;</span>
+        <span class="kn">proxy_redirect</span> <span class="no">off</span><span class="p">;</span>
+        <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$host</span><span class="p">;</span>
+        <span class="kn">proxy_set_header</span> <span class="s">X-Real-IP</span> <span class="nv">$remote_addr</span><span class="p">;</span>
+        <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-For</span> <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+        <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-Proto</span> <span class="nv">$scheme</span><span class="p">;</span>
+
+        <span class="kn">proxy_intercept_errors</span> <span class="no">on</span><span class="p">;</span>
+        <span class="kn">error_page</span> <span class="mi">404</span> <span class="mi">500</span> <span class="mi">502</span> <span class="mi">503</span> <span class="mi">504</span> <span class="p">=</span> <span class="s">@fallback</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kn">location</span> <span class="s">@fallback</span> <span class="p">{</span>
+        <span class="kn">rewrite</span> <span class="s">^(.*)\/</span>$ <span class="nv">$1/index.html</span> <span class="s">break</span><span class="p">;</span>
+        <span class="kn">try_files</span> <span class="nv">$uri</span> <span class="nv">$uri/</span> <span class="p">=</span><span class="mi">404</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Forbid access to hidden files: .ht*, .git/ .gitignore, .envrc, etc
+</span><span class="c1"></span>    <span class="kn">location</span> <span class="p">~</span> <span class="sr">/\.</span> <span class="p">{</span>
+        <span class="kn">allow</span> <span class="mi">127</span><span class="s">.0.0.1</span><span class="p">;</span>
+        <span class="kn">deny</span>  <span class="s">all</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>先访问本地静态文件，然后回落到反向代理，这种回落方式更为常见。但这里为达成相反的回落方式，</p>
+<ol>
+<li><code>location /</code> 块匹配先将请求转发到反向代理，通过开启反向代理错误捕捉，以及自定义错误页面，将反向代理离线时的请求回落到本地静态文件。</li>
+<li>另外，<code>index</code> 规则在 <code>error_page</code> 下没有生效。<code>location @fallback</code> 块中，<code>rewrite</code> 重写请求，将请求导向对应的博文 <code>index.html</code> 文件。</li>
+</ol>
+<p><code>snippets/self-signed.conf</code> stores the cert locations.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">ssl_certificate</span> <span class="s">/path/to/mkcert/example.test+10.pem</span><span class="p">;</span>
+<span class="k">ssl_certificate_key</span> <span class="s">/path/to/mkcert/example.test+10-key.pem</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>snippets/ssl-params.conf</code> stores strong ciphers for the cert. Copied from <a href="https://cipherli.st/">cipherli.st</a>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="c1"># cipherli.st
+</span><span class="c1"></span><span class="k">ssl_protocols</span> <span class="s">TLSv1.3</span><span class="p">;</span> <span class="c1"># Requires nginx &gt;= 1.13.0 else use TLSv1.2
+</span><span class="c1"># ssl_protocols TLSv1.3 TLSv1.2; # Requires nginx &gt;= 1.13.0 else use TLSv1.2
+</span><span class="c1"></span><span class="k">ssl_prefer_server_ciphers</span> <span class="no">on</span><span class="p">;</span>
+<span class="c1"># openssl dhparam -out /usr/local/etc/nginx/dhparam.pem 4096
+</span><span class="c1"></span><span class="k">ssl_dhparam</span> <span class="s">/usr/local/etc/nginx/dhparam.pem</span><span class="p">;</span> <span class="c1"># openssl dhparam -out /etc/nginx/dhparam.pem 4096
+</span><span class="c1"></span><span class="k">ssl_ciphers</span> <span class="s">EECDH+AESGCM:EDH+AESGCM</span><span class="p">;</span>
+<span class="k">ssl_ecdh_curve</span> <span class="s">secp384r1</span><span class="p">;</span> <span class="c1"># Requires nginx &gt;= 1.1.0
+</span><span class="c1"></span><span class="k">ssl_session_timeout</span>  <span class="mi">10m</span><span class="p">;</span>
+<span class="k">ssl_session_cache</span> <span class="s">shared:SSL:10m</span><span class="p">;</span>
+<span class="k">ssl_session_tickets</span> <span class="no">off</span><span class="p">;</span> <span class="c1"># Requires nginx &gt;= 1.5.9
+</span><span class="c1"># stapling not available for self-signed cert, just ignore the warning
+</span><span class="c1"></span><span class="k">ssl_stapling</span> <span class="no">on</span><span class="p">;</span> <span class="c1"># Requires nginx &gt;= 1.3.7
+</span><span class="c1"></span><span class="k">ssl_stapling_verify</span> <span class="no">on</span><span class="p">;</span> <span class="c1"># Requires nginx =&gt; 1.3.7
+</span><span class="c1"># resolver $DNS-IP-1 $DNS-IP-2 valid=300s;
+</span><span class="c1"></span><span class="k">resolver</span> <span class="mi">114</span><span class="s">.114.114.114</span> <span class="mi">8</span><span class="s">.8.4.4</span> <span class="s">valid=300s</span><span class="p">;</span>
+<span class="k">resolver_timeout</span> <span class="s">5s</span><span class="p">;</span>
+<span class="k">add_header</span> <span class="s">Strict-Transport-Security</span> <span class="s">&#34;max-age=63072000</span><span class="p">;</span> <span class="k">includeSubDomains</span><span class="p">;</span> <span class="k">preload&#34;</span><span class="p">;</span>
+<span class="k">add_header</span> <span class="s">X-Frame-Options</span> <span class="s">DENY</span><span class="p">;</span>
+<span class="k">add_header</span> <span class="s">X-Content-Type-Options</span> <span class="s">nosniff</span><span class="p">;</span>
+<span class="k">add_header</span> <span class="s">X-XSS-Protection</span> <span class="s">&#34;1</span><span class="p">;</span> <span class="k">mode=block&#34;</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Note</strong>:</p>
+<ul>
+<li>
+<p>HTTPS is setup with TLSv1.3 and HTTP/2. Check the connection with</p>
+</li>
+<li>
+<p>前向保密的 Diffie-Hellman 参数生成</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">openssl dhparam -out /usr/local/etc/nginx/dhparam.pem <span class="m">4096</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><code>ssl_stapling</code> doesn&rsquo;t work for self-signed cert. Just ignore the warning.</p>
+</li>
+<li>
+<p><code>Strict-Transport-Security</code> 开启了 <code>HSTS</code>，客户端第二次访问时会直接访问对应 HTTPS 而跳过 HTTP，以避免 <a href="https://en.wikipedia.org/wiki/Downgrade_attack">downgrade attacks</a>。</p>
+</li>
+</ul>
+<h2 id="检查效果">检查效果</h2>
+<p>最后，通过信号控制 Nginx 重新读取配置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo nginx -s reload
+</code></pre></td></tr></table>
+</div>
+</div><p>访问 <a href="https://blog.example.test/">https://blog.example.test/</a> 本地博客服务。当 <code>hugo server -D -w</code> 测试服务器启动时，测试服务器内容优先被显示。</p>
+<p>测试 HTTP/2, TLS v1.3 是否生效。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">curl -k --tlsv1.3 --http2 -L -v -s https://blog.example.test 1&gt;/dev/null
+<span class="c1"># -k, --insecure, 信任自签证书</span>
+<span class="c1"># --tlsv1.3, --http2 强制使用 H2, tls 1.3 发起请求</span>
+<span class="c1"># -L, --location, 跟踪跳转</span>
+<span class="c1"># -v, --verbose, 开启详细输出，以显示 TLS 握手过程</span>
+<span class="c1"># -s, --slient. Quiet mode, no err msg.</span>
+<span class="c1"># 1&gt;/dev/null, filter the response body</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>curl</code> 响应测试输出内容略。</p>
+<h2 id="扩展阅读">扩展阅读</h2>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-18-04">How To Create a Self-Signed SSL Certificate for Nginx in Ubuntu 18.04</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-with-http-2-support-on-ubuntu-18-04">How To Set Up Nginx with HTTP/2 Support on Ubuntu 18.04</a></li>
+<li><a href="/post/2018/basic-webserver-setup-nginx/">本博客博文 Basic HTTP2 Setup</a></li>
+<li><a href="https://superuser.com/a/1374750/733022">Get HTTP response without body by <code>curl</code></a></li>
+</ul>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">laggardkernel</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-09-16
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/nginx/">nginx</a>
+          <a href="/tags/https/">https</a>
+          <a href="/tags/hugo/">hugo</a>
+          <a href="/tags/h2/">h2</a>
+          <a href="/tags/tls/">tls</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2019/nginx-rewrite-status-code/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Rewrite the Status Code in Nginx</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/2019/flask-pitfalls/">
+            <span class="next-text nav-default">Flask Pitfalls</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'pseudocold';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/5101148" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/laggardkernel" class="iconfont icon-github" title="github"></a>
+  <a href="https://blog.pseudocold.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">laggardkernel</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dhcp on Home</title>
+    <link>https://blog.pseudocold.com/tags/dhcp/</link>
+    <description>Recent content in dhcp on Home</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 15 Oct 2019 17:19:31 +0800</lastBuildDate><atom:link href="https://blog.pseudocold.com/tags/dhcp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Setup DHCP Client with systemd-networkd</title>
+      <link>https://blog.pseudocold.com/post/2019/setup-dhcp-systemd-networkd/</link>
+      <pubDate>Tue, 15 Oct 2019 17:19:31 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/setup-dhcp-systemd-networkd/</guid>
+      <description>&lt;p&gt;Former package group &amp;ldquo;base&amp;rdquo; from Archlinux contains 2 network managers - &lt;code&gt;netctl&lt;/code&gt; and &lt;code&gt;systemd-networkd&lt;/code&gt;, and 1 DHCP client &lt;code&gt;dhcpcd&lt;/code&gt;, which is obviously redundant for a network setup. After &lt;a href=&#34;https://blog.pseudocold.com/post/2019/base-group-replaced-by-mandatory-base-package-in-archlinux&#34;&gt;pkg group &amp;ldquo;base&amp;rdquo; replaced by the same name meta pkg&lt;/a&gt;, only &lt;code&gt;systemd-networkd&lt;/code&gt; is left. For a simple network setup with DHCP, &lt;code&gt;systemd-networkd&lt;/code&gt; is enough to get the work done.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

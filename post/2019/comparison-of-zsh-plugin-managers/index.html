@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Comparison of ZSH Frameworks and Plugin Managers - Home</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="laggardkernel" /><meta name="description" content="A comparison of all kinds of ZSH frameworks and plugin manager. Try to find the fastest one.
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.pseudocold.com/post/2019/comparison-of-zsh-plugin-managers/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Comparison of ZSH Frameworks and Plugin Managers" />
+<meta property="og:description" content="A comparison of all kinds of ZSH frameworks and plugin manager. Try to find the fastest one." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pseudocold.com/post/2019/comparison-of-zsh-plugin-managers/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-01-18T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2019-01-18T00:00:00&#43;00:00" />
+
+<meta itemprop="name" content="Comparison of ZSH Frameworks and Plugin Managers">
+<meta itemprop="description" content="A comparison of all kinds of ZSH frameworks and plugin manager. Try to find the fastest one."><meta itemprop="datePublished" content="2019-01-18T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-01-18T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="3091">
+<meta itemprop="keywords" content="zsh," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Comparison of ZSH Frameworks and Plugin Managers"/>
+<meta name="twitter:description" content="A comparison of all kinds of ZSH frameworks and plugin manager. Try to find the fastest one."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Home</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Home</a>
+</div>
+
+<nav class="site-navbar">
+    
+      <div class="top-progress-bar"></div>
+    
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Comparison of ZSH Frameworks and Plugin Managers</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-01-18 </span>
+        <div class="post-category">
+            <a href="/categories/cli/"> CLI </a>
+            </div>
+          <span class="more-meta"> 3091 words </span>
+          <span class="more-meta"> 7 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#changelog">Changelog</a></li>
+    <li><a href="#tldr">TLDR</a></li>
+    <li><a href="#intro">Intro</a></li>
+    <li><a href="#my-experience-with-zsh-frameworks-and-plugin-managers">My experience with ZSH frameworks and plugin managers:</a>
+      <ul>
+        <li><a href="#frameworks">Frameworks</a></li>
+        <li><a href="#plugin-managers">Plugin Managers</a></li>
+      </ul>
+    </li>
+    <li><a href="#faq">FAQ</a>
+      <ul>
+        <li><a href="#why-dont-you-make-a-benchmark">Why don&rsquo;t you make a benchmark?</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>A comparison of all kinds of ZSH frameworks and plugin manager. Try to find the fastest one.</p>
+<h2 id="changelog">Changelog</h2>
+<ul>
+<li>update 1: add a FAQ section</li>
+<li>update 2: benchmark chart and feature comparison table</li>
+<li>update 3:
+<ul>
+<li>improve the table with missing features for antigen</li>
+<li>new <code>zplg times</code> result</li>
+</ul>
+</li>
+</ul>
+<h2 id="tldr">TLDR</h2>
+<p><a href="https://github.com/vintersnow/zsh_plugin_manager_speed">Speed comparison of ZSH plugin mangers with 10 plugins loaded</a> made by vintersnow@github, detail is covered in the post <a href="https://qiita.com/vintersnow/items/cef72aebb2d55a82f212">最速のZsh プラグインマネージャーを求めて</a>.</p>
+<p><img src="https://raw.githubusercontent.com/vintersnow/zsh_plugin_manager_speed/master/result.png" alt="Result of speed comparison"></p>
+<p>Comparison of Features and Optimizations made by me.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Manager</th>
+<th>Plugins</th>
+<th>Frameworks Supported</th>
+<th>Other Features</th>
+<th>Speed with 0 plugin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>antigen</td>
+<td>bytecode compiling, static bundle loading</td>
+<td>-</td>
+<td>oh-my-zsh</td>
+<td>-</td>
+<td>60 ms</td>
+</tr>
+<tr>
+<td>zgen</td>
+<td>static loading</td>
+<td>-</td>
+<td>oh-my-zsh, prezto</td>
+<td>-</td>
+<td>50 ms</td>
+</tr>
+<tr>
+<td>antibody</td>
+<td>executed in Go, or static loading</td>
+<td>-</td>
+<td>oh-my-zsh</td>
+<td>-</td>
+<td>50 ms</td>
+</tr>
+<tr>
+<td>zplug</td>
+<td>cache mechanism</td>
+<td>parallel loading</td>
+<td>oh-my-zsh, prezto</td>
+<td>managing scripts</td>
+<td>160 ms</td>
+</tr>
+<tr>
+<td>zplugin</td>
+<td>bytecode compiling</td>
+<td>bytecode compiling, Turbo Mode (background loading)</td>
+<td>oh-my-zsh, prezto</td>
+<td>managing scripts, completions, plugin report</td>
+<td>50 ms</td>
+</tr>
+</tbody>
+</table>
+<h2 id="intro">Intro</h2>
+<p>I&rsquo;ve been trying different plugin mangers for months to find the fastest one. The content below is what I got. <strong>For the record, the conclusion is very subjective. But it&rsquo;s the truth for me. I would appreciate hearing your thoughts on this.</strong> Here it begins.</p>
+<p>Display what I got after this long journey. (BTW, I has an SSD on my machine, the data should be much different on HDDs.)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-zsh" data-lang="zsh">❯ <span class="nb">export</span> <span class="nv">TIMEFMT</span><span class="o">=</span><span class="s1">&#39;%U user %S system %P cpu %*E total&#39;</span>
+
+❯ <span class="k">for</span> i <span class="o">({</span>1..10<span class="o">})</span> <span class="nb">time</span> zsh -ilc <span class="nb">echo</span> <span class="p">&amp;</span>&gt;/dev/null <span class="o">||</span> <span class="nb">true</span>
+0.07s user 0.04s system 97% cpu 0.115 total
+0.07s user 0.04s system 97% cpu 0.110 total
+0.06s user 0.04s system 97% cpu 0.109 total
+0.07s user 0.04s system 97% cpu 0.111 total
+0.07s user 0.04s system 97% cpu 0.111 total
+0.07s user 0.04s system 97% cpu 0.111 total
+0.07s user 0.04s system 97% cpu 0.111 total
+0.07s user 0.04s system 97% cpu 0.112 total
+0.07s user 0.04s system 97% cpu 0.113 total
+0.07s user 0.04s system 97% cpu 0.114 total
+
+❯ zplg <span class="nb">times</span>
+Plugin loading times:
+0.001 sec - dircolors-solarized
+0.001 sec - base16-fzf
+0.001 sec - PZT::modules/environment
+0.001 sec - PZT::modules/history
+0.001 sec - PZT::modules/directory
+0.001 sec - PZT::modules/helper
+0.003 sec - PZT::modules/spectrum
+0.011 sec - PZT::modules/utility
+0.001 sec - PZT::modules/osx
+0.001 sec - OMZ::plugins/fancy-ctrl-z
+0.004 sec - OMZ::plugins/fzf
+0.005 sec - mafredri/zsh-async
+0.005 sec - laggardkernel/zsh-fuzzy-search-and-edit
+0.001 sec - wfxr/forgit
+0.002 sec - laggardkernel/git-ignore
+0.001 sec - ytet5uy4/pctl
+0.001 sec - getColorCode
+0.001 sec - PZT::modules/completion <span class="c1"># only use the conf part</span>
+0.001 sec - zpm-zsh/ssh
+0.001 sec - zsh-users/zsh-completions
+0.001 sec - zdharma/history-search-multi-word
+0.002 sec - PZT::modules/autosuggestions
+0.006 sec - laggardkernel/spaceship-prompt
+0.089 sec - romkatv/gitstatus <span class="c1"># turbo mode started</span>
+0.017 sec - _local/init0 <span class="c1"># init of pyenv, nodenv, rbenv</span>
+0.036 sec - zdharma/fast-syntax-highlighting
+0.002 sec - PZT::modules/history-substring-search
+0.022 sec - softmoth/zsh-vim-mode
+0.017 sec - PZT::modules/fasd <span class="c1"># compinit here</span>
+0.077 sec - _local/init1
+0.011 sec - urbainvaes/fzf-marks
+0.027 sec - hlissner/zsh-autopair
+0.027 sec - MichaelAquilina/zsh-you-should-use
+0.018 sec - marzocchi/zsh-notify
+0.005 sec - OMZ::plugins/urltools
+Total: 0.401 sec
+
+❯ <span class="nv">count</span><span class="o">=</span><span class="k">$(</span>zplg times<span class="p">|</span>wc -l<span class="k">)</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="k">$((</span>count <span class="o">-</span> <span class="m">2</span><span class="k">))</span>  <span class="c1"># calc number of plugins</span>
+<span class="m">35</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="my-experience-with-zsh-frameworks-and-plugin-managers">My experience with ZSH frameworks and plugin managers:</h2>
+<p>There&rsquo;re basically three kinds of startup time for ZSH.</p>
+<ol>
+<li>time taken by framework, or by plugin manger itself to parse its dialect</li>
+<li>time cost in loading plugins</li>
+<li>time taken by scripts written by ourselves</li>
+</ol>
+<p>The results here are based on the first two kinds of time.</p>
+<p>I should mention it here that the most of startup time is taken by some time-consuming plugins, such as</p>
+<ul>
+<li><code>*vm</code>, <code>*env</code> initialization
+<ul>
+<li><code>nvm</code>, <code>rvm</code></li>
+<li><code>rbenv</code>, <code>pyenv</code>, <code>nodenv</code></li>
+</ul>
+</li>
+<li>init code generation (not <code>source</code>, or <code>eval</code> those codes)
+<ul>
+<li><code>thefuck</code>, 120ms for init generation, 1ms for <code>eval</code> 👍</li>
+<li><code>fasd</code>, 30~40ms for init generation</li>
+</ul>
+</li>
+<li>time-consuming commands
+<ul>
+<li><code>brew --prefix nvm</code>, 600ms 🌚</li>
+<li><code>brew command command-not-found-init</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="frameworks">Frameworks</h3>
+<h4 id="oh-my-zshhttpsgithubcomrobbyrusselloh-my-zsh"><a href="https://github.com/robbyrussell/oh-my-zsh">Oh-My-ZSH</a></h4>
+<p>The most famous framework with most plugins built-in. For example, <code>autojump</code>, <code>z</code>, <code>fasd</code> are all included, which let users choose whatever they want.</p>
+<h4 id="preztohttpsgithubcomsorin-ionescuprezto"><a href="https://github.com/sorin-ionescu/prezto">Prezto</a></h4>
+<p>The only framework does optimizations in plugins with sophisticated coding skill, which makes me realize I&rsquo;m ignorant about ZSH:</p>
+<ul>
+<li><a href="https://github.com/sorin-ionescu/prezto/blob/4abbc5572149baa6a5e7e38393a4b2006f01024f/modules/completion/init.zsh#L31-L41">Refreshing <code>.zcompdump</code> every 20h</a></li>
+<li><a href="https://github.com/sorin-ionescu/prezto/blob/4abbc5572149baa6a5e7e38393a4b2006f01024f/runcoms/zlogin#L9-L15">Compiling <code>.zcompdump</code> as bytecode in the background</a></li>
+<li><a href="https://github.com/sorin-ionescu/prezto/blob/4abbc5572149baa6a5e7e38393a4b2006f01024f/modules/fasd/init.zsh#L22-L36">Caching init script for fasd</a></li>
+<li>Saving <code>*env</code> startup time with <a href="https://github.com/sorin-ionescu/prezto/blob/4abbc5572149baa6a5e7e38393a4b2006f01024f/modules/python/init.zsh#L22"><code>init - --no-rehash</code> for <code>rbenv</code>, <code>pyenv</code>, <code>nodenv</code></a></li>
+<li><a href="https://github.com/sorin-ionescu/prezto/blob/4abbc5572149baa6a5e7e38393a4b2006f01024f/modules/command-not-found/init.zsh">Removing the horribly time-consuming <code>brew command</code> from <code>command-not-found</code></a></li>
+</ul>
+<p>Prezto modules are loaded by its custom function called <code>pmodload</code>. <code>source</code> the script directly won&rsquo;t work as expected.</p>
+<p>And it has a different style compared with oh-my-zsh:</p>
+<ul>
+<li>Avoiding environment variable pollution with <code>zstyle</code></li>
+<li>Bundling related plugins together
+<ul>
+<li>module <code>python</code> in Prezto is composed of four parts: <code>pyenv</code>, <code>conda</code>, <code>virtualenv</code>, <code>virtualenvwrapper</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="zimhttpsgithubcomzimfwzimfw"><a href="https://github.com/zimfw/zimfw">ZIM</a></h4>
+<p>(I have not tested this. But bytecode compiling should help it be one of the fast frameworks.)</p>
+<p>Zsh IMproved FrameWork. According to issue #284:</p>
+<ul>
+<li>bytecode compiling</li>
+<li>coding style focused on efficiency</li>
+</ul>
+<p>Drawback: much less plugins are included compared to oh-my-zsh and Prezto.</p>
+<h3 id="plugin-managers">Plugin Managers</h3>
+<h4 id="antigenhttpsgithubcomzsh-usersantigen"><a href="https://github.com/zsh-users/antigen">Antigen</a></h4>
+<p>The de facto official plugin manager. Antigen supports oh-my-zsh, plugins from github repos. No prezto module support.</p>
+<p>Startup time of a clean installation is about 60ms. Startup time using conf example from the <a href="https://github.com/zsh-users/antigen#usage"><code>README.md</code></a> is about 150ms. (Exclude the time-consuming <code>command-not-found</code> plugin for macOS, 6 plugins are loaded, maybe with <code>compinit</code>.)</p>
+<p><strong>Not bad, but not excellent either.</strong></p>
+<p>Optimizations:</p>
+<ul>
+<li>bytecode compiling for itself to reduce the 1st kind of time</li>
+<li>No optimization for the loading of plugins</li>
+</ul>
+<h4 id="zgenhttpsgithubcomtarjoilijazgen"><a href="https://github.com/tarjoilija/zgen">Zgen</a></h4>
+<p>Zgen hitchhikes on <a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</a> and <a href="https://github.com/sorin-ionescu/prezto">prezto</a>. It clones those two repos, and loads their plugins/modules using methods from them. Zgen also supports plugins from github repos.</p>
+<p>What makes zgen excellent is its <strong>static loading</strong>. It generates a <strong>static init script</strong> consisting of <code>source</code> statements for plugins and <code>pmodload</code> statements for prezto modules. When ZSH starts up, zgen will source the init script directly without parsing its dialect every time, which also means you need to regenerate the init script after updating ur conf. A clean startup time is 50ms.</p>
+<p>Optimizations:</p>
+<ul>
+<li>static init, removes the 1st kind of time <strong>completely</strong></li>
+<li>No optimization for the loading of plugins</li>
+</ul>
+<h4 id="antibodyhttpsgithubcomgetantibodyantibody"><a href="https://github.com/getantibody/antibody">Antibody</a></h4>
+<p>Antigen in Go. It supports oh-my-zsh plugins, plugins from github repos. No support for Prezto modules.</p>
+<p><strong>Note</strong>: For anyone think the plugin manager written in Go is superior to plugin manger written in ZSH. Let&rsquo;s make it clear, Antibody loads plugins using <strong>ZSH statement <code>source</code></strong>, which means antibody ONLY reduces the 1st kind of startup time.</p>
+<p>The born of antibody may be related to the slowness of old version antigen. Antibody tries to use Go to reduces the startup time taken by plugin manger itself, cause using Go to parse and execute its dialect <code>antibody bundle &lt; ~/.zsh_plugins.txt</code> is faster.</p>
+<p>(The slowness of antigen should only be its skeleton in the closet now.)</p>
+<p>It adds a new loading method called <strong>static loading</strong> later. Obviously, parsing the dialect into <code>source</code> statements to cache it directly later, is faster than parsing the dialect every time ZSH starts up. You may guess it, this is basically what <a href="https://github.com/tarjoilija/zgen">zgen</a> is doing using ZSH. The clean startup time of both managers are very close, nearly 50ms.</p>
+<p>I kind of feel sorry for the author of antibody, who uses a more complicated, powerful tool to solve the problem, but later found himself defeated by an simple idea.</p>
+<p>Optimizations:</p>
+<ul>
+<li>Reduce the 1st kind of time with Go, or</li>
+<li>remove the 1st kind of time <strong>completely</strong> using static loading</li>
+<li>No optimization for the loading of plugins</li>
+</ul>
+<h4 id="a-detailed-comparison-between-antibody-and-zgen">A Detailed Comparison Between Antibody and Zgen</h4>
+<p>Clean startup time without any plugin loaded:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-zsh" data-lang="zsh"><span class="c1"># antibody, source &lt;(antibody init)</span>
+<span class="k">for</span> i <span class="o">({</span>1..10<span class="o">})</span> <span class="nb">time</span> zsh -ilc <span class="nb">echo</span> <span class="p">&amp;</span>&gt;/dev/null
+zsh  0.03s user 0.02s system 118% cpu 0.047 total
+zsh  0.03s user 0.02s system 103% cpu 0.049 total
+zsh  0.03s user 0.02s system 107% cpu 0.051 total
+zsh  0.03s user 0.02s system 114% cpu 0.045 total
+zsh  0.03s user 0.02s system 102% cpu 0.049 total
+zsh  0.03s user 0.02s system 105% cpu 0.047 total
+zsh  0.03s user 0.02s system 110% cpu 0.046 total
+zsh  0.03s user 0.02s system 107% cpu 0.050 total
+zsh  0.03s user 0.02s system 106% cpu 0.049 total
+zsh  0.03s user 0.02s system 107% cpu 0.048 total
+
+<span class="c1"># zgen, source &#34;${HOME}/.zgen/zgen.zsh&#34;</span>
+<span class="k">for</span> i <span class="o">({</span>1..10<span class="o">})</span> <span class="nb">time</span> zsh -ilc <span class="nb">echo</span> <span class="p">&amp;</span>&gt;/dev/null
+zsh  0.03s user 0.02s system 110% cpu 0.046 total
+zsh  0.03s user 0.02s system 106% cpu 0.046 total
+zsh  0.03s user 0.02s system 106% cpu 0.048 total
+zsh  0.03s user 0.02s system 109% cpu 0.051 total
+zsh  0.03s user 0.02s system 105% cpu 0.048 total
+zsh  0.03s user 0.02s system 102% cpu 0.051 total
+zsh  0.03s user 0.02s system 106% cpu 0.047 total
+zsh  0.03s user 0.02s system 107% cpu 0.047 total
+zsh  0.03s user 0.02s system 111% cpu 0.049 total
+zsh  0.03s user 0.02s system 106% cpu 0.047 total
+</code></pre></td></tr></table>
+</div>
+</div><p>Tests using example config from <a href="https://getantibody.github.io/">getantibody.github.io</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-zsh" data-lang="zsh"><span class="c1"># example conf for antibody dynamic loading</span>
+antibody bundle <span class="s">&lt;&lt; EOF
+</span><span class="s">caarlos0/jvm
+</span><span class="s">djui/alias-tips
+</span><span class="s"># comments are supported like this
+</span><span class="s">caarlos0/zsh-mkc
+</span><span class="s">zsh-users/zsh-completions
+</span><span class="s">caarlos0/zsh-open-github-pr
+</span><span class="s">
+</span><span class="s"># empty lines are skipped
+</span><span class="s">
+</span><span class="s"># remove plugin below because of time-consuming `brew` command
+</span><span class="s"># robbyrussell/oh-my-zsh path:plugins/aws
+</span><span class="s">
+</span><span class="s">zsh-users/zsh-syntax-highlighting
+</span><span class="s">zsh-users/zsh-history-substring-search
+</span><span class="s">EOF</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Result:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-zsh" data-lang="zsh"><span class="c1"># antibody dynamic loading</span>
+<span class="k">for</span> i <span class="o">({</span>1..10<span class="o">})</span> <span class="nb">time</span> zsh -ilc <span class="nb">echo</span> <span class="p">&amp;</span>&gt;/dev/null
+zsh  0.05s user 0.03s system 105% cpu 0.083 total
+zsh  0.06s user 0.03s system 105% cpu 0.083 total
+zsh  0.05s user 0.03s system 104% cpu 0.082 total
+zsh  0.05s user 0.03s system 107% cpu 0.081 total
+zsh  0.05s user 0.03s system 104% cpu 0.082 total
+zsh  0.05s user 0.03s system 103% cpu 0.081 total
+zsh  0.06s user 0.03s system 107% cpu 0.083 total
+zsh  0.05s user 0.03s system 105% cpu 0.082 total
+zsh  0.05s user 0.03s system 102% cpu 0.082 total
+zsh  0.06s user 0.03s system 106% cpu 0.082 total
+
+<span class="c1"># antibody static loading, source .zsh_plugins.sh directly. No auto `compint`.</span>
+<span class="k">for</span> i <span class="o">({</span>1..10<span class="o">})</span> <span class="nb">time</span> zsh -ilc <span class="nb">echo</span> <span class="p">&amp;</span>&gt;/dev/null
+zsh  0.05s user 0.02s system 105% cpu 0.069 total
+zsh  0.05s user 0.03s system 107% cpu 0.071 total
+zsh  0.05s user 0.03s system 106% cpu 0.071 total
+zsh  0.05s user 0.03s system 104% cpu 0.070 total
+zsh  0.05s user 0.03s system 104% cpu 0.070 total
+zsh  0.05s user 0.03s system 108% cpu 0.072 total
+zsh  0.05s user 0.03s system 105% cpu 0.070 total
+zsh  0.05s user 0.03s system 105% cpu 0.070 total
+zsh  0.05s user 0.03s system 104% cpu 0.071 total
+zsh  0.05s user 0.03s system 106% cpu 0.072 total
+
+
+<span class="c1"># zgen static loading, without `compinit`, ZGEN_AUTOLOAD_COMPINIT=0</span>
+<span class="k">for</span> i <span class="o">({</span>1..10<span class="o">})</span> <span class="nb">time</span> zsh -ilc <span class="nb">echo</span> <span class="p">&amp;</span>&gt;/dev/null
+zsh  0.05s user 0.03s system 105% cpu 0.075 total
+zsh  0.05s user 0.03s system 104% cpu 0.077 total
+zsh  0.05s user 0.03s system 106% cpu 0.074 total
+zsh  0.05s user 0.03s system 104% cpu 0.074 total
+zsh  0.05s user 0.03s system 105% cpu 0.076 total
+zsh  0.05s user 0.03s system 103% cpu 0.074 total
+zsh  0.05s user 0.03s system 108% cpu 0.076 total
+zsh  0.05s user 0.03s system 104% cpu 0.075 total
+zsh  0.05s user 0.03s system 107% cpu 0.077 total
+zsh  0.05s user 0.03s system 102% cpu 0.081 total
+
+<span class="c1"># zgen source &#34;${HOME}/.zgen/init.zsh&#34; directly</span>
+<span class="c1"># without `compinit`, ZGEN_AUTOLOAD_COMPINIT=0</span>
+<span class="k">for</span> i <span class="o">({</span>1..10<span class="o">})</span> <span class="nb">time</span> zsh -ilc <span class="nb">echo</span> <span class="p">&amp;</span>&gt;/dev/null
+zsh  0.05s user 0.03s system 107% cpu 0.070 total
+zsh  0.05s user 0.03s system 106% cpu 0.073 total
+zsh  0.05s user 0.02s system 103% cpu 0.070 total
+zsh  0.05s user 0.03s system 104% cpu 0.070 total
+zsh  0.05s user 0.03s system 109% cpu 0.071 total
+zsh  0.05s user 0.03s system 105% cpu 0.070 total
+zsh  0.04s user 0.02s system 106% cpu 0.064 total
+zsh  0.04s user 0.02s system 107% cpu 0.062 total
+zsh  0.04s user 0.02s system 107% cpu 0.061 total
+zsh  0.04s user 0.02s system 107% cpu 0.063 total
+</code></pre></td></tr></table>
+</div>
+</div><p>We used 7 plugins here. The result is clear, static loading saves your time. The only difference between static loading in Antibody and Zgen is, Zgen the plugin manager itself needs to be <code>source</code>d, the <code>source</code> is run by Zgen itself, and Zgen does <code>compint</code> for you by default. (Disable auto <code>compinit</code> in Zgen with <code>ZGEN_AUTOLOAD_COMPINIT=0</code>)</p>
+<p>Everything else are the same. What they do in static loading is sourcing <code>*plugin.zsh</code> into current shell and adding plugin folders into <code>fpath</code>.</p>
+<p>Same formula, different packagings. Zgen implements static loading with only 500 lines ZSH script, with additional Prezto support.</p>
+<h4 id="interlude">Interlude</h4>
+<p>Now we have examined plugin mangers trying to reduce the startup time taken by themselves. But the time taken by plugin manger itself is only a fraction of the total startup time. Just as what I wrote in the beginning, a simple <code>brew --prefix nvm</code> cost you 600ms, <code>thefuck --alias</code> cost you 120ms. No mater how efficient your plugin manger is, you still get that kind of startup delay.</p>
+<p>Next, I&rsquo;ll examine some other plugin managers trying to <strong>reduce the 2nd kind of time taken by plugins</strong>. Keep tuned.</p>
+<p><img src="https://i.imgur.com/5KbbDcd.png" alt="To be continued"></p>
+<h4 id="zuluhttpsgithubcomzulu-zshzulu"><a href="https://github.com/zulu-zsh/zulu">Zulu</a></h4>
+<p>Zulu, a plugin manager uses bytecode compiling both for the plugin manager itself and all plugins being loaded. It only supports built-in plugins, no support oh-my-zsh or prezto plugins. <strong>What kind of plugin manger could call itself a plugin manger if it only uses builtin plugins?</strong> Let&rsquo;s be practical, zulu is <strong>just a framework</strong>.</p>
+<p>A clean startup (without adding any plugins) time is 150ms. Ok, it&rsquo;s <strong>BAD</strong>. Compared with Antigen, zulu has more optimizations but a longer startup time, which means the plugin manager itself cost too much time and the implementation is not efficient.</p>
+<p>Optimizations:</p>
+<ul>
+<li>bytecode compiling for plugin manger itself. Offset by its low efficient coding.</li>
+<li>bytecode compiling for plugins</li>
+</ul>
+<h4 id="zplughttpsgithubcomzplugzplug"><a href="https://github.com/zplug/zplug">Zplug</a></h4>
+<p>Zplug uses parallel installation/updating, hooks, cache mechanism. It also supports managing scripts and binary from Github release for you. Oh-my-zsh, Prezto and plugins from Github repos are all supported. It&rsquo;s very full-fledged and powerful.</p>
+<p>The problem is, it&rsquo;s a plugin manger begins with good ideas, like parallel and cache, results in a very, very <strong>BAD implementation</strong>. A clean startup time is 160ms. (Just <code>source</code> the plugin manger itself.)</p>
+<p>According to <a href="https://github.com/zplug/zplug/issues/368">issue #368</a>, <a href="https://github.com/zplug/zplug/issues/364">issue #364</a>, thread from reddit/r/zsh <a href="https://www.reddit.com/r/zsh/comments/6pmr15/zplug_is_slow/">Zplug is slow?</a>:</p>
+<p>Zplug is slower than Oh-my-zsh, Prezto, Zgen. Antigen. Tests made by myself also confirmed the conclusion, it&rsquo;s slower compared with the prezto, zgen with the same plugins loaded. <strong>The time chart on zplug&rsquo;s Github repo is unreliable</strong>.</p>
+<p>I&rsquo;ll quote what I said on issue <a href="https://github.com/zplug/zplug/issues/368">issue #368</a> here:</p>
+<blockquote>
+<p>At first, I thought it as a compatibility problem of prezto modules. But after commenting all the prezto modules, I got a startup time of some 0.6 second in total, which is basically the same startup time when i used prezto. If I enable the prezto modules I use, startup time is about 1 second.</p>
+<p>This is ridiculous because when I used the perzto framework, it loaded more plugins and had a time-consuming initialization of pyenv.</p>
+</blockquote>
+<p>Sorry, I didn&rsquo;t mean to be so rude. What irritates me is, the content from zpulg&rsquo;s <code>README.md</code> makes you hold your breath, but what I experienced is <strong>totally different</strong> from what they tout.</p>
+<p>Another drawback brought by the parallel loading is that you have <strong>no definite control of the loading order</strong> of your plugins. Even the plugins loaded with same <code>defer</code> value are loaded parallelly.</p>
+<p>Optimizations:</p>
+<ul>
+<li>Negative optimization brought by terrible implementation for plugin manager itself.</li>
+<li>Parallel loading, cache mechanism for loading of plugins</li>
+</ul>
+<h4 id="zpluginhttpsgithubcomzdharmazplugin"><a href="https://github.com/zdharma/zplugin">Zplugin</a></h4>
+<p>Zplugin, another full-fledge plugin manger with script, binary management, reports, completion management, turbo mode, services.</p>
+<ul>
+<li>Reports
+<ul>
+<li><code>zplugin time</code> list time taken by each plugin</li>
+<li><code>zplugin report</code> reports what&rsquo;s going on in the plugins</li>
+</ul>
+</li>
+<li>Scripts management: download and update scripts easily from remote repos</li>
+<li>Completion management: enable, disable specific completion easily</li>
+<li><strong>Async Turbo Mode</strong>: the real <strong>killer for time-consuming plugins</strong></li>
+</ul>
+<p>Zplugin supports plugins from oh-my-zsh, Prezto, Github repos.</p>
+<p>At first, it didn&rsquo;t catch my eye because it&rsquo;s less popular compared to zplug, which offers most of the same features. Anyway, I already explained my relationship with zplug.</p>
+<p>A clean startup time is 50ms. Bytecode compiling is made for manger itself and all plugins. This helps zplugin get a slower startup time increase compared to plugin mangers without bytecode compiling for plugins.</p>
+<blockquote>
+<p>Async Turbo Mode, allows you to postpone loading of a plugin to the moment when processing of <code>.zshrc</code> is finished and prompt is being shown. Besides, there are no drawbacks of this approach – no lags, freezes, etc.</p>
+</blockquote>
+<p>From the data I offered at the beginning at the post. Zplugin loads my 37 plugins with a startup time of 160ms. The real time taken by all plugins is 1.040s, which means 880ms is reduced in Turbo Mode.</p>
+<p>Optimizations:</p>
+<ul>
+<li>bytecode compiling for plugin manger itself</li>
+<li>bytecode compiling for plugins</li>
+<li>Amazing Turbo Mode kills the time-consuming plugins like <code>nvm</code>, <code>thefuck</code>, <code>pyenv</code>, <code>nodenv</code>, etc.</li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<h3 id="why-dont-you-make-a-benchmark">Why don&rsquo;t you make a benchmark?</h3>
+<p>Sorry, I won&rsquo;t do it, because I think it&rsquo;s unnecessary. According to my analytical method, any plugin manger not trying to reduce the time taken by plugins, are <strong>not qualified in the finals</strong>. Just as what I said, the startup time taken by plugin manager itself only takes a fraction of the total time. <strong>Time-consuming plugins are the main causes of a slow startup of ZSH</strong>.</p>
+<p>Among all the plugin managers I&rsquo;ve tested, Zplug and Zplugin are the only two trying to solve the hardest part, which brings them to the final round. Although Zplug&rsquo;s implementation is bad, I still hold the opinion that its <strong>parallel mechanism is more innovative</strong> than static loading and bytecode compiling.</p>
+<p>I&rsquo;d like to apologize to any plugin manager developer who feels hurt by my word. I do respect their works and they are the men who make the community of ZSH bigger than any other shell. (The community here, is based on the number of plugins and plugin mangers of a interactive shell. <a href="https://github.com/unixorn/awesome-zsh-plugins">awesome-zsh-plugins</a>)</p>
+<p>While, I&rsquo;m just a ZSH user like most other guys, and always want the best. Users don&rsquo;t care which one is better among those mediocre products. Competition is cruel.</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">laggardkernel</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-01-18
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/zsh/">zsh</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2019/ufw-notes/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">UFW Notes</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/2018/iproute2/">
+            <span class="next-text nav-default">iproute2 Usage</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'pseudocold';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/5101148" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/laggardkernel" class="iconfont icon-github" title="github"></a>
+  <a href="https://blog.pseudocold.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">laggardkernel</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>macos on Home</title>
+    <link>https://blog.pseudocold.com/tags/macos/</link>
+    <description>Recent content in macos on Home</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 16 Oct 2019 16:04:22 +0800</lastBuildDate><atom:link href="https://blog.pseudocold.com/tags/macos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TCPKeepAlive v.s. ServerAlive in SSH</title>
+      <link>https://blog.pseudocold.com/post/2019/ssh-tcpkeepalive-vs-serveralive/</link>
+      <pubDate>Wed, 16 Oct 2019 16:04:22 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/ssh-tcpkeepalive-vs-serveralive/</guid>
+      <description>&lt;p&gt;Both &lt;code&gt;TCPKeepAlive&lt;/code&gt; and &lt;code&gt;ServerAliveInterval&lt;/code&gt; for &lt;code&gt;ssh&lt;/code&gt;, are used to keep SSH connection alive. What&amp;rsquo;s the difference between them? Which one should you use?&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> Multi User Anaconda/Miniconda Installation</title>
+      <link>https://blog.pseudocold.com/post/2018/miniconda-multi-user-installation/</link>
+      <pubDate>Sat, 10 Aug 2019 00:41:23 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/miniconda-multi-user-installation/</guid>
+      <description>&lt;p&gt;在 Linux 中脚本安装 Anaconda/Miniconda 使所有人均可调用。需要 &lt;code&gt;sudo&lt;/code&gt; 权限。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>命令行压缩、解压命令总结</title>
+      <link>https://blog.pseudocold.com/post/2018/archiving-and-compression/</link>
+      <pubDate>Tue, 05 Feb 2019 15:48:50 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/archiving-and-compression/</guid>
+      <description>&lt;p&gt;在命令行里该用什么命令解压什么文件？压缩命令使用总结。个人笔记，非入门教程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Sudo</title>
+      <link>https://blog.pseudocold.com/post/2018/sudo/</link>
+      <pubDate>Sun, 03 Feb 2019 16:27:56 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/sudo/</guid>
+      <description>&lt;p&gt;&lt;code&gt;sudo&lt;/code&gt; 使用全解。&lt;code&gt;sudo -i&lt;/code&gt;, &lt;code&gt;sudo -s&lt;/code&gt;, &lt;code&gt;su&lt;/code&gt;, &lt;code&gt;su -l&lt;/code&gt; 对比。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>macOS 中的隐藏字体</title>
+      <link>https://blog.pseudocold.com/post/2018/hidden-fonts-on-macos/</link>
+      <pubDate>Wed, 07 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/hidden-fonts-on-macos/</guid>
+      <description>&lt;p&gt;从Safari页面渲染异开始，仔细检查后发现其调用了一款其他浏览器调用不到的字体。那么这款字体是哪里来的呢？&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>强制 MacBook Touchbar显示为 Function Key 功能键</title>
+      <link>https://blog.pseudocold.com/post/2018/function-key-in-touchbar/</link>
+      <pubDate>Fri, 09 Feb 2018 08:49:54 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2018/function-key-in-touchbar/</guid>
+      <description>&lt;p&gt;Touchbar 上不能默认显示功能键，苹果只给出单独设置某个应用默认为功能键的方案，参考&lt;a href=&#34;https://support.apple.com/zh-cn/HT207240&#34;&gt;如何在配备 Multi-Touch Bar 的 MacBook Pro 上使用功能键&lt;/a&gt;。但实际上存在隐藏配置项，可以将功能键作为默认显示。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

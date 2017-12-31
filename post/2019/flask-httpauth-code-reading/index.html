@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Flask HTTPAuth 源码阅读笔记 - Home</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="laggardkernel" /><meta name="description" content="flask-httpauth 源码阅读个人笔记， 不做解读。
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.pseudocold.com/post/2019/flask-httpauth-code-reading/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Flask HTTPAuth 源码阅读笔记" />
+<meta property="og:description" content="flask-httpauth 源码阅读个人笔记， 不做解读。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pseudocold.com/post/2019/flask-httpauth-code-reading/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-08-04T12:15:28&#43;08:00" />
+<meta property="article:modified_time" content="2019-08-04T12:15:28&#43;08:00" />
+
+<meta itemprop="name" content="Flask HTTPAuth 源码阅读笔记">
+<meta itemprop="description" content="flask-httpauth 源码阅读个人笔记， 不做解读。"><meta itemprop="datePublished" content="2019-08-04T12:15:28&#43;08:00" />
+<meta itemprop="dateModified" content="2019-08-04T12:15:28&#43;08:00" />
+<meta itemprop="wordCount" content="1636">
+<meta itemprop="keywords" content="flask," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Flask HTTPAuth 源码阅读笔记"/>
+<meta name="twitter:description" content="flask-httpauth 源码阅读个人笔记， 不做解读。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Home</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Home</a>
+</div>
+
+<nav class="site-navbar">
+    
+      <div class="top-progress-bar"></div>
+    
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Flask HTTPAuth 源码阅读笔记</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-08-04 </span>
+        <div class="post-category">
+            <a href="/categories/code-reading/"> Code Reading </a>
+            </div>
+          <span class="more-meta"> 1636 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#flask_httpauthpy">flask_httpauth.py</a>
+      <ul>
+        <li><a href="#httpauth-基类">HTTPAuth 基类</a></li>
+        <li><a href="#httpbasicauth">HTTPBasicAuth</a></li>
+        <li><a href="#httpdigestauth">HTTPDigestAuth</a></li>
+        <li><a href="#httptokenauth">HTTPTokenAuth</a></li>
+        <li><a href="#multiauth">MultiAuth</a></li>
+      </ul>
+    </li>
+    <li><a href="#examples-tests">examples, tests</a></li>
+    <li><a href="#binmakechangelogpy">bin/makechangelog.py</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><code>flask-httpauth</code> 源码阅读个人笔记， 不做解读。</p>
+<p>References</p>
+<ul>
+<li><a href="https://flask-httpauth.readthedocs.io/en/latest/">Flask-HTTPAuth doc</a>，最初出现于狗书中RESTFul API认证。由于 Flask-Login 默认使用 session，为了在无状态 API 避免麻烦转而采用Flask-HTTPAuth.</li>
+<li><a href="https://github.com/miguelgrinberg/Flask-HTTPAuth">Flask-HTTPAuth source</a></li>
+<li><a href="http://www.bjhee.com/flask-ext9.html">Flask扩展系列(九)–HTTP认证</a></li>
+</ul>
+<p>3.2.4</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 单一文件源码
+flask_httpauth.py
+</code></pre></td></tr></table>
+</div>
+</div><p>Flask-HTTPAuth 封装了众多的装饰器，用来针对不同验证类型，配置不同验证函数。</p>
+<p>注：HTTP认证基于请求头<code>Authentication</code>，详情参考《HTTP权威指南》。</p>
+<p><code>.login_required</code>, <code>.error_handler</code>分别对应为登录验证，验证失败响应函数的装饰器。</p>
+<h2 id="flask_httpauthpy">flask_httpauth.py</h2>
+<p><code>scheme</code>参数不可随便设置，有规定。</p>
+<ul>
+<li>Basic</li>
+<li>Digest</li>
+<li>Bearer（非标准，自定义即可）, for <code>HTTPTokenAuth</code></li>
+<li>前两者直接被Werkzeug存储到<code>request.authorization</code>，其他在<code>get_auth()</code>自行获取</li>
+</ul>
+<p><code>realm</code>参数仅在<code>HTTPDigestAuth</code>中参与验证。其他类中只被用于在错误处理时返回响应头中的质询<code>WWW-Authenticate</code>，说明验证位置，提示对方使用对应验证。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">HTTPAuth</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+    <span class="k">def</span> <span class="nf">error_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">decorated</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+                <span class="c1"># if user didn&#39;t set status code, use 401</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="mi">401</span>
+            <span class="k">if</span> <span class="s1">&#39;WWW-Authenticate&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;WWW-Authenticate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">authenticate_header</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">res</span>
+
+    <span class="k">def</span> <span class="nf">authenticate_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;{0} realm=&#34;{1}&#34;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scheme</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">realm</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>WWW-Authenticate</code>质询状态码为401 Unauthorized。</p>
+<h3 id="httpauth-基类">HTTPAuth 基类</h3>
+<p><code>__init__()</code>，设置回调函数<code>.get_password_callback</code>, <code>.auth_error_callback</code>.</p>
+<p><code>get_password()</code>, 返回回调函数。</p>
+<p><code>error_handler</code>装饰器，调用<code>.auth_error_callback</code>记录的函数，通过响应头<code>WWW-Authenticate</code>提示对方验证。</p>
+<p><code>get_auth()</code>，从请求头<code>Authorization</code>获取认证信息，调用<code>werkzeug.datastructures.Authorization()</code>返回auth实例。</p>
+<p><code>get_auth_password()</code>, 调用 <code>.get_password_callback(auth.username)</code> 获取密码。</p>
+<p><code>login_required()</code></p>
+<ul>
+<li>跳过 <code>OPTIONS</code></li>
+<li><code>get_auth_password(auth)</code></li>
+<li><code>authenticate(auth, password)</code> 进行验证</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python">            <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">!=</span> <span class="s1">&#39;OPTIONS&#39;</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+                <span class="n">password</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_auth_password</span><span class="p">(</span><span class="n">auth</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">auth</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+                    <span class="c1"># Clear TCP receive buffer of any pending data</span>
+                    <span class="n">request</span><span class="o">.</span><span class="n">data</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth_error_callback</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>username()</code>, get username from <code>request.authorization.username</code>.</p>
+<h3 id="httpbasicauth">HTTPBasicAuth</h3>
+<p>请求头<code>Authorization: Baisc base64-username:passwd</code>，<code>username:password</code>进行Base64编码。</p>
+<p>Base64编码主要别用来移除国际字符和非法字符。</p>
+<p><code>hash_password()</code>, <code>verify_password</code> 装饰器，注册回调函数为 <code>HTTPBasicAuth</code> 实例属性。</p>
+<p><code>authenticate(self, auth, stored_password)</code>验证顺序</p>
+<ol>
+<li><code>verify_password_callback(auth.username, auth.password)</code> 直接校验</li>
+<li>对比<code>auth.password</code>与传入的 <code>stored_password</code>
+<ul>
+<li>可选<code>hash_password_callback(auth.password)</code>哈希处理auth中传入的密码</li>
+</ul>
+</li>
+</ol>
+<p>注：传入参数<code>stored_password</code>通过<code>self.get_auth_password(auth)</code>，调用<code>get_password_callback</code>获取。也就是说要么单独使用<code>@verify_password</code>，要么使用<code>@hash_password</code>, <code>@get_password</code>结合使用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verify_password_callback</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">verify_password_callback</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">client_password</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">auth</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_password_callback</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">client_password</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_password_callback</span><span class="p">(</span><span class="n">client_password</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="httpdigestauth">HTTPDigestAuth</h3>
+<p>参考《HTTP权威指南》p309 摘要的计算一节。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">HTTP/1.1 401 Unauthorized
+WWW-Authenticate: Digest
+  realm=&#34;Shopping Cart&#34;
+  nonce=&#39;random-string&#39;
+  qop=&#34;auth,auth-int&#34; # 可选：提供保护质量选项
+
+GET /url HTTP/1.1
+Authorization: Digest
+  username=&#34;username&#34;
+  realm=&#34;Shopping Cart&#34;
+  nonce=&#34;copy the received nonce&#34;
+  response=&#34;string&#34;
+  qop=&#34;auth&#34; # 开始可选：执行对称认证，要求服务器验证自己身份
+  nc=0000001, # nonce number
+  cnonce=&#34;s&#34; # optinal, client nonce, 客户端发起验证质询
+</code></pre></td></tr></table>
+</div>
+</div><p>验证成功后服务器响应中，<code>Authentication-Info</code>为可选。</p>
+<p>qop, quality of protection.</p>
+<ul>
+<li>auth, <code>&lt;request-method&gt;:&lt;uri-directive-value&gt;</code></li>
+<li>auth-init, 在auth基础上加入了请求报文实体的主体的摘要。</li>
+<li>有助于方法、资源或者报文被篡改</li>
+</ul>
+<p>散列是对于报文实体主体，即传输编码前数据，进行散列。</p>
+<p>Flask-HTTPAuth 中摘要认证没有考虑qop.</p>
+<h3 id="httptokenauth">HTTPTokenAuth</h3>
+<p><code>@verify_token</code>装饰器，回调函数接受token值。</p>
+<p><code>auth['token']</code>由<code>Authorization</code>请求头中获取。</p>
+<h3 id="multiauth">MultiAuth</h3>
+<p>封装多个 additional_auth ，依次尝试，最后回落到 main_auth.</p>
+<p>由源码可以，第一参数为回落main_auth，后面列表参数优先。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">MultiAuth</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">main_auth</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main_auth</span> <span class="o">=</span> <span class="n">main_auth</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">additional_auth</span> <span class="o">=</span> <span class="n">args</span>
+
+<span class="c1"># ...</span>
+
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">auth</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">additional_auth</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">auth</span><span class="o">.</span><span class="n">scheme</span> <span class="o">==</span> <span class="n">scheme</span><span class="p">:</span>
+                            <span class="n">selected_auth</span> <span class="o">=</span> <span class="n">auth</span>
+                            <span class="k">break</span>
+            <span class="k">if</span> <span class="n">selected_auth</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">selected_auth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main_auth</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="examples-tests">examples, tests</h2>
+<p>参考二者可以学习此库的使用。</p>
+<h2 id="binmakechangelogpy">bin/makechangelog.py</h2>
+<p>自commit中提取提交信息，建立超链接，写入changelog。不错的Python脚本编程参考。</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">laggardkernel</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-08-04
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/flask/">flask</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2019/flask-mail/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">为何 Flask-Mail 需要上下文环境</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/2019/flask-uploads-code-reading/">
+            <span class="next-text nav-default">Flask-Uploads 源码阅读笔记</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'pseudocold';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/5101148" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/laggardkernel" class="iconfont icon-github" title="github"></a>
+  <a href="https://blog.pseudocold.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">laggardkernel</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

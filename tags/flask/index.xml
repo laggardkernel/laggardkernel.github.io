@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>flask on Home</title>
+    <link>https://blog.pseudocold.com/tags/flask/</link>
+    <description>Recent content in flask on Home</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 12 Sep 2019 22:37:35 +0800</lastBuildDate><atom:link href="https://blog.pseudocold.com/tags/flask/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Flask Pitfalls</title>
+      <link>https://blog.pseudocold.com/post/2019/flask-pitfalls/</link>
+      <pubDate>Thu, 12 Sep 2019 22:37:35 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/flask-pitfalls/</guid>
+      <description>&lt;p&gt;尝试总结 Flask 开发中一些碰到的问题，有待完善。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Flask 0.1 源码解读</title>
+      <link>https://blog.pseudocold.com/post/2019/flask-0.1/</link>
+      <pubDate>Tue, 20 Aug 2019 01:20:54 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/flask-0.1/</guid>
+      <description>&lt;p&gt;在理解WSGI规范后，阅读Flask 0.1源码，深入理解整个应用创建、请求处理的过程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>wsigref 源码阅读笔记</title>
+      <link>https://blog.pseudocold.com/post/2019/wsigref-code-reading/</link>
+      <pubDate>Tue, 20 Aug 2019 00:08:19 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/wsigref-code-reading/</guid>
+      <description>&lt;p&gt;&lt;code&gt;wsgiref&lt;/code&gt; 源码阅读个人笔记， 不做解读。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>为何 Flask-Mail 需要上下文环境</title>
+      <link>https://blog.pseudocold.com/post/2019/flask-mail/</link>
+      <pubDate>Fri, 09 Aug 2019 11:09:58 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/flask-mail/</guid>
+      <description>&lt;p&gt;Flask-Mail 扩展源码内容实际和 Flask 关系不大，主要是封装 Python 内置 &lt;code&gt;email&lt;/code&gt; 库来发送邮件。我的第一直觉是跳过这个模块源码。不过，这时候我突然想到一个问题，Flask-Mail 发送邮件为什么需要应用上下文？每个教程都这么告诉我，但却没有解释过原因。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Flask HTTPAuth 源码阅读笔记</title>
+      <link>https://blog.pseudocold.com/post/2019/flask-httpauth-code-reading/</link>
+      <pubDate>Sun, 04 Aug 2019 12:15:28 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/flask-httpauth-code-reading/</guid>
+      <description>&lt;p&gt;&lt;code&gt;flask-httpauth&lt;/code&gt; 源码阅读个人笔记， 不做解读。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Flask-Uploads 源码阅读笔记</title>
+      <link>https://blog.pseudocold.com/post/2019/flask-uploads-code-reading/</link>
+      <pubDate>Sun, 04 Aug 2019 12:15:28 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/flask-uploads-code-reading/</guid>
+      <description>&lt;p&gt;&lt;code&gt;flask-uploads&lt;/code&gt; 源码阅读个人笔记， 不做解读。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Flask-Login 源码阅读笔记</title>
+      <link>https://blog.pseudocold.com/post/2019/flask-login-code-reading/</link>
+      <pubDate>Fri, 02 Aug 2019 02:04:13 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/flask-login-code-reading/</guid>
+      <description>&lt;p&gt;&lt;code&gt;flask-login&lt;/code&gt; 源码阅读个人笔记， 不做解读。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Flask-WTF 源码阅读笔记</title>
+      <link>https://blog.pseudocold.com/post/2019/flask-wtf-code-reading/</link>
+      <pubDate>Fri, 02 Aug 2019 01:58:42 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/flask-wtf-code-reading/</guid>
+      <description>&lt;p&gt;&lt;code&gt;flask-wtf&lt;/code&gt; 源码阅读个人笔记， 不做解读。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

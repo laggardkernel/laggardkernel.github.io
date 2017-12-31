@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Downgrade Packages in Arch - Home</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="laggardkernel" /><meta name="description" content="Downgrade packages in Arch.
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.pseudocold.com/post/2019/arch-pkg-downgrade/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Downgrade Packages in Arch" />
+<meta property="og:description" content="Downgrade packages in Arch." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pseudocold.com/post/2019/arch-pkg-downgrade/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-02-02T14:54:27&#43;08:00" />
+<meta property="article:modified_time" content="2019-02-02T14:54:27&#43;08:00" />
+
+<meta itemprop="name" content="Downgrade Packages in Arch">
+<meta itemprop="description" content="Downgrade packages in Arch."><meta itemprop="datePublished" content="2019-02-02T14:54:27&#43;08:00" />
+<meta itemprop="dateModified" content="2019-02-02T14:54:27&#43;08:00" />
+<meta itemprop="wordCount" content="370">
+<meta itemprop="keywords" content="linux,archlinux," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Downgrade Packages in Arch"/>
+<meta name="twitter:description" content="Downgrade packages in Arch."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Home</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Home</a>
+</div>
+
+<nav class="site-navbar">
+    
+      <div class="top-progress-bar"></div>
+    
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Downgrade Packages in Arch</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-02-02 </span>
+        
+          <span class="more-meta"> 370 words </span>
+          <span class="more-meta"> 1 min read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#references">References</a></li>
+    <li><a href="#use-an-earlier-pkg-cache">Use an Earlier Pkg Cache</a></li>
+    <li><a href="#downgrade-the-kernel">Downgrade the Kernel</a></li>
+    <li><a href="#arch-linux-archive">Arch Linux Archive</a>
+      <ul>
+        <li><a href="#downgrade-all-pkgs-to-a-specific-date">Downgrade All Pkgs to a Specific Date</a></li>
+      </ul>
+    </li>
+    <li><a href="#tools">Tools</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Downgrade packages in Arch.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/Downgrading_packages">Downgrading packages</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Arch_Linux_Archive">Arch Linux Archive</a></li>
+</ul>
+<h2 id="use-an-earlier-pkg-cache">Use an Earlier Pkg Cache</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">pacman -U /var/cache/pacman/pkg/package-old_version.pkg.tar.xz
+</code></pre></td></tr></table>
+</div>
+</div><p>Remember to ignore the pkg from being upgraded in <code>pacman.conf</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">IgnorePkg=linux
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="downgrade-the-kernel">Downgrade the Kernel</h2>
+<p>小心，需要同时降级</p>
+<ul>
+<li><code>linux</code></li>
+<li><code>linux-headers</code></li>
+<li>kernel modules like <code>virtualbox-host-modules-arch-5.2.8-4-x86_64.pkg.tar.xz</code></li>
+</ul>
+<p>Find theme in <code>/var/cache/pacman/pkg</code></p>
+<h2 id="arch-linux-archive">Arch Linux Archive</h2>
+<p>ALA所能保存的历史版本有限。</p>
+<p>ALA stores official repositories snapshots, iso images and bootstrap tarballs across time.</p>
+<p>You can use it to</p>
+<ul>
+<li>Downgrade to a previous version of one package (last version is broken, I want the previous one)</li>
+<li>Restore all your packages at a precise moment (my system is broken, I want to go back 2 months ago)</li>
+<li>Find a previous version of an ISO image</li>
+</ul>
+<p><a href="https://archive.archlinux.org/">https://archive.archlinux.org/</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">├── iso
+├── packages
+└── repos
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">pacman -U https://archive.archlinux.org/packages/ ... packagename.pkg.tar.xz
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="downgrade-all-pkgs-to-a-specific-date">Downgrade All Pkgs to a Specific Date</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/pacman</span>
+<span class="k">[core]</span>
+<span class="na">SigLevel</span> <span class="o">=</span> <span class="s">PackageRequired</span>
+<span class="na">Server</span><span class="o">=</span><span class="s">https://archive.archlinux.org/repos/2014/03/30/$repo/os/$arch</span>
+
+<span class="k">[extra]</span>
+<span class="na">SigLevel</span> <span class="o">=</span> <span class="s">PackageRequired</span>
+<span class="na">Server</span><span class="o">=</span><span class="s">https://archive.archlinux.org/repos/2014/03/30/$repo/os/$arch</span>
+
+<span class="k">[community]</span>
+<span class="na">SigLevel</span> <span class="o">=</span> <span class="s">PackageRequired</span>
+<span class="na">Server</span><span class="o">=</span><span class="s">https://archive.archlinux.org/repos/2014/03/30/$repo/os/$arch</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/pacman.d/mirrorlist</span>
+<span class="c1">##</span>
+<span class="c1">## Arch Linux repository mirrorlist</span>
+<span class="c1">## Generated on 2042-01-01</span>
+<span class="c1">##</span>
+<span class="na">Server</span><span class="o">=</span><span class="s">https://archive.archlinux.org/repos/2014/03/30/$repo/os/$arch</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># -yy, force refresh database</span>
+<span class="c1"># -uu, enable pkg downgrades</span>
+sudo pacman -Syyuu
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="tools">Tools</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Language</th>
+<th>Features</th>
+<th>Last commit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>downgrader</td>
+<td>C</td>
+<td>cache, ALA, pacman logs</td>
+<td>201704</td>
+</tr>
+<tr>
+<td>downgrade</td>
+<td>Bash</td>
+<td>cache, ALA</td>
+<td>201903</td>
+</tr>
+<tr>
+<td>agetpkg</td>
+<td>Python</td>
+<td>ALA</td>
+<td>201705</td>
+</tr>
+</tbody>
+</table>
+<p><code>downgrader</code> 列出版本号的排序错误，没有修复。没有文档？！</p>
+<p><code>downgrade</code> 支持交互式选择。维护性最好，选它。(交互式选择弊端在于列出的旧版本有限)</p>
+<p><code>agetpk</code> 多余简陋，需要自己查找版本号。</p>
+<p><a href="https://github.com/pbrisbin/downgrade">downgrade</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># from cache and ALA</span>
+downgrade foo bar
+
+<span class="c1"># use cache only</span>
+<span class="nv">DOWNGRADE_FROM_ALA</span><span class="o">=</span><span class="m">0</span> downgrade foo
+<span class="c1"># use ALA only</span>
+<span class="nv">DOWNGRADE_FROM_CACHE</span><span class="o">=</span><span class="m">0</span> downgrade foo
+<span class="c1"># favor su over sudo</span>
+<span class="nv">DOWNGRADE_FROM_ALA</span><span class="o">=</span><span class="m">0</span> <span class="nv">DOWNGRADE_NOSUDO</span><span class="o">=</span><span class="m">1</span> downgrade foo
+
+downgrade <span class="o">{</span>package<span class="o">}</span>-<span class="o">{</span>version<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">laggardkernel</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-02-02
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/linux/">linux</a>
+          <a href="/tags/archlinux/">archlinux</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2018/su/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Su Usage</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/2019/pacman-notes/">
+            <span class="next-text nav-default">Pacman Notes</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'pseudocold';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/5101148" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/laggardkernel" class="iconfont icon-github" title="github"></a>
+  <a href="https://blog.pseudocold.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">laggardkernel</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

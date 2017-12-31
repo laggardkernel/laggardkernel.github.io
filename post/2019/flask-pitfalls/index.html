@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Flask Pitfalls - Home</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="laggardkernel" /><meta name="description" content="尝试总结 Flask 开发中一些碰到的问题，有待完善。
+" /><meta name="keywords" content="flask, pitfall" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.pseudocold.com/post/2019/flask-pitfalls/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Flask Pitfalls" />
+<meta property="og:description" content="尝试总结 Flask 开发中一些碰到的问题，有待完善。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pseudocold.com/post/2019/flask-pitfalls/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-09-12T22:37:35&#43;08:00" />
+<meta property="article:modified_time" content="2019-09-12T22:37:35&#43;08:00" />
+
+<meta itemprop="name" content="Flask Pitfalls">
+<meta itemprop="description" content="尝试总结 Flask 开发中一些碰到的问题，有待完善。"><meta itemprop="datePublished" content="2019-09-12T22:37:35&#43;08:00" />
+<meta itemprop="dateModified" content="2019-09-12T22:37:35&#43;08:00" />
+<meta itemprop="wordCount" content="602">
+<meta itemprop="keywords" content="flask,tls,web," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Flask Pitfalls"/>
+<meta name="twitter:description" content="尝试总结 Flask 开发中一些碰到的问题，有待完善。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Home</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Home</a>
+</div>
+
+<nav class="site-navbar">
+    
+      <div class="top-progress-bar"></div>
+    
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Flask Pitfalls</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-09-12 </span>
+        <div class="post-category">
+            <a href="/categories/flask/"> Flask </a>
+            </div>
+          <span class="more-meta"> 602 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#env">.env</a>
+      <ul>
+        <li><a href="#手动导入-env">手动导入 .env</a></li>
+        <li><a href="#gunicorn-启动参数传递">Gunicorn 启动参数传递</a></li>
+      </ul>
+    </li>
+    <li><a href="#ssl-vs-tls-465-vs-587">SSL v.s. TLS, 465 v.s. 587</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>尝试总结 Flask 开发中一些碰到的问题，有待完善。</p>
+<h2 id="env">.env</h2>
+<p><code>.env</code> 只被 <code>flask</code> 命令加载，而在生产服务器 gunicorn 运行时不会被导入。也就是说，这只是 flask 命令行自己的实现，而不是 Flask 服务内置的功能。</p>
+<p><a href="http://flask.pocoo.org/docs/1.1/cli#environment-variables-from-dotenv">Environment variables from dotenv</a></p>
+<blockquote>
+<p>If <code>python-dotenv</code> is installed, running the flask command will set environment variables defined in the files <code>.env</code> and <code>.flaskenv</code>. This can be used to avoid having to set <code>FLASK_APP</code> manually every time you open a new terminal, and to set configuration using environment variables similar to how some deployment services work.</p>
+<p>Variables set on the command line are used over those set in .env, which are used over those set in <code>.flaskenv</code>. <code>.flaskenv</code> should be used for public variables, such as <code>FLASK_APP</code>, while .env should not be committed to your repository so that it can set private variables.</p>
+<p>Directories are scanned upwards from the directory you call flask from to locate the files. The current working directory will be set to the location of the file, with the assumption that that is the top level project directory.</p>
+</blockquote>
+<p>The files are only loaded by the flask command or calling <code>run()</code>. If you would like to load these files when running in production, you should call l<code>oad_dotenv()</code> manually.</p>
+<h3 id="手动导入-env">手动导入 .env</h3>
+<p>使用 <code>python-dotenv</code> 手动加载导入。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># app.py</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+
+
+<span class="n">dotenv_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">&#34;.env&#34;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dotenv_path</span><span class="p">):</span>
+    <span class="n">load_dotenv</span><span class="p">(</span><span class="n">dotenv_path</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="gunicorn-启动参数传递">Gunicorn 启动参数传递</h3>
+<p>不推荐，只能命令行传递。安全有保障，但是环境变量一多写起来太麻烦。</p>
+<p><a href="http://docs.gunicorn.org/en/stable/settings.html"><code>-e ENV</code>, <code>--env ENV</code></a></p>
+<blockquote>
+<p>Set environment variable (key=value).</p>
+<p>Pass variables to the execution environment. Ex.:</p>
+<p><code>$ gunicorn -b 127.0.0.1:8000 --env FOO=1 test:app</code></p>
+</blockquote>
+<h2 id="ssl-vs-tls-465-vs-587">SSL v.s. TLS, 465 v.s. 587</h2>
+<p>Flask-Mail 发送邮件时要注意 <code>MAIL_USE_TLS</code>, <code>MAIL_USE_SSL</code> 区别。</p>
+<p><a href="https://security.stackexchange.com/a/161925/203193">SSL v.s. STARTTLS</a></p>
+<blockquote>
+<p>The difference, then, is that &ldquo;SSL&rdquo; means SMTP over SSL-or-TLS on port 465, and &ldquo;TLS&rdquo; means SMTP with STARTTLS on port 25 or 587. So what&rsquo;s the difference between them?</p>
+<p>STARTTLS is opportunistic encryption. The connection starts as plaintext SMTP, and the client tries to initiate encryption if the server says that it can. The problem with this is that the plaintext negotiation can be relayed and modified by a Man-in-the-Middle attacker, exactly the way that sslstrip works for HTTP redirects and links to HTTPS.</p>
+<p>SMTP-over-SSL, on the other hand, starts with a SSL (or TLS&ndash;the exact protocol is negotiated) connection, then SMTP is conducted over that tunnel. With this configuration, the client always expects to use SSL, and can&rsquo;t be tricked into going plaintext.</p>
+</blockquote>
+<p><a href="https://stackoverflow.com/q/15796530/5101148">smtps (port 465) v.s. msa (port 587)</a></p>
+<blockquote>
+<ul>
+<li>Port 587: [SMTP] Message submission (SMTP-MSA), a service that accepts submission of email from email clients (MUAs). Described in RFC 6409.</li>
+<li>Port 465: URL Rendezvous Directory for SSM (entirely unrelated to email)</li>
+</ul>
+<p>Historically, port 465 was initially planned for the <strong>SMTPS</strong> encryption and authentication “wrapper” over SMTP, but it was quickly deprecated (within months, and over 15 years ago) in favor of <strong>STARTTLS</strong> over SMTP (RFC 3207)</p>
+<p>The hopelessly confusing and imprecise term, SSL, has often been used to indicate the SMTPS wrapper and TLS to indicate the STARTTLS protocol extension.</p>
+</blockquote>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">laggardkernel</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-09-12
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/flask/">flask</a>
+          <a href="/tags/tls/">tls</a>
+          <a href="/tags/web/">web</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2019/serve-hugo-blog-with-nginx-locally/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Nginx 部署 Hugo 静态博客始终本地可用</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/2019/flask-0.1/">
+            <span class="next-text nav-default">Flask 0.1 源码解读</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'pseudocold';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/5101148" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/laggardkernel" class="iconfont icon-github" title="github"></a>
+  <a href="https://blog.pseudocold.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">laggardkernel</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

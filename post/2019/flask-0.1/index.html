@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Flask 0.1 源码解读 - Home</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="laggardkernel" /><meta name="description" content="在理解WSGI规范后，阅读Flask 0.1源码，深入理解整个应用创建、请求处理的过程。
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.pseudocold.com/post/2019/flask-0.1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Flask 0.1 源码解读" />
+<meta property="og:description" content="在理解WSGI规范后，阅读Flask 0.1源码，深入理解整个应用创建、请求处理的过程。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pseudocold.com/post/2019/flask-0.1/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-08-20T01:20:54&#43;08:00" />
+<meta property="article:modified_time" content="2019-08-20T01:20:54&#43;08:00" />
+
+<meta itemprop="name" content="Flask 0.1 源码解读">
+<meta itemprop="description" content="在理解WSGI规范后，阅读Flask 0.1源码，深入理解整个应用创建、请求处理的过程。"><meta itemprop="datePublished" content="2019-08-20T01:20:54&#43;08:00" />
+<meta itemprop="dateModified" content="2019-08-20T01:20:54&#43;08:00" />
+<meta itemprop="wordCount" content="3595">
+<meta itemprop="keywords" content="flask," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Flask 0.1 源码解读"/>
+<meta name="twitter:description" content="在理解WSGI规范后，阅读Flask 0.1源码，深入理解整个应用创建、请求处理的过程。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Home</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Home</a>
+</div>
+
+<nav class="site-navbar">
+    
+      <div class="top-progress-bar"></div>
+    
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Flask 0.1 源码解读</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-08-20 </span>
+        <div class="post-category">
+            <a href="/categories/code-reading/"> Code Reading </a>
+            </div>
+          <span class="more-meta"> 3595 words </span>
+          <span class="more-meta"> 8 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#准备">准备</a></li>
+    <li><a href="#一分为二">一分为二</a></li>
+    <li><a href="#wsgi应用请求处理">WSGI应用：请求处理</a></li>
+    <li><a href="#request-context-属性">Request Context 属性</a></li>
+    <li><a href="#辅助函数们url_for-flash-get_flashed_messages-render_template">辅助函数们：url_for, flash, get_flashed_messages, render_template</a></li>
+    <li><a href="#正餐flask-类">正餐：Flask 类</a></li>
+    <li><a href="#url_map-vs-url_adapter">url_map v.s. url_adapter</a></li>
+    <li><a href="#local-localproxy-localstack">Local, LocalProxy, LocalStack</a>
+      <ul>
+        <li><a href="#local">Local</a></li>
+        <li><a href="#localproxy">LocalProxy</a></li>
+        <li><a href="#localstack">LocalStack</a></li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>在理解WSGI规范后，阅读Flask 0.1源码，深入理解整个应用创建、请求处理的过程。</p>
+<h2 id="准备">准备</h2>
+<p>理论</p>
+<ul>
+<li>理解WSGI</li>
+</ul>
+<p>工具 Pycharm</p>
+<ul>
+<li>利用Pycharm structure分析脚本结构</li>
+<li>Navigate, Symbol 跳转到源码处</li>
+<li>全局搜索</li>
+<li>右击，Find Usage</li>
+<li>按住Ctrl，超链接模式跳转</li>
+<li>Shortcuts on macOS
+<ul>
+<li>Go to declaration, <code>cmd+b</code>.</li>
+<li>Go the implementation, <code>cmd+alt+b</code></li>
+<li>navigate back, <code>cmd+[</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="一分为二">一分为二</h2>
+<p>从过程上，Flask源码可以分为两部分：</p>
+<ol>
+<li>组装 <code>Flask</code>，创建应用实例
+<ul>
+<li>注册视图函数</li>
+<li>错误处理函数</li>
+<li>请求前后的钩子函数：<code>@before_request</code>, <code>@after_request</code></li>
+<li>加载模板上下文
+<ul>
+<li>默认上下文变量：<code>request</code>, <code>session</code>, <code>g</code></li>
+<li>默认上下文函数：<code>url_for</code>, <code>get_flashed_messages</code></li>
+<li>其他自定义上下文变量</li>
+</ul>
+</li>
+<li>&hellip;</li>
+</ul>
+</li>
+<li>应用实例作为WSGI应用程序被调用，处理请求
+<ul>
+<li>激活请求上下文</li>
+<li>调用请求前钩子函数做请求前预处理，如果出错，终止此次请求</li>
+<li>处理请求，查询出请求对应端点，再由端点匹配到视图函数处理请求</li>
+<li>将视图函数的返回值封装成响应实例</li>
+<li>响应后处理
+<ul>
+<li>注入 <code>session</code> 到响应，因为Flask中 session 基于 cookies 实现</li>
+<li>调用响应后处理钩子函数（由 <code>@after_request</code> 注册）</li>
+</ul>
+</li>
+<li>返回响应给WSGI网关</li>
+</ul>
+</li>
+</ol>
+<p>尽管从顺序上应该从 <code>Flask</code> 实例创建开始，但考虑到大多数人都是先了解 WSGI 才来读得源码。实际从源码底部请求处理上看起更方便理解。</p>
+<h2 id="wsgi应用请求处理">WSGI应用：请求处理</h2>
+<p>作为 WSGI 应用，需要应用程序可被调用，或是函数，或者是可调用对象（带有 <code>__call__</code> 魔法函数）。</p>
+<p>Flask 以类 <code>Flask</code> 的实例作为WSGI应用程序，实际 <code>__call__</code> 方法定义在类上边。（在源码尾部）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Flask</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;Shortcut for :attr:`wsgi_app`&#34;&#34;&#34;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">wsgi_app</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>而真正负责处理请求的部分在 <code>Flask.wsgi_app</code> 函数。根据被调用的函数名以及Pycharm中 &ldquo;Go to implementation&rdquo; 以及 &ldquo;Navigate back&rdquo;，很轻易的就可以理解这个函数的行为，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Flask</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="k">def</span> <span class="nf">wsgi_app</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;The actual WSGI application.  This is not implemented in
+</span><span class="s2">        `__call__` so that middlewares can be applied:
+</span><span class="s2">
+</span><span class="s2">            app.wsgi_app = MyMiddleware(app.wsgi_app)
+</span><span class="s2">
+</span><span class="s2">        :param environ: a WSGI environment
+</span><span class="s2">        :param start_response: a callable accepting a status code,
+</span><span class="s2">                               a list of headers and an optional
+</span><span class="s2">                               exception context to start the response
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="c1"># 激活请求上下文，实际为激活一些请求相关（线程局部）全局变量：</span>
+        <span class="c1"># request, session, g</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_context</span><span class="p">(</span><span class="n">environ</span><span class="p">):</span>
+            <span class="c1"># 依次调用通过 `@before_request` 装饰器注册的请求前钩子函数做预处理</span>
+            <span class="n">rv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_request</span><span class="p">()</span>
+            <span class="c1"># 如果某个请求前钩子函数有返回值，说明请求前检测没有完成，抛出了错误</span>
+            <span class="c1"># 若请求预处理无错误，派遣请求（实际就是开始处理请求）</span>
+            <span class="k">if</span> <span class="n">rv</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">rv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_request</span><span class="p">()</span>
+                <span class="c1"># 处理请求部分需要跳转到对应函数实现部分</span>
+                <span class="c1"># def dispatch_request(self):</span>
+                <span class="c1">#     try:</span>
+                <span class="c1">#         # 从注册的url列表中匹配到该请求对应路由</span>
+                <span class="c1">#         endpoint, values = self.match_request()</span>
+                <span class="c1">#         # 根据对应路由，调用对应视图函数处理请求</span>
+                <span class="c1">#         return self.view_functions[endpoint](**values)</span>
+                <span class="c1">#     # 若抛出错误，根据错误状态码查找 @errorhandler 注册的错误处理函数</span>
+                <span class="c1">#     except HTTPException, e:</span>
+                <span class="c1">#         handler = self.error_handlers.get(e.code)</span>
+                <span class="c1">#     ...</span>
+
+            <span class="c1"># 视图函数中有可能返回的不是响应实例，例如 return render_template(&#39;xxx&#39;), 200</span>
+            <span class="c1"># 处理视图函数返回值，创建响应实例</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_response</span><span class="p">(</span><span class="n">rv</span><span class="p">)</span>
+            <span class="c1"># 对返回的相应实例做后处理</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_response</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+            <span class="c1"># def process_response(self, reponse):</span>
+            <span class="c1">#     session = _request_ctx_stack.top.session</span>
+            <span class="c1">#     # 保存session到响应的cookies中，因为Flask session基于cookies实现</span>
+            <span class="c1">#     if session is not None:</span>
+            <span class="c1">#         self.save_session(session, response)</span>
+            <span class="c1">#     # 调用 @after_request 注册的后处理函数</span>
+            <span class="c1">#     for handler in self.after_request_funcs:</span>
+            <span class="c1">#         response = handler(response)</span>
+
+            <span class="c1"># 根据 WSGI 规范，WSGI应用实例使用传入的 environ, startreponse</span>
+            <span class="c1"># 生成响应，返回给 WSGI网关</span>
+            <span class="k">return</span> <span class="n">response</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>明白了请求的处理过程，我们可以反过来从头开始阅读源码，理解 Flask 类的组装。不过在开始之前，会先碰到 <code>_RequestContext</code>。</p>
+<h2 id="request-context-属性">Request Context 属性</h2>
+<p>对于请求上下文环境，先不用深入其基于 <code>LocalStack</code> 的压栈、出栈，或使其某些属性如何基于 <code>LocalProxy</code> 实现。先把 <code>_RequestContext</code> 属性（它是什么）以及它的作用理解就可以。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">_RequestContext</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="c1"># 请求上下文被用于存储请求相关信息，同时生成WSGI环境所需的请求对象、URL转换器</span>
+    <span class="s2">&#34;&#34;&#34;The request context contains all request relevant information.  It is
+</span><span class="s2">    created at the beginning of the request and pushed to the
+</span><span class="s2">    `_request_ctx_stack` and removed at the end of it.  It will create the
+</span><span class="s2">    URL adapter and request object for the WSGI environment provided.
+</span><span class="s2">    &#34;&#34;&#34;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">environ</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
+        <span class="c1"># url_map 属性是一个Map对象，它调用 bind_to_environ() 方法，</span>
+        <span class="c1"># 返回一个MapAdapter类实例。此实例负责匹配和构建URL</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url_adapter</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">url_map</span><span class="o">.</span><span class="n">bind_to_environ</span><span class="p">(</span><span class="n">environ</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">request</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">request_class</span><span class="p">(</span><span class="n">environ</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">open_session</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">)</span>
+        <span class="c1"># 跳转到 open_session 实现可知 session 基于 cookies 实现</span>
+        <span class="c1"># def open_session(self, request):</span>
+        <span class="c1">#     key = self.secret_key</span>
+        <span class="c1">#     if key is not None:</span>
+        <span class="c1">#         return SecureCookie.load_cookie(request, self.session_cookie_name,</span>
+        <span class="c1">#                                         secret_key=key)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="n">_RequestGlobals</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flashes</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="c1"># request context 的激活使用</span>
+<span class="k">class</span> <span class="nc">Flask</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wsgi_app</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_context</span><span class="p">(</span><span class="n">environ</span><span class="p">):</span>
+            <span class="c1"># ...</span>
+
+    <span class="k">def</span> <span class="nf">request_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environ</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_RequestContext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environ</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="辅助函数们url_for-flash-get_flashed_messages-render_template">辅助函数们：url_for, flash, get_flashed_messages, render_template</h2>
+<p>这一部分十分容易理解。注意 <code>url_for</code> 中 <code>url_adapter</code>，在后边我们可以对比理解一下 <code>url_map</code>, <code>url_adapter</code> 关系。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">url_for</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="o">**</span><span class="n">values</span><span class="p">):</span>
+    <span class="c1"># 根据传入的端点返回对应的URL</span>
+    <span class="k">return</span> <span class="n">_request_ctx_stack</span><span class="o">.</span><span class="n">top</span><span class="o">.</span><span class="n">url_adapter</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">flash</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+    <span class="c1"># flash msgs 实际被存在于 session 中.</span>
+    <span class="c1"># 使用 session 而非 g 以保证闪现消息可以跨请求存活，在后面请求中被渲染</span>
+    <span class="n">session</span><span class="p">[</span><span class="s1">&#39;_flashes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;_flashes&#39;</span><span class="p">,</span> <span class="p">[]))</span> <span class="o">+</span> <span class="p">[</span><span class="n">message</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">get_flashed_messages</span><span class="p">():</span>
+    <span class="c1"># 通过 session.pop 弹出消息使其被使用后失效，</span>
+    <span class="c1"># 暂存在 _RequestContext.flashes 以防被多次渲染到模板</span>
+    <span class="n">flashes</span> <span class="o">=</span> <span class="n">_request_ctx_stack</span><span class="o">.</span><span class="n">top</span><span class="o">.</span><span class="n">flashes</span>
+    <span class="k">if</span> <span class="n">flashes</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">_request_ctx_stack</span><span class="o">.</span><span class="n">top</span><span class="o">.</span><span class="n">flashes</span> <span class="o">=</span> <span class="n">flashes</span> <span class="o">=</span> \
+            <span class="n">session</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;_flashes&#39;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="k">return</span> <span class="n">flashes</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">render_template</span><span class="p">(</span><span class="n">template_name</span><span class="p">,</span> <span class="o">**</span><span class="n">context</span><span class="p">):</span>
+    <span class="c1"># 没什么好说的，调用jinja渲染模板</span>
+    <span class="c1"># 注意 update_template_context 会调自定义的 template_context 处理函数</span>
+    <span class="c1"># 更新模板上下文</span>
+    <span class="n">current_app</span><span class="o">.</span><span class="n">update_template_context</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">current_app</span><span class="o">.</span><span class="n">jinja_env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="n">template_name</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">Flask</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="k">def</span> <span class="nf">update_template_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="n">reqctx</span> <span class="o">=</span> <span class="n">_request_ctx_stack</span><span class="o">.</span><span class="n">top</span>
+        <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">template_context_processors</span><span class="p">:</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">func</span><span class="p">())</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="正餐flask-类">正餐：Flask 类</h2>
+<p>Flask 类作为WSGI引用的核心，充当着注册中心的角色。注册视图函数、URL规则、模板配置、前后处理钩子函数等等。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Flask</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">package_name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">package_name</span> <span class="o">=</span> <span class="n">package_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_path</span> <span class="o">=</span> <span class="n">_get_package_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">package_name</span><span class="p">)</span>
+
+        <span class="c1"># 视图函数、错误处理函数、请求前后钩子函数等存储</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view_functions</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_handlers</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">before_request_funcs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">after_request_funcs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_context_processors</span> <span class="o">=</span> <span class="p">[</span><span class="n">_default_template_ctx_processor</span><span class="p">]</span>
+
+        <span class="c1"># url_map 为 Werkzeug Map实例，存储URL规则及相关配置</span>
+        <span class="c1"># 主要通过存储 Rule 实例，保存了端点和URL规则的映射</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url_map</span> <span class="o">=</span> <span class="n">Map</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">static_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c1"># 记录静态文件路由（如 `/static/&lt;filename&gt;`）与端点 &#39;static&#39; 映射关系</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">url_map</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Rule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">static_path</span> <span class="o">+</span> <span class="s1">&#39;/&lt;filename&gt;&#39;</span><span class="p">,</span>
+                                  <span class="n">build_only</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s1">&#39;static&#39;</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">pkg_resources</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">target</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">package_name</span><span class="p">,</span> <span class="s1">&#39;static&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">target</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_path</span><span class="p">,</span> <span class="s1">&#39;static&#39;</span><span class="p">)</span>
+            <span class="c1"># 通过SharedDataMiddleware记录路由与操作系统上真实文件路径关系</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wsgi_app</span> <span class="o">=</span> <span class="n">SharedDataMiddleware</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wsgi_app</span><span class="p">,</span> <span class="p">{</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">static_path</span><span class="p">:</span> <span class="n">target</span>
+            <span class="p">})</span>
+
+        <span class="c1"># jinja 环境创建，默认加载 url_for, get_flashed_messages 到模板上下文</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">jinja_env</span> <span class="o">=</span> <span class="n">Environment</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">create_jinja_loader</span><span class="p">(),</span>
+                                     <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">jinja_options</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">jinja_env</span><span class="o">.</span><span class="n">globals</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="n">url_for</span><span class="o">=</span><span class="n">url_for</span><span class="p">,</span>
+            <span class="n">get_flashed_messages</span><span class="o">=</span><span class="n">get_flashed_messages</span>
+        <span class="p">)</span>
+
+    <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">open_session</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="c1"># 从请求携带的 cookies 中获取session，或者创建新 session</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">secret_key</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">SecureCookie</span><span class="o">.</span><span class="n">load_cookie</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">session_cookie_name</span><span class="p">,</span>
+                                            <span class="n">secret_key</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">save_session</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+        <span class="c1"># 嵌入 session 到 response cookies中</span>
+        <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">save_cookie</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">session_cookie_name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_url_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+        <span class="c1"># 注册端点与URL规则到应用实例 url_map 属性</span>
+        <span class="n">options</span><span class="p">[</span><span class="s1">&#39;endpoint&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">endpoint</span>
+        <span class="n">options</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;methods&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url_map</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Rule</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">route</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+        <span class="c1"># @route 装饰器，实际仍为调用 add_url_rule 注册视图函数到应用实例</span>
+        <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_url_rule</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">view_functions</span><span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span>
+            <span class="k">return</span> <span class="n">f</span>
+        <span class="k">return</span> <span class="n">decorator</span>
+
+    <span class="c1"># 接下来是一系列的装饰器定义，用来添加自定义的错误处理、请求前后钩子</span>
+    <span class="k">def</span> <span class="nf">errorhandler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">):</span>
+        <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">before_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+        <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">after_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+        <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">context_processor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+        <span class="o">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在源码的最底端，我们看到了 wsgi_app 函数请求处理，这个时候再回过来看一遍请求处理思路就清晰度了。</p>
+<h2 id="url_map-vs-url_adapter">url_map v.s. url_adapter</h2>
+<p>url_map 为 Werkzeug Map实例，记录端点与URL规则映射。而 url_map 通过调用 <code>.bind_to_envrion</code> 返回 url_adapter，url_adapter 根据端点调用 <code>.bind()</code> 可以构建出对应的URL。</p>
+<p>url_map用于记录映射，url_adapter 负责反查、或者构造URL。前者无请求信息，后者绑定了请求信息。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">_RequestContext</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">environ</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
+        <span class="c1"># url_map 属性是一个Map对象，它调用 bind_to_environ() 方法，</span>
+        <span class="c1"># 返回一个MapAdapter类实例。此实例负责匹配和构建URL</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url_adapter</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">url_map</span><span class="o">.</span><span class="n">bind_to_environ</span><span class="p">(</span><span class="n">environ</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">url_for</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="o">**</span><span class="n">values</span><span class="p">):</span>
+    <span class="c1"># 根据传入的端点返回对应的URL</span>
+    <span class="k">return</span> <span class="n">_request_ctx_stack</span><span class="o">.</span><span class="n">top</span><span class="o">.</span><span class="n">url_adapter</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>实际应用实例处理请求时</p>
+<ol>
+<li>通过 url_adapter 调用 <code>.match()</code> 查询出当前请求对应的端点、视图参数</li>
+<li>根据查询出的端点调用对应的视图函数处理请求</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Flask</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">package_name</span><span class="p">):</span>
+        <span class="o">...</span>
+        <span class="c1"># url_map 为 Werkzeug Map实例，存储URL规则及相关配置</span>
+        <span class="c1"># 主要通过存储 Rule 实例，保存了端点和URL规则的映射</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url_map</span> <span class="o">=</span> <span class="n">Map</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">match_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">rv</span> <span class="o">=</span> <span class="n">_request_ctx_stack</span><span class="o">.</span><span class="n">top</span><span class="o">.</span><span class="n">url_adapter</span><span class="o">.</span><span class="n">match</span><span class="p">()</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">view_args</span> <span class="o">=</span> <span class="n">rv</span>
+        <span class="k">return</span> <span class="n">rv</span>
+
+    <span class="k">def</span> <span class="nf">dispatch_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">endpoint</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">match_request</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">view_functions</span><span class="p">[</span><span class="n">endpoint</span><span class="p">](</span><span class="o">**</span><span class="n">values</span><span class="p">)</span>
+            <span class="o">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="local-localproxy-localstack">Local, LocalProxy, LocalStack</h2>
+<p>这一部分其实不了解也能读懂整个Flask流程，只记住一下一些概念即可，有兴趣可以看源码深究。可以参看 李辉 的《Flask Web开发实战》书中最后一章。</p>
+<p>目前推荐先阅读之后的几版源码，弄清楚后来一些特性的实现。</p>
+<h3 id="local">Local</h3>
+<p>Flask为了应对多线程处理，引入了本地线程（Thread Local）的概念，在保存数据的同时记录下对应的线程ID，获取数据时根据所在线程的ID即可获取到对应的数据。（简单地说，虽然所有线程看来在使用一个全局对象，实际上每个线程使用的是全局对象下当前线程对应的同名变量）</p>
+<p>Python内置模块 <code>threading.local</code> 就是对于本地线程的一种实现。</p>
+<p>根据 Werkzeug，<code>threading.local</code> 存在一些限制，不能满足其项目需求。</p>
+<blockquote>
+<p>This (<code>threading.local</code>) approach, however, has a few disadvantages. For example, besides threads, there are <strong>other types of concurrency</strong> in Python. A very popular one is greenlets. Also, whether every request gets its own thread is not guaranteed in WSGI. It could be that a request is reusing a thread from a previous request, and hence data is left over in the thread local object.</p>
+</blockquote>
+<p>于是，Werkzeug 基于 greenlet 实现本地线程 <code>Local</code> 类，其覆盖性更好。</p>
+<h3 id="localproxy">LocalProxy</h3>
+<p>代理（Proxy）是一种设计模式，通过创建一个代理对象。我们可以使用这个代理对象来操作实际对象。乍一看，你可能会觉得 Flask 吃饱撑的不用 <code>Local</code> 而要通过 <code>LocalProxy</code> 套一层。</p>
+<p>因为上下文的推送和移除是动态进行的，Flask 使用代理可以让我们拥有动态获取上下文对象的能力。
+另外，一个动态的全局对象，也让多个程序实例并存有了可能。这样在不同的程序上下文环境中，<code>current_app</code> 总是能对应正确的程序实例。</p>
+<h3 id="localstack">LocalStack</h3>
+<p><code>LocalStack</code> 只是基于 <code>Local</code> 实现的栈结构。</p>
+<p>为什么 Flask 使用 <code>LocalStack</code> 而不是直接使用 <code>Local</code> 存储上下文对象。主要的原因是为了支持多程序共存。将程序分离成多个程序很类似蓝本的模块化分离，但它们并不是一回事。使用Werkzeug提供的 <code>DispatcherMiddleware</code> 中间件就可以把多个程序组合成一个WSGI程序运行。</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://github.com/pallets/flask">Flask on GitHub</a></li>
+<li><a href="https://werkzeug.palletsprojects.com/en/0.15.x/local/">Werkzueg: Context Locals</a></li>
+<li>《Flask Web开发实战》，李辉</li>
+</ul>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">laggardkernel</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-08-20
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/flask/">flask</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2019/flask-pitfalls/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Flask Pitfalls</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/2019/wsigref-code-reading/">
+            <span class="next-text nav-default">wsigref 源码阅读笔记</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'pseudocold';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/5101148" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/laggardkernel" class="iconfont icon-github" title="github"></a>
+  <a href="https://blog.pseudocold.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">laggardkernel</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

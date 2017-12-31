@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>MariaDB/MySQL Setup: All in One - Home</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="laggardkernel" /><meta name="description" content="MariaDB, MySQL安装配置全指南。MySQL语法参考笔记《MySQL必知必会》读书笔记。
+" /><meta name="keywords" content="mariadb, mysql, setup, installation" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.pseudocold.com/post/2018/mysql-mariadb-setup/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="MariaDB/MySQL Setup: All in One" />
+<meta property="og:description" content="MariaDB, MySQL安装配置全指南。MySQL语法参考笔记《MySQL必知必会》读书笔记。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pseudocold.com/post/2018/mysql-mariadb-setup/" /><meta property="article:section" content="post" />
+
+<meta property="article:modified_time" content="2018-03-30T23:35:45&#43;08:00" />
+
+<meta itemprop="name" content="MariaDB/MySQL Setup: All in One">
+<meta itemprop="description" content="MariaDB, MySQL安装配置全指南。MySQL语法参考笔记《MySQL必知必会》读书笔记。">
+<meta itemprop="dateModified" content="2018-03-30T23:35:45&#43;08:00" />
+<meta itemprop="wordCount" content="2641">
+<meta itemprop="keywords" content="mariadb,mysql," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MariaDB/MySQL Setup: All in One"/>
+<meta name="twitter:description" content="MariaDB, MySQL安装配置全指南。MySQL语法参考笔记《MySQL必知必会》读书笔记。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Home</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Home</a>
+</div>
+
+<nav class="site-navbar">
+    
+      <div class="top-progress-bar"></div>
+    
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">MariaDB/MySQL Setup: All in One</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-03-30 </span>
+        <div class="post-category">
+            <a href="/categories/devops/"> DevOps </a>
+            </div>
+          <span class="more-meta"> 2641 words </span>
+          <span class="more-meta"> 6 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#differences-between-mariadb-and-mysql">Differences Between MariaDB and MySQL</a></li>
+    <li><a href="#whats-new">What&rsquo;s New</a>
+      <ul>
+        <li><a href="#80">8.0</a></li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+    <li><a href="#installationsetup">Installation/Setup</a>
+      <ul>
+        <li><a href="#user-auth-and-privileges">user auth and privileges</a></li>
+      </ul>
+    </li>
+    <li><a href="#conf">Conf</a>
+      <ul>
+        <li><a href="#conf-location">Conf Location</a></li>
+        <li><a href="#remote-access">Remote Access</a></li>
+        <li><a href="#auto-completion">auto-completion</a></li>
+        <li><a href="#utf8mb4">utf8mb4</a></li>
+        <li><a href="#tmpdir-with-a-tmpfs">tmpdir with a TMPFS</a></li>
+        <li><a href="#populate-time-zone-tables">Populate time zone tables</a></li>
+      </ul>
+    </li>
+    <li><a href="#db-maintenance">Db Maintenance</a>
+      <ul>
+        <li><a href="#upgrade-db-to-next-majaor-release">Upgrade db to next majaor release</a></li>
+        <li><a href="#check-optimize-repair-the-db">Check, Optimize, Repair the DB</a></li>
+        <li><a href="#backup">Backup</a></li>
+      </ul>
+    </li>
+    <li><a href="#adminer">Adminer</a></li>
+    <li><a href="#phpmyadmin">phpMyAdmin</a>
+      <ul>
+        <li><a href="#禁止root登录phpmyadmin">禁止root登录phpmyadmin</a></li>
+        <li><a href="#nginx-access-control">Nginx Access Control</a></li>
+        <li><a href="#apache-access-control">Apache Access Control</a></li>
+      </ul>
+    </li>
+    <li><a href="#file-access-control">File Access Control</a></li>
+    <li><a href="#tips">Tips</a>
+      <ul>
+        <li><a href="#reset-password">Reset Password</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>MariaDB, MySQL安装配置全指南。MySQL语法参考笔记《MySQL必知必会》读书笔记。</p>
+<p>MariaDB is an alternative to MySQL.</p>
+<p>MySQL, MariaDB 并不相同，很多配置项不一致。</p>
+<h2 id="differences-between-mariadb-and-mysql">Differences Between MariaDB and MySQL</h2>
+<p>MariaDB是MySQL fork，在MySQL被Oracle收购后分支。</p>
+<blockquote>
+<p>The <code>InnoDB</code> storage engine by Oracle was also forked by Percona as <code>XtraDB</code>. The fork is used by both MariaDB and Percona Server.</p>
+</blockquote>
+<p>实际从MariaDB 10.2开始，又换回InnoDB作为默认分支。</p>
+<ul>
+<li><a href="https://www.eversql.com/mariadb-vs-mysql/">MariaDB vs MySQL – Comparing MySQL 8.0 with MariaDB 10.3</a></li>
+</ul>
+<h2 id="whats-new">What&rsquo;s New</h2>
+<h3 id="80">8.0</h3>
+<ul>
+<li><a href="https://blog.51cto.com/fengfeng688/2147169">MySQL8.0新特性——默认使用caching_sha2_password作为身份验证插件</a></li>
+<li><a href="https://www.oschina.net/news/95325/mysql-8-0-ga-released">MySQL 8.0 正式版 8.0.11 发布：比 MySQL 5.7 快 2 倍</a></li>
+</ul>
+<p><code>caching_sha2_password</code> 代替 <code>mysql_native_password</code> 密码加密作为默认。原有账户的加密方式保持不变。</p>
+<p>改变某用户的验证方式，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">ALTER</span> <span class="k">USER</span> <span class="k">user</span>  <span class="n">IDENTIFIED</span> <span class="k">WITH</span> <span class="n">caching_sha2_password</span>  <span class="k">BY</span> <span class="s1">&#39;password&#39;</span><span class="p">;</span>
+<span class="k">ALTER</span> <span class="k">USER</span> <span class="s1">&#39;root&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span> <span class="n">IDENTIFIED</span> <span class="k">WITH</span> <span class="n">mysql_native_password</span>  <span class="k">BY</span> <span class="s1">&#39;password&#39;</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>change <code>default_authentication_plugin</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># my.cnf</span>
+<span class="k">[mysqld]</span>
+<span class="na">default_authentication_plugin</span><span class="o">=</span><span class="s">mysql_native_password</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>MySQL 8 开始，使用 <code>utf8mb4</code> 作为 MySQL 的默认字符集。</p>
+<p>MySQL 从 5.7 版本开始提供 NoSQL 存储功能，目前在 8.0 版本中这部分功能也得到了更大的改进。</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-mariadb-on-debian-10">setup on Debian 10</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/MariaDB">MariaDB from archlinux wiki</a></li>
+</ul>
+<h2 id="installationsetup">Installation/Setup</h2>
+<p>ArchLinux 建议更改存储路径。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">mariadb-install-db --user<span class="o">=</span>mysql --basedir<span class="o">=</span>/usr --datadir<span class="o">=</span>/var/lib/mysql
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>For security reasons, the systemd service file contains <code>ProtectHome=true</code>, which prevents MariaDB from accessing files under the <code>/home</code>, <code>/root</code> and <code>/run/user</code> hierarchies. The datadir has to be in an accessible location and owned by the <code>mysql</code> user and group.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt update
+sudo apt install mariadb-server
+sudo mysql_secure_installation
+<span class="c1"># enter, not root password</span>
+<span class="c1"># don&#39;t setup a root account</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>the <code>root</code> account for MariaDB is tied closely to automated system maintenance, so we should not change the configured authentication methods for that account.</p>
+<p>remove some anonymous users and the test database</p>
+<p>disable remote root logins, and load these new rules so that MariaDB immediately respects the changes you have made.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># check installation</span>
+sudo mysql
+mysql&gt; SELECT user,authentication_string,plugin,host FROM mysql.user<span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="user-auth-and-privileges">user auth and privileges</h3>
+<p>In Debian systems running MariaDB 10.3, the <code>root</code> MariaDB user is set to authenticate using the <code>unix_socket</code> plugin by default rather than with a password. （MariaDB root密码验证方式不一致）</p>
+<p><code>root</code>不使用密码验证，所以需要一个替代的管理员账户。</p>
+<p>直接修改 <code>/etc/mysql/debian.cnf</code> 之后会被覆盖，</p>
+<p>create a new account called admin with the same capabilities as the root account, but configured for password authentication.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo mysql
+
+<span class="c1"># config an account with password auth</span>
+GRANT ALL ON *.* TO <span class="s1">&#39;admin&#39;</span>@<span class="s1">&#39;localhost&#39;</span> IDENTIFIED BY <span class="s1">&#39;password&#39;</span> WITH GRANT OPTION<span class="p">;</span>
+FLUSH PRIVILEGES<span class="p">;</span>
+<span class="nb">exit</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo systemctl status mariadb
+
+<span class="c1"># connect the database with mysqladmin tool</span>
+sudo mysqladmin version
+
+<span class="c1"># test auth</span>
+mysqladmin -u admin -p version
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="conf">Conf</h2>
+<h3 id="conf-location">Conf Location</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">mysqld --help --verbose <span class="p">|</span> less
+...
+/etc/my.cnf /etc/my.cnf.d/ ~/.my.cnf
+...
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="remote-access">Remote Access</h3>
+<ol>
+<li>
+<p>SSH本地转发，利用数据库客户端代理连接到本地端口</p>
+</li>
+<li>
+<p>在服务器上暴露3306端口，创建专门用于远程连接的账户。</p>
+</li>
+</ol>
+<p>Bind to wan.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[mysqld]</span>
+   <span class="na">...</span>
+   <span class="c1"># uncheck skip-netwoking to disable remote access</span>
+   <span class="c1">#skip-networking</span>
+   <span class="na">bind-address</span> <span class="o">=</span> <span class="s">&lt;some ip-address&gt;
+</span><span class="s">   ...</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Create account for specific database, and grant remote access for that account.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">mysql -u root -p
+
+<span class="c1"># check remote access privileged</span>
+<span class="k">select</span> user, host from mysql.user where host &lt;&gt; <span class="s1">&#39;lodalhost&#39;</span><span class="p">;</span>
+
+<span class="c1"># grant remote privileges</span>
+grant all privileges on dbname.* to <span class="s1">&#39;account&#39;</span>@<span class="s1">&#39;192.168.1.%&#39;</span> identified by <span class="s1">&#39;pasword&#39;</span> with grant option<span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="auto-completion">auto-completion</h3>
+<p>disabled by default. Enable in the client conf, <code>/etc/mysql/my.cnf</code>,</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[mysql]</span>
+<span class="na">auto-rehash</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="utf8mb4">utf8mb4</h3>
+<p><strong>Note</strong>: make a backup before changing the character set.</p>
+<blockquote>
+<p>The mariadb package already uses <code>utf8mb4</code> as charset and <code>utf8mb4_unicode_ci</code> as collation. Users using the default (character) settings may want to skip this section.</p>
+</blockquote>
+<p>utf8mb8 is compatible with utf8, with additional unicode support.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># /etc/mysql/my.cnf</span>
+<span class="k">[client]</span>
+<span class="na">default-character-set</span> <span class="o">=</span> <span class="s">utf8mb4</span>
+
+<span class="k">[mysqld]</span>
+<span class="na">collation_server</span> <span class="o">=</span> <span class="s">utf8mb4_unicode_ci</span>
+<span class="na">character_set_server</span> <span class="o">=</span> <span class="s">utf8mb4</span>
+
+<span class="k">[mysql]</span>
+<span class="na">default-character-set</span> <span class="o">=</span> <span class="s">utf8mb4</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="tmpdir-with-a-tmpfs">tmpdir with a TMPFS</h3>
+<p>（暂时不使用，确认有需求后再说。wiki中100M大小可能仅作为示例）</p>
+<blockquote>
+<p>The directory used by MySQL for storing temporary files is named <code>tmpdir</code>. For example, it is used to perform disk based large sorts, as well as for internal and explicit temporary tables.</p>
+</blockquote>
+<p>为避免 &lsquo;tmpdir&rsquo; 分区（默认为 <code>/tmp</code>下）被塞爆，使用专门的临时存储位置。据Archlinux教程，只创建了100M的临时文件分区用于数据库，推测只是为了避免与其他临时文件冲突。</p>
+<p><a href="https://wiki.archlinux.org/index.php/Tmpfs">tmpfs</a></p>
+<blockquote>
+<p>tmpfs is a temporary filesystem that resides in <em>memory and/or swap partition(s)</em>. Mounting directories as tmpfs can be an effective way of speeding up accesses to their files, or to ensure that their contents are automatically cleared upon reboot.</p>
+</blockquote>
+<p>TMPFS使用内存或者交换分区加快读写速度。</p>
+<p><a href="https://stackoverflow.com/a/11990922/5101148">Where MySQL Stores Temporary Files</a></p>
+<blockquote>
+<p>On Unix, MySQL uses the value of the <code>TMPDIR</code> environment variable as the path name of the directory in which to store temporary files. If <code>TMPDIR</code> is not set, MySQL uses the system default, which is usually <code>/tmp</code>, <code>/var/tmp</code>, or <code>/usr/tmp</code>.</p>
+<p>On Windows, Netware and OS2, MySQL checks in order the values of the <code>TMPDIR</code>, <code>TEMP</code>, and <code>TMP</code> environment variables. For the first one found to be set, MySQL uses it and does not check those remaining. If none of <code>TMPDIR</code>, <code>TEMP</code>, or <code>TMP</code> are set, MySQL uses the Windows system default, which is usually <code>C:\windows\temp</code>.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">show</span> <span class="n">variables</span> <span class="k">like</span> <span class="s1">&#39;tmpdir&#39;</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># create a dir with approriate perm, writable by mysql user</span>
+mkdir -pv /var/lib/mysqltmp
+chown mysql:mysql /var/lib/mysqltmp
+
+<span class="c1"># check id, gid of the mysql user and group</span>
+$ id mysql
+<span class="nv">uid</span><span class="o">=</span>27<span class="o">(</span>mysql<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>27<span class="o">(</span>mysql<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span>27<span class="o">(</span>mysql<span class="o">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Mount tmpfs for &lsquo;tmpdir&rsquo; in <code>/etc/fstab</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="na">tmpfs /var/lib/mysqltmp tmpfs rw,gid</span><span class="o">=</span><span class="s">27,uid=27,size=100M,mode=0750,noatime 0 0</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="populate-time-zone-tables">Populate time zone tables</h3>
+<p>Created automatically, but not populated. Used in <code>CONVERT_TZ()</code> sql queries.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">mysql_tzinfo_to_sql /usr/share/zoneinfo <span class="p">|</span> mysql -u root -p mysql
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="db-maintenance">Db Maintenance</h2>
+<h3 id="upgrade-db-to-next-majaor-release">Upgrade db to next majaor release</h3>
+<ol>
+<li>keep the old daemon running</li>
+<li>upgrade the pkg</li>
+<li>run <code>mysql_upgrade</code></li>
+<li>restart the daemon</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">mysql_upgrade -u root -p
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="check-optimize-repair-the-db">Check, Optimize, Repair the DB</h3>
+<p><code>mysqlcheck</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># check all</span>
+mysqlcheck --all-databases -u root -p -c
+
+<span class="c1"># analyze all</span>
+mysqlcheck --all-databases -u root -p -a
+
+<span class="c1"># repair</span>
+<span class="c1"># -r</span>
+
+<span class="c1"># optimize, -o</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="backup">Backup</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># for InnoDB</span>
+mysqldump --single-transaction --flush-logs --master-data<span class="o">=</span><span class="m">2</span> --all-databases -u root -p &gt; all_databases.sql
+
+<span class="c1"># backup with compression，其实就是管道加gzip</span>
+mysqldump --single-transaction --flush-logs --master-data<span class="o">=</span><span class="m">2</span> --all-databases -u root -p <span class="p">|</span> gzip &gt; all_databases.sql.gz
+
+<span class="c1"># reload it into server</span>
+zcat all_databases.sql.gz <span class="p">|</span> mysql -u root -p
+
+
+
+<span class="c1"># simple example</span>
+mysqldump -u usrname -p database_name &gt; data-dump.sql
+<span class="c1"># create a db before importing, 导入数据前先要有一个数据库存在</span>
+<span class="c1"># mysq -u root -p</span>
+<span class="c1"># create database new_database;</span>
+mysql -u username -p new_database &lt; data-dump.sql
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="adminer">Adminer</h2>
+<p><a href="https://www.adminer.org/en/phpmyadmin/">comparision with phpmyadmin</a></p>
+<p>单文件，静态</p>
+<h2 id="phpmyadmin">phpMyAdmin</h2>
+<p>压根就不要用这种面板，直接SSH本地转发，使用mysql客户端。要用也用Adminer。</p>
+<ol>
+<li>开启服务</li>
+<li>配置
+<ul>
+<li>phpmyadmin禁止root登录</li>
+</ul>
+</li>
+<li>Nginx，Apache 访问控制。
+<ul>
+<li>改名，非 <code>pma</code>子域名，或者子文件夹</li>
+<li>限制隐藏文件的访问，参考Ubuntu phpMyAdmin配置</li>
+<li>只允许本地访问，然后使用SSH本地转发</li>
+<li>或者，只允许特定IP范围访问，加入基础认证</li>
+</ul>
+</li>
+</ol>
+<p>Tutorials</p>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-18-04">How To Install and Secure phpMyAdmin on Ubuntu 18.04 (Apache)</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-with-nginx-on-an-ubuntu-18-04-server">How to Install and Secure phpMyAdmin with Nginx on an Ubuntu 18.04 server</a></li>
+<li><a href="https://www.phpmyadmin.net/">phpmyadmin.net</a></li>
+<li><a href="https://docs.phpmyadmin.net/zh_CN/latest/">phpMyAdmin 文档</a></li>
+</ul>
+<h3 id="禁止root登录phpmyadmin">禁止root登录phpmyadmin</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="c1"># sudo nano /etc/phpmyadmin/conf.d/pma_secure.php
+</span><span class="c1"></span>
+<span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;auth_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;cookie&#39;</span><span class="p">;</span>
+<span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;AllowNoPassword&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span> <span class="c1"># *
+</span><span class="c1"></span><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;AllowRoot&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span> <span class="c1"># *
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="nginx-access-control">Nginx Access Control</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt install phpmyadmin
+sudo ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="basic-auth">Basic Auth</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">openssl passwd
+<span class="c1"># generate a password like &#34;O5az.RSPzd.HE&#34;</span>
+
+sudo nano /etc/nginx/pma_pass
+<span class="c1"># sammy:O5az.RSPzd.HE</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Enable basic auth.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
+    <span class="kn">.</span> <span class="s">.</span> <span class="s">.</span>
+
+        <span class="s">location</span> <span class="s">/nothingtosee</span> <span class="p">{</span>
+                <span class="kn">auth_basic</span> <span class="s">&#34;Admin</span> <span class="s">Login&#34;</span><span class="p">;</span>
+                <span class="kn">auth_basic_user_file</span> <span class="s">/etc/nginx/pma_pass</span><span class="p">;</span>
+        <span class="p">}</span>
+
+
+    <span class="kn">.</span> <span class="s">.</span> <span class="s">.</span>
+<span class="err">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="ssh-tunnel-and-ip-limit">SSH Tunnel and IP Limit</h4>
+<p>利用 <code>allow</code>, <code>deny</code> 做访问控制。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
+    <span class="kn">.</span> <span class="s">.</span> <span class="s">.</span>
+
+    <span class="s">location</span> <span class="s">/nothingtosee</span> <span class="p">{</span>
+        <span class="kn">satisfy</span> <span class="s">all</span><span class="p">;</span> <span class="c1">#requires both conditions
+</span><span class="c1"></span>
+        <span class="kn">allow</span> <span class="mi">203</span><span class="s">.0.113.111</span><span class="p">;</span> <span class="c1">#allow your IP
+</span><span class="c1"></span>        <span class="kn">allow</span> <span class="mi">127</span><span class="s">.0.0.1</span><span class="p">;</span> <span class="c1">#allow localhost via SSH tunnels
+</span><span class="c1"></span>        <span class="kn">deny</span> <span class="s">all</span><span class="p">;</span> <span class="c1">#deny all other sources
+</span><span class="c1"></span>
+        <span class="kn">auth_basic</span> <span class="s">&#34;Admin</span> <span class="s">Login&#34;</span><span class="p">;</span>
+        <span class="kn">auth_basic_user_file</span> <span class="s">/etc/nginx/pma_pass</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kn">.</span> <span class="s">.</span> <span class="s">.</span>
+<span class="err">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># local forwarding</span>
+ssh user@server_domain_or_IP -L 8000:localhost:80 -L 8443:localhost:443 -N
+<span class="c1"># -N, do not execute remote commands. 即不打开交互式shell</span>
+<span class="c1"># -f, run in bg</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="apache-access-control">Apache Access Control</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt install phpmyadmin php-mbstring php-gettext
+sudo phpenmod mbstring
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="basic-auth-1">Basic Auth</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-apache" data-lang="apache"><span class="c"># /etc/apache2/conf-available/phpmyadmin.conf</span>
+<span class="nt">&lt;Directory</span> <span class="s">/usr/share/phpmyadmin</span><span class="nt">&gt;</span>
+    <span class="nb">Options</span> FollowSymLinks
+    <span class="nb">DirectoryIndex</span> index.php
+    <span class="nb">AllowOverride</span> <span class="k">All</span> # enable .htaccess
+    . . .
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-apache" data-lang="apache"><span class="c"># /usr/share/phpmyadmin/.htaccess</span>
+
+<span class="nb">AuthType</span> Basic
+<span class="nb">AuthName</span> <span class="s2">&#34;Restricted Files&#34;</span>
+<span class="nb">AuthUserFile</span> <span class="sx">/etc/phpmyadmin/.htpasswd</span>
+<span class="c"># only authenticated users should be given access</span>
+<span class="nb">Require</span> valid-user
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># create .htaccess file</span>
+sudo htpasswd -c /etc/phpmyadmin/.htpasswd username
+
+<span class="c1"># add an additional user</span>
+sudo htpasswd /etc/phpmyadmin/.htpasswd additionaluser
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="file-access-control">File Access Control</h2>
+<p>禁止访问某些文件</p>
+<ul>
+<li><code>.md</code>、README、Changelog, etc</li>
+<li>setup, basic auth</li>
+<li>templates, libraies, setup/lib</li>
+</ul>
+<p>参考</p>
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/PhpMyAdmin">phpMyAdmin from archlinux wiki</a></li>
+<li>也可以参考Ubuntu中phpmyadmin包配置</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
+    <span class="kn">server_name</span> <span class="s">domain.tld</span><span class="p">;</span>
+    <span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span> <span class="s">http2</span><span class="p">;</span>
+    <span class="kn">listen</span> <span class="s">[::]:443</span> <span class="s">ssl</span> <span class="s">http2</span><span class="p">;</span>
+    <span class="kn">index</span> <span class="s">index.php</span><span class="p">;</span>
+    <span class="kn">access_log</span> <span class="s">/var/log/nginx/domain.tld.access.log</span><span class="p">;</span>
+    <span class="kn">error_log</span> <span class="s">/var/log/nginx/domain.tld.error.log</span><span class="p">;</span>
+
+    <span class="kn">root</span> <span class="s">/srv/http/domain.tld</span><span class="p">;</span>
+    <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+        <span class="kn">try_files</span> <span class="nv">$uri</span> <span class="nv">$uri/</span> <span class="p">=</span><span class="mi">404</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kn">location</span> <span class="s">/phpMyAdmin</span> <span class="p">{</span>
+        <span class="kn">root</span> <span class="s">/usr/share/webapps/phpMyAdmin</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Deny static files
+</span><span class="c1"></span>    <span class="kn">location</span> <span class="p">~</span> <span class="sr">^/phpMyAdmin/(README|LICENSE|ChangeLog|DCO)$</span> <span class="p">{</span>
+       <span class="kn">deny</span> <span class="s">all</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Deny .md files
+</span><span class="c1"></span>    <span class="kn">location</span> <span class="p">~</span> <span class="sr">^/phpMyAdmin/(.+\.md)$</span> <span class="p">{</span>
+      <span class="kn">deny</span> <span class="s">all</span><span class="p">;</span>
+   <span class="p">}</span>
+
+   <span class="c1"># Deny setup directories
+</span><span class="c1"></span>   <span class="kn">location</span> <span class="p">~</span> <span class="sr">^/phpMyAdmin/(doc|sql|setup)/</span> <span class="p">{</span>
+      <span class="kn">deny</span> <span class="s">all</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="kn">...</span>
+<span class="err">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>From Ubuntu 18.04</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-apache" data-lang="apache"><span class="c"># Authorize for setup</span>
+<span class="nt">&lt;Directory</span> <span class="s">/usr/share/phpmyadmin/setup</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;IfModule</span> <span class="s">mod_authz_core.c</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;IfModule</span> <span class="s">mod_authn_file.c</span><span class="nt">&gt;</span>
+            <span class="nb">AuthType</span> Basic
+            <span class="nb">AuthName</span> <span class="s2">&#34;phpMyAdmin Setup&#34;</span>
+            <span class="nb">AuthUserFile</span> <span class="sx">/etc/phpmyadmin/htpasswd.setup</span>
+        <span class="nt">&lt;/IfModule&gt;</span>
+        <span class="nb">Require</span> valid-user
+    <span class="nt">&lt;/IfModule&gt;</span>
+<span class="nt">&lt;/Directory&gt;</span>
+
+<span class="c"># Disallow web access to directories that don&#39;t need it</span>
+<span class="nt">&lt;Directory</span> <span class="s">/usr/share/phpmyadmin/templates</span><span class="nt">&gt;</span>
+    <span class="nb">Require</span> <span class="k">all</span> denied
+<span class="nt">&lt;/Directory&gt;</span>
+<span class="nt">&lt;Directory</span> <span class="s">/usr/share/phpmyadmin/libraries</span><span class="nt">&gt;</span>
+    <span class="nb">Require</span> <span class="k">all</span> denied
+<span class="nt">&lt;/Directory&gt;</span>
+<span class="nt">&lt;Directory</span> <span class="s">/usr/share/phpmyadmin/setup/lib</span><span class="nt">&gt;</span>
+    <span class="nb">Require</span> <span class="k">all</span> denied
+<span class="nt">&lt;/Directory&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="tips">Tips</h2>
+<h3 id="reset-password">Reset Password</h3>
+<p><a href="https://www.digitalocean.com/community/tutorials/how-to-reset-your-mysql-or-mariadb-root-password-on-ubuntu-18-04">How To Reset Your MySQL or MariaDB Root Password on Ubuntu 18.04</a></p>
+<h4 id="检查-root-登录">检查 root 登录</h4>
+<blockquote>
+<p>On fresh Ubuntu 18.04 installations, the default MySQL or MariaDB configuration usually allows you to access the database (with full administrative privileges) without providing a password as long as you make the connection from the system’s root account.</p>
+</blockquote>
+<p>默认情况下使用<code>root</code>账户（机器账户）是没有密码的，可以直接登录数据库。</p>
+<p>try <code>sudo mysql</code> before resetting the password for db access.</p>
+<p>prerequisite: account with sudo right. <code>sudo -v</code></p>
+<h4 id="stop-db-service">Stop db service</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># stop the db services</span>
+sudo systemctl stop mariadb
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="start-the-db-without-grant-table">Start the Db without grant table</h4>
+<p>Solution: running mysql withou permission checking, namely without loading the &ldquo;grant&rdquo; table. Then you can login in with root account without a passwd</p>
+<p>MariaDB only, disable loading grant table</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo systemctl set-environment <span class="nv">MYSQLD_OPTS</span><span class="o">=</span><span class="s2">&#34;--skip-grant-table --skip-networking&#34;</span>
+<span class="c1"># 其实也可以写到配置里</span>
+sudo systemctl start mariadb
+</code></pre></td></tr></table>
+</div>
+</div><p>MySQL only with <em>service overrides</em>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo systemctl edit mysql
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[Service]</span>
+<span class="c1"># clear the default value</span>
+<span class="na">ExecStart</span><span class="o">=</span>
+<span class="c1"># new</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/sbin/mysqld --daemonize --pid-file=/run/mysqld/mysqld.pid --skip-grant-tables --skip-networking</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># reload the new service def</span>
+sudo systemctl daemon-reload
+sudo systemctl start mysql
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="reset-password-1">Reset password</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo mysql -u root
+
+<span class="c1"># load the grant table after login into db, otherwise we&#39;re unable to execute commands altering data</span>
+flush privileges<span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>MariaDB doesn&rsquo;t use <code>authentication_string</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">UPDATE</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span> <span class="k">SET</span> <span class="n">password</span> <span class="o">=</span> <span class="n">PASSWORD</span><span class="p">(</span><span class="s1">&#39;new_password&#39;</span><span class="p">)</span> <span class="k">WHERE</span> <span class="k">user</span> <span class="o">=</span> <span class="s1">&#39;root&#39;</span><span class="p">;</span>
+
+<span class="o">#</span> <span class="k">in</span> <span class="k">case</span> <span class="n">you</span> <span class="n">changed</span> <span class="n">the</span> <span class="k">default</span> <span class="n">auth</span> <span class="n">mechanism</span>
+<span class="k">UPDATE</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span> <span class="k">SET</span> <span class="n">authentication_string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="k">WHERE</span> <span class="k">user</span> <span class="o">=</span> <span class="s1">&#39;root&#39;</span><span class="p">;</span>
+<span class="k">UPDATE</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span> <span class="k">SET</span> <span class="n">plugin</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="k">WHERE</span> <span class="k">user</span> <span class="o">=</span> <span class="s1">&#39;root&#39;</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>MySQL still use the auth string</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">UPDATE</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span> <span class="k">SET</span> <span class="n">authentication_string</span> <span class="o">=</span> <span class="n">PASSWORD</span><span class="p">(</span><span class="s1">&#39;new_password&#39;</span><span class="p">)</span> <span class="k">WHERE</span> <span class="k">user</span> <span class="o">=</span> <span class="s1">&#39;root&#39;</span><span class="p">;</span>
+<span class="k">UPDATE</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span> <span class="k">SET</span> <span class="n">plugin</span> <span class="o">=</span> <span class="s1">&#39;mysql_native_password&#39;</span> <span class="k">WHERE</span> <span class="k">user</span> <span class="o">=</span> <span class="s1">&#39;root&#39;</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="revert-systemd-changes">Revert systemd changes</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># for mariadb</span>
+sudo systemctl unset-environment MYSQLD_OPTS
+sudo systemctl restart mariadb
+
+<span class="c1"># for mysql</span>
+sudo systemctl revert mysql
+sudo systemctl daemon-reload
+sudo systemctl restart mysql
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">laggardkernel</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2018-03-30
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/mariadb/">mariadb</a>
+          <a href="/tags/mysql/">mysql</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2018/mysql-mariadb-option-groups/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">MariaDB/MySQL Option Groups</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/2018/mysql-crashcourse-03/">
+            <span class="next-text nav-default">MySQL必知必会：21-30</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'pseudocold';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/5101148" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/laggardkernel" class="iconfont icon-github" title="github"></a>
+  <a href="https://blog.pseudocold.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">laggardkernel</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Migrate from base Group Package to Meta Pkg in Archlinux - Home</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="laggardkernel" /><meta name="description" content="Package group &amp;ldquo;base&amp;rdquo; is replaced as meta package &amp;ldquo;base&amp;rdquo; on 2019-10-06. The biggest change introduced by this move is that the kernel pkg linux is not part of &amp;ldquo;base&amp;rdquo; anymore.
+" /><meta name="keywords" content="linux, archlinux, base" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.pseudocold.com/post/2019/migrate-from-base-pkg-group-to-meta-pkg-in-archlinux/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Migrate from base Group Package to Meta Pkg in Archlinux" />
+<meta property="og:description" content="Package group &ldquo;base&rdquo; is replaced as meta package &ldquo;base&rdquo; on 2019-10-06. The biggest change introduced by this move is that the kernel pkg linux is not part of &ldquo;base&rdquo; anymore." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pseudocold.com/post/2019/migrate-from-base-pkg-group-to-meta-pkg-in-archlinux/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-10-15T15:44:09&#43;08:00" />
+<meta property="article:modified_time" content="2019-10-15T15:44:09&#43;08:00" />
+
+<meta itemprop="name" content="Migrate from base Group Package to Meta Pkg in Archlinux">
+<meta itemprop="description" content="Package group &ldquo;base&rdquo; is replaced as meta package &ldquo;base&rdquo; on 2019-10-06. The biggest change introduced by this move is that the kernel pkg linux is not part of &ldquo;base&rdquo; anymore."><meta itemprop="datePublished" content="2019-10-15T15:44:09&#43;08:00" />
+<meta itemprop="dateModified" content="2019-10-15T15:44:09&#43;08:00" />
+<meta itemprop="wordCount" content="932">
+<meta itemprop="keywords" content="linux,archlinux," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Migrate from base Group Package to Meta Pkg in Archlinux"/>
+<meta name="twitter:description" content="Package group &ldquo;base&rdquo; is replaced as meta package &ldquo;base&rdquo; on 2019-10-06. The biggest change introduced by this move is that the kernel pkg linux is not part of &ldquo;base&rdquo; anymore."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Home</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Home</a>
+</div>
+
+<nav class="site-navbar">
+    
+      <div class="top-progress-bar"></div>
+    
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Migrate from base Group Package to Meta Pkg in Archlinux</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-10-15 </span>
+        <div class="post-category">
+            <a href="/categories/devops/"> DevOps </a>
+            </div>
+          <span class="more-meta"> 932 words </span>
+          <span class="more-meta"> 5 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#caveat-pertaining-to-pacstrap">Caveat pertaining to <code>pacstrap</code></a></li>
+    <li><a href="#difference-between-meta-package-and-package-group">Difference between meta package and package group</a></li>
+    <li><a href="#package-removed-from-meta-pkg-base">Package removed from meta pkg base</a></li>
+    <li><a href="#package-comparison">Package Comparison</a></li>
+    <li><a href="#convert-installed-packages-into-base-meta-package">Convert Installed Packages into base Meta Package</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Package group &ldquo;base&rdquo; is replaced as <a href="https://www.archlinux.org/news/base-group-replaced-by-mandatory-base-package-manual-intervention-required/">meta package &ldquo;base&rdquo; on 2019-10-06</a>. The biggest change introduced by this move is that the kernel pkg <code>linux</code> is not part of &ldquo;base&rdquo; anymore.</p>
+<h2 id="caveat-pertaining-to-pacstrap">Caveat pertaining to <code>pacstrap</code></h2>
+<p>For later archlinux installation, users have to specify the kernel explicitly. Otherwise, the system won&rsquo;t boot up.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># The new way to do pacstrap</span>
+pacstrap /mnt base linux linux-firmware
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="difference-between-meta-package-and-package-group">Difference between meta package and package group</h2>
+<p>Both of them provide similar functionality to enable multiple related packages to be installed or uninstalled simultaneously.</p>
+<blockquote>
+<ul>
+<li>
+<p>The advantage of a meta package, compared to a group, is that any new member packages will be installed when the meta package itself is updated with a new set of dependencies. This is in contrast to a group where new group members will not be automatically installed.</p>
+</li>
+<li>
+<p>The disadvantage of a meta package is that it is not as flexible as a group; you can choose which group members you wish to install but you cannot choose which meta package dependencies you wish to install.</p>
+</li>
+</ul>
+</blockquote>
+<p>Another difference is how they are defined.</p>
+<blockquote>
+<p>Groups and metapackages are a solutions to a similar problem, but technically they are very different:</p>
+<ul>
+<li>A group is a <strong>logical</strong> group of packages. When you install a group, each package that is contained in the group gets installed. Groups are a concept supported by your package manager</li>
+<li>A metapackage is an <strong>empty package</strong> (i.e. no files are installed) that depends on a bunch of packages. When a metapackage is installed, each dependency gets installed. This does not need special support from the package manager</li>
+</ul>
+</blockquote>
+<h2 id="package-removed-from-meta-pkg-base">Package removed from meta pkg base</h2>
+<p>In fact, it has nothing to with the difference between package group and meta package. The move is done on purpose to contain only the <strong>minimal package set</strong> defining a basic Arch Linux installation.</p>
+<p>Compared with package group &ldquo;base&rdquo;, some other pkgs have been remove from meta pkg &ldquo;base&rdquo; as well. Such as</p>
+<ul>
+<li><code>dhcpcd</code>, <code>netctl</code> (<code>systemd-network</code> is enough)</li>
+<li><code>inetutil</code> (<code>ftp</code>, etc)</li>
+<li><code>linux</code>, <code>linux-firmware</code></li>
+<li><code>logrotate</code></li>
+<li><code>man-db</code>, <code>man-pages</code></li>
+<li><code>nano</code>, <code>vi</code></li>
+<li><code>perl</code></li>
+<li>etc.</li>
+</ul>
+<p>You may wanna install some of them back manually.</p>
+<p>Update: the installation guide recommends some other packages installed during <code>pactrap</code>.</p>
+<ul>
+<li>userspace utilities for the management of <a href="https://wiki.archlinux.org/index.php/File_systems">file systems</a> that will be used on the system,</li>
+<li>utilities for accessing <a href="https://wiki.archlinux.org/index.php/RAID">RAID</a> or <a href="https://wiki.archlinux.org/index.php/LVM">LVM</a> partitions,</li>
+<li>specific firmware for other devices not included in <a href="https://www.archlinux.org/packages/?name=linux-firmware">linux-firmware</a>,</li>
+<li>software necessary for <a href="https://wiki.archlinux.org/index.php/Networking">networking</a>,</li>
+<li>a <a href="https://wiki.archlinux.org/index.php/Text_editor">text editor</a>,</li>
+<li>packages for accessing documentation in man and info pages: <code>man-db</code>, <code>man-pages</code> and <code>texinfo</code>.</li>
+</ul>
+<h2 id="package-comparison">Package Comparison</h2>
+<p>Packages exist in the group package but not in the meta package.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ comm -23 &lt;<span class="o">(</span>pacman -Sgq base <span class="p">|</span> sort<span class="o">)</span> &lt;<span class="o">(</span>expac -S <span class="s2">&#34;%D&#34;</span> base <span class="p">|</span> tr -s <span class="s2">&#34; &#34;</span> <span class="s2">&#34;\n&#34;</span> <span class="p">|</span> sort<span class="o">)</span>
+
+cryptsetup -- indirect dependency of base
+device-mapper -- indirect dependency of base
+dhcpcd
+diffutils
+e2fsprogs -- indirect dependency of base
+inetutils
+jfsutils
+less -- indirect dependency of base
+linux
+linux-firmware
+logrotate
+lvm2
+man-db
+man-pages
+mdadm
+nano
+netctl
+perl
+reiserfsprogs
+s-nail
+sysfsutils
+texinfo
+usbutils
+vi
+which
+xfsprogs
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="convert-installed-packages-into-base-meta-package">Convert Installed Packages into base Meta Package</h2>
+<p>Considering the old &ldquo;base&rdquo; package group may be remove in the future. We&rsquo;d better migrate to the new &ldquo;base&rdquo; meta package now.</p>
+<p>First, install the meta package with <code>sudo pacman -S base</code>.</p>
+<p>Then, we need move the package out of package group &ldquo;base&rdquo; by modifying the local pkg info files <code>/var/lib/pacman/&lt;pkg-name&gt;/desc</code>.</p>
+<p>A package is defined as a part of a package by following content within this description files,</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">%GROUPS%
+base
+base-devel
+</code></pre></td></tr></table>
+</div>
+</div><p>So all we need to do is to remove the line &ldquo;base&rdquo; from the description of that package.</p>
+<p>Before removing the content, check the content to be removed with its context.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash
+</span><span class="cp"></span><span class="k">for</span> item in /var/lib/pacman/local/*/desc<span class="p">;</span> <span class="k">do</span>
+  <span class="k">if</span> grep -q -E <span class="s1">&#39;^base$&#39;</span> <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">&#34;</span>
+    grep -C1 -E <span class="s1">&#39;^base$&#39;</span> <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">&#34;</span>
+  <span class="k">fi</span>
+<span class="k">done</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>You may also compare the output list with <code>pacman -Qg base</code>.</p>
+<p>If the script match exactly what we want, then remove the &ldquo;base&rdquo; group info with <code>sed</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash
+</span><span class="cp"></span><span class="k">for</span> item in /var/lib/pacman/local/*/desc<span class="p">;</span> <span class="k">do</span>
+  <span class="k">if</span> grep -q -E <span class="s1">&#39;^base$&#39;</span> <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">&#34;</span>
+    <span class="c1"># grep -C1 -E &#39;^base$&#39; &#34;$item&#34;</span>
+    sudo sed -i <span class="s1">&#39;s/^base$//&#39;</span> <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">&#34;</span>
+  <span class="k">fi</span>
+<span class="k">done</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>After moving all the packages out of the base group, mark the related packages as dependencies of the &ldquo;base&rdquo; meta package.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># use expac to extract packages included in the &#34;base&#34; meta pkg</span>
+sudo pacman -S expac
+expac -S <span class="s2">&#34;%D&#34;</span> base
+
+<span class="c1"># mark these pkgs as dependencies</span>
+sudo pacman -D --asdeps <span class="k">$(</span>expac -S <span class="s2">&#34;%D&#34;</span> base<span class="k">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>In the former part, we listed the unique packages within &ldquo;base&rdquo; group. Check the list and decide what to do with them.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># Mark the indirect dependencies</span>
+sudo pacman -D --asdeps cryptsetup device-mapper e2fsprogs less
+
+<span class="c1"># if you don&#39;t use LVM or RAID</span>
+sudo pacman -Rs lvm2 mdadm
+
+<span class="c1"># Remove user space utilities for filesystems you don&#39;t use, check the list here.</span>
+<span class="c1"># https://wiki.archlinux.org/index.php/File_systems</span>
+<span class="c1"># For me, I only need &#34;e2fsprogs&#34; for ext4</span>
+sudo pacman -Rs jfsutils reiserfsprogs xfsprogs
+
+<span class="c1"># Remove text editors (nano and vi) you don&#39;t need.</span>
+<span class="c1"># I have vim installed. So</span>
+sudo pacman -Rs nano vi
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="references">References</h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/Meta_package_and_package_group">Meta package and package group from <em>archlinux wiki</em></a></li>
+<li><a href="https://unix.stackexchange.com/a/477301/246718">How do you list installed meta packages on Arch Linux?</a></li>
+<li><a href="https://www.archlinux.org/groups/x86_64/base/">Group details - base</a></li>
+<li><a href="https://www.archlinux.org/packages/core/any/base/">Dependencies - base</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Talk:Installation_guide#pacstrap_suggested_packages">Changes for the base package</a></li>
+</ul>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">laggardkernel</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-10-15
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/linux/">linux</a>
+          <a href="/tags/archlinux/">archlinux</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2019/size-of-xdg-runtime-dir/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Size of XDG Runtime Dir</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/2019/pip-vs-conda/">
+            <span class="next-text nav-default">Pip v.s. Conda</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'pseudocold';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/5101148" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/laggardkernel" class="iconfont icon-github" title="github"></a>
+  <a href="https://blog.pseudocold.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">laggardkernel</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

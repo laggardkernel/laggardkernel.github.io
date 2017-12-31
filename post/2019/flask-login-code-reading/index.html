@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Flask-Login 源码阅读笔记 - Home</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="laggardkernel" /><meta name="description" content="flask-login 源码阅读个人笔记， 不做解读。
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.pseudocold.com/post/2019/flask-login-code-reading/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Flask-Login 源码阅读笔记" />
+<meta property="og:description" content="flask-login 源码阅读个人笔记， 不做解读。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pseudocold.com/post/2019/flask-login-code-reading/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-08-02T02:04:13&#43;08:00" />
+<meta property="article:modified_time" content="2019-08-02T02:04:13&#43;08:00" />
+
+<meta itemprop="name" content="Flask-Login 源码阅读笔记">
+<meta itemprop="description" content="flask-login 源码阅读个人笔记， 不做解读。"><meta itemprop="datePublished" content="2019-08-02T02:04:13&#43;08:00" />
+<meta itemprop="dateModified" content="2019-08-02T02:04:13&#43;08:00" />
+<meta itemprop="wordCount" content="2257">
+<meta itemprop="keywords" content="flask," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Flask-Login 源码阅读笔记"/>
+<meta name="twitter:description" content="flask-login 源码阅读个人笔记， 不做解读。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Home</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Home</a>
+</div>
+
+<nav class="site-navbar">
+    
+      <div class="top-progress-bar"></div>
+    
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Flask-Login 源码阅读笔记</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-08-02 </span>
+        <div class="post-category">
+            <a href="/categories/code-reading/"> Code Reading </a>
+            </div>
+          <span class="more-meta"> 2257 words </span>
+          <span class="more-meta"> 5 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#references">References</a></li>
+    <li><a href="#current_user-from-utilspy">current_user from utils.py</a></li>
+    <li><a href="#utilspy">utils.py</a></li>
+    <li><a href="#mixinspy">mixins.py</a></li>
+    <li><a href="#login_managerpy">login_manager.py</a></li>
+    <li><a href="#流程梳理">流程梳理</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><code>flask-login</code> 源码阅读个人笔记， 不做解读。</p>
+<p>version: 0.4.1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">flask_login
+├── __about__.py
+├── __init__.py
+├── _compat.py
+├── config.py
+├── login_manager.py
+├── mixins.py
+├── signals.py
+└── utils.py
+</code></pre></td></tr></table>
+</div>
+</div><p>TODO</p>
+<ul>
+<li><input disabled="" type="checkbox"> Flask-Login 通过 session 记录登录状态，阅读完 Flask 源码后再次梳理此插件源码</li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://flask-login.readthedocs.io/en/latest/">flask-login doc</a></li>
+</ul>
+<h2 id="current_user-from-utilspy">current_user from utils.py</h2>
+<p><code>current_user</code> is a <code>LocalProxy</code>(from werkzeug) instance. <strong>important</strong></p>
+<p>calls <code>utils._get_user()</code>, which get user obj from <code>_request_ctx_stack.top.user</code>. When <code>_request_ctx_stack.top.user</code> is not set. Set it with <code>LoginManager._load_user()</code>.</p>
+<p><code>LoginManager._load_user()</code></p>
+<ul>
+<li>update session fresheness according session freshness mode (basic, or strong)</li>
+<li>if &lsquo;user_id&rsquo; is missing from <code>session</code>, load user obj into <code>_request_ctx_stack.top.user</code> from cookies, or from request, or from header.</li>
+<li>if &lsquo;user_id&rsquo; is set in <code>session</code>, load user obj from <code>session['user_id']</code> by calling <code>reload_user</code></li>
+</ul>
+<h2 id="utilspy">utils.py</h2>
+<p><code>current_user</code> is a <code>LocalProxy</code>(from werkzeug) instance. <strong>important</strong></p>
+<p><code>werkzeug.security.safe_str_cmp</code></p>
+<blockquote>
+<p>This function compares strings in somewhat <strong>constant time</strong>. This requires that the length of at least one string is known in advance.</p>
+</blockquote>
+<p><code>login_user()</code></p>
+<ul>
+<li>记录user_id等信息到session</li>
+<li>用户对象存储在<code>_request_ctx_stack.top.user</code>.</li>
+<li>发送用户登录信号</li>
+</ul>
+<p><code>logout_user</code>，与以上相反</p>
+<ul>
+<li>自session pop出登录信息</li>
+<li><code>LoginManager.reload_user()</code>重新登录用户，此处结果为修改<code>_request_ctx_stack.top.user</code>为匿名用户实例</li>
+</ul>
+<p><code>confirm_login</code>，set session status as &ldquo;fresh&rdquo;. Sessions become stale when they&rsquo;re loaded from a cookie.</p>
+<ul>
+<li><code>session['_fresh'] = True</code></li>
+</ul>
+<p>decorators</p>
+<ul>
+<li><code>login_required</code>, <code>current_user.is_authenticated</code> or not
+<ul>
+<li>could be disabled by <code>LOGIN_DISABLED</code> config</li>
+</ul>
+</li>
+<li><code>fresh_login_required</code>, check if user is <code>.is_authenticated</code> and session fresh</li>
+</ul>
+<p>inner use methods</p>
+<ul>
+<li><code>_cookie_digest</code>: <code>return hmac.new(key, payload.encode('utf-8'), sha512).hexdigest()</code>, generated with <code>SECRET_KEY</code>.</li>
+<li><code>_create_identifier</code>, create user identifier with their <code>User-Agent</code> and ip address (<code>X-Forwarded-For</code>). return hexdigest generated by <code>sha512()</code></li>
+</ul>
+<h2 id="mixinspy">mixins.py</h2>
+<p><code>UserMixin</code> with attr</p>
+<ul>
+<li><code>is_active</code>, True</li>
+<li><code>is_authenticated</code>, True</li>
+<li><code>is_anonymous</code>, False</li>
+<li><code>get_id()</code>, return <code>id</code> of the model instance</li>
+</ul>
+<p><code>AnonymousUserMixin</code></p>
+<h2 id="login_managerpy">login_manager.py</h2>
+<p><code>LoginManager</code></p>
+<p>不建议定义本地化字符串回调函数，还要自己实现（检测用于语言偏好，返回对应提示信息），直接使用现成工具，Flask-Babel。术业有专攻。而且，多语言支持都是站点级别的多语言支持，只实现登录提示信息的多语言支持没有意义。</p>
+<p>一般没必要使用refresh，即跳转页面让用户重新授权，标记session为&quot;fresh&quot;。如果是论坛，恐怕只需要在修改密码时要求已登录用户再次验证（输入密码），直接在对应页面表单中要求填写密码即可。如果类似再验证需求较多时，再考虑分离验证到refresh。</p>
+<p>attrs</p>
+<ul>
+<li><code>blueprint_login_views</code>, dict stores login views/functions for blueprints.</li>
+<li><code>.user_callback</code>, custom func used to get user obj. default None (not enabled).</li>
+<li><code>unauthorized_callback</code>, custom callback/error handler, not enabled by default.</li>
+<li><code>._session_identifier_generator</code>, <code>utils._create_identifier()</code></li>
+</ul>
+<p>methods</p>
+<ul>
+<li><code>init_app()</code>
+<ul>
+<li>bind LoginManger instance to <code>app.login_manager</code></li>
+<li>call <code>_update_remember_cookie</code> after each request</li>
+<li>inject <code>current_user</code> (<code>LocalProxy</code>) into context.</li>
+</ul>
+</li>
+<li><code>unathorized()</code>, handler for views requires auth
+<ul>
+<li>send signal</li>
+<li>get login_view (for app, or for a blueprint)</li>
+<li>flash a login message (inform the user to login before current action)</li>
+<li><code>make_login_url</code>, get url from login_view string</li>
+<li>redirect user to the login url</li>
+</ul>
+</li>
+<li><code>needs_refresh()</code>，跳转到重新验证（密码验证）页面，流程与上面类似。一般用不到。</li>
+<li><code>reload_user()</code>，刷新请求上下文的栈顶中的用户对象（此处存储的即为<code>current_user</code>）
+<ul>
+<li>据<code>session['user_id']</code>获取用户对象</li>
+<li>重新设置<code>_request_ctx_stack.top.user</code>存储的用户实例，未登录时设置为<code>AnonymouseUserMixin</code>实例</li>
+</ul>
+</li>
+</ul>
+<p>helpers</p>
+<ul>
+<li><code>user_loader</code>, set callback to load user from the session. takes an user ID (unicode) returns an user object. 通过装饰器注册用户实例加载函数。在<code>reload_user()</code>中调用注册的回调函数。</li>
+<li><code>header_loader</code>, set callback to load user from a header value (take an auth token). deprecated</li>
+<li><code>request_loader</code>, set callback to loader user from a Flask request</li>
+<li><code>unauthorized_handler</code>, set handler used by <code>login_required</code> decorator, takes no arguments. returns a response.</li>
+<li><code>needs_refresh_handler</code>, set handler used by <code>fresh_login_required</code> decorator, takes no argument. returns a response.</li>
+</ul>
+<p><code>_load_user()</code>: <code>.login_required</code>装饰器检查<code>current_user.is_authenticated</code>属性。而<code>current_user</code>通过<code>LoginManager._load_user()</code>依次检查</p>
+<ol>
+<li>cookie name <code>REMEMBER_COOKIE_NAME</code> 是否存在于cookies中。<code>LoginManager._load_from_cookie</code>从cookies中获得<code>user_id</code>，调用<code>LoginManager.user_callback</code>加载用户对象到<code>_request_ctx_stack.top.user</code></li>
+<li><code>self.request_callback</code>函数存在，<code>LoginManager._load_from_request</code>调用此回调函数，加载用户对象</li>
+<li><code>AUTH_HEADER_NAME</code> 键存在于 <code>request.haeders</code>时，调用<code>LoginManager._load_from_header</code></li>
+</ol>
+<p>inner used methods</p>
+<ul>
+<li><code>_load_user()</code>, <strong>important</strong>, <strong>used when retrieving <code>current_user</code></strong>.
+<ul>
+<li>Loads user from session or remember_me cookie as applicable</li>
+<li>call <code>_session_protection</code>, update session freshness according to session mode (basic or strong), update &lsquo;_fresh&rsquo; or &lsquo;remember&rsquo; in session.</li>
+<li><code>reload_user</code> if needed (may required by session freshness change)</li>
+<li>if &lsquo;user_id&rsquo; is missing from <code>session</code>, load user obj into <code>_request_ctx_stack.top.user</code> with
+<ul>
+<li><code>_load_from_cookie</code>, or fallbacks to</li>
+<li><code>_load_from_request</code>, or fallbacks to</li>
+<li><code>_load_from_header</code></li>
+</ul>
+</li>
+<li>else, load user obj from <code>session['user_id']</code> by calling <code>reload_user</code></li>
+</ul>
+</li>
+<li><code>_update_remember_cookie</code>, <strong>important</strong>, <strong>called after each request</strong>. Check &lsquo;remember&rsquo; in session and refresh login status (cookies on the client about login duration info).
+<ul>
+<li><code>_set_cookie</code>, used to update login expiration after each request. 调用<code>utils.encode_cookie</code>, 实际为基于<code>SECRET_KEY</code>的hmac摘要。</li>
+</ul>
+</li>
+<li><code>_clear_cookie</code>, clear cookies about login info (duration/expiration info)</li>
+</ul>
+<h2 id="流程梳理">流程梳理</h2>
+<p><code>current_user</code>，在<code>utils.py</code>中可见，current为一个<code>LocalProxy</code>，通过<code>utils._get_user()</code>加载其到当地代理。</p>
+<p><code>utils._get_user</code>被调用时，先尝试检测<code>_request_ctx_stack_top.user</code>，若不存在，则调用<code>LoginManager._load_user()</code>检测session，若失效，<code>reload_user</code>被调用自session中查找user_id，加载用户，或加载返回一个匿名用户实例。</p>
+<p>在<code>LoginManager</code>实例初始化<code>.init_app()</code>时，通过调用<code>app.context(utils._user_context_processor)</code>。将<code>current_user</code>注册到上下文中，全局可用。</p>
+<p>用户实例或者继承自<code>UserMixin</code>，或者为匿名用户。多出了一些登录相关属性:</p>
+<ul>
+<li><code>is_authenticated</code></li>
+<li><code>is_active</code></li>
+<li><code>is_anonymous</code></li>
+<li><code>get_id()</code></li>
+</ul>
+<p><code>utils.login_required</code>装饰路由：检测是否认证登录<code>current_user.is_authenticated</code>。若未认证，触发<code>LoginManager.unauthorized()</code>，根据<code>.login_view</code>跳转至登录URL进行认证，且会调用<code>flash()</code>生成认证消息提示。（通常，认证路由调用<code>login_user</code>登录用户，其实为记录用户id到session，装载用户实例到<code>_request_ctx_stack.top.user</code>）</p>
+<p>期间还涉及session新鲜度，以及session强度等问题。由于此处只是流程梳理，不做详细解释。</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">laggardkernel</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-08-02
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/flask/">flask</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2019/flask-uploads-code-reading/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Flask-Uploads 源码阅读笔记</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/2019/flask-wtf-code-reading/">
+            <span class="next-text nav-default">Flask-WTF 源码阅读笔记</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'pseudocold';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/5101148" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/laggardkernel" class="iconfont icon-github" title="github"></a>
+  <a href="https://blog.pseudocold.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">laggardkernel</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

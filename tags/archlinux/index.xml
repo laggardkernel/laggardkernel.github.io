@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>archlinux on Home</title>
+    <link>https://blog.pseudocold.com/tags/archlinux/</link>
+    <description>Recent content in archlinux on Home</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 15 Oct 2019 17:19:31 +0800</lastBuildDate><atom:link href="https://blog.pseudocold.com/tags/archlinux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Setup DHCP Client with systemd-networkd</title>
+      <link>https://blog.pseudocold.com/post/2019/setup-dhcp-systemd-networkd/</link>
+      <pubDate>Tue, 15 Oct 2019 17:19:31 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/setup-dhcp-systemd-networkd/</guid>
+      <description>&lt;p&gt;Former package group &amp;ldquo;base&amp;rdquo; from Archlinux contains 2 network managers - &lt;code&gt;netctl&lt;/code&gt; and &lt;code&gt;systemd-networkd&lt;/code&gt;, and 1 DHCP client &lt;code&gt;dhcpcd&lt;/code&gt;, which is obviously redundant for a network setup. After &lt;a href=&#34;https://blog.pseudocold.com/post/2019/base-group-replaced-by-mandatory-base-package-in-archlinux&#34;&gt;pkg group &amp;ldquo;base&amp;rdquo; replaced by the same name meta pkg&lt;/a&gt;, only &lt;code&gt;systemd-networkd&lt;/code&gt; is left. For a simple network setup with DHCP, &lt;code&gt;systemd-networkd&lt;/code&gt; is enough to get the work done.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Migrate from base Group Package to Meta Pkg in Archlinux</title>
+      <link>https://blog.pseudocold.com/post/2019/migrate-from-base-pkg-group-to-meta-pkg-in-archlinux/</link>
+      <pubDate>Tue, 15 Oct 2019 15:44:09 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/migrate-from-base-pkg-group-to-meta-pkg-in-archlinux/</guid>
+      <description>&lt;p&gt;Package group &amp;ldquo;base&amp;rdquo; is replaced as &lt;a href=&#34;https://www.archlinux.org/news/base-group-replaced-by-mandatory-base-package-manual-intervention-required/&#34;&gt;meta package &amp;ldquo;base&amp;rdquo; on 2019-10-06&lt;/a&gt;. The biggest change introduced by this move is that the kernel pkg &lt;code&gt;linux&lt;/code&gt; is not part of &amp;ldquo;base&amp;rdquo; anymore.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Downgrade Packages in Arch</title>
+      <link>https://blog.pseudocold.com/post/2019/arch-pkg-downgrade/</link>
+      <pubDate>Sat, 02 Feb 2019 14:54:27 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/arch-pkg-downgrade/</guid>
+      <description>&lt;p&gt;Downgrade packages in Arch.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Pacman Notes</title>
+      <link>https://blog.pseudocold.com/post/2019/pacman-notes/</link>
+      <pubDate>Fri, 01 Feb 2019 22:19:22 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/pacman-notes/</guid>
+      <description>&lt;p&gt;&lt;code&gt;pacman&lt;/code&gt; 使用速查，，个人笔记，非入门教程。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

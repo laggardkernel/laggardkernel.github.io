@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Flask on Home</title>
+    <link>https://blog.pseudocold.com/categories/flask/</link>
+    <description>Recent content in Flask on Home</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 12 Sep 2019 22:37:35 +0800</lastBuildDate><atom:link href="https://blog.pseudocold.com/categories/flask/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Flask Pitfalls</title>
+      <link>https://blog.pseudocold.com/post/2019/flask-pitfalls/</link>
+      <pubDate>Thu, 12 Sep 2019 22:37:35 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/flask-pitfalls/</guid>
+      <description>&lt;p&gt;尝试总结 Flask 开发中一些碰到的问题，有待完善。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>为何 Flask-Mail 需要上下文环境</title>
+      <link>https://blog.pseudocold.com/post/2019/flask-mail/</link>
+      <pubDate>Fri, 09 Aug 2019 11:09:58 +0800</pubDate>
+      
+      <guid>https://blog.pseudocold.com/post/2019/flask-mail/</guid>
+      <description>&lt;p&gt;Flask-Mail 扩展源码内容实际和 Flask 关系不大，主要是封装 Python 内置 &lt;code&gt;email&lt;/code&gt; 库来发送邮件。我的第一直觉是跳过这个模块源码。不过，这时候我突然想到一个问题，Flask-Mail 发送邮件为什么需要应用上下文？每个教程都这么告诉我，但却没有解释过原因。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

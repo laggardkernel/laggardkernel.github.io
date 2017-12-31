@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>强制 MacBook Touchbar显示为 Function Key 功能键 - Home</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="laggardkernel" /><meta name="description" content="Touchbar 上不能默认显示功能键，苹果只给出单独设置某个应用默认为功能键的方案，参考如何在配备 Multi-Touch Bar 的 MacBook Pro 上使用功能键。但实际上存在隐藏配置项，可以将功能键作为默认显示。
+" /><meta name="keywords" content="macos, touchbar, defaults" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.pseudocold.com/post/2018/function-key-in-touchbar/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="强制 MacBook Touchbar显示为 Function Key 功能键" />
+<meta property="og:description" content="Touchbar 上不能默认显示功能键，苹果只给出单独设置某个应用默认为功能键的方案，参考如何在配备 Multi-Touch Bar 的 MacBook Pro 上使用功能键。但实际上存在隐藏配置项，可以将功能键作为默认显示。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pseudocold.com/post/2018/function-key-in-touchbar/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-02-09T08:49:54&#43;08:00" />
+<meta property="article:modified_time" content="2019-02-09T08:49:54&#43;08:00" />
+
+<meta itemprop="name" content="强制 MacBook Touchbar显示为 Function Key 功能键">
+<meta itemprop="description" content="Touchbar 上不能默认显示功能键，苹果只给出单独设置某个应用默认为功能键的方案，参考如何在配备 Multi-Touch Bar 的 MacBook Pro 上使用功能键。但实际上存在隐藏配置项，可以将功能键作为默认显示。"><meta itemprop="datePublished" content="2018-02-09T08:49:54&#43;08:00" />
+<meta itemprop="dateModified" content="2019-02-09T08:49:54&#43;08:00" />
+<meta itemprop="wordCount" content="830">
+<meta itemprop="keywords" content="macos,touchbar,defaults," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="强制 MacBook Touchbar显示为 Function Key 功能键"/>
+<meta name="twitter:description" content="Touchbar 上不能默认显示功能键，苹果只给出单独设置某个应用默认为功能键的方案，参考如何在配备 Multi-Touch Bar 的 MacBook Pro 上使用功能键。但实际上存在隐藏配置项，可以将功能键作为默认显示。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Home</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Home</a>
+</div>
+
+<nav class="site-navbar">
+    
+      <div class="top-progress-bar"></div>
+    
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">强制 MacBook Touchbar显示为 Function Key 功能键</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-02-09 </span>
+        <div class="post-category">
+            <a href="/categories/gui/"> gui </a>
+            </div>
+          <span class="more-meta"> 830 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#touchbar-隐藏设置项">TouchBar 隐藏设置项</a></li>
+    <li><a href="#defaults-命令设置-touch-bar-默认显示为功能键-f1-f12">defaults 命令设置 Touch Bar 默认显示为功能键 F1-F12</a></li>
+    <li><a href="#检查应用对应的-bundle-id">检查应用对应的 bundle id</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Touchbar 上不能默认显示功能键，苹果只给出单独设置某个应用默认为功能键的方案，参考<a href="https://support.apple.com/zh-cn/HT207240">如何在配备 Multi-Touch Bar 的 MacBook Pro 上使用功能键</a>。但实际上存在隐藏配置项，可以将功能键作为默认显示。</p>
+<p>更新：貌似 macOS 10.13 将此隐藏项放到了系统设置中。也就是说，此项不再隐藏。本文唯一意义是实现此更改的完全命令行操作。</p>
+<hr>
+<h2 id="touchbar-隐藏设置项">TouchBar 隐藏设置项</h2>
+<p>思路来源自<a href="https://www.reddit.com/r/Minecraft/comments/5klnro/playing_on_a_new_2016_touch_bar_macbook_pro_fkeys/">此 reddit 提问</a>，提问者需要添加 JDK 为默认显示功能键，有回答者给出了 <code>defaults</code> 命令修改 <code>com.apple.touchbar.agent</code> domain，直接添加 JDK 绝对位置。（因为 JDK 没有安装到 <code>/Applications</code> 下，“键盘设置&ndash;快捷键&ndash;功能键”无法添加此应用。</p>
+<p>首先在 &ldquo;System Settings - Keyboard&rdquo; 更改 &ldquo;Touch Bar show&rdquo;, &ldquo;Press Fn key to&rdquo;，以及 &ldquo;System Settings - Keyboard - Shortcuts&rdquo; 中更改 &ldquo;Function Keys&rdquo; 项。这样的话，<code>com.apple.touchbar.agent</code> 域中值将发生变化。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">❯ defaults <span class="nb">read</span> com.apple.touchbar.agent
+<span class="o">{</span>
+    <span class="nv">PresentationModeFnModes</span> <span class="o">=</span>     <span class="o">{</span>
+        <span class="nv">appWithControlStrip</span> <span class="o">=</span> functionKeys<span class="p">;</span>
+    <span class="o">}</span><span class="p">;</span>
+    <span class="nv">PresentationModeGlobal</span> <span class="o">=</span> fullControlStrip<span class="p">;</span>
+    <span class="nv">PresentationModePerApp</span> <span class="o">=</span>     <span class="o">{</span>
+        <span class="s2">&#34;com.binarynights.ForkLift-3&#34;</span> <span class="o">=</span> functionKeys<span class="p">;</span>
+        <span class="s2">&#34;com.microsoft.VSCode&#34;</span> <span class="o">=</span> functionKeys<span class="p">;</span>
+        <span class="s2">&#34;com.sublimetext.3&#34;</span> <span class="o">=</span> functionKeys<span class="p">;</span>
+    <span class="o">}</span><span class="p">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>通过输出 <code>com.apple.touchbar.agent</code> 中值，可以很容易推测出它们与 &ldquo;System Settings&rdquo; 设置的对应关系。</p>
+<table>
+<thead>
+<tr>
+<th>System Settings - Keyboard</th>
+<th><code>com.apple.touchbar.agent</code></th>
+<th>Available values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Touch Bar show</td>
+<td><code>PresentationModeGlobal</code></td>
+<td><code>appWithControlStrip</code>(default), <code>app</code>, <code>fullControlStrip</code>, functionKeys</td>
+</tr>
+<tr>
+<td>Press Fn key to</td>
+<td><code>PresentationModeFnModes</code></td>
+<td>same with above.</td>
+</tr>
+<tr>
+<td>Shortcuts - Function Keys</td>
+<td><code>PresentationModePerApp</code></td>
+<td>same with above.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="defaults-命令设置-touch-bar-默认显示为功能键-f1-f12">defaults 命令设置 Touch Bar 默认显示为功能键 F1-F12</h2>
+<p>问题就在于 &ldquo;Touch Bar show&rdquo; 没有给出对应 <code>functionKeys</code> 的下拉选项。所以，直接通过命令行修改接口达成目的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 默认显示功能键</span>
+defaults write com.apple.touchbar.agent PresentationModeGlobal functionKeys <span class="se">\
+</span><span class="se"></span>  <span class="o">&amp;&amp;</span> defaults write com.apple.touchbar.agent PresentationModeFnModes <span class="o">{}</span>
+
+<span class="c1"># 默认显示功能键，Fn 按下后依然显示功能键</span>
+defaults write com.apple.touchbar.agent PresentationModeGlobal functionKeys <span class="se">\
+</span><span class="se"></span>  <span class="o">&amp;&amp;</span> defaults write com.apple.touchbar.agent PresentationModeFnModes <span class="o">{}</span> <span class="se">\
+</span><span class="se"></span>  <span class="o">&amp;&amp;</span> defaults write com.apple.touchbar.agent PresentationModeFnModes -dict-add functionKeys functionKeys
+
+<span class="c1"># 重启TouchBarServer，使其重新读取配置</span>
+sudo killall TouchBarServer
+</code></pre></td></tr></table>
+</div>
+</div><p>另外，直接注意的是，<code>PresentationModePerApp</code> 没有其对应项，也就是目前没有为某个应用单独设置<!-- raw HTML omitted -->Fn<!-- raw HTML omitted -->按下时 TouchBar 显示内容。<!-- raw HTML omitted -->Fn<!-- raw HTML omitted -->按下时 TouchBar 显示内容只存在一个全局设置项。</p>
+<p>其他一些 <code>defaults</code> 命令用法示例。（有些没有实际意义，仅作为命令使用的参考）。更多参考 <code>man defaults</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">defaults <span class="nb">read</span> com.apple.touchbar.agent
+
+defaults write com.apple.touchbar.agent PresentationModeGlobal appWithControlStrip<span class="o">(</span>default<span class="o">)</span><span class="p">|</span>app<span class="p">|</span>fullControlStrip<span class="p">|</span>functionKeys
+
+defaults write com.apple.touchbar.agent PresentationModeFnModes <span class="o">{}</span>
+
+defaults write com.apple.touchbar.agent PresentationModeFnModes -dict-add key value
+
+defaults write com.apple.touchbar.agent PresentationModeGlobal functionKeys <span class="se">\
+</span><span class="se"></span>  <span class="o">&amp;&amp;</span> defaults write com.apple.touchbar.agent PresentationModeFnModes <span class="o">{}</span>
+
+defaults write com.apple.touchbar.agent PresentationModeGlobal functionKeys <span class="se">\
+</span><span class="se"></span>  <span class="o">&amp;&amp;</span> defaults write com.apple.touchbar.agent PresentationModeFnModes <span class="o">{}</span> <span class="se">\
+</span><span class="se"></span>  <span class="o">&amp;&amp;</span> defaults write com.apple.touchbar.agent PresentationModeFnModes -dict-add functionKeys functionKeys
+
+defaults delete com.apple.touchbar.agent PresentationModeGlobal
+
+defaults write com.apple.touchbar.agent PresentationModeFnModes <span class="o">{}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="检查应用对应的-bundle-id">检查应用对应的 bundle id</h2>
+<p><a href="https://stackoverflow.com/a/39464824/5101148"><em>How to get Bundle ID of Mac application?</em> from StackOverflow</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">osascript -e <span class="s1">&#39;id of app &#34;SomeApp&#34;&#39;</span>
+
+<span class="c1"># or</span>
+mdls -name kMDItemCFBundleIdentifier -r SomeApp.app
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">laggardkernel</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-02-09
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/macos/">macos</a>
+          <a href="/tags/touchbar/">touchbar</a>
+          <a href="/tags/defaults/">defaults</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2018/mysql-crashcourse-01/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">MySQL必知必会：01-10</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'pseudocold';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/5101148" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/laggardkernel" class="iconfont icon-github" title="github"></a>
+  <a href="https://blog.pseudocold.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">laggardkernel</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Flask-Uploads 源码阅读笔记 - Home</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="laggardkernel" /><meta name="description" content="flask-uploads 源码阅读个人笔记， 不做解读。
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.pseudocold.com/post/2019/flask-uploads-code-reading/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.37e88f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Flask-Uploads 源码阅读笔记" />
+<meta property="og:description" content="flask-uploads 源码阅读个人笔记， 不做解读。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.pseudocold.com/post/2019/flask-uploads-code-reading/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-08-04T12:15:28&#43;08:00" />
+<meta property="article:modified_time" content="2019-08-04T12:15:28&#43;08:00" />
+
+<meta itemprop="name" content="Flask-Uploads 源码阅读笔记">
+<meta itemprop="description" content="flask-uploads 源码阅读个人笔记， 不做解读。"><meta itemprop="datePublished" content="2019-08-04T12:15:28&#43;08:00" />
+<meta itemprop="dateModified" content="2019-08-04T12:15:28&#43;08:00" />
+<meta itemprop="wordCount" content="1665">
+<meta itemprop="keywords" content="flask," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Flask-Uploads 源码阅读笔记"/>
+<meta name="twitter:description" content="flask-uploads 源码阅读个人笔记， 不做解读。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Home</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Home</a>
+</div>
+
+<nav class="site-navbar">
+    
+      <div class="top-progress-bar"></div>
+    
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Flask-Uploads 源码阅读笔记</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-08-04 </span>
+        <div class="post-category">
+            <a href="/categories/code-reading/"> Code Reading </a>
+            </div>
+          <span class="more-meta"> 1665 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#总结">总结</a>
+      <ul>
+        <li><a href="#基于mime过滤上传文件">基于MIME过滤上传文件</a></li>
+        <li><a href="#文件存储名">文件存储名</a></li>
+        <li><a href="#配置说明">配置说明</a></li>
+      </ul>
+    </li>
+    <li><a href="#flask_uploadspy">flask_uploads.py</a>
+      <ul>
+        <li><a href="#patch_request_class-限制文件大小">patch_request_class() 限制文件大小</a></li>
+        <li><a href="#_uploads-蓝图">_uploads 蓝图</a></li>
+        <li><a href="#configure_uploads-配置上传组">configure_uploads() 配置上传组</a></li>
+        <li><a href="#uploadset-类">UploadSet 类</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><code>flask-uploads</code> 源码阅读个人笔记， 不做解读。</p>
+<p>References</p>
+<ul>
+<li><a href="https://github.com/maxcountryman/flask-uploads">flask-uploads source</a></li>
+<li><a href="https://pythonhosted.org/Flask-Uploads/">flask-uploads doc</a></li>
+</ul>
+<p>0.2.0，貌似一直没有更新。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">flask-uploads
+├── docs
+├── example
+│   ├── static
+│   │   └── style.css
+│   ├── templates
+│   │   ├── index.html
+│   │   ├── layout.html
+│   │   ├── login.html
+│   │   └── new.html
+│   └── photolog.py
+├── LICENSE
+├── MANIFEST.in
+├── README.md
+├── flask_uploads.py
+├── setup.py
+├── tests.py
+└── tox.ini
+</code></pre></td></tr></table>
+</div>
+</div><p>结构简单，调用<code>flask.send_from_directory</code>返回文件，<code>werkzeud.secure_filename</code>处理文件名。</p>
+<h2 id="总结">总结</h2>
+<h3 id="基于mime过滤上传文件">基于MIME过滤上传文件</h3>
+<p>文件类型判断基于后缀名，感觉不是很可靠。建议实际使用时，文件信息到数据库，并在此时确认mimetype. 文件类型信息可能在之后处理时需要，如生成图片缩略图需要确定上传的文件是否为图片。</p>
+<p>参考《Python Web开发实战》董明伟，做文件类型判断。<code>uploaded_file.mimetype</code>.</p>
+<p>建议扩展<code>UploadSet</code>类，添加<code>self.mimetypes</code>元组，重载<code>file_allowed()</code>函数做MIME类型判断。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Flask-Uploads源码自带</span>
+<span class="n">IMAGES</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="s1">&#39;jpg jpe jpeg png gif svg bmp&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="c1"># 自定义</span>
+<span class="n">IMAGE_MIMES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;image/x-icon&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;image/svg+xml&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;image/jpeg&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;image/gif&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;image/png&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;image/webp&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="k">class</span> <span class="nc">UploadImageSet</span><span class="p">(</span><span class="n">UploadSet</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">mimetypes</span> <span class="o">=</span> <span class="n">IMAGE_MIMES</span>
+
+    <span class="k">def</span> <span class="nf">file_allowed</span><span class="p">(</span><span class="n">storage</span><span class="p">,</span> <span class="n">basename</span><span class="p">):</span>
+        <span class="n">extension_allowed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extension_allowed</span><span class="p">(</span><span class="n">extension</span><span class="p">(</span><span class="n">basename</span><span class="p">))</span>
+        <span class="n">mimetype_allowed</span> <span class="o">=</span> <span class="n">storage</span><span class="o">.</span><span class="n">mimetype</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mimetypes</span>
+        <span class="k">return</span> <span class="n">extension_allowed</span> <span class="ow">and</span> <span class="n">mimetype_allowed</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>storage 文 <code>request.files</code> 字典中的文件对象，为 <code>FileStorage</code> 实例。</p>
+<p><code>file_allowed()</code>函数在 <code>.save()</code> 保存文件时调用，作为上传文件过滤。</p>
+<h3 id="文件存储名">文件存储名</h3>
+<p><code>UplaodSet.save()</code>采用上传文件的<code>.filename</code>作为保存名，通过添加 <code>_N</code> 数字后缀避免文件名冲突。</p>
+<p>建议替换为 <code>uuid.uuid4().hex</code> 随机值作为文件名，保存时传入 <code>save(fileObj, name=&quot;random-string&quot;)</code> 保存文件。<code>name</code> 值以 <code>.</code> 结尾时，<code>save()</code> 重用上传文件对象的文件后缀。</p>
+<p><code>os.path.splitext(filename)</code> 始终返回二元元组，即后缀名可以为空。</p>
+<h3 id="配置说明">配置说明</h3>
+<p><code>UPLOADED_PHOTOS_DEST</code>, <code>UPLOADED_PHOTOS_URL</code>, <code>UPLOADED_PHOTOS_ALLOW</code>, <code>UPLOADED_PHOTOS_DENY</code> 中 <code>PHOTOS</code> 为 set 组名。也就是说可以定义多个组，分别存放不同的文件类型。每个组有如上4个配置。</p>
+<p><code>UPLOADED_PHOTOS_URL</code> 要加 <code>/</code> 后缀。</p>
+<p>dest存储位置，url 访问链接最终会回落到 <code>UPLOADS_DEFAULT_DEST</code>, <code>UPLOADS_DEFAULT_URL</code>.</p>
+<h2 id="flask_uploadspy">flask_uploads.py</h2>
+<h3 id="patch_request_class-限制文件大小">patch_request_class() 限制文件大小</h3>
+<p><del><code>patch_request_class(app, size=64 * 1024 * 1024)</code></del>. Use <code>MAX_CONTENT_LENGTH</code> settings instead in Flask &gt;= 0.6.</p>
+<blockquote>
+<p>While Werkzeug switches uploads from memory to a temporary file when they hit 500 KiB,</p>
+<p>it&rsquo;s still possible for someone to overload your disk space with a gigantic file.</p>
+</blockquote>
+<p>It patches <code>werkzeug.BaseRequest.max_content_length</code> attribute to limit the file size.</p>
+<p><code>patch_request_class(app, size=None)</code>. 传入<code>None</code>参数以调用<code>MAX_CONTENT_LENGTH</code>参数。</p>
+<h3 id="_uploads-蓝图">_uploads 蓝图</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">uploads_mod</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="s1">&#39;_uploads&#39;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">,</span> <span class="n">url_prefix</span><span class="o">=</span><span class="s1">&#39;/_uploads&#39;</span><span class="p">)</span>
+
+<span class="c1"># 视图 _uploads.uploaded_file 对应URL /_uploads/&lt;setname&gt;/&lt;filename&gt;</span>
+<span class="c1"># 路径部分 `_uploads` 可以被 UPLOADS_DEFAULT_DEST 代替</span>
+<span class="nd">@uploads_mod.route</span><span class="p">(</span><span class="s1">&#39;/&lt;setname&gt;/&lt;path:filename&gt;&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">uploaded_file</span><span class="p">(</span><span class="n">setname</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">current_app</span><span class="o">.</span><span class="n">upload_set_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">setname</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">config</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">abort</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">send_from_directory</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">destination</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="configure_uploads-配置上传组">configure_uploads() 配置上传组</h3>
+<p><code>configure_uploads(app, upload_sets)</code></p>
+<ul>
+<li>从<code>app.config</code>字典中加载配置，依次配置每个upload set 的
+<ul>
+<li>dest</li>
+<li>base_url</li>
+<li>allowed and denied extensions</li>
+</ul>
+</li>
+<li>每个 upload set 配置存储到<code>UploadConfiguration</code>实例</li>
+<li>最终存储在<code>app.upload_set_config['set-name']</code>，set name 为 <code>UploadSet()</code>传入的组名</li>
+<li>注册蓝图做文件服务，<code>/_uploads</code></li>
+</ul>
+<h3 id="uploadset-类">UploadSet 类</h3>
+<p><code>UploadSet</code> class</p>
+<p><code>__init__(self, name='files', extensions=DEFAULTS, default_dest=None)</code></p>
+<p><code>.config</code>属性，返回当前上传组的配置信息</p>
+<p><code>.url(filename)</code>，返回文件访问链接 <code>&lt;base_url&gt;/&lt;filename&gt;</code>，回落到<code>/_uploads/&lt;setname&gt;/&lt;filename&gt;</code>。</p>
+<p><code>path(self, filename, folder=None)</code>, 返回存储路径。若<code>folder</code>不为空，则假定<code>folder</code>值作为目标目录下的子目录。</p>
+<p><code>file_allowed(storage, basename)</code>实际为检查扩展名，判断当前文件是否允许被上传。storage为<code>werkzueg.FileStorage</code>实例，也就是<code>request.files</code>字典中上传的文件对象，可以自己扩展此检测函数。</p>
+<p><code>file_allowed()</code>函数在 <code>.save()</code> 保存文件时调用，作为上传文件过滤。</p>
+<p><code>get_basename(filename)</code>，调用<code>werkzeug.utils.secure_filename()</code>移除非ASCII字符，转换后缀名小写。</p>
+<p><code>save(self, storage, folder=None, name=None)</code>，保存上传的文件对象storage</p>
+<ul>
+<li>storage类型判断，保证传入的对象为<code>werkzeug.FileStorage</code>实例</li>
+<li>判断 name 是否带有 <code>/</code>，拆分出 folder 子文件夹名</li>
+<li><code>self.file_allowed()</code>，判断文件是否被当前上传组<code>UploadSet</code>允许</li>
+<li>拼接保存路径，确保文件夹存在，解决同名冲突，保存文件</li>
+<li>返回文件相对于 <code>self.config.destination</code> 的相对路径</li>
+</ul>
+<p><code>resolve_confilict()</code> 内部使用函数，通过在 filename_without_ext 后添加 <code>_N</code> 数字后缀，避免重名。</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">laggardkernel</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-08-04
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/flask/">flask</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2019/flask-httpauth-code-reading/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Flask HTTPAuth 源码阅读笔记</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/2019/flask-login-code-reading/">
+            <span class="next-text nav-default">Flask-Login 源码阅读笔记</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'pseudocold';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://stackoverflow.com/users/5101148" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/laggardkernel" class="iconfont icon-github" title="github"></a>
+  <a href="https://blog.pseudocold.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">laggardkernel</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.46a59934.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
